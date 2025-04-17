@@ -3,7 +3,6 @@ from copy import deepcopy
 import math
 from torch.optim import Optimizer
 import torch
-from torch.optim import Optimizer
 from torch.func import vmap
 from functools import reduce
 

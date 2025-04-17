@@ -2,8 +2,8 @@ from scipy.stats import norm
 import numpy as np
 import time
 import torch
-from sampling import random_samples
-from collocations import OptionParameters
+from derpinns.sampling import random_samples
+from derpinns.collocations import OptionParameters
 
 
 def compare_with_mc(model, params: OptionParameters, n_prices, n_simulations, dtype, device, seed=None):
@@ -39,7 +39,7 @@ def compare_with_mc(model, params: OptionParameters, n_prices, n_simulations, dt
 
     start = time.time()
     for i in range(n_prices):
-        Z = random_samples(n_simulations, params.n_assets,sampler='Halton')
+        Z = random_samples(n_simulations, params.n_assets, sampler='Halton')
         Z = norm.ppf(Z)
         correlated_Z = Z @ L.T
         drift = (params.r - 0.5 * sigma**2) * params.tau

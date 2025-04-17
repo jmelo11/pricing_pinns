@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 import torch
 from torch.utils.data import DataLoader
 from torch.optim import Optimizer
-from collocations import *
-from datasets import *
+from derpinns.collocations import *
+from derpinns.datasets import *
 
 
 class Closure(ABC):

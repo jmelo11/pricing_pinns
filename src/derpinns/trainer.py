@@ -5,10 +5,10 @@ import torch
 from kfac.preconditioner import KFACPreconditioner
 from kfac.scheduler import LambdaParamScheduler
 
-from solution import *
-from datasets import *
-from closures import *
-from optimizer import *
+from derpinns.solution import *
+from derpinns.datasets import *
+from derpinns.closures import *
+from derpinns.optimizer import *
 
 
 class PINNTrainer:

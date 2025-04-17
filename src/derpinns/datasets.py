@@ -1,7 +1,7 @@
+from torch import nn
 import torch
 from torch.utils.data import Dataset
-from collocations import *
-from torch import nn
+from derpinns.collocations import *
 
 
 class SampledDataset(Dataset):

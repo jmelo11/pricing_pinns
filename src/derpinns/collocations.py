@@ -1,5 +1,5 @@
 import numpy as np
-from sampling import random_samples, scale_samples
+from derpinns.sampling import random_samples, scale_samples
 
 
 class OptionParameters:
