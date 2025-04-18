@@ -41,7 +41,7 @@ def payoff(x):
 
 
 def generate_collocations(n_samples, params: OptionParameters, mask_col, initial_condition=False,
-                          fixed_asset_id=None, fixed_asset_value=None, sampler='pseudo'):
+                          fixed_asset_id=None, fixed_asset_value=None, sampler='pseudo', seed=None):
     '''
     Generates collocation points, their labels, and a binary mask.
 
@@ -55,7 +55,7 @@ def generate_collocations(n_samples, params: OptionParameters, mask_col, initial
                top boundary for asset i: mask_col = 2 + 2*i 
                bottom boundary for asset i: mask_col = 2 + 2*i + 1
     '''
-    samples = random_samples(n_samples, params.n_dim, sampler)
+    samples = random_samples(n_samples, params.n_dim, sampler, seed=seed)
 
     if initial_condition:
         # For the initial condition, time is 0.
@@ -92,7 +92,7 @@ def concat_datasets(dataset1, dataset2):
     return x, y, mask
 
 
-def generate_dataset(params: OptionParameters, interior_samples, initial_samples, boundary_samples, sampler='pseudo'):
+def generate_dataset(params: OptionParameters, interior_samples, initial_samples, boundary_samples, sampler='pseudo', seed=None):
     '''
         Generates all the samples required to train the PINN (top, bottom, initial condition and interior samples).
     '''
@@ -101,7 +101,8 @@ def generate_dataset(params: OptionParameters, interior_samples, initial_samples
         n_samples=interior_samples,
         params=params,
         mask_col=0,
-        sampler=sampler
+        sampler=sampler,
+        seed=seed
     )
 
     # Generate initial condition collocations (mask column 1) with time t = 0.
@@ -110,7 +111,8 @@ def generate_dataset(params: OptionParameters, interior_samples, initial_samples
         params=params,
         mask_col=1,
         initial_condition=True,
-        sampler=sampler
+        sampler=sampler,
+        seed=seed
     )
 
     dataset = concat_datasets(interior_points, initial_condition_points)
@@ -124,7 +126,8 @@ def generate_dataset(params: OptionParameters, interior_samples, initial_samples
                 mask_col=2 + 2 * i,
                 fixed_asset_id=i,
                 fixed_asset_value=params.x_max,
-                sampler=sampler
+                sampler=sampler,
+                seed=seed
             )
             # Bottom boundary for asset i (mask column 2 + 2*i + 1).
             bottom_boundary_points = generate_collocations(
@@ -133,7 +136,8 @@ def generate_dataset(params: OptionParameters, interior_samples, initial_samples
                 mask_col=2 + 2 * i + 1,
                 fixed_asset_id=i,
                 fixed_asset_value=params.x_min,
-                sampler=sampler
+                sampler=sampler,
+                seed=seed
             )
 
             dataset = concat_datasets(dataset, top_boundary_points)

@@ -22,7 +22,6 @@ def _moving_average(arr, window):
 
 def plot_loss(
     loss_history,
-    nn_size,
     save_path=None,
     backend="plotly",
     fig_size=(800, 600),
@@ -69,7 +68,7 @@ def plot_loss(
                                  line=dict(color=blue_palette[4])))
 
         fig.update_layout(
-            title=f"Loss History  (NN size = {nn_size})",
+            title=f"Loss History",
             xaxis_title="Epoch",
             yaxis_title="Loss (log‑scale)",
             yaxis_type="log",
@@ -90,7 +89,7 @@ def plot_loss(
         plt.plot(x, boundary, label="Boundary Loss", color=blue_palette[2])
         plt.plot(x, initial,  label="Initial Loss",  color=blue_palette[4])
         plt.yscale("log")
-        plt.title(f"Loss History  (NN size = {nn_size})")
+        plt.title(f"Loss History")
         plt.xlabel("Epoch")
         plt.ylabel("Loss")
         plt.legend()
@@ -99,6 +98,114 @@ def plot_loss(
             plt.savefig(save_path, dpi=300)
         else:
             plt.show()
+
+
+def compare_loss_histories(
+    runs,
+    labels=None,
+    backend="plotly",
+    fig_size=(900, 600),
+    smooth=True,
+    smooth_window=50,
+):
+    """
+    Compare N loss‑history dicts on one figure.
+
+    Parameters
+    ----------
+    runs : list of dict     – each dict must contain keys
+                              'interior_loss', 'boundary_loss', 'initial_loss'
+    labels : list of str    – legend labels, default "Run 1", "Run 2", ...
+    """
+
+    n_runs = len(runs)
+    assert n_runs > 0, "runs list cannot be empty"
+    if labels is None:
+        labels = [f"Run {i+1}" for i in range(n_runs)]
+    assert len(labels) == n_runs, "`labels` length must match `runs` length"
+
+    # colour per loss‑type, dash‑style per run
+    colours = {"pde": "#1f77b4", "bdy": "#5fa2d0",
+               "init": "#9cc3e6", "tot": "#08306B"}
+    dashes = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot"]
+
+    # prepare data -----------------------------------------------------------
+    def prep(d):
+        i = np.asarray(d["interior_loss"])
+        b = np.asarray(d["boundary_loss"])
+        n = np.asarray(d["initial_loss"])
+        t = i+b+n
+        if smooth:
+            i, b, n, t = (_moving_average(x, smooth_window)
+                          for x in (i, b, n, t))
+        return i, b, n, t
+
+    processed = [prep(r) for r in runs]
+    x = np.arange(len(processed[0][0]))   # assume equal length
+
+    # ---------------------------------------------------------------- Plotly
+    if backend.lower() == "plotly":
+        fig = make_subplots(
+            rows=4, cols=1, shared_xaxes=True, vertical_spacing=0.06,
+            subplot_titles=("wInterior Loss",
+                            "Boundary Loss", "Initial Loss", "Total Loss")
+        )
+
+        def add(row, y_values, colour, dash, label, showlegend):
+            fig.add_trace(
+                go.Scatter(
+                    x=x, y=y_values, mode="lines",
+                    name=label,
+                    legendgroup=label,
+                    showlegend=showlegend,
+                    line=dict(color=colour, dash=dash)
+                ),
+                row=row, col=1,
+            )
+
+        for run_idx, (ia, ba, na, ta) in enumerate(processed):
+            dash = dashes[run_idx % len(dashes)]
+            label = labels[run_idx]
+            show = True  # only show legend once per run (row 1)
+            add(1, ia, colours["pde"],  dash, label, show)
+            add(2, ba, colours["bdy"],  dash, label, False)
+            add(3, na, colours["init"], dash, label, False)
+            add(4, ta, colours["tot"], dash, label, False)
+
+        fig.update_yaxes(type="log")
+        fig.update_layout(
+            height=fig_size[1], width=fig_size[0],
+            title_text="Loss Comparison", legend_title="Run"
+        )
+        fig.show()
+
+    # ------------------------------------------------------------- Matplotlib
+    else:
+        _, axes = plt.subplots(3, 1,
+                               figsize=(fig_size[0] / 100, fig_size[1] / 100),
+                               sharex=True)
+
+        titles = ["PDE / Interior Loss", "Boundary Loss", "Initial Loss"]
+
+        for run_idx, (ia, ba, na) in enumerate(processed):
+            dash = dashes[run_idx % len(dashes)]
+            label = labels[run_idx]
+            axes[0].plot(x, ia, label=label,
+                         color=colours["pde"],  linestyle=dash)
+            axes[1].plot(x, ba, label=label,
+                         color=colours["bdy"],  linestyle=dash)
+            axes[2].plot(x, na, label=label,
+                         color=colours["init"], linestyle=dash)
+
+        for ax, title in zip(axes, titles):
+            ax.set_yscale("log")
+            ax.set_title(title, fontsize=10)
+
+        axes[-1].set_xlabel("Epoch")
+        axes[1].set_ylabel("Loss (log scale)")
+        axes[0].legend(loc="upper right")
+        plt.tight_layout()
+        plt.show()
 
 
 def plot_all_total_losses(bench, backend='plotly', save_path=None, fig_size=(800, 600)):

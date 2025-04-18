@@ -6,6 +6,7 @@ This repository has all codes used for the master's thesis ***"Leveraging PINNs 
 
 The content of each file is shown below:
 
+- **experiments folder**: Contains the different tests done in this thesis among other notes.
 - **nn.py**: Contains builder method to construct neural networks.
 - **sampling.py**: Contains all methods related to creating random collocations points. Multiple methods are available.
 - **solution.py**: This file contains functions to evaluate the solutions.

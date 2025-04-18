@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from torch.optim import Optimizer
 from derpinns.collocations import *
 from derpinns.datasets import *
+from derpinns.sampling import residual_based_adaptive_sampling
 
 
 class Closure(ABC):
@@ -110,47 +111,21 @@ class DimlessBS(Closure):
     def get_state(self):
         return self.state
 
-    def compute_derivatives(self) -> tuple:
+    def compute_derivatives(self, x) -> tuple:
         """
             Computes all required derivatives using autograd.
         """
-        u = self.model(self.x)
-        grads = torch.autograd.grad(u.sum(), self.x, create_graph=True)[0]
+        u = self.model(x)
+        grads = torch.autograd.grad(u.sum(), x, create_graph=True)[0]
         u_tau = grads[:, -1]
         u_x = grads[:, :self.n_assets]
         u_xx_list = []
         for j in range(self.n_assets):
-            grad_j = torch.autograd.grad(u_x[:, j].sum(), self.x, create_graph=True,
+            grad_j = torch.autograd.grad(u_x[:, j].sum(), x, create_graph=True,
                                          retain_graph=True)[0][:, :self.n_assets]
             u_xx_list.append(grad_j)
         u_xx = torch.stack(u_xx_list, dim=1)
         return u, u_tau, u_x, u_xx
-
-    # def compute_derivatives(self):
-    #     """
-    #     Vectorised first & second derivatives using torch.func.
-    #     Works with any nn.Module that expects a 2‑D batch (B, D).
-    #     """
-    #     x = self.x                                # (B, D)   D = n_assets + 1
-
-    #     # scalar network that accepts a 1‑D vector
-    #     def net_fn(z: torch.Tensor) -> torch.Tensor:
-    #         # z: (D,), unsqueeze to (1,D) for the model,      -> (1,1)
-    #         return self.model(z.unsqueeze(0)).squeeze()       # scalar ( )
-
-    #     # batched gradient & Hessian
-    #     grad_fn = vmap(grad(net_fn))              # (B, D)
-    #     hess_fn = vmap(hessian(net_fn))           # (B, D, D)
-
-    #     grads = grad_fn(x)
-    #     hess = hess_fn(x)
-
-    #     u = self.model(x)                    # (B,1)
-    #     u_tau = grads[:, -1]                     # (B,)
-    #     u_x = grads[:, :self.n_assets]         # (B, d)
-    #     u_xx = hess[:, :self.n_assets, :self.n_assets]   # (B, d, d)
-
-    #     return u, u_tau, u_x, u_xx
 
     def interior_residual(self, u, u_tau, u_x, u_xx) -> torch.Tensor:
         diffusion = torch.zeros(
@@ -260,7 +235,7 @@ class DimlessBS(Closure):
             The training step. Computes all losses and returns the total.
         """
         # self.optimizer.zero_grad()
-        u, u_tau, u_x, u_xx = self.compute_derivatives()
+        u, u_tau, u_x, u_xx = self.compute_derivatives(self.x)
 
         if torch.isnan(u_tau).any():
             raise ValueError("NaN @ u_tau")
@@ -312,14 +287,65 @@ class DimlessBS(Closure):
         return interior_loss + boundary_loss + initial_loss
 
 
+class ResidualBasedAdaptiveSamplingDimlessBS(DimlessBS):
+    """
+        Implementation of the residual-based adaptive sampling method.
+        https://www.sciencedirect.com/science/article/pii/S0045782522006260?via%3Dihub
+    """
+
+    def __init__(self,  sampler='Halton', k=1, c=1, seed=None):
+        super(DimlessBS).__init__()
+        self.state = {
+            "interior_loss": [],
+            "boundary_loss": [],
+            "initial_loss": [],
+        }
+        self.sampler = sampler
+        self.seed = seed
+        self.k = k
+        self.c = c
+
+    def next_batch(self):
+        # Get the next batch of data
+        super().next_batch()
+
+        interior_mask = self.mask[:, 0].bool()
+        n_samples = self.x[interior_mask].shape[0]
+
+        def res_f(x):
+            x = torch.tensor(x, dtype=self.dtype,
+                             device=self.device, requires_grad=True)
+            u, u_tau, u_x, u_xx = self.compute_derivatives(x)
+            return self.interior_residual(u, u_tau, u_x, u_xx).detach().cpu().numpy()
+
+        tmp_x = residual_based_adaptive_sampling(
+            res_f,
+            n_samples,
+            self.dataset.params.domain_ranges(),
+            k=self.k,
+            c=self.c,
+            sampler=self.sampler,
+            seed=self.seed
+        )
+        # we need to modify the tmp_x to be in the same range as the original x
+        tmp_x = torch.tensor(tmp_x, dtype=self.dtype,
+                             device=self.device, requires_grad=True)
+
+        self.x[interior_mask] = tmp_x
+
+
 class LossBalancingDimlessBS(DimlessBS):
     """
         Implements ReLoBRaLo:
         https://arxiv.org/abs/2110.09813
     """
 
-    def __init__(self):
+    def __init__(self, alpha: torch.Tensor, tau: torch.Tensor, rho_prob: torch.Tensor):
         super(DimlessBS).__init__()
+        self.alpha = alpha
+        self.tau = tau
+        self.rho_prob = rho_prob
+
         self.loss_0 = None
         self.loss_t_1 = None
         self.lambda_t_1 = None
@@ -346,11 +372,9 @@ class LossBalancingDimlessBS(DimlessBS):
         return self.state
 
     def __call__(self, *args, **kwargs):
-        tau = 1
-        rho = torch.bernoulli(torch.tensor(0.99))
-        alpha = 0.999
         m = self.n_assets*2+2
         epsilon = 1e-8
+        rho = torch.bernoulli(torch.tensor(self.rho_prob))
         interior_loss, boundary_losses, initial_loss = self.compute_losses()
 
         current_loss = torch.zeros(
@@ -359,7 +383,6 @@ class LossBalancingDimlessBS(DimlessBS):
         current_loss[1] = initial_loss
         current_loss[2:] = boundary_losses
         with torch.no_grad():
-
             if self.loss_0 is None:
                 self.loss_0 = current_loss
 
@@ -367,23 +390,26 @@ class LossBalancingDimlessBS(DimlessBS):
                 self.loss_t_1 = current_loss
 
             if self.lambda_t_1 is None:
-                self.lambda_t_1 = torch.ones(m)
+                self.lambda_t_1 = torch.ones(
+                    m, dtype=self.dtype, device=self.device)
 
             lambda_bal_0 = m * \
-                torch.softmax(current_loss/(tau*self.loss_0 + epsilon), 0)
+                torch.softmax(current_loss/(self.tau*self.loss_0 + epsilon), 0)
 
             lambda_bal_t_1 = m * \
                 torch.softmax(
-                    current_loss/(tau*self.loss_t_1 + epsilon), 0)
+                    current_loss/(self.tau*self.loss_t_1 + epsilon), 0)
 
             lambda_hist = rho*self.lambda_t_1+(1-rho)*lambda_bal_0
-            self.lambda_t_1 = alpha*lambda_hist+(1-alpha)*lambda_bal_t_1
+            self.lambda_t_1 = self.alpha*lambda_hist + \
+                (1-self.alpha)*lambda_bal_t_1
 
         self.loss_t_1 = current_loss
+        losses = self.lambda_t_1 * current_loss
         if kwargs.get('update_status', True):
             self.update_state(
-                interior_loss.item(), boundary_losses.sum().item(), initial_loss.item())
-        return torch.dot(self.lambda_t_1, current_loss)
+                losses[0].item(), losses[2:].sum().item(), losses[1].item())
+        return losses.sum()
 
 
 class PINNBoundaryDimlessBS(DimlessBS):

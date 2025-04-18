@@ -9,10 +9,10 @@ class SampledDataset(Dataset):
         Generates a dataset of collocations points.
     """
 
-    def __init__(self, params: OptionParameters, interior_samples: int, initial_samples: int, boundary_samples: int, sampler: str, dtype: torch.dtype, device: torch.device, verbose: bool = False):
+    def __init__(self, params: OptionParameters, interior_samples: int, initial_samples: int, boundary_samples: int, sampler: str, dtype: torch.dtype, device: torch.device, verbose: bool = False, seed=None):
         self.params = params
         x, y, mask = generate_dataset(
-            params, interior_samples, initial_samples, boundary_samples, sampler)
+            params, interior_samples, initial_samples, boundary_samples, sampler, seed)
 
         self.x = torch.tensor(
             x, dtype=dtype, device=device, requires_grad=True)
@@ -65,7 +65,7 @@ class SampledDatasetWithPINNBoundary(Dataset):
             lb_y = pinn(lb_x).cpu().detach().numpy()
             # set the lower boundary value for the i-th asset
             y[lb_mask] = lb_y
-        
+
         self.x = torch.tensor(
             x, dtype=dtype, device=device, requires_grad=True)
 

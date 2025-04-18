@@ -185,7 +185,6 @@ class PINNTrainer:
             pbar.close()
         else:
             pbar = tqdm(range(self.epochs), desc="Adam training")
-
             for epoch in pbar:
                 self.closure.next_batch()
                 self.optimizer.zero_grad()
