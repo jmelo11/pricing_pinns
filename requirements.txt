@@ -8,3 +8,4 @@ scikit-learn
 scipy
 scikit-optimize
 kfac_pytorch @ git+https://github.com/gpauloski/kfac-pytorch.git@v0.4.2
+tqdm

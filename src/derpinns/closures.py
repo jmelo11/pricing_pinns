@@ -1,3 +1,5 @@
+from typing import List
+from torch.autograd import grad
 from abc import ABC, abstractmethod
 import torch
 from torch.utils.data import DataLoader
@@ -58,6 +60,9 @@ class Closure(ABC):
 
     def next_batch(self):
         self.x, self.y, self.mask = next(iter(self.dataloader))
+        self.x = self.x.to(self.device)
+        self.y = self.y.to(self.device)
+        self.mask = self.mask.to(self.device)
 
     def update_losses_state(self, pde_loss, boundary_loss, initial_cond_loss):
         self.state["interior_loss"].append(pde_loss)
@@ -391,7 +396,7 @@ class LossBalancingDimlessBS(DimlessBS):
 
 class PINNBoundaryDimlessBS(DimlessBS):
     """
-        TODO: Uses the solution of the i-1th asset case for the lower boundary.
+        Uses the solution of the i-1th asset case for the lower boundary.
     """
 
     def __init__(self):
@@ -432,3 +437,98 @@ class PINNBoundaryDimlessBS(DimlessBS):
                 )
                 losses[2*i + 1] = tr.square().mean()
         return losses
+
+
+class FirstOrderPINN(DimlessBS):
+
+    def __init__(self):
+        super(DimlessBS).__init__()
+
+    def compute_derivatives(self, x: torch.Tensor):
+        # 1) run the net
+        out = self.model(x)              # (N, 1 + n_assets + 1)
+        # 2) split u vs predicted grads
+        u = out[:, :1]             # (N,1)
+        u_hat = out[:, 1:]             # (N, n_assets+1)
+
+        # 3) true grads of u
+        true_grads = grad(u.sum(), x, create_graph=True)[0]  # (N, d)
+        # split true time‐deriv vs spatial‐derivs
+        u_tau_true = true_grads[:, -1]            # (N,)
+        u_x_true = true_grads[:, :self.n_assets]  # (N,n_assets)
+
+        # 4) predicted first‐derivs
+        u_tau_hat = u_hat[:, -1]            # (N,)
+        u_x_hat = u_hat[:, :self.n_assets]  # (N,n_assets)
+
+        # 5) second derivatives by differentiating each û_{x_i}
+        u_xx_list = []
+        for i in range(self.n_assets):
+            # sum over batch so grad() works
+            yi = u_x_hat[:, i].sum()
+            gij = grad(yi, x, create_graph=True, retain_graph=True)[0]
+            # keep only spatial‐spatial block
+            u_xx_list.append(gij[:, :self.n_assets])
+        u_xx = torch.stack(u_xx_list, dim=1)    # (N,n_assets,n_assets)
+
+        return u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true
+
+    def compute_losses(self):
+        # get all six pieces
+        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = \
+            self.compute_derivatives(self.x)
+
+        # 1) compatibility MSE between predicted vs true first‐derivs
+        comp_time = (u_tau_hat - u_tau_true).square().mean()
+        comp_space = (u_x_hat - u_x_true).square().mean()
+        compatibility = comp_time + comp_space
+
+        # 2) interior PDE loss (same as before, but using u_tau_hat & u_x_hat & u_xx)
+        interior_mask = self.mask[:, 0].bool()
+        if interior_mask.any():
+            R = self.interior_residual(
+                u[interior_mask],
+                u_tau_hat[interior_mask],
+                u_x_hat[interior_mask],
+                u_xx[interior_mask]
+            )
+            interior_loss = R.square().mean()
+        else:
+            interior_loss = torch.tensor(0., device=u.device)
+
+        # 3) initial‐condition loss
+        init_mask = self.mask[:, 1].bool()
+        if init_mask.any():
+            I = self.initial_residual(
+                u[init_mask],
+                self.y[init_mask]
+            ).square().mean()
+        else:
+            I = torch.tensor(0., device=u.device)
+
+        # 4) boundary losses (unchanged)
+        B_losses = self.boundary_loss(
+            u, u_tau_hat, u_x_hat, u_xx
+        )
+        boundary_loss = B_losses.sum()
+
+        # total
+        total = interior_loss + I + boundary_loss + compatibility
+
+        # log if needed (update_status=True by default)
+        if getattr(self, "_logging_enabled", True):
+            self.update_losses_state(
+                interior_loss.item(),
+                boundary_loss.item(),
+                I.item(),
+                compatibility=compatibility.item()
+            )
+
+        return interior_loss, B_losses, I, compatibility
+
+    def __call__(self, *args, **kwargs):
+        """
+        Return the scalar loss for the optimizer.
+        """
+        interior, B_losses, I, comp = self.compute_losses()
+        return interior + B_losses.sum() + I + comp

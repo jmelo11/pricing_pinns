@@ -1,3 +1,4 @@
+from typing import Optional
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -97,14 +98,14 @@ class NN(nn.Module):
         Vanilla NN.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Tanh()):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.SiLU()):
         super(NN, self).__init__()
         layers = []
-        # First layer: Linear followed by Tanh activation
+        # First layer: Linear followed by activation
         layers.append(nn.Linear(input_dim, hidden_dim, dtype=dtype))
         layers.append(activation)
 
-        # Additional hidden layers: each Linear + SiLU activation
+        # Additional hidden layers: each Linear
         for _ in range(n_layers - 1):
             layers.append(nn.Linear(hidden_dim, hidden_dim, dtype=dtype))
             layers.append(activation)
@@ -119,22 +120,22 @@ class NN(nn.Module):
         return x
 
 
-class NNAnzats(nn.Module):
+class NNWithAnsatz(nn.Module):
     """
         NN with a differentiable approximation of the payoff function.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Tanh()):
-        super(NNAnzats, self).__init__()
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Sigmoid()):
+        super(NNWithAnsatz, self).__init__()
         layers = []
         self.input_dim = input_dim
-        # First layer: Linear followed by Tanh activation
+        # First layer: Linear followed by activation
         layers.append(nn.Linear(input_dim, hidden_dim, dtype=dtype))
         layers.append(activation)
         self.alpha = nn.Parameter(torch.tensor([10.0]))
-        # self.beta = nn.Parameter(torch.tensor([10.0]))
+        self.beta = nn.Parameter(torch.tensor([10.0]))
 
-        # Additional hidden layers: each Linear + SiLU activation
+        # Additional hidden layers: each Linear +  activation
         for _ in range(n_layers - 1):
             layers.append(nn.Linear(hidden_dim, hidden_dim, dtype=dtype))
             layers.append(activation)
@@ -143,25 +144,14 @@ class NNAnzats(nn.Module):
         self.hidden_layers = nn.Sequential(*layers)
         self.output_layer = nn.Linear(hidden_dim, output_dim, dtype=dtype)
 
-    # def payoff(self, x):
-    #     x = torch.max(torch.exp(x), dim=1).values
-    #     ones = torch.ones_like(x)
-    #     zeros = torch.zeros_like(x)
-    #     payoff_values = torch.maximum(x - ones, zeros)
-    #     return payoff_values.reshape([-1, 1])
-
-    def payoff(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Example payoff that uses:
-          1. A differentiable approximation to max(exp(x)) [smooth_max_exp].
-          2. A smooth approximation (softmax).
-
-        alpha is trainable, ensuring your payoff remains differentiable.
-        """
-        # Convert from log_alpha/log_beta to alpha/beta > 0
-        x_sm = self.smooth_max_exp(x, alpha=self.alpha)
-        payoff_values = F.softplus(x_sm - 1.0, beta=15)
-        return payoff_values.unsqueeze(1)
+    def payoff(self, x):
+        # x = torch.max(torch.exp(x), dim=1).values
+        x = self.smooth_max_exp(x, alpha=self.alpha)
+        ones = torch.ones_like(x)
+        # zeros = torch.zeros_like(x)
+        # payoff_values = torch.maximum(x - ones, zeros)
+        payoff_values = F.gelu(x - ones)
+        return payoff_values.reshape([-1, 1])
 
     def smooth_max_exp(self, x: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
         """
@@ -179,7 +169,7 @@ class NNAnzats(nn.Module):
         x = self.hidden_layers(inputs)
         x = self.output_layer(x)
         p = self.payoff(inputs[:, :self.input_dim-1])
-        return p+x*inputs[:, -1].reshape(-1, 1)  # x is the time variable
+        return p + x
 
 
 class SPINN(nn.Module):
@@ -229,7 +219,10 @@ def weights_init(m):
         nn.init.constant_(m.bias, 0.0)
 
 
-def build_nn(nn_shape: str, input_dim: int, dtype=torch.float32):
+def build_nn(nn_shape: str, input_dim: int, dtype=torch.float32, activation=nn.Tanh()):
+    """
+    Build a neural network based on the provided shape string.
+    """
     try:
         h, l = nn_shape.split('x')
         hidden_dim = int(h)
@@ -241,6 +234,36 @@ def build_nn(nn_shape: str, input_dim: int, dtype=torch.float32):
                input_dim=input_dim + 1,
                hidden_dim=hidden_dim,
                output_dim=1,
-               dtype=dtype)
+               dtype=dtype, activation=activation)
     model.apply(weights_init)
     return model
+
+
+class FirstOrderNN(nn.Module):
+
+    def __init__(self,
+                 n_layers: int,
+                 input_dim: int,
+                 hidden_dim: int,
+                 activation: Optional[nn.Module] = nn.Tanh(),
+                 dtype=torch.float32):
+
+        super().__init__()
+        layers = []
+        # first hidden layer
+        layers.append(nn.Linear(input_dim, hidden_dim, dtype=dtype))
+        layers.append(activation)
+        # remaining hidden layers
+        for _ in range(n_layers - 1):
+            layers.append(nn.Linear(hidden_dim, hidden_dim, dtype=dtype))
+            layers.append(activation)
+
+        self.hidden_layers = nn.Sequential(*layers)
+        # final output: 1 (u) + d (predicted ∂u/∂x_i)
+        self.output_layer = nn.Linear(hidden_dim, 1 + input_dim, dtype=dtype)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+
+        h = self.hidden_layers(x)
+        out = self.output_layer(h)
+        return out

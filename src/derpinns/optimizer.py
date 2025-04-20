@@ -765,7 +765,7 @@ class LBFGS(Optimizer):
 
 class BFGS(Optimizer):
     """
-    Implements BFGS algorithm.
+    Implements BFGS algorithm. Chap.6 of `Numerical Optimization` by Nocedal and Wright.
 
     """
 
@@ -934,7 +934,7 @@ class BFGS(Optimizer):
 
 class SSBroyden(Optimizer):
     """
-    Implements Self-Scaled Broyden.
+    Implements Self-Scaled Broyden. Chap. 6 of `Numerical Optimization` by Nocedal and Wright.
     """
 
     def __init__(self,
@@ -1158,6 +1158,8 @@ class SSBroyden(Optimizer):
                     f"Unknown method {method}. Supported methods are: SSBroyden1")
             # prepare next iter
             grad = grad_new
+
+            closure()
 
         # save H back
         state["H"] = H

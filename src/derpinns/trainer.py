@@ -1,9 +1,7 @@
 from torch.optim import Optimizer
-from torch_kfac import KFAC
 from tqdm import tqdm
 import torch
-from kfac.preconditioner import KFACPreconditioner
-from kfac.scheduler import LambdaParamScheduler
+import os
 
 from derpinns.solution import *
 from derpinns.datasets import *
@@ -64,7 +62,7 @@ class PINNTrainer:
         return self
 
     def train(self):
-        if isinstance(self.optimizer, LBFGS) or isinstance(self.optimizer, BFGS):
+        if isinstance(self.optimizer, LBFGS) or isinstance(self.optimizer, BFGS) or isinstance(self.optimizer, SSBroyden):
             pbar = tqdm(range(self.optimizer.state_dict()
                               ['param_groups'][0]['max_iter']), desc=str(self.optimizer.__class__.__name__) + " training")
 
@@ -144,6 +142,7 @@ class PINNTrainer:
                 self.optimizer.zero_grad()
                 loss = self.closure()
                 loss.backward()
+                
                 if self.preconditioner:
                     self.preconditioner.step()
                 self.optimizer.step()
@@ -168,4 +167,5 @@ class PINNTrainer:
 
                 self.closure.update_errors_state(
                     results['max_error'], results['l2_rel_error'])
+
             pbar.close()

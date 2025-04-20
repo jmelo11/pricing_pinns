@@ -45,7 +45,7 @@ class SampledDataset(Dataset):
 
 class SampledDatasetWithPINNBoundary(Dataset):
     """
-        Takes advantage of the fact that for the lower boundary, the solution is the same as the n-1th asset case.
+        TODO: Takes advantage of the fact that for the lower boundary, the solution is the same as the n-1th asset case.
     """
 
     def __init__(self, pinn: nn.Module, params: OptionParameters, interior_samples: int, initial_samples: int, boundary_samples: int, sampler: str, dtype: torch.dtype, device: torch.device, verbose: bool = False):

@@ -23,10 +23,12 @@ def pseudorandom(n_samples, dimension, seed=None):
 
 
 def quasirandom(n_samples, dimension, sampler, seed=None):
-    # Certain points should be removed:
-    # - Boundary points such as [..., 0, ...]
-    # - Special points [0, 0, 0, ...] and [0.5, 0.5, 0.5, ...], which cause error in
-    #   Hypersphere.random_points() and Hypersphere.random_boundary_points()
+    """
+        Certain points should be removed:
+        - Boundary points such as [..., 0, ...]
+        - Special points [0, 0, 0, ...] and [0.5, 0.5, 0.5, ...], which cause error in
+        Hypersphere.random_points() and Hypersphere.random_boundary_points()
+    """
     skip = 0
     if sampler == "LHS":
         sampler = skopt.sampler.Lhs()
@@ -63,8 +65,8 @@ def scale_samples(samples, ranges):
 
 def residual_based_adaptive_sampling(res_f, n_samples, ranges, k, c, sampler="pseudo", seed=None):
     """
-    Implementation of the residual-based adaptive sampling method.
-    https://www.sciencedirect.com/science/article/pii/S0045782522006260?via%3Dihub
+        Implementation of the residual-based adaptive sampling method.
+        https://www.sciencedirect.com/science/article/pii/S0045782522006260?via%3Dihub
     """
     samples = random_samples(n_samples*10, len(ranges), sampler, seed=seed)
     scl_samples = scale_samples(samples, ranges)
