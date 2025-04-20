@@ -100,6 +100,103 @@ def plot_loss(
             plt.show()
 
 
+def compare_error_histories(
+    runs,
+    labels=None,
+    backend="plotly",
+    fig_size=(900, 500),
+    smooth=True,
+    smooth_window=50,
+):
+    """
+    Compare relative and max error histories from multiple runs.
+
+    Parameters
+    ----------
+    runs : list of dict – each dict must contain keys
+           'l2_rel_err', 'max_err'
+    labels : list of str – legend labels, default "Run 1", "Run 2", ...
+    """
+
+    n_runs = len(runs)
+    assert n_runs > 0, "runs list cannot be empty"
+    if labels is None:
+        labels = [f"Run {i+1}" for i in range(n_runs)]
+    assert len(labels) == n_runs, "`labels` length must match `runs` length"
+
+    colors = {"rel_err": "#d62728", "max_err": "#2ca02c"}
+    dashes = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot"]
+
+    def prep(d):
+        rel = np.asarray(d["l2_rel_err"])
+        mx = np.asarray(d["max_err"])
+        if smooth:
+            rel, mx = (_moving_average(x, smooth_window) for x in (rel, mx))
+        return rel, mx
+
+    processed = [prep(r) for r in runs]
+    x = np.arange(len(processed[0][0]))  # assume equal length
+
+    # --- Plotly backend ---
+    if backend.lower() == "plotly":
+        fig = make_subplots(
+            rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.07,
+            subplot_titles=("L2 Relative Error", "Maximum Error")
+        )
+
+        def add(row, y_values, color, dash, label, showlegend):
+            fig.add_trace(
+                go.Scatter(
+                    x=x, y=y_values, mode="lines",
+                    name=label,
+                    line=dict(color=color, dash=dash)
+                ),
+                row=row, col=1,
+            )
+
+        for run_idx, (rel, mx) in enumerate(processed):
+            dash = dashes[run_idx % len(dashes)]
+            label = labels[run_idx]
+            show = (run_idx == 0)
+            add(1, rel, colors["rel_err"], dash, label, show)
+            add(2, mx, colors["max_err"], dash, label, False)
+
+        fig.update_yaxes(type="log")
+        fig.update_layout(
+            height=fig_size[1], width=fig_size[0],
+            title_text="Error Comparison",
+            legend_title="Run"
+        )
+        fig.show()
+
+    # --- Matplotlib backend ---
+    else:
+        _, axes = plt.subplots(2, 1,
+                               figsize=(fig_size[0] / 100, fig_size[1] / 100),
+                               sharex=True)
+
+        titles = ["L2 Relative Error", "Maximum Error"]
+
+        for run_idx, (rel, mx) in enumerate(processed):
+            dash = dashes[run_idx % len(dashes)]
+            label = labels[run_idx]
+            axes[0].plot(x, rel, label=label,
+                         color=colors["rel_err"], linestyle=dash)
+            axes[1].plot(x, mx, label=label,
+                         color=colors["max_err"], linestyle=dash)
+
+        for ax, title in zip(axes, titles):
+            ax.set_yscale("log")
+            ax.set_title(title, fontsize=10)
+
+        axes[-1].set_xlabel("Epoch")
+        axes[0].set_ylabel("Relative Error (log)")
+        axes[1].set_ylabel("Max Error (log)")
+        axes[0].legend(loc="upper right")
+        plt.tight_layout()
+        plt.show()
+
+
 def compare_loss_histories(
     runs,
     labels=None,
@@ -147,7 +244,7 @@ def compare_loss_histories(
     if backend.lower() == "plotly":
         fig = make_subplots(
             rows=4, cols=1, shared_xaxes=True, vertical_spacing=0.06,
-            subplot_titles=("wInterior Loss",
+            subplot_titles=("Interior Loss",
                             "Boundary Loss", "Initial Loss", "Total Loss")
         )
 

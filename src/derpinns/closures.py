@@ -22,8 +22,15 @@ class Closure(ABC):
 
         self.dtype = None
         self.device = None
-        self.state = None
         self.optimizer = None
+
+        self.state = {
+            "interior_loss": [],
+            "boundary_loss": [],
+            "initial_loss": [],
+            "max_err": [],
+            "l2_rel_err": [],
+        }
 
     def with_device(self, device: torch.device):
         if device:
@@ -32,9 +39,8 @@ class Closure(ABC):
         else:
             raise ValueError("Invalid device")
 
-    @abstractmethod
     def get_state(self):
-        pass
+        return self.state
 
     def with_dtype(self, dtype: torch.dtype):
         if dtype:
@@ -52,6 +58,23 @@ class Closure(ABC):
 
     def next_batch(self):
         self.x, self.y, self.mask = next(iter(self.dataloader))
+
+    def update_losses_state(self, pde_loss, boundary_loss, initial_cond_loss):
+        self.state["interior_loss"].append(pde_loss)
+        self.state["boundary_loss"].append(boundary_loss)
+        self.state["initial_loss"].append(initial_cond_loss)
+
+    def update_errors_state(self, max_err, l2_err):
+        self.state["max_err"].append(max_err)
+        self.state["l2_rel_err"].append(l2_err)
+
+    def log_state(self):
+        print(f"Interior Loss: {self.state['interior_loss'][-1]}")
+        print(f"Boundary Loss: {self.state['boundary_loss'][-1]}")
+        print(f"Inital Condition Loss: {self.state['initial_loss'][-1]}")
+        print(
+            f"Total Loss: {self.state['interior_loss'][-1]+self.state['boundary_loss'][-1]+self.state['initial_loss'][-1]}")
+        print("-"*40)
 
     @abstractmethod
     def __call__(self, *args, **kwargs) -> torch.Tensor:
@@ -79,12 +102,7 @@ class DimlessBS(Closure):
     """
 
     def __init__(self):
-        super(Closure).__init__()
-        self.state = {
-            "interior_loss": [],
-            "boundary_loss": [],
-            "initial_loss": [],
-        }
+        super().__init__()
         self.n_assets = None
 
     def with_dataset(self, dataset: SampledDataset, loader_opts: dict):
@@ -94,22 +112,6 @@ class DimlessBS(Closure):
         self.r = dataset.params.r
         self.rho = dataset.params.rho
         return self
-
-    def update_state(self, pde_loss, boundary_loss, initial_cond_loss):
-        self.state["interior_loss"].append(pde_loss)
-        self.state["boundary_loss"].append(boundary_loss)
-        self.state["initial_loss"].append(initial_cond_loss)
-
-    def log_state(self):
-        print(f"Interior Loss: {self.state['interior_loss'][-1]}")
-        print(f"Boundary Loss: {self.state['boundary_loss'][-1]}")
-        print(f"Inital Condition Loss: {self.state['initial_loss'][-1]}")
-        print(
-            f"Total Loss: {self.state['interior_loss'][-1]+self.state['boundary_loss'][-1]+self.state['initial_loss'][-1]}")
-        print("-"*40)
-
-    def get_state(self):
-        return self.state
 
     def compute_derivatives(self, x) -> tuple:
         """
@@ -282,7 +284,7 @@ class DimlessBS(Closure):
         interior_loss, boundary_losses, initial_loss = self.compute_losses()
         boundary_loss = torch.sum(boundary_losses)
         if kwargs.get('update_status', True):
-            self.update_state(
+            self.update_losses_state(
                 interior_loss.item(), boundary_loss.item(), initial_loss.item())
         return interior_loss + boundary_loss + initial_loss
 
@@ -295,11 +297,7 @@ class ResidualBasedAdaptiveSamplingDimlessBS(DimlessBS):
 
     def __init__(self,  sampler='Halton', k=1, c=1, seed=None):
         super(DimlessBS).__init__()
-        self.state = {
-            "interior_loss": [],
-            "boundary_loss": [],
-            "initial_loss": [],
-        }
+
         self.sampler = sampler
         self.seed = seed
         self.k = k
@@ -349,27 +347,6 @@ class LossBalancingDimlessBS(DimlessBS):
         self.loss_0 = None
         self.loss_t_1 = None
         self.lambda_t_1 = None
-        self.state = {
-            "interior_loss": [],
-            "boundary_loss": [],
-            "initial_loss": [],
-        }
-
-    def update_state(self, pde_loss, boundary_loss, initial_cond_loss):
-        self.state["interior_loss"].append(pde_loss)
-        self.state["boundary_loss"].append(boundary_loss)
-        self.state["initial_loss"].append(initial_cond_loss)
-
-    def log_state(self):
-        print(f"Interior Loss: {self.state['interior_loss'][-1]}")
-        print(f"Boundary Loss: {self.state['boundary_loss'][-1]}")
-        print(f"Inital Condition Loss: {self.state['initial_loss'][-1]}")
-        print(
-            f"Total Loss: {self.state['interior_loss'][-1]+self.state['boundary_loss'][-1]+self.state['initial_loss'][-1]}")
-        print("-"*40)
-
-    def get_state(self):
-        return self.state
 
     def __call__(self, *args, **kwargs):
         m = self.n_assets*2+2
@@ -407,23 +384,18 @@ class LossBalancingDimlessBS(DimlessBS):
         self.loss_t_1 = current_loss
         losses = self.lambda_t_1 * current_loss
         if kwargs.get('update_status', True):
-            self.update_state(
+            self.update_losses_state(
                 losses[0].item(), losses[2:].sum().item(), losses[1].item())
         return losses.sum()
 
 
 class PINNBoundaryDimlessBS(DimlessBS):
     """
-        Uses the solution of the i-1th asset case for the lower boundary.
+        TODO: Uses the solution of the i-1th asset case for the lower boundary.
     """
 
     def __init__(self):
         super(DimlessBS).__init__()
-        self.state = {
-            "interior_loss": [],
-            "boundary_loss": [],
-            "initial_loss": [],
-        }
 
     def with_dataset(self, dataset: SampledDatasetWithPINNBoundary, loader_opts: dict):
         super().with_dataset(dataset, loader_opts)
@@ -432,22 +404,6 @@ class PINNBoundaryDimlessBS(DimlessBS):
         self.r = dataset.params.r
         self.rho = dataset.params.rho
         return self
-
-    def update_state(self, pde_loss, boundary_loss, initial_cond_loss):
-        self.state["interior_loss"].append(pde_loss)
-        self.state["boundary_loss"].append(boundary_loss)
-        self.state["initial_loss"].append(initial_cond_loss)
-
-    def log_state(self):
-        print(f"Interior Loss: {self.state['interior_loss'][-1]}")
-        print(f"Boundary Loss: {self.state['boundary_loss'][-1]}")
-        print(f"Inital Condition Loss: {self.state['initial_loss'][-1]}")
-        print(
-            f"Total Loss: {self.state['interior_loss'][-1]+self.state['boundary_loss'][-1]+self.state['initial_loss'][-1]}")
-        print("-"*40)
-
-    def get_state(self):
-        return self.state
 
     def boundary_loss(self, u, u_tau, u_x, u_xx) -> list[torch.Tensor]:
         """
