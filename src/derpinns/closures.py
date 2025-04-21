@@ -8,6 +8,8 @@ from derpinns.collocations import *
 from derpinns.datasets import *
 from derpinns.sampling import residual_based_adaptive_sampling
 
+torch.autograd.set_detect_anomaly(True)
+
 
 class Closure(ABC):
     """
@@ -122,6 +124,7 @@ class DimlessBS(Closure):
         """
             Computes all required derivatives using autograd.
         """
+        x.requires_grad_(True)
         u = self.model(x)
         grads = torch.autograd.grad(u.sum(), x, create_graph=True)[0]
         u_tau = grads[:, -1]
