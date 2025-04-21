@@ -14,7 +14,7 @@ The content of each file is shown below:
 - **trainer.py**: Contains helper class to orquestate the training procedure.
 - **utils.py**: Plotting and visualizations helper functions.
 
-In order to run the code in experemints, ´´´requirements.txt´´´ file is provided and in order to use this repo's library you can use the following command:
+In order to run the code in experemints, ```requirements.txt``` file is provided and in order to use this repo's library you can use the following command:
 
 ```bash
 pip install -e .
