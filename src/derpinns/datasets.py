@@ -14,9 +14,7 @@ class SampledDataset(Dataset):
         x, y, mask = generate_dataset(
             params, interior_samples, initial_samples, boundary_samples, sampler, seed)
 
-        self.x = torch.tensor(
-            x, dtype=dtype, device=device, requires_grad=True)
-
+        self.x = torch.tensor(x, dtype=dtype, device=device)
         self.y = torch.tensor(y, dtype=dtype, device=device)
         self.mask = torch.tensor(mask, dtype=torch.bool, device=device)
 
