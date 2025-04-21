@@ -7,12 +7,12 @@ This repository has all codes used for the master's thesis ***"Leveraging PINNs 
 The content of each file is shown below:
 
 - **experiments folder**: Contains the different tests done in this thesis among other notes.
-- **nn.py**: Contains builder method to construct neural networks.
-- **sampling.py**: Contains all methods related to creating random collocations points. Multiple methods are available.
-- **solution.py**: This file contains functions to evaluate the solutions.
-- **closures.py**: Here we can find all training methods implemented in this thesis.
-- **trainer.py**: Contains helper class to orquestate the training procedure.
-- **utils.py**: Plotting and visualizations helper functions.
+- **nn.py**: Contains different neural network arquictectures.
+- **sampling.py**: All methods related to creating random collocations points.
+- **solution.py**: Exact and approximate solutions for the equations used in this thesis.
+- **closures.py**: Here we can find all training steps used to calibrate models.
+- **trainer.py**: Contains a helper class to orquestate the training procedure.
+- **utils.py**: Plotting and visualizations utils.
 
 In order to run the code in experemints, ```requirements.txt``` file is provided and in order to use this repo's library you can use the following command:
 
