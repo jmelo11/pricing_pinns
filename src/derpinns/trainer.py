@@ -142,7 +142,7 @@ class PINNTrainer:
                 self.optimizer.zero_grad()
                 loss = self.closure()
                 loss.backward()
-                
+
                 if self.preconditioner:
                     self.preconditioner.step()
                 self.optimizer.step()

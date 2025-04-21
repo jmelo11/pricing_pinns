@@ -62,9 +62,6 @@ class Closure(ABC):
 
     def next_batch(self):
         self.x, self.y, self.mask = next(iter(self.dataloader))
-        self.x = self.x.to(self.device)
-        self.y = self.y.to(self.device)
-        self.mask = self.mask.to(self.device)
 
     def update_losses_state(self, pde_loss, boundary_loss, initial_cond_loss):
         self.state["interior_loss"].append(pde_loss)

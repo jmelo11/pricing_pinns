@@ -98,7 +98,7 @@ class NN(nn.Module):
         Vanilla NN.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.SiLU()):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Softplus()):
         super(NN, self).__init__()
         layers = []
         # First layer: Linear followed by activation
@@ -125,7 +125,7 @@ class NNWithAnsatz(nn.Module):
         NN with a differentiable approximation of the payoff function.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Sigmoid()):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Softplus()):
         super(NNWithAnsatz, self).__init__()
         layers = []
         self.input_dim = input_dim
