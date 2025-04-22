@@ -7,6 +7,7 @@ import torch
 from derpinns.sampling import random_samples
 
 
+@torch.no_grad()
 def compare_with_mc(
     model,
     params,
@@ -44,12 +45,11 @@ def compare_with_mc(
     drift = (params.r - 0.5 * sigma**2) * params.tau
     vol_sqrt = sigma * np.sqrt(params.tau)
 
-    with torch.no_grad():
-        t0 = time.perf_counter()
-        inp = torch.cat([x0, torch.full((n_prices, 1), params.tau,
-                                        dtype=dtype, device=device)], dim=1)
-        nn_prices = model(inp).squeeze() * params.strike   # (n_prices,)
-        nn_time = time.perf_counter() - t0
+    t0 = time.perf_counter()
+    inp = torch.cat([x0, torch.full((n_prices, 1), params.tau,
+                                    dtype=dtype, device=device)], dim=1)
+    nn_prices = model(inp).squeeze() * params.strike   # (n_prices,)
+    nn_time = time.perf_counter() - t0
 
     t0 = time.perf_counter()
 
