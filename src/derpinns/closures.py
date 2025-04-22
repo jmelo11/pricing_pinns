@@ -1,4 +1,3 @@
-from typing import List
 from torch.autograd import grad
 from abc import ABC, abstractmethod
 import torch
@@ -7,6 +6,7 @@ from torch.optim import Optimizer
 from derpinns.collocations import *
 from derpinns.datasets import *
 from derpinns.sampling import residual_based_adaptive_sampling
+
 
 torch.autograd.set_detect_anomaly(True)
 
@@ -132,6 +132,16 @@ class DimlessBS(Closure):
                                          retain_graph=True)[0][:, :self.n_assets]
             u_xx_list.append(grad_j)
         u_xx = torch.stack(u_xx_list, dim=1)
+
+        if torch.isnan(u_tau).any():
+            raise ValueError("NaN @ u_tau")
+        if torch.isnan(u_x).any():
+            raise ValueError("NaN @ u_x")
+        if torch.isnan(u_xx).any():
+            raise ValueError("NaN @ u_xx")
+        if torch.isnan(u).any():
+            raise ValueError("NaN @ u")
+
         return u, u_tau, u_x, u_xx
 
     def interior_residual(self, u, u_tau, u_x, u_xx) -> torch.Tensor:
@@ -244,15 +254,6 @@ class DimlessBS(Closure):
         # self.optimizer.zero_grad()
         u, u_tau, u_x, u_xx = self.compute_derivatives(self.x)
 
-        if torch.isnan(u_tau).any():
-            raise ValueError("NaN @ u_tau")
-        if torch.isnan(u_x).any():
-            raise ValueError("NaN @ u_x")
-        if torch.isnan(u_xx).any():
-            raise ValueError("NaN @ u_xx")
-        if torch.isnan(u).any():
-            raise ValueError("NaN @ u")
-
         # PDE residual: interi or loss
         interior_mask = self.mask[:, 0].bool()
         if interior_mask.sum() > 0:
@@ -298,10 +299,12 @@ class ResidualBasedAdaptiveSamplingDimlessBS(DimlessBS):
     """
         Implementation of the residual-based adaptive sampling method.
         https://www.sciencedirect.com/science/article/pii/S0045782522006260?via%3Dihub
+
+        The main disadvantage of this kind of methods is that is does not allow mini-batching.
     """
 
     def __init__(self,  sampler='Halton', k=1, c=1, seed=None):
-        super(DimlessBS).__init__()
+        super().__init__()
 
         self.sampler = sampler
         self.seed = seed
@@ -317,7 +320,7 @@ class ResidualBasedAdaptiveSamplingDimlessBS(DimlessBS):
 
         def res_f(x):
             x = torch.tensor(x, dtype=self.dtype,
-                             device=self.device, requires_grad=True)
+                             device=self.device)
             u, u_tau, u_x, u_xx = self.compute_derivatives(x)
             return self.interior_residual(u, u_tau, u_x, u_xx).detach().cpu().numpy()
 
@@ -332,7 +335,7 @@ class ResidualBasedAdaptiveSamplingDimlessBS(DimlessBS):
         )
         # we need to modify the tmp_x to be in the same range as the original x
         tmp_x = torch.tensor(tmp_x, dtype=self.dtype,
-                             device=self.device, requires_grad=True)
+                             device=self.device)
 
         self.x[interior_mask] = tmp_x
 
@@ -439,7 +442,7 @@ class PINNBoundaryDimlessBS(DimlessBS):
         return losses
 
 
-class FirstOrderPINN(DimlessBS):
+class FOPINN(DimlessBS):
 
     def __init__(self):
         super(DimlessBS).__init__()
@@ -532,3 +535,126 @@ class FirstOrderPINN(DimlessBS):
         """
         interior, B_losses, I, comp = self.compute_losses()
         return interior + B_losses.sum() + I + comp
+
+
+class DimlessBSOnlyInterior(DimlessBS):
+    """
+        Training step of the non-dimensional Black-Scholes PDE using only the interior loss.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+    def compute_losses(self):
+        """
+            The training step. Computes all losses and returns the total.
+        """
+        # self.optimizer.zero_grad()
+        u, u_tau, u_x, u_xx = self.compute_derivatives(self.x)
+
+        # PDE residual: interi or loss
+        interior_mask = self.mask[:, 0].bool()
+        if interior_mask.sum() > 0:
+            interior_loss = self.interior_residual(
+                u[interior_mask],
+                u_tau[interior_mask],
+                u_x[interior_mask],
+                u_xx[interior_mask]
+            ).square().mean()
+        else:
+            interior_loss = torch.tensor(
+                0.0, dtype=self.dtype, device=self.device)
+
+        # Initial condition loss
+        initial_mask = self.mask[:, 1].bool()
+        if initial_mask.sum() > 0:
+            initial_loss = self.initial_residual(
+                u[initial_mask],
+                self.y[initial_mask]
+            ).square().mean()
+        else:
+            initial_loss = torch.tensor(
+                0.0, dtype=self.dtype, device=self.device)
+
+        # to fill the gap so all still works
+        boundary_losses = torch.zeros(
+            self.n_assets*2, dtype=self.dtype, device=self.device)
+        return interior_loss, boundary_losses, initial_loss
+
+
+class RBABSOnlyInterior(DimlessBS):
+    """
+        Mix of residual-based adaptive sampling and only interior loss.
+    """
+
+    def __init__(self,  sampler='Halton', k=1, c=1, seed=None):
+        super().__init__()
+
+        self.sampler = sampler
+        self.seed = seed
+        self.k = k
+        self.c = c
+
+    def next_batch(self):
+        # Get the next batch of data
+        super().next_batch()
+
+        interior_mask = self.mask[:, 0].bool()
+        n_samples = self.x[interior_mask].shape[0]
+
+        def res_f(x):
+            x = torch.tensor(x, dtype=self.dtype,
+                             device=self.device)
+            u, u_tau, u_x, u_xx = self.compute_derivatives(x)
+            return self.interior_residual(u, u_tau, u_x, u_xx).detach().cpu().numpy()
+
+        tmp_x = residual_based_adaptive_sampling(
+            res_f,
+            n_samples,
+            self.dataset.params.domain_ranges(),
+            k=self.k,
+            c=self.c,
+            sampler=self.sampler,
+            seed=self.seed
+        )
+        # we need to modify the tmp_x to be in the same range as the original x
+        tmp_x = torch.tensor(tmp_x, dtype=self.dtype,
+                             device=self.device)
+
+        self.x[interior_mask] = tmp_x
+
+    def compute_losses(self):
+        """
+            The training step. Computes all losses and returns the total.
+        """
+        # self.optimizer.zero_grad()
+        u, u_tau, u_x, u_xx = self.compute_derivatives(self.x)
+
+        # PDE residual: interi or loss
+        interior_mask = self.mask[:, 0].bool()
+        if interior_mask.sum() > 0:
+            interior_loss = self.interior_residual(
+                u[interior_mask],
+                u_tau[interior_mask],
+                u_x[interior_mask],
+                u_xx[interior_mask]
+            ).square().mean()
+        else:
+            interior_loss = torch.tensor(
+                0.0, dtype=self.dtype, device=self.device)
+
+        # Initial condition loss
+        initial_mask = self.mask[:, 1].bool()
+        if initial_mask.sum() > 0:
+            initial_loss = self.initial_residual(
+                u[initial_mask],
+                self.y[initial_mask]
+            ).square().mean()
+        else:
+            initial_loss = torch.tensor(
+                0.0, dtype=self.dtype, device=self.device)
+
+        # to fill the gap so all still works
+        boundary_losses = torch.zeros(
+            self.n_assets*2, dtype=self.dtype, device=self.device)
+        return interior_loss, boundary_losses, initial_loss
