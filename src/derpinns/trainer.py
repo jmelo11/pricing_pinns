@@ -62,6 +62,7 @@ class PINNTrainer:
         return self
 
     def train(self):
+
         if isinstance(self.optimizer, LBFGS) or isinstance(self.optimizer, BFGS) or isinstance(self.optimizer, SSBroyden):
             pbar = tqdm(range(self.optimizer.state_dict()
                               ['param_groups'][0]['max_iter']), desc=str(self.optimizer.__class__.__name__) + " training")
@@ -75,8 +76,12 @@ class PINNTrainer:
                 loss.backward()
 
                 if update_status:
-                    results = compare_with_mc(self.closure.model,
-                                              self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44)
+                    if isinstance(self.closure, FOPINNClosure):
+                        results = compare_with_mc(self.closure.model,
+                                                  self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44, split_output=True)
+                    else:
+                        results = compare_with_mc(self.closure.model,
+                                                  self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44)
                     pbar.update(self.optimizer.state_dict()[
                         'state'][0]['n_iter']
                         - last_evals)
@@ -147,8 +152,12 @@ class PINNTrainer:
                     self.preconditioner.step()
                 self.optimizer.step()
 
-                results = compare_with_mc(self.closure.model,
-                                          self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44)
+                if isinstance(self.closure, FOPINNClosure):
+                    results = compare_with_mc(self.closure.model,
+                                              self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44, split_output=True)
+                else:
+                    results = compare_with_mc(self.closure.model,
+                                              self.closure.dataset.params, n_prices=5, n_simulations=10_000, dtype=self.dtype, device=self.device, seed=44)
 
                 if self.scheduler:
                     if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):

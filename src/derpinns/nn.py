@@ -133,7 +133,6 @@ class NNWithAnsatz(nn.Module):
         layers.append(nn.Linear(input_dim, hidden_dim, dtype=dtype))
         layers.append(activation)
         self.alpha = nn.Parameter(torch.tensor([10.0]))
-        self.beta = nn.Parameter(torch.tensor([10.0]))
 
         # Additional hidden layers: each Linear +  activation
         for _ in range(n_layers - 1):
@@ -145,11 +144,8 @@ class NNWithAnsatz(nn.Module):
         self.output_layer = nn.Linear(hidden_dim, output_dim, dtype=dtype)
 
     def payoff(self, x):
-        # x = torch.max(torch.exp(x), dim=1).values
         x = self.smooth_max_exp(x, alpha=self.alpha)
         ones = torch.ones_like(x)
-        # zeros = torch.zeros_like(x)
-        # payoff_values = torch.maximum(x - ones, zeros)
         payoff_values = F.gelu(x - ones)
         return payoff_values.reshape([-1, 1])
 
@@ -160,9 +156,7 @@ class NNWithAnsatz(nn.Module):
         where x_max is the max across each row to improve numerical stability.
         """
         x_max = x.max(dim=1, keepdim=True).values
-        # log-sum-exp for alpha*(x - x_max)
         lse = torch.logsumexp(alpha * (x - x_max), dim=1, keepdim=True)
-        # exponentiate
         return torch.exp((lse + alpha * x_max) / alpha).squeeze(1)
 
     def forward(self, inputs):

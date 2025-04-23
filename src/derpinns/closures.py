@@ -6,7 +6,7 @@ from torch.optim import Optimizer
 from derpinns.collocations import *
 from derpinns.datasets import *
 from derpinns.sampling import residual_based_adaptive_sampling
-
+from torch.func import jacrev, jacfwd, vmap
 
 torch.autograd.set_detect_anomaly(True)
 
@@ -442,38 +442,44 @@ class PINNBoundaryDimlessBS(DimlessBS):
         return losses
 
 
-class FOPINN(DimlessBS):
+class FOPINNClosure(DimlessBS):
 
     def __init__(self):
-        super(DimlessBS).__init__()
+        super().__init__()
 
-    def compute_derivatives(self, x: torch.Tensor):
-        # 1) run the net
-        out = self.model(x)              # (N, 1 + n_assets + 1)
-        # 2) split u vs predicted grads
-        u = out[:, :1]             # (N,1)
-        u_hat = out[:, 1:]             # (N, n_assets+1)
+    def compute_derivatives(self, x):
+        # make x a true leaf
+        x = x.requires_grad_(True)                # [B, n_assets+1]
+        out = self.model(x)                       # [B, 1 + n_assets]
+        u, u_hat = out[:, :1], out[:, 1:]
 
-        # 3) true grads of u
-        true_grads = grad(u.sum(), x, create_graph=True)[0]  # (N, d)
-        # split true time‐deriv vs spatial‐derivs
-        u_tau_true = true_grads[:, -1]            # (N,)
-        u_x_true = true_grads[:, :self.n_assets]  # (N,n_assets)
+        # 1) true first‐order gradients (space + time)
+        grads = torch.autograd.grad(
+            u.sum(),
+            x,
+            create_graph=True,
+            retain_graph=True,           # <<< keep the graph alive
+        )[0]                                # [B, n_assets+1]
+        u_x_true = grads[:, :self.n_assets]
+        u_tau_true = grads[:, self.n_assets]
 
-        # 4) predicted first‐derivs
-        u_tau_hat = u_hat[:, -1]            # (N,)
-        u_x_hat = u_hat[:, :self.n_assets]  # (N,n_assets)
+        # 2) predicted first‐order
+        u_x_hat = u_hat[:, :self.n_assets]
+        u_tau_hat = u_hat[:, self.n_assets]
 
-        # 5) second derivatives by differentiating each û_{x_i}
+        # 3) second spatial derivatives
         u_xx_list = []
         for i in range(self.n_assets):
-            # sum over batch so grad() works
             yi = u_x_hat[:, i].sum()
-            gij = grad(yi, x, create_graph=True, retain_graph=True)[0]
-            # keep only spatial‐spatial block
-            u_xx_list.append(gij[:, :self.n_assets])
-        u_xx = torch.stack(u_xx_list, dim=1)    # (N,n_assets,n_assets)
+            full_grad = torch.autograd.grad(
+                yi,
+                x,
+                create_graph=True,
+                retain_graph=True,       # <<< keep the graph alive until final backward
+            )[0]                        # [B, n_assets+1]
+            u_xx_list.append(full_grad[:, :self.n_assets])
 
+        u_xx = torch.stack(u_xx_list, dim=1)  # [B, n_assets, n_assets]
         return u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true
 
     def compute_losses(self):
@@ -513,19 +519,46 @@ class FOPINN(DimlessBS):
         B_losses = self.boundary_loss(
             u, u_tau_hat, u_x_hat, u_xx
         )
-        boundary_loss = B_losses.sum()
 
-        # total
-        total = interior_loss + I + boundary_loss + compatibility
+        return interior_loss, B_losses, I, compatibility
 
-        # log if needed (update_status=True by default)
-        if getattr(self, "_logging_enabled", True):
-            self.update_losses_state(
-                interior_loss.item(),
-                boundary_loss.item(),
-                I.item(),
-                compatibility=compatibility.item()
+    def compute_losses(self):
+        # get all six pieces
+        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = \
+            self.compute_derivatives(self.x)
+
+        # 1) compatibility MSE between predicted vs true first‐derivs
+        comp_time = (u_tau_hat - u_tau_true).square().mean()
+        comp_space = (u_x_hat - u_x_true).square().mean()
+        compatibility = comp_time + comp_space
+
+        # 2) interior PDE loss (same as before, but using u_tau_hat & u_x_hat & u_xx)
+        interior_mask = self.mask[:, 0].bool()
+        if interior_mask.any():
+            R = self.interior_residual(
+                u[interior_mask],
+                u_tau_hat[interior_mask],
+                u_x_hat[interior_mask],
+                u_xx[interior_mask]
             )
+            interior_loss = R.square().mean()
+        else:
+            interior_loss = torch.tensor(0., device=u.device)
+
+        # 3) initial‐condition loss
+        init_mask = self.mask[:, 1].bool()
+        if init_mask.any():
+            I = self.initial_residual(
+                u[init_mask],
+                self.y[init_mask]
+            ).square().mean()
+        else:
+            I = torch.tensor(0., device=u.device)
+
+        # 4) boundary losses (unchanged)
+        B_losses = self.boundary_loss(
+            u, u_tau_hat, u_x_hat, u_xx
+        )
 
         return interior_loss, B_losses, I, compatibility
 
@@ -534,6 +567,12 @@ class FOPINN(DimlessBS):
         Return the scalar loss for the optimizer.
         """
         interior, B_losses, I, comp = self.compute_losses()
+        if kwargs.get('update_status', True):
+            self.update_losses_state(
+                interior.item(),
+                B_losses.sum().item(),
+                I.item(),
+            )
         return interior + B_losses.sum() + I + comp
 
 

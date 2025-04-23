@@ -16,6 +16,7 @@ def compare_with_mc(
     dtype=torch.float32,
     device=torch.device("cpu"),
     seed=None,
+    split_output=False,
 ):
     """
         Vectorised NN-vs-MC comparison.
@@ -48,7 +49,13 @@ def compare_with_mc(
     t0 = time.perf_counter()
     inp = torch.cat([x0, torch.full((n_prices, 1), params.tau,
                                     dtype=dtype, device=device)], dim=1)
-    nn_prices = model(inp).squeeze() * params.strike   # (n_prices,)
+    if split_output:
+        # split the output, the net returns a matrix where the first
+        # column is the price and next following columns are the first order derivatives of u wrt inputs
+        nn_prices = torch.split(model(inp), 1, dim=1)[
+            0].squeeze() * params.strike
+    else:
+        nn_prices = model(inp).squeeze() * params.strike   # (n_prices,)
     nn_time = time.perf_counter() - t0
 
     t0 = time.perf_counter()
