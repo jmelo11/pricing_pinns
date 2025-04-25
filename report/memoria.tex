@@ -1,0 +1,1129 @@
+%----------
+%   WARNING
+%----------
+
+% This Guide contains Library recommendations based mainly on APA and IEEE styles, but you must always follow the guidelines of your TFG Tutor and the TFG regulations for your degree.
+
+% THIS TEMPLATE IS BASED ON THE APA STYLE 
+
+
+%----------
+% DOCUMENT SETTINGS
+%----------
+
+\documentclass[12pt]{report} % font: 12pt
+
+% margins: 2.5 cm top and bottom; 3 cm left and right
+\usepackage[
+a4paper,
+vmargin=2.5cm,
+hmargin=3cm
+]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc}
+
+
+% Paragraph Spacing and Line Spacing: Narrow (6 pt / 1.15 spacing) or Moderate (6 pt / 1.5 spacing)
+\renewcommand{\baselinestretch}{1.15}
+\parskip=6pt
+
+% Color settings for cover and code listings 
+\usepackage[table]{xcolor}
+\definecolor{azulUC3M}{RGB}{0,0,102}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+% PDF/A -- Important for its inclusion in e-Archive. PDF/A is the optimal format for preservation and for the generation of metadata: http://uc3m.libguides.com/ld.php?content_id=31389625. 
+
+% In the template we include the file OUTPUT.XMPDATA. You can download that file and include the metadata that will be incorporated into the PDF file when you compile the memoria.tex file. Then upload it back to your project. 
+\usepackage[a-1b]{pdfx}
+
+% LINKS
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+	linkcolor=black, % links to parts of the document (e.g. index) in black
+	urlcolor=blue} % links to resources outside the document in blue
+
+% MATH EXPRESSIONS
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+% Character encoding
+\usepackage{txfonts} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% English settings
+\usepackage[english]{babel} 
+\usepackage[babel, english=american]{csquotes}
+\AtBeginEnvironment{quote}{\small}
+
+% Footer settings
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\thepage}
+\fancypagestyle{plain}{\pagestyle{fancy}}
+
+% DESIGN OF THE TITLES of the parts of the work (chapters and epigraphs or sub-chapters)
+\usepackage{titlesec}
+\usepackage{titletoc}
+\titleformat{\chapter}[block]
+{\large\bfseries\filcenter}
+{\thechapter.}
+{5pt}
+{\MakeUppercase}
+{}
+\titlespacing{\chapter}{0pt}{0pt}{*3}
+\titlecontents{chapter}
+[0pt]                                               
+{}
+{\contentsmargin{0pt}\thecontentslabel.\enspace\uppercase}
+{\contentsmargin{0pt}\uppercase}                        
+{\titlerule*[.7pc]{.}\contentspage}                 
+
+\titleformat{\section}
+{\bfseries}
+{\thesection.}
+{5pt}
+{}
+\titlecontents{section}
+[5pt]                                               
+{}
+{\contentsmargin{0pt}\thecontentslabel.\enspace}
+{\contentsmargin{0pt}}
+{\titlerule*[.7pc]{.}\contentspage}
+
+\titleformat{\subsection}
+{\normalsize\bfseries}
+{\thesubsection.}
+{5pt}
+{}
+\titlecontents{subsection}
+[10pt]                                               
+{}
+{\contentsmargin{0pt}                          
+	\thecontentslabel.\enspace}
+{\contentsmargin{0pt}}                        
+{\titlerule*[.7pc]{.}\contentspage}  
+
+
+% Tables and figures settings
+\usepackage{multirow} % combine cells 
+\usepackage{caption} % customize the title of tables and figures
+\usepackage{floatrow} % we use this package and its \ ttabbox and \ ffigbox macros to align the table and figure names according to the defined style.
+\usepackage{array} % with this package we can define in the following line a new type of column for tables: custom width and centered content
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\DeclareCaptionFormat{upper}{#1#2\uppercase{#3}\par}
+\usepackage{graphicx}
+\graphicspath{{imagenes/}} % images fodler
+
+% Table layout for social sciences and humanities
+\captionsetup*[table]{
+	justification=raggedright,
+	labelsep=newline,
+	labelfont=small,
+	singlelinecheck=false,
+	labelfont=bf,
+	font=small,
+	textfont=it
+}
+
+% Figure layout for social sciences and humanities
+\captionsetup[figure]{
+	%name=Figura,
+	singlelinecheck=off,
+	labelsep=newline,
+	font=small,
+	labelfont=bf,
+	textfont=it
+}
+\floatsetup[figure]{
+    style=plaintop,
+    heightadjust=caption,
+    footposition=bottom,
+    font=small
+}
+
+% Figures and tables footnote layout 
+\captionsetup*[floatfoot]{
+    footfont={small, up}
+}
+
+% FOOTNOTES
+\usepackage{chngcntr} % continuous numbering of footnotes
+\counterwithout{footnote}{chapter}
+
+% CODE LISTINGS 
+% support and styling for listings. More information in  https://es.wikibooks.org/wiki/Manual_de_LaTeX/Listados_de_código/Listados_con_listings
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath,amssymb}   % for math symbols & environments
+\usepackage{amsthm}            % for theorem environments
+
+% Theorem‐style definitions:
+\theoremstyle{plain}           % default: italic body
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}      % upright body
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}          % upright body, no number
+\newtheorem*{remark}{Remark}
+
+
+
+% Custom listing
+\lstdefinestyle{estilo}{ frame=Ltb,
+	framerule=0pt,
+	aboveskip=0.5cm,
+	framextopmargin=3pt,
+	framexbottommargin=3pt,
+	framexleftmargin=0.4cm,
+	framesep=0pt,
+	rulesep=.4pt,
+	backgroundcolor=\color{gray97},
+	rulesepcolor=\color{black},
+	%
+	basicstyle=\ttfamily\footnotesize,
+	keywordstyle=\bfseries,
+	stringstyle=\ttfamily,
+	showstringspaces = false,
+	commentstyle=\color{gray45},     
+	%
+	numbers=left,
+	numbersep=15pt,
+	numberstyle=\tiny,
+	numberfirstline = false,
+	breaklines=true,
+	xleftmargin=\parindent
+}
+
+\captionsetup*[lstlisting]{font=small, labelsep=period}
+ 
+\lstset{style=estilo}
+\renewcommand{\lstlistingname}{\uppercase{Código}}
+
+
+% REFERENCES 
+
+% APA bibliography setup
+%\usepackage[style=apa, backend=biber, natbib=true, hyperref=true, uniquelist=false, sortcites]{biblatex}
+
+\usepackage[style=ieee, backend=biber, natbib=true, hyperref=true, uniquelist=false, sortcites]{biblatex}
+
+
+\addbibresource{referencias.bib} % The references.bib file in which the bibliography used should be
+
+
+%-------------
+%	DOCUMENT
+%-------------
+
+\begin{document}
+\pagenumbering{roman} % Roman numerals are used in the numbering of the pages preceding the body of the work.
+	
+%----------
+%	COVER
+%----------	
+\begin{titlepage}
+	\begin{sffamily}
+	\color{azulUC3M}
+	\begin{center}
+		\begin{figure}[H] % UC3M Logo
+			\makebox[\textwidth][c]{\includegraphics[width=16cm]{logo_UC3M.png}}
+		\end{figure}
+		\vspace{2.5cm}
+		\begin{Large}
+			Master Degree in Computational and Applied Mathematics\\			
+			 2024-2025\\ % Academic year
+			\vspace{2cm}		
+			\textsl{Master Thesis}
+			\bigskip
+			
+		\end{Large}
+		 	{\Huge Leveraging Physics-Informed Neural Networks for Multidimensional Pricing Problems}\\
+		 	\vspace*{0.5cm}
+	 		\rule{10.5cm}{0.1mm}\\
+			\vspace*{0.9cm}
+			{\LARGE Jose Pedro Melo Olivares}\\ 
+			\vspace*{1cm}
+		\begin{Large}
+			Pedro Echeverria, Ph.D \\
+			Francisco Bernal, Ph.D\\
+			Madrid, 2025\\
+		\end{Large}
+	\end{center}
+	\vfill
+	\color{black}
+	\fbox{
+	\begin{minipage}{\linewidth}
+    	\textbf{AVOID PLAGIARISM}\\
+    	\footnotesize{The University uses the \textbf{Turnitin Feedback Studio} for the delivery of student work. This program compares the originality of the work delivered by each student with millions of electronic resources and detects those parts of the text that are copied and pasted. Plagiarizing in a TFM is considered a  \textbf{\underline{Serious Misconduct}}, and may result in permanent expulsion from the University.}\end{minipage}}
+
+	% IF OUR WORK IS TO BE PUBLISHED UNDER A CREATIVE COMMONS LICENSE, INCLUDE THESE LINES. IS THE RECOMMENDED OPTION.
+	\noindent\includegraphics[width=4.2cm]{creativecommons.png}\\ % Creative Commons Logo
+    \footnotesize{This work is licensed under Creative Commons \textbf{Attribution – Non Commercial – Non Derivatives}}
+	
+	\end{sffamily}
+\end{titlepage}
+
+\newpage % blank page
+\thispagestyle{empty}
+\mbox{}
+
+%----------
+%	ABSTRACT AND KEYWORDS 
+%----------	
+\renewcommand\abstractname{\large\bfseries\filcenter\uppercase{Summary}}
+\begin{abstract}
+\thispagestyle{plain}
+\setcounter{page}{3}
+	
+	% Write your abstract  
+
+This master's thesis explores the usage of physics-informed neural networks (PINNs) in 
+multidimensional derivative pricing problems, where traditional numerical method for 
+solving partial differential equations tend to be doomed by the \textit{curse of dimensionality}. This 
+document presents results that confirm that PINNs are capable of tackling this problem with 
+satisfactory results.
+	
+	\textbf{Keywords:} % add the keywords
+	
+	\vfill
+\end{abstract}
+	\newpage % Blank page
+	\thispagestyle{empty}
+	\mbox{}
+
+
+%----------
+%	Dedication
+%----------	
+\chapter*{Dedication}
+
+\setcounter{page}{5}
+	
+	% Write here	
+    To my partner, Paula, for her support, to Francisco Gomez and Pedro Echeverria from BBVA for their valuable feedback and guidance and to the UC3M math faculty for their help.
+	\vfill
+	
+	\newpage % blank page
+	\thispagestyle{empty}
+	\mbox{}
+	
+
+%----------
+%	TOC
+%----------	
+
+%--
+% TOC
+%-
+\tableofcontents
+\thispagestyle{fancy}
+
+\newpage % blank page
+\thispagestyle{empty}
+\mbox{}
+
+%--
+% List of figures. If they are not included, comment the following lines
+%-
+\listoffigures
+\thispagestyle{fancy}
+
+\newpage % blank page
+\thispagestyle{empty}
+\mbox{}
+
+%--
+% List of tables. If they are not included, comment the following lines
+%-
+\listoftables
+\thispagestyle{fancy}
+
+\newpage % blankpage
+\thispagestyle{empty}
+\mbox{}
+
+
+%----------
+%	THESIS
+%----------	
+\clearpage
+\pagenumbering{arabic} % numbering with Arabic numerals for the rest of the document.	
+
+\chapter{Introduction}
+
+\section{Motivation}
+
+The fast advances in machine learning over the past decade have profoundly transformed 
+fields such as speech recognition, visual object recognition, object detection and many other domains such 
+as drug discovery and genomics \cite{lecun}. Among these fields, the financial industry stands out by continuously 
+seeking efficient and accurate computational methods for pricing complex financial products. Derivatives, 
+which are financial instruments whose value depends on underlying assets \cite{alma99148840908702021}, are particularly 
+significant due to their extensive use for risk management, speculation, and hedging  
+strategies.
+
+Derivatives are financial instruments whose values are derived from underlying assets such 
+as stocks, bonds, commodities, or indices \cite{Wilmott2010PaulWO}. The accurate pricing of derivatives is crucial in 
+finance, as it influences investment decisions and risk management strategies. Traditionally, 
+pricing derivatives involves either Monte Carlo simulations \cite{glasserman2004monte} or solving Partial Differential 
+Equations (PDEs) like the renowned Black-Scholes equation \cite{blackscholes}. While PDE-based methods provide 
+valuable theoretical insights, their applicability is severely restricted by the "curse of 
+dimensionality" \cite{bellman1966dynamic}, particularly when dealing with derivatives dependent on multiple assets or 
+path-dependent features. As a result, Monte Carlo simulations have historically been the 
+preferred numerical approach in practice. However, the advent of different 
+machine-learning-based techniques now presents an opportunity to overcome these 
+dimensionality constraints effectively \cite{Han_2018}.
+
+The emergence of Physics-Informed Neural Networks (PINNs) \cite{RAISSI2019686}, a modern machine learning 
+methodology, provides an innovative approach that addresses these challenges. PINNs leverage 
+neural networks not only as universal approximators of functions but also explicitly 
+incorporate the governing PDEs \cite{RAISSI2019686} of the underlying financial model into their training . This 
+integration enables PINNs to learn directly from the mathematical structure of the problem, 
+ensuring accuracy and consistency with the financial theory while dramatically reducing 
+computation times. This advantage is particularly appealing to financial institutions that 
+require real-time or near-real-time pricing for complex derivatives.
+
+Additionally, PINNs can generate complete price surfaces fast, facilitating immediate 
+sensitivity analyses and risk assessment across a broad range of market scenarios. Such 
+capabilities are particularly valuable when dealing with multidimensional problems involving 
+numerous underlying assets, where traditional numerical techniques for PDEs struggle to 
+deliver timely results \cite{Wilmott2010PaulWO}.
+
+This master's thesis aims to explore and validate the effectiveness of PINNs in solving 
+multidimensional derivative pricing problems. Guided by industry professionals from BBVA, 
+the research presented herein assesses the capability of PINNs to efficiently and accurately 
+price complex derivatives through multidimensional PDEs, demonstrating significant potential 
+for practical adoption in financial institutions.
+
+The subsequent chapters will present a comprehensive review of derivative pricing theory, 
+introduce the mathematical foundations and computational framework of PINNs, describe the 
+specific implementation details, and thoroughly evaluate their performance against traditional pricing methods.
+
+\section{Objectives}
+
+The primary objective of this thesis is to investigate the use of PINNs for the pricing of financial 
+derivatives, particularly in high-dimensional settings involving multiple underlying assets. 
+The work aims to explore the potential of PINNs as a competitive alternative to traditional 
+numerical techniques such as Monte Carlo simulations and finite difference methods, which face 
+significant limitations in complex scenarios due to the \textit{curse of dimensionality}.
+
+To this end, the specific objectives are as follows:
+\begin{itemize}
+    \item To review the theoretical foundations of derivative pricing and the associated PDEs, with a focus on the Black-Scholes framework and its multi-asset extension.
+    \item To provide a concise overview of classical numerical methods for solving PDEs in the context of derivative pricing, highlighting their limitations in high-dimensional problems.
+    \item To introduce the concept of PINNs and explain their mathematical and computational foundations, including network architecture and loss function formulation.
+    \item To design and implement various experimental setups using PINNs, evaluating the effect of different network shapes, loss balancing techniques, sampling strategies, and solver configurations.
+    \item To compare the performance of different quasi-Newton solvers and optimization strategies within the PINNs framework.
+    \item To assess the overall effectiveness and scalability of PINNs in pricing both single-asset and multi-asset derivatives.
+\end{itemize}
+
+This thesis also aims to provide practical insights relevant to the financial industry, supported by 
+guidance from professionals at BBVA, and to contribute to the growing body of research that bridges 
+deep learning and quantitative finance.
+
+\section{Thesis Structure}
+This thesis is structured into six main chapters, each addressing a different aspect of the research:
+\begin{itemize}
+    \item \textbf{Chapter 1: Introduction} \\
+    Presents the motivation behind the study, defines the objectives, and outlines the structure of the 
+	thesis.
+    
+    \item \textbf{Chapter 2: Theoretical Background} \\
+    Introduces the fundamental concepts of derivative pricing, including the Black-Scholes model and 
+	its multi-asset extension. It also provides a brief overview of traditional numerical methods, such 
+	as finite difference methods and Monte Carlo simulations, and discusses their limitations in 
+	high-dimensional settings.
+    
+    \item \textbf{Chapter 3: Physics-Informed Neural Networks} \\
+    Explains the concept of PINNs, starting with the theoretical underpinnings of neural networks. It 
+	then discusses the structure of PINNs, their components, and the training methodology used to enforce 
+	the underlying PDE constraints.
+    
+    \item \textbf{Chapter 4: Implementation and Experiments} \\
+    Details the experimental setup, including the architecture of the neural networks, optimization 
+	strategies, and various techniques explored to improve model performance. This includes comparisons 
+	of solver strategies, network configurations, loss balancing, and data sampling techniques.
+    
+    \item \textbf{Chapter 5: Results and Discussion} \\
+    Presents the results obtained from both single-asset and multi-asset derivative pricing experiments. 
+	The performance of the PINNs is analyzed and compared to expectations, highlighting strengths, 
+	challenges, and insights gained from the implementation.
+    
+    \item \textbf{Chapter 6: Conclusions and Future Work} \\
+    Summarizes the main findings of the study, reflects on the limitations encountered, and proposes 
+	directions for future research in the application of PINNs in quantitative finance.
+\end{itemize}
+
+This structure is intended to provide a logical and progressive narrative that moves from theory to 
+implementation and finally to critical evaluation and discussion.
+
+
+\chapter{Theoretical Background}
+This chapter provides the foundational concepts necessary for understanding the pricing of financial 
+derivatives, the mathematical tools traditionally used for their valuation, and the challenges 
+associated with high-dimensional problems. It begins by introducing what derivatives are and the 
+different types commonly traded in financial markets, before discussing the theoretical models used 
+to price them and the limitations of classical numerical methods.
+
+\section{Derivative Pricing Fundamentals}
+
+\subsection{Derivatives Overview}
+
+Financial derivatives are instruments whose value depends on the performance of an underlying asset, 
+such as equities, commodities, currencies, interest rates, or indices \cite{alma99148840908702021}. Derivatives 
+enable market participants to manage risk exposure, speculate on asset price movements, and access 
+otherwise restricted markets or asset classes \cite{alma99148840908702021,Wilmott2010PaulWO}.
+
+Among derivative contracts, \textbf{European options} are foundational instruments granting holders 
+the right—but not the obligation—to buy (call option) or sell (put option) an underlying asset at a 
+predetermined strike price, but exclusively at maturity \cite{blackscholes}. The payoff of a 
+European call option at maturity \(T\) is expressed mathematically as:
+\begin{equation}
+\max(S(T) - K, 0),
+\label{euro_call_payoff}
+\end{equation}
+where \(S(T)\) denotes the underlying asset's price at maturity and \(K\) is the strike price 
+\cite{alma99148840908702021}.
+
+In contrast, \textbf{American options} extend additional flexibility, allowing holders to exercise 
+their rights at any time before or at maturity. This feature significantly complicates the valuation, 
+typically necessitating numerical approximation techniques, such as binomial tree methods, finite 
+difference schemes, or Monte Carlo simulations \cite{glasserman2004monte, Wilmott2010PaulWO}.
+
+Other derivative classes include exotic options, such as \textbf{barrier options}, whose payoff 
+depends on whether the underlying asset's price breaches a predetermined barrier; 
+\textbf{Asian options}, with payoffs dependent on the average price of the underlying asset over a 
+specific period; and \textbf{lookback options}, whose payoff depends on the maximum or minimum asset 
+price attained during the contract's life \cite{alma99148840908702021, Wilmott2010PaulWO}. Due to their path-dependent 
+nature, these instruments require advanced computational techniques and sophisticated modeling 
+approaches for accurate pricing.
+
+In multi-asset contexts, derivatives depend on the joint dynamics of multiple underlying assets. For 
+example, \textbf{basket options} are derivatives whose payoffs depend on a weighted portfolio 
+of several underlying assets. A typical payoff structure for a European-style basket call option 
+is given by:
+\begin{equation}
+\max\left(\sum_{i=1}^d w_i S_i(T) - K, 0\right),
+\label{basket_payoff}
+\end{equation}
+where \(S_i(T)\) represents the maturity price of asset \(i\), \(w_i\) its corresponding weight 
+within the basket, and \(K\) the strike price \cite{glasserman2004monte, alma99148840908702021}.
+
+Another commonly traded multi-asset derivative is the \textbf{max-option} or \textbf{best-of option}, whose payoff structure is:
+\begin{equation}
+\max\left(\max (S_1(T),\dots,S_n(T)) - K, 0\right).
+\label{best_of_payoff}
+\end{equation}
+
+Pricing multi-dimensional derivatives is computationally demanding using traditional numerical 
+methods, as computational complexity increases exponentially with the number of underlying assets. 
+This challenge, known as the \textit{curse of dimensionality} (CoD) —a term originally coined by 
+Richard Bellman \cite{bellman1966dynamic}—limits the practicality of traditional grid-based or PDE-based 
+numerical methods in high-dimensional derivative pricing contexts \cite{glasserman2004monte,Wilmott2010PaulWO}.
+
+Recent developments in computational finance indicate a growing interest in overcoming these 
+dimensionality constraints through machine learning-based methods. Techniques such as Deep 
+Learning and PINNs have demonstrated significant potential 
+in efficiently handling high-dimensional derivative pricing problems, enabling accurate and 
+rapid pricing, sensitivity analysis, and risk assessment (see for example 
+\cite{huge2020differentialmachinelearning, crépey2024cvasensitivitieshedgingrisk, heaton2018deeplearningfinance}).
+
+
+\subsection{Black–Scholes Framework}
+The Black–Scholes model \cite{blackscholes} provides a quantitative method to price different derivatives. 
+Under the risk-neutral measure $\mathbb{Q}$, we assume the underlying asset 
+price process $S_t$ satisfies the stochastic differential equation
+\begin{equation}
+  \mathrm{d}S_t = r\,S_t\,\mathrm{d}t + \sigma\,S_t\,\mathrm{d}W_t^{\mathbb{Q}},
+  \label{eq:gbm_single}
+\end{equation}
+where $r$ is the constant risk-free rate, $\sigma>0$ 
+the volatility, and $W_t^{\mathbb{Q}}$ a standard Brownian motion under $\mathbb{Q}$.  
+
+Let $V(t,S)$ denote the time-$t$ price of a derivative with payoff at maturity $T$.  Applying Itô’s lemma to $V(t,S_t)$ yields
+\begin{equation}
+  \mathrm{d}V = \Bigl(
+    \frac{\partial V}{\partial t} + r S\,\frac{\partial V}{\partial S} + \frac{1}{2}\sigma^2 S^2\,\frac{\partial^2 V}{\partial S^2}
+  \Bigr)\,\mathrm{d}t
+  + \sigma S\,\frac{\partial V}{\partial S}\,\mathrm{d}W_t^{\mathbb{Q}}.
+  \label{eq:ito_single}
+\end{equation}
+
+In order to eliminate risks, we construct a self-financing portfolio $\Pi = V - \Delta S$ and choose $\Delta = \partial V/\partial S$.  
+The remaining drift must equal $r\,\Pi$, leading to the Black–Scholes PDE
+\begin{equation}
+  \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2\,\frac{\partial^2 V}{\partial S^2}
+  + r S\,\frac{\partial V}{\partial S} - r V = 0.
+  \label{eq:BS_single}
+\end{equation}
+
+\subsubsection{Boundary and Initial Conditions}
+To ensure a unique solution of \eqref{eq:BS_single}, 
+we need to specify boundary and initial conditions. At one hand, boundary conditions are determined by the behavior of the derivative as the underlying asset price approaches certain limits.
+As $S\to0$, a general condition \cite{Wilmott2010PaulWO} to assume is that the diffusion and drift terms vanish, leading to
+\begin{equation}
+  \frac{\partial V}{\partial t} - rV = 0,
+\end{equation}
+and for the case when $S\to+\infty$, is costumary to assume that the derivative price behaves linearly with respect to the underlying asset price. Therefore,
+we have the condition
+\begin{equation}
+  \frac{\partial^2 V}{\partial S^2} = 0.
+\end{equation}
+
+At the other hand, initial conditions reflect the payoff of the derivative we want to price. 
+In this thesis, all tests are based on the case of \textbf{best-of-option}, so our inital condition 
+is given by
+\eqref{best_of_payoff}.
+
+
+\subsection{Multi–Asset Extension and Dimensionless Formulation}
+Now suppose we have $d$ assets $S_t^1,\dots,S_t^d$, each given by the dynamics
+\begin{equation}
+  \mathrm{d}S_t^i = r\,S_t^i\,\mathrm{d}t + \sigma_i S_t^i\,\mathrm{d}W_t^{\mathbb{Q},i},
+  \quad
+  \mathrm{d}W_t^{\mathbb{Q},i}\mathrm{d}W_t^{\mathbb{Q},j}=\rho_{ij}\,\mathrm{d}t,
+  \label{eq:gbm_multi}
+\end{equation}
+and with correlation matrix $\mathbf{R}=(\rho_{ij})$. Applying Itô’s lemma to the multi–asset price $V(t,\mathbf{S})$ leads to
+\begin{equation}
+  \frac{\partial V}{\partial t}
+  + \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d
+    \sigma_i\sigma_j\,S_iS_j\,\frac{\partial^2 V}{\partial S_i\,\partial S_j}
+  + r\sum_{i=1}^d S_i\,\frac{\partial V}{\partial S_i} - rV = 0.
+  \label{eq:BS_multi}
+\end{equation}
+
+A general recomendation when working with machine learning models is to apply scaling and nondimensionalization to the problem \cite{wang2023expertsguidetrainingphysicsinformed},
+because it helps improve the stability, convergence, and generalization of the model. In our case we can transform our equation to 
+log–strike coordinates and backward time using the following change of variables
+\begin{equation}
+  x_i=\ln\bigl(S_i/K\bigr),
+  \quad
+  \tau=T-t,
+  \quad
+  u(\tau,\mathbf{x})=V(t,\mathbf{S})/K.
+\end{equation}
+
+Applying the chain rule to \eqref{eq:BS_multi} and substituting the new variables leads to the scaled PDE
+\begin{equation}
+  \frac{\partial u}{\partial \tau} =
+    \tfrac12\sum_{i=1}^d \sigma_i^2
+      \Bigl(\frac{\partial^2 u}{\partial x_i^2}-\frac{\partial u}{\partial x_i}\Bigr)
+    + \tfrac12\sum_{i,j=1}^d \sigma_i\sigma_j\rho_{ij}
+      \frac{\partial^2 u}{\partial x_i\,\partial x_j}
+    + r\sum_{i=1}^d \frac{\partial u}{\partial x_i}
+    - ru.
+  \label{eq:scaled_PDE}
+\end{equation}
+
+\subsubsection{Dimensionless Boundary and Initial Conditions}
+\textit{Hay un error en las condiciones de borde-> k no esta definido.}
+In the new problem setting we also need to update our boundary conditions. In the dimensionless 
+case, the spatial variable $x_i$ is unbounded, so we need to specify the behavior 
+of the solution as $x_i\to-\infty$ and $x_i\to+\infty$. Taking the same ideas as in 
+the single–asset case, the lower boundary condition ($x_i \to -\infty$) is given by
+\begin{equation}
+	\frac{\partial u}{\partial \tau} \;=\;
+	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d 
+	\sigma_i^{2}\!\left(
+	\frac{\partial^{2}u}{\partial x_i^{2}}
+	-\frac{\partial u}{\partial x_i}\right)
+	\;+\;
+	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d
+		\sum_{\substack{j=1 \\ j\neq k}}^d
+	\sigma_i\sigma_j\rho_{ij}\,
+	\frac{\partial^{2}u}{\partial x_i\,\partial x_j}
+	\;+\;
+	r\sum_{\substack{i=1 \\ i\neq k}}^d
+	\frac{\partial u}{\partial x_i}
+	\;-\;
+	r\,u ,
+  \label{eq:boundary_multi_1}
+\end{equation}
+and the upper boundary condition ($x_i \to +\infty$) is given by
+\begin{equation}
+	\frac{\partial u}{\partial \tau} \;=\;
+	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d 
+	\sigma_i^{2}\!\left(
+	\frac{\partial^{2}u}{\partial x_i^{2}}
+	-\frac{\partial u}{\partial x_i}\right)
+	\;+\;
+	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d
+		\sum_{\substack{j=1 \\ j\neq k}}^d
+	\sigma_i\sigma_j\rho_{ij}\,
+	\frac{\partial^{2}u}{\partial x_i\,\partial x_j}
+	\;+\;
+	r\sum_{i=1}^d\frac{\partial u}{\partial x_i}
+	\;-\;
+	r\,u .
+  \label{eq:boundary_multi_2}
+\end{equation}
+Also we need to update the inital condition we will use in our problem. 
+In particular, we will use the payoff of the best-of option as our 
+initial condition, which is given by \eqref{best_of_payoff} now becomes
+\begin{equation}
+	u(0,\mathbf{x})=\max\bigl(e^{\max x_i}-1,0\bigr).
+	\label{eq:terminal_multi}
+\end{equation}
+These boundary specifications, together with \eqref{eq:scaled_PDE} and \eqref{best_of_payoff}, define 
+the problem that the PINN approximates. 
+There a few things that are interesting to point out about this problem. For example, the equation we attempt to solve is a linear parabolic PDE which grows cuadratically
+in the number of derivatives we need to compute when $d$ grows. This means that the computational cost of the PINN will grow significantly with the number of assets.
+Also, notice that the lower boundary condition (when $x_i\to-\infty$) is independent of the $k$-th asset, which means that we could
+use the solution of the $d-1$-assets case as boundary, reducing the complexity of the problem.
+
+\section{Traditional Numerical Approaches}
+
+\subsubsection{Brief Overview of Finite Difference Methods}
+Finite Difference Methods (FDM) are among the most widely used techniques for numerically 
+solving partial differential equations such as \eqref{eq:BS_single} or its multi-dimensional 
+counterpart \eqref{eq:BS_multi}. The core idea behind FDM is to discretize the time and 
+asset domains into a structured grid and approximate the derivatives in the PDE using finite 
+differences.
+
+For example, in the single–asset case, the time derivative can be approximated by a backward 
+difference:
+\begin{equation}
+	\frac{\partial V}{\partial t} \approx \frac{V^{n} - V^{n-1}}{\Delta t},
+\end{equation}
+and spatial derivatives using central differences:
+\begin{equation}
+	\frac{\partial V}{\partial S} \approx \frac{V_{i+1}^n - V_{i-1}^n}{2\Delta S}
+	\qquad
+	\frac{\partial^2 V}{\partial S^2} \approx \frac{V_{i+1}^n - 2V_i^n + V_{i-1}^n}{\Delta S^2}
+\end{equation}
+This transforms the PDE into a system of algebraic equations, which can be solved using 
+standard linear algebra techniques such as LU decomposition or iterative solvers.
+
+Despite their simplicity and interpretability, FDMs suffer from the 
+CoD. In the $d$-dimensional case, the number of grid points grows 
+exponentially with $d$, making them impractical for high-dimensional problems. As a result, 
+their application is limited to cases with small $d$ or where symmetry or decomposition 
+strategies can be employed to reduce complexity.
+
+\subsubsection{Monte Carlo Methods}
+Monte Carlo (MC) methods are stochastic techniques that simulate multiple sample paths 
+of the underlying assets under the risk-neutral measure $\mathbb{Q}$ and average the 
+discounted payoff \cite{glasserman2004monte}. In the context of the multi–asset Black–Scholes 
+model \eqref{eq:gbm_multi}, this involves simulating correlated geometric Brownian motions. 
+An example of a MC pricing algorithm is shown below:
+\begin{algorithm}[H]
+	\caption{MC Pricing of a General Payoff}
+	\begin{algorithmic}[1]
+	\STATE \textbf{Input:} Number of simulations $N$, time horizon $T$, risk-free rate $r$, strike $K$, asset parameters $(\mu_i, \sigma_i, \rho_{ij})$
+	\FOR{$n = 1$ to $N$}
+	  \STATE Simulate one path for each asset $S_T^i$ using correlated Brownian motion
+	  \STATE Compute the path-dependent payoff: $\text{Payoff}^{(n)} = \max\left(\max_i S_T^{i} - K, 0\right)$
+	\ENDFOR
+	\STATE Compute the option price:
+	\[
+	V(0, \mathbf{S}_0) \approx e^{-rT} \cdot \frac{1}{N} \sum_{n=1}^{N} \text{Payoff}^{(n)}
+	\]
+	\end{algorithmic}
+\end{algorithm}
+MC methods are particularly attractive for high-dimensional problems, 
+as their convergence rate is independent of the number of dimensions. However, 
+they converge slowly — with a rate of $\mathcal{O}(1/\sqrt{N})$ — so often require 
+variance reduction techniques (e.g., control variates, antithetic variables) to be 
+efficient.
+
+Another drawback, where PDE methods outperform MC methods, is that they are not well-suited for
+pricing American options or other path-dependent derivatives, as they require
+the ability to exercise at multiple points in time. While there are techniques to adapt MC 
+methods for American options, such as the Longstaff-Schwartz method \cite{longstaffshawrtz}, they are often less
+efficient than PDE-based methods. This is where PINNs can provide a significant advantage, 
+as they can naturally handle path-dependent payoffs and American-style options, among others.
+
+% \chapter{Physics-Informed Machine Learning}
+
+% As already mentioned, over the past decade, machine learning -and in particular, deep learning-
+% has seen explosive growth across science and engineering \cite{ref1}. Neural networks have demonstrated
+% remarkable capabilities in approximating complex, high-dimensional functions \cite{RAISSI2019686}. However, 
+% traditional data-driven approaches often require large amounts of labeled data and lack 
+% built-in knowledge of physical laws \cite{RAISSI2019686}. This gap is where PINNs come into play,
+% offering a framework that combines the strengths of deep learning with the constraints
+% of physics-based models \cite{RAISSI2019686}.
+
+% Before diving into the specific structure and implementation of PINNs, 
+% this chapter provides a high-level introduction to the neural network models 
+% they are built upon, and discusses how the universal approximation capabilities 
+% of these networks make them suitable candidates for solving PDEs. We also explore the 
+% key motivations behind physics-informed models, and how they represent an evolution 
+% in the use of machine learning in the sciences.
+
+% \section{Introduction to Neural Networks}
+
+% Neural networks are function approximators inspired by the structure of biological brains \cite{}. 
+% At their core, they transform inputs through successive layers of simple nonlinear operations 
+% to produce outputs. The power of neural networks lies in their ability to model highly nonlinear, 
+% high-dimensional functions, \cite{} a fact formalized by the Universal Approximation Theorem (UAT) \cite{}, which 
+% guarantees that even simple neural networks can approximate any continuous function on a compact domain \cite{}.
+
+% \subsection{Universal Approximation Theorem}
+
+% The UAT is a foundational result that underpins much of the theoretical motivation for using neural 
+% networks in scientific applications. It asserts that neural networks with a single hidden layer 
+% and a suitable activation function can approximate any continuous function on a compact domain,
+% given enough neurons \cite{}. While the theorem guarantees \emph{existence} of such approximations, 
+% it does not address how to find the right parameters or how efficiently this can be done in practice.
+
+% Let \(K\subset\mathbb{R}^n\) be compact, and denote by \(C(K)\) the Banach space of 
+% continuous functions \(f:K\to\mathbb{R}\) equipped with the uniform norm
+% \begin{equation}	
+% 	\|f\|_{\infty} \;=\;\max_{x\in K}|f(x)|\,.
+% \end{equation}
+
+% \begin{definition}
+% A function \(\sigma:\mathbb{R}\to\mathbb{R}\) is called \emph{sigmoidal} if
+% \[
+% \lim_{t\to -\infty}\sigma(t)=0
+% \quad\text{and}\quad
+% \lim_{t\to +\infty}\sigma(t)=1\,.
+% \]
+% \end{definition}
+
+% \begin{theorem}[Cybenko (1989)\cite{cybenko:hal-03753170}]\label{thm:cybenko}
+% Let \(\sigma\) be any continuous sigmoidal function.  Then the set
+% \[
+% \mathcal{H} \;=\;
+% \Bigl\{\, x\mapsto \sum_{j=1}^N \alpha_j\,\sigma\bigl(w_j^T x + b_j\bigr)
+% \;\Big|\; N\in\mathbb{N},\;\alpha_j\in\mathbb{R},\;w_j\in\mathbb{R}^n,\;b_j\in\mathbb{R}\Bigr\}
+% \]
+% is dense in \(C(K)\).  That is, for every \(f\in C(K)\) and every \(\varepsilon>0\) there exist \(N,\{\alpha_j,w_j,b_j\}\) such that
+% \[
+% \sup_{x\in K}\Bigl|\,f(x)\;-\,\sum_{j=1}^N \alpha_j\,\sigma(w_j^T x + b_j)\Bigr| < \varepsilon.
+% \]
+% \end{theorem}
+
+% \section{Physics‐Informed Neural Networks (PINNs)}
+
+% \textit{Revisar: estructura no hace mucho sentido, quizas hay que modificar las 
+% secciones.}
+
+% Building on the UAT, Physics‐Informed Neural Networks (PINNs) \cite{RAISSI2019686} embed differential equations 
+% into the training of a neural network.  Let \(\Omega\subset\mathbb{R}^d\) be a spatial domain and consider the PDE
+% problem
+
+% \begin{equation}
+% 	\begin{aligned}
+% 	\mathcal{N}_I[u(t,x)] = 0, & \quad x\in\Omega,\, t\in [0,T], \\
+% 	\mathcal{N}_B[u(t,x)] = 0, & \quad x\in\partial\Omega,\, t\in [0,T], \\
+% 	\mathcal{N}_0[u(t^*,x)] = 0, & \quad x\in\Omega_0,\, t^*=0\,\text{ or }\,t^*=T,
+% 	\end{aligned}
+% \end{equation}
+
+% where \(\mathcal{N}_I\) is the PDE operator, \(\mathcal{N}_B\) is the boundary operator, 
+% and \(\mathcal{N}_0\) is the initial condition operator. The PINN approximates the
+% solution \(u(t,x)\) by a surrogate neural network \(u_\theta(t,x)\) with parameters 
+% \(\theta\). Our goal is obtain the parameters \(\theta\) by minimizing the total loss function
+% \begin{equation}
+% 	\mathcal{L}(\theta) = \lambda_1 \mathcal{L}_{\text{PDE}} + \lambda_2 \mathcal{L}_{\text{boundary}} + \lambda_3 \mathcal{L}_{\text{initial}},
+% 	\label{eq:total_loss}
+% \end{equation}
+% where each residual term is defined as
+% \begin{equation}
+% 	\begin{aligned}
+% 		\mathcal{L}_{\text{PDE}} = \lambda_1 \int_{\Omega} \bigl|\mathcal{N}_I[u_\theta(t,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t, \\
+% 		\mathcal{L}_{\text{Boundary}} = \lambda_2 \int_{\partial\Omega} \bigl|\mathcal{N}_B[u_\theta(t,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t, \\
+% 		\mathcal{L}_{\text{Initial}} = \lambda_3 \int_{\Omega_0} \bigl|\mathcal{N}_0[u_\theta(t^*,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t.
+% 	\end{aligned}
+% 	\label{eq:loss_terms}
+% \end{equation}
+
+% In general, the loss terms are computed using Monte Carlo sampling, where each integral is approximated 
+% by a finite sum over collocation points.
+
+% \subsection{Challenges in Training PINNs}
+
+% As we already saw, training a PINN involves minimizing the total loss $\mathcal{L}(\theta)$. This 
+% presents some challenges:
+% \begin{itemize}
+%     \item \textbf{Imbalance of loss terms}: Given the different nature of the loss terms,
+% 	the PDE residuals can be of orders of magnitude larger than the boundary and initial conditions, therefore leading
+% 	gradient pathologies \cite{wang2020understandingmitigatinggradientpathologies, BISCHOF2025117914}. This imbalance can
+% 	be troublesome, as the optimizer may focus on minimizing the PDE residuals at the expense of the boundary and initial conditions.
+
+% 	\item \textbf{Slow convergence}: Arising from a variety of factors, including the
+% 	complexity of the PDE, the choice of neural network architecture, and the optimization algorithm used,
+% 	PINNs can have trouble converging to a solution in a timely manner. This a relevant issue in applications 
+% 	where real-time or near-real-time solutions are required, such as in financial applications.
+	
+% 	\item \textbf{Memory and computational cost}: The memory and computational cost of training a PINN ,
+% 	can be significant, especially for high-dimensional PDEs. Even though neural networks are often fast to
+% 	evaluate, training big arquitectures can be very memory consuming when taking to account the number of parameters, gradients
+% 	and collocation to be computed \cite{cho2023separablephysicsinformedneuralnetworks}.
+
+% \end{itemize}
+
+\chapter{Physics-Informed Machine Learning}
+
+\section{Introduction to Physics-Informed Neural Networks (PINNs)}
+As previously discussed, traditional numerical methods for solving PDEs in 
+derivative pricing, such as FDM and MC simulations, 
+often struggle with computational complexity, particularly when dealing with 
+high-dimensional financial instruments. PINNs, introduced by Raissi et al. \cite{RAISSI2019686}, 
+provide an innovative framework that explicitly incorporates governing PDEs directly into neural 
+network training. Rather than relying solely on large amounts of data, PINNs leverage physical 
+laws and constraints embedded within the problem formulation to enhance predictive accuracy, 
+efficiency, and reliability of the solutions. This methodology is especially promising for 
+high-dimensional derivative pricing problems, as it effectively mitigates the 
+CoD while maintaining consistency with the underlying financial theory.
+
+Consider the PDE problem defined by:
+\begin{equation}
+	\begin{aligned}
+	\mathcal{N}_I[u(t,x)] &= 0, && x\in\Omega,\quad t\in [0,T], \\
+	\mathcal{N}_B[u(t,x)] &= 0, && x\in\partial\Omega,\quad t\in [0,T], \\
+	\mathcal{N}_0[u(t^*,x)] &= 0, && x\in\Omega,\quad t^*=0,
+	\end{aligned}
+	\label{eq:PDE_conditions}
+\end{equation}
+where \(\mathcal{N}_I\) denotes the PDE operator in the interior of the spatial 
+domain \(\Omega\), \(\mathcal{N}_B\) represents the boundary condition operator 
+on \(\partial\Omega\), and \(\mathcal{N}_0\) enforces initial conditions at \(t=0\).
+
+PINNs approximate the PDE solution \(u(t,x)\) with a neural network \(u_\theta(t,x)\), 
+parameterized by \(\theta\). The optimal parameters \(\theta\) are found by minimizing 
+the composite loss function:
+\begin{equation}
+	\mathcal{L}(\theta) = \lambda_1 \mathcal{L}_{\text{PDE}}(\theta) + \lambda_2 \mathcal{L}_{\text{boundary}}(\theta) + \lambda_3 \mathcal{L}_{\text{initial}}(\theta),
+	\label{eq:total_loss}
+\end{equation}
+with each component explicitly defined as:
+\begin{equation}
+	\begin{aligned}
+		\mathcal{L}_{\text{PDE}}(\theta) &= \int_{0}^{T}\int_{\Omega}\left|\mathcal{N}_I[u_\theta(t,x)]\right|^2\,\mathrm{d}x\,\mathrm{d}t, \\
+		\mathcal{L}_{\text{boundary}}(\theta) &= \int_{0}^{T}\int_{\partial\Omega}\left|\mathcal{N}_B[u_\theta(t,x)]\right|^2\,\mathrm{d}s\,\mathrm{d}t, \\
+		\mathcal{L}_{\text{initial}}(\theta) &= \int_{\Omega}\left|\mathcal{N}_0[u_\theta(0,x)]\right|^2\,\mathrm{d}x.
+	\end{aligned}
+	\label{eq:loss_terms}
+\end{equation}
+These integrals are typically approximated by Monte Carlo sampling, 
+choosing discrete collocation points within the respective domains.
+
+\section{Challenges in Training PINNs}
+Training PINNs involves addressing several critical challenges:
+\begin{itemize}
+    \item \textbf{Loss imbalance:} Significant differences in the magnitude of PDE and boundary 
+	losses can lead to convergence issues, addressed through adaptive weighting strategies \cite{wang2020understandingmitigatinggradientpathologies}.
+    
+    \item \textbf{Spectral bias:} Neural networks prioritize low-frequency solutions, complicating 
+	representation of high-frequency or multi-scale phenomena~\cite{wang2023expertsguidetrainingphysicsinformed}.
+    
+    \item \textbf{Causality violations:} Training PINNs over entire temporal domains simultaneously 
+	may violate physical causality, prompting the use of time-adaptive training schemes~\cite{wang2022respectingcausalityneedtraining}.
+    
+    \item \textbf{Computational complexity:} Extensive computational resources are needed, particularly 
+	for high-dimensional PDEs, due to expensive gradient computations \cite{karniadakis2021physics}.
+\end{itemize}
+
+\section{Developments and Applications}
+PINN's field of investigation has witnessed substantial advancements aimed at addressing 
+their inherent limitations, such as training inefficiencies, scalability challenges, 
+and difficulties in capturing complex solution behaviors. This section delineates notable 
+developments that enhance the capability and applicability of PINNs.
+
+\subsubsection{Extended Physics-Informed Neural Networks (XPINNs)}
+Extended Physics-Informed Neural Networks (XPINNs) introduce a generalized space-time domain 
+decomposition strategy, partitioning the problem domain into multiple subdomains. 
+Each subdomain is assigned a distinct neural network, facilitating parallel training 
+and improved scalability. This approach is particularly effective for complex geometries 
+and high-dimensional problems, as it allows for localized learning and reduces computational 
+overhead~\cite{jagtap2020extended}.
+
+\subsubsection{Variational and Augmented PINNs}
+Variational PINNs (VPINNs) reformulate the loss function using variational principles, 
+integrating test functions and quadrature rules to enhance solution accuracy and convergence 
+rates. This method is beneficial for problems where traditional PINNs struggle with stability 
+and precision~\cite{kharazmi2021hp}. Augmented PINNs (APINNs) incorporate additional physical 
+constraints or auxiliary variables into the neural network architecture, improving the network's 
+ability to capture complex solution features and ensuring adherence to 
+underlying physical laws~\cite{patel2023turbulence}.
+
+\subsubsection{Neural Operators: DeepONet and Fourier Neural Operators (FNO)}
+Neural operators, such as Deep Operator Networks (DeepONet) and Fourier Neural 
+Operators (FNO), represent a paradigm shift by learning mappings between function 
+spaces rather than individual function evaluations. DeepONet employs a branch and 
+trunk network to approximate nonlinear operators, enabling rapid predictions 
+across varying input functions~\cite{lu2021learning}. FNO leverages the Fourier 
+transform to learn global solution operators efficiently, offering advantages in 
+handling complex, high-dimensional PDEs with reduced computational costs~\cite{li2020fourier}.
+
+\subsubsection{Applications of PINNs}
+In terms of applications, PINNs have been successfully employed in various fields, including:
+\begin{itemize}
+    \item \textbf{Fluid dynamics:} Modeling complex flows including turbulent and laminar regimes, 
+	and inferring hidden physical fields from sparse observational 
+	data~\cite{RAISSI2019686, bhatnagar2019prediction}.
+    
+    \item \textbf{Biomedicine:} Improving medical imaging reconstruction and personalized patient 
+	modeling via inverse problems involving PDE constraints \cite{banerjee2024pinnsmedicalimageanalysis}.
+    
+    \item \textbf{Materials science and climate modeling:} Inferring material properties and 
+	assimilating observational data into physics-based climate models for improved 
+	predictions~\cite{karniadakis2021physics}.
+\end{itemize}
+Overall, the PINN methodology represents a robust integration of deep learning and physical 
+modeling, actively evolving through continuous theoretical improvements and expanding applications.
+
+\subsubsection{Training PINNs}
+As already said, training PINNs involves minimizing the total loss $\mathcal{L}(\theta)$ with respect to the
+neural network parameters $\theta$. This is typically done using gradient-based optimization algorithms,
+such as stochastic gradient descent (SGD) or its variants, which iteratively update the parameters
+based on the computed gradients of the loss function with respect to the parameters. The gradients are
+computed using automatic differentiation, which allows for efficient and accurate calculation of the gradients
+of the loss function with respect to the parameters. The optimization process continues until a stopping criterion is met,
+such as a maximum number of iterations or convergence of the loss function.
+
+As usually data of the true solution is not available, the training process relies on sampling collocation points
+from the domain of interest, which are used to compute the loss terms. The collocation points are synthetically generated
+using a predefined procedure, for example, by sampling from a uniform distribution over the domain of interest.
+
+A typical training procedure for PINNs is as follows:
+
+\begin{algorithm}[H]
+	\caption{Training procedure of PINNs}
+	\begin{algorithmic}[1]
+	\STATE \textbf{Input:} Neural network architecture, PDE operator, boundary and initial conditions.
+	\STATE Initialize neural network parameters $\theta$.
+	\STATE Sample total collocation points from $\Omega$, $\partial\Omega$ and $\Omega_0$.
+	\WHILE{not converged}
+	  \STATE Obtain a subset of collocation points from the total set.
+	  \STATE Compute PDE residuals at subset of collocation points.
+	  \STATE Compute total loss $\mathcal{L}(\theta)$ using \eqref{eq:total_loss} at the collocation points.
+	  \STATE Compute gradients of $\mathcal{L}(\theta)$ with respect to $\theta$.
+	  \STATE Update parameters $\theta$ using an optimization algorithm.
+	\ENDWHILE
+	\end{algorithmic}
+	\label{alg:training_pinns}
+\end{algorithm}
+
+Given the multitude of options and techniques available for training PINNs, it is crucial to
+carefully select the most appropriate methods for each specific problem. In the following sections,
+we will discuss the various techniques and strategies that can be employed to enhance the training process
+and improve the performance of PINNs. We will explore different neural network architectures,
+sampling strategies, loss balancing techniques, and optimization methods that can be used to
+train PINNs effectively. By understanding the strengths and weaknesses of each approach, we can
+make informed decisions about which techniques to apply in our specific use case, ultimately leading to
+more accurate and efficient solutions for pricing multi-asset derivatives.
+
+
+\chapter{Implementation and Experiments}
+
+In this chapter, we present the implementation details and benchmarks different techniques used in this thesis.
+We will discuss the architecture altenatives of the neural networks, the sampling strategies that can be employed,
+the optimization techniques used to train the models, and the various experiments conducted to evaluate 
+the best approach for pricing multi-asset derivatives.
+
+\section{Sampling Point Strategies}
+
+\section{Neural Network Arquitectures}
+
+When we talk about the architecture of a neural network, we are referring to the number of 
+layers and the number of neurons in each layer, as well as the activation functions used or 
+any other modification we want to apply to the networks.
+
+\subsubsection{Feedforward Neural Network}
+
+The first arquitectures and most traditional arquitecture is the feedforward neural network. It is a
+fully connected neural network, where each neuron in a layer is connected to every neuron in the
+previous layer. The output of each neuron is computed as a weighted sum of the inputs, followed by
+an activation function. Some of the most common activation functions are the sigmoid, hyperbolic tangent (tanh),
+and rectified linear unit (ReLU) functions and their choice can have a significant impact on the performance of the network.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/vanilla.png}
+	\caption{Components of the training procedure of a vanilla PINN.}
+	\label{fig:vanilla_pinn}
+\end{figure}
+
+\subsubsection{Neural Network with Ansatz Layer}
+
+The second arquitecture takes the output of the neural network and passes it as an argument of an ansatz 
+function $f(u)$ that attempts to provide an approximation of the real solution of the problem, 
+in order to accelerate convergence and improve accuracy of the solution. Ideally but not necessarily, 
+the ansatz function $f(u)$ should be differentiable, so that we can compute the derivatives of the output correctly 
+using automatic differentiation.
+
+In the case of option pricing, we found that the ansatz function works best when it resembles the payoff of the derivative.
+
+\textbf{Continuar}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/ansatz.png}
+	\caption{Neural network with ansatz layer.}
+	\label{fig:ansatz}
+\end{figure}
+
+\subsubsection{First-Order Neural Network}
+
+Finally, the last approach we explore attempts to enhance the training process by complementing the output
+of the neural network by also providing estimates of the first order derivatives of the solution. This
+requires us adding a new loss term to the total loss function, which is computed against
+the derivates using automatic differentiation (compatibility loss.)
+
+The befenits of this approach are twofold: first, it allows us to
+compute the derivatives of the solution without having to compute them using automatic differentiation,
+which can be computationally expensive. Second, it allows us to use the derivatives of the solution
+as additional information to guide the training process, which can help improve convergence and accuracy.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/ansatz.png}
+	\caption{Neural network with ansatz layer.}
+	\label{fig:ansatz}
+\end{figure}
+
+\subsubsection{Performance Metrics and Benchmarks}
+
+Loss balacing is another studied technique in PINNs, which aims to 
+improve also the convergence and accuracy of the solution by assigning specific weights to the 
+different loss terms in the total loss function. According to \cite{wang2023expertsguidetrainingphysicsinformed},
+gradient pathologies... 
+
+Different methods have emerged in order to tackle this problem. For example, \cite{} proposes ...
+in order to ... . Another approach is ... .
+
+\subsection{Loss Balancing Strategies}
+
+\subsubsection{GradNorm}
+
+\subsubsection{ReBRoLaBRo}
+
+\subsubsection{Performance Metrics and Benchmarks}
+
+\subsection{Optimization techniques}
+
+\subsubsection{Gradient Descent}
+\subsubsection{Quasi-Newton Methods}
+\subsubsection{Performance Metrics and Benchmarks}
+
+\chapter{Results and Discussion}
+\section{Single-Asset Cases}
+\section{Multi-Asset Case}
+\section{Discussion}
+
+\chapter{Conclusions and Future Work}
+\section{Summary of Findings}
+\section{Limitations and Future Research Directions}
+
+
+\clearpage
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\printbibliography
+
+\end{document}
