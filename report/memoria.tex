@@ -248,7 +248,7 @@ hmargin=3cm
 			\bigskip
 			
 		\end{Large}
-		 	{\Huge Leveraging Physics-Informed Neural Networks for Multidimensional Pricing Problems}\\
+		 	{\Huge Leveraging Physics-Informed Neural Networks for Option Pricing Problems}\\
 		 	\vspace*{0.5cm}
 	 		\rule{10.5cm}{0.1mm}\\
 			\vspace*{0.9cm}
@@ -269,7 +269,7 @@ hmargin=3cm
 
 	% IF OUR WORK IS TO BE PUBLISHED UNDER A CREATIVE COMMONS LICENSE, INCLUDE THESE LINES. IS THE RECOMMENDED OPTION.
 	\noindent\includegraphics[width=4.2cm]{creativecommons.png}\\ % Creative Commons Logo
-    \footnotesize{This work is licensed under Creative Commons \textbf{Attribution – Non Commercial – Non Derivatives}}
+    \footnotesize{This work is licensed under Creative Commons \textbf{Attribution - Non Commercial - Non Derivatives}}
 	
 	\end{sffamily}
 \end{titlepage}
@@ -289,8 +289,7 @@ hmargin=3cm
 	% Write your abstract  
 
 This master's thesis explores the usage of physics-informed neural networks (PINNs) in 
-multidimensional derivative pricing problems, where traditional numerical method for 
-solving partial differential equations tend to be doomed by the \textit{curse of dimensionality}. This 
+option pricing problems, as they allow for improved evaluation speeds compared to traditional methods. This 
 document presents results that confirm that PINNs are capable of tackling this problem with 
 satisfactory results.
 	
@@ -372,37 +371,34 @@ which are financial instruments whose value depends on underlying assets \cite{a
 significant due to their extensive use for risk management, speculation, and hedging  
 strategies.
 
-Derivatives are financial instruments whose values are derived from underlying assets such 
-as stocks, bonds, commodities, or indices \cite{Wilmott2010PaulWO}. The accurate pricing of derivatives is crucial in 
-finance, as it influences investment decisions and risk management strategies. Traditionally, 
-pricing derivatives involves either Monte Carlo simulations \cite{glasserman2004monte} or solving Partial Differential 
-Equations (PDEs) like the renowned Black-Scholes equation \cite{blackscholes}. While PDE-based methods provide 
-valuable theoretical insights, their applicability is severely restricted by the "curse of 
-dimensionality" \cite{bellman1966dynamic}, particularly when dealing with derivatives dependent on multiple assets or 
-path-dependent features. As a result, Monte Carlo simulations have historically been the 
+Derivative's underlyings can be a wide range of financial assets, such
+as stocks, bonds, commodities, or indices \cite{Wilmott2010PaulWO}. The accurate pricing of such products is crucial in 
+finance, as it influences investment decisions and risk management strategies and traditionally it has been done using
+either Monte Carlo simulations \cite{glasserman2004monte} or solving Partial Differential 
+Equations (PDEs) -like the renowned Black-Scholes equation \cite{blackscholes}. While PDE-based methods provide 
+valuable theoretical insights, their applicability has been restricted by the "curse of 
+dimensionality" \cite{bellman1966dynamic} and the speed of evaluation, particularly when dealing with derivatives dependent on 
+multiple assets or path-dependent features. As a result, Monte Carlo simulations have historically been the 
 preferred numerical approach in practice. However, the advent of different 
-machine-learning-based techniques now presents an opportunity to overcome these 
-dimensionality constraints effectively \cite{Han_2018}.
+machine-learning-based techniques now presents an opportunity to overcome these constraints effectively \cite{Han_2018}.
 
 The emergence of Physics-Informed Neural Networks (PINNs) \cite{RAISSI2019686}, a modern machine learning 
 methodology, provides an innovative approach that addresses these challenges. PINNs leverage 
 neural networks not only as universal approximators of functions but also explicitly 
-incorporate the governing PDEs \cite{RAISSI2019686} of the underlying financial model into their training . This 
+incorporate the governing PDEs \cite{RAISSI2019686} of the underlying financial model into their training. This 
 integration enables PINNs to learn directly from the mathematical structure of the problem, 
 ensuring accuracy and consistency with the financial theory while dramatically reducing 
-computation times. This advantage is particularly appealing to financial institutions that 
-require real-time or near-real-time pricing for complex derivatives.
+computation times, at the expense of amortized training times. This advantage is particularly appealing 
+to financial institutions that require real-time or near-real-time pricing for complex derivatives.
 
 Additionally, PINNs can generate complete price surfaces fast, facilitating immediate 
 sensitivity analyses and risk assessment across a broad range of market scenarios. Such 
-capabilities are particularly valuable when dealing with multidimensional problems involving 
-numerous underlying assets, where traditional numerical techniques for PDEs struggle to 
-deliver timely results \cite{Wilmott2010PaulWO}.
+capabilities are particularly valuable in context like valuation adjustments -also know as XVA-, and internal modeling frameworks.
 
 This master's thesis aims to explore and validate the effectiveness of PINNs in solving 
-multidimensional derivative pricing problems. Guided by industry professionals from BBVA, 
+derivative pricing problems. Guided by industry professionals from BBVA, 
 the research presented herein assesses the capability of PINNs to efficiently and accurately 
-price complex derivatives through multidimensional PDEs, demonstrating significant potential 
+price complex derivatives through PDEs, demonstrating significant potential 
 for practical adoption in financial institutions.
 
 The subsequent chapters will present a comprehensive review of derivative pricing theory, 
@@ -412,19 +408,17 @@ specific implementation details, and thoroughly evaluate their performance again
 \section{Objectives}
 
 The primary objective of this thesis is to investigate the use of PINNs for the pricing of financial 
-derivatives, particularly in high-dimensional settings involving multiple underlying assets. 
-The work aims to explore the potential of PINNs as a competitive alternative to traditional 
-numerical techniques such as Monte Carlo simulations and finite difference methods, which face 
-significant limitations in complex scenarios due to the \textit{curse of dimensionality}.
+derivatives involving different dynamics and products and explore the potential this technique
+as a competitive alternative to traditional numerical procedure such as Monte Carlo simulations and finite difference methods.
 
 To this end, the specific objectives are as follows:
 \begin{itemize}
-    \item To review the theoretical foundations of derivative pricing and the associated PDEs, with a focus on the Black-Scholes framework and its multi-asset extension.
-    \item To provide a concise overview of classical numerical methods for solving PDEs in the context of derivative pricing, highlighting their limitations in high-dimensional problems.
-    \item To introduce the concept of PINNs and explain their mathematical and computational foundations, including network architecture and loss function formulation.
-    \item To design and implement various experimental setups using PINNs, evaluating the effect of different network shapes, loss balancing techniques, sampling strategies, and solver configurations.
-    \item To compare the performance of different quasi-Newton solvers and optimization strategies within the PINNs framework.
+    \item To review the theoretical foundations of derivative pricing and the associated PDEs for some representative selection of derivative products.
+    \item To provide a concise overview of classical numerical methods for solving PDEs in the context of derivative pricing and highlighting their limitations.
     \item To assess the overall effectiveness and scalability of PINNs in pricing both single-asset and multi-asset derivatives.
+    % \item To introduce the concept of PINNs and explain their mathematical and computational foundations, including network architecture and loss function formulation.
+    % \item To design and implement various experimental setups using PINNs, evaluating the effect of different network shapes, loss balancing techniques, sampling strategies, and solver configurations.
+    % \item To compare the performance of different quasi-Newton solvers and optimization strategies within the PINNs framework.
 \end{itemize}
 
 This thesis also aims to provide practical insights relevant to the financial industry, supported by 
@@ -449,24 +443,23 @@ This thesis is structured into six main chapters, each addressing a different as
 	then discusses the structure of PINNs, their components, and the training methodology used to enforce 
 	the underlying PDE constraints.
     
-    \item \textbf{Chapter 4: Implementation and Experiments} \\
-    Details the experimental setup, including the architecture of the neural networks, optimization 
-	strategies, and various techniques explored to improve model performance. This includes comparisons 
-	of solver strategies, network configurations, loss balancing, and data sampling techniques.
+    % \item \textbf{Chapter 4: Implementation and Experiments} \\
+    % Details the experimental setup, including the architecture of the neural networks, optimization 
+	% strategies, and various techniques explored to improve model performance. This includes comparisons 
+	% of solver strategies, network configurations, loss balancing, and data sampling techniques.
     
-    \item \textbf{Chapter 5: Results and Discussion} \\
+    \item \textbf{Chapter 4: Implementation and Results} \\
     Presents the results obtained from both single-asset and multi-asset derivative pricing experiments. 
 	The performance of the PINNs is analyzed and compared to expectations, highlighting strengths, 
 	challenges, and insights gained from the implementation.
     
-    \item \textbf{Chapter 6: Conclusions and Future Work} \\
+    \item \textbf{Chapter 5: Conclusions and Future Work} \\
     Summarizes the main findings of the study, reflects on the limitations encountered, and proposes 
 	directions for future research in the application of PINNs in quantitative finance.
 \end{itemize}
 
 This structure is intended to provide a logical and progressive narrative that moves from theory to 
 implementation and finally to critical evaluation and discussion.
-
 
 \chapter{Theoretical Background}
 This chapter provides the foundational concepts necessary for understanding the pricing of financial 
@@ -477,210 +470,437 @@ to price them and the limitations of classical numerical methods.
 
 \section{Derivative Pricing Fundamentals}
 
-\subsection{Derivatives Overview}
+\subsection{Derivatives Overview}\label{sec:derivatives_overview}
 
-Financial derivatives are instruments whose value depends on the performance of an underlying asset, 
-such as equities, commodities, currencies, interest rates, or indices \cite{alma99148840908702021}. Derivatives 
-enable market participants to manage risk exposure, speculate on asset price movements, and access 
-otherwise restricted markets or asset classes \cite{alma99148840908702021,Wilmott2010PaulWO}.
+Financial derivatives are contracts whose cash flows are linked to the value of one or several
+\emph{underlyings}—shares, commodities, foreign-exchange rates, or interest-rate curves
+\cite{alma99148840908702021,Wilmott2010PaulWO}.  
+By re-packaging the risk of these underlyings, derivatives let market participants
+insure portfolios, express directional views with limited capital, and design bespoke payoffs
+that would be hard to replicate through spot trading alone.
 
-Among derivative contracts, \textbf{European options} are foundational instruments granting holders 
-the right—but not the obligation—to buy (call option) or sell (put option) an underlying asset at a 
-predetermined strike price, but exclusively at maturity \cite{blackscholes}. The payoff of a 
-European call option at maturity \(T\) is expressed mathematically as:
-\begin{equation}
-\max(S(T) - K, 0),
-\label{euro_call_payoff}
+\medskip
+\noindent\textbf{Single-asset vanilla options.}
+The starting point for almost every option textbook is the \emph{European} call or put.
+A European call delivers, at a fixed future date \(T\), the right to buy the underlying at the
+pre-agreed strike \(K\); the put grants the right to sell. The payoffs
+\[
+\max(S_T-K,0),\qquad \max(K-S_T,0)
+\]
+are therefore functions of the future spot price \(S_T\) only, so valuing the contract amounts
+to forecasting the \emph{distribution} of \(S_T\) under a risk-neutral measure. The celebrated
+Black-Scholes formula achieves this under a log-normal assumption for returns, but observed
+market prices exhibit persistent \emph{volatility smiles}, forcing practitioners to enrich the
+model with time-varying or random volatility. Such extensions break the closed-form solution
+and motivate numerical solvers—finite differences, Fourier integrals, Monte-Carlo simulations,
+and, as this thesis explores, Physics-Informed Neural Networks (PINNs).
+
+\medskip
+\noindent\textbf{Early-exercise complexity: the American put.}
+An American option can be exercised \emph{any time} up to expiry. Because the holder may choose
+the most favourable moment, the pricing problem now involves deciding when to stop as well as
+what the discounted payoff might be.  In mathematical terms the valuation becomes a
+\emph{free-boundary} problem: one must find both the option price and the moving boundary
+separating the \emph{hold and exercise} regions. Tree methods, finite-difference schemes, and
+regression-based Monte-Carlo algorithms cope with this added layer, but each suffers either
+slow convergence or high variance.
+
+\medskip
+\noindent\textbf{Going multi-asset: best-of basket calls.}
+Retail structured notes often promise the performance of “whichever of these three tech stocks
+does best.”  Mathematically the payoff is
+\[
+\max\bigl(\max_{1\le i\le d}S_{i,T}-K,0\bigr),
+\]
+where only the strongest performer among \(d\) assets matters.  Pricing therefore depends on
+how the assets move \emph{together}.  
+Even if each asset were independent, traditional finite-difference grids would expand
+exponentially with \(d\); when cross-correlation is introduced, the curse of dimensionality
+worsens. Monte-Carlo sampling remains feasible but noisy. These basket options hence provide an ideal test bed
+for high-dimensional PINN techniques.
+
+\medskip
+\noindent\textbf{Adding market factors: equity calls with stochastic volatility and rates.}
+Long-dated equity or FX options are not only sensitive to the level of the underlying
+but also to the path followed by volatility and by interest rates used to discount future
+cash flows. In industry a popular approach is to combine a
+stochastic-volatility model (capturing the volatility smile) with a one-factor
+description of the short-term interest rate (capturing the term-structure of discount
+curves).  Although each ingredient is tractable in isolation, their combination produces a
+three-dimensional valuation problem with no analytic shortcut.
+
+\medskip
+\noindent\textbf{Interest-rate derivatives.}
+Unlike equity options, which depend on a traded asset, interest-rate contracts are tied
+to an entire curve of future borrowing costs.  A \emph{payer swaption} gives its owner the
+right, at time \(T\), to lock in a fixed rate \(K\) on a standard interest-rate swap running
+from \(T\) to some final date \(T_n\).  If, at expiry, the prevailing market swap rate
+\(L(T)\) exceeds \(K\), the option is in the money and the holder enters the swap; otherwise it
+is left to lapse.  One can think of the payoff as the present value of a series of future
+fixed-vs-floating exchanges, multiplied by \(\max(L(T)-K,0)\).
+
+To compute today's price, a model must therefore (i) fit the current discount curve so that the
+valuation of the floating leg is consistent with observable bond prices, and (ii) describe how
+the whole curve might move between now and \(T\).  The one-factor Hull-White model remains a
+workhorse because it achieves task (i) exactly while keeping task (ii) low-dimensional.
+However, even with this simplification closed-form solutions exist only for the cleanest
+European style; callability clauses, collateral requirements, or cash-settlement conventions
+re-introduce numerical integration.  PINNs offer a flexible alternative: once the governing
+partial differential equation is embedded into the neural network, curve fitting and option
+valuation are solved simultaneously.
+
+\medskip
+\noindent\textbf{Connecting the dots.}
+From the plain European call to the swaption, each contract adds a new layer of
+reality—early-exercise privilege, multiple underlyings, extra risk factors, or dependence on an
+entire yield curve.  These layers defeat the neat closed forms of classical option theory and
+stretch grid-based solvers beyond practicality.  PINNs, by contrast, are mesh-free,
+dimension-agnostic, and naturally incorporate boundary or inequality constraints in their loss
+functions.  The remainder of the thesis will quantify how these attributes translate into
+speed and accuracy across our five representative derivatives
+\cite{huge2020differentialmachinelearning,heaton2018deeplearningfinance}.
+
+\section{Modelling Framework}\label{sec:modelling_framework}
+
+Financial derivatives are priced using tools derived from stochastic calculus.
+Throughout this section we fix a filtered probability space
+$(\Omega,\mathcal{F},(\mathcal{F}_t)_{t\ge0},\mathbb{Q})$ satisfying
+the usual conditions and interpret $\mathbb{Q}$ as a
+\emph{risk-neutral} measure.  All stochastic processes introduced
+below are $(\mathcal{F}_t)$-adapted and, unless stated otherwise,
+driven by one or several standard $\mathbb{Q}$-Brownian motions with
+the specified instantaneous correlation.
+
+%---------------------------------------------------------------------
+\subsection{The Black-Scholes Model}\label{sec:bs_dynamics}
+
+We begin by explaining option price under the assumptions of the Black-Scholes model. This framework, proposed by \cite{black1973},
+assumes option prices are a consecuence of \textit{hedging}, a procedure used to eliminate risk 
+associated with the fluctuation of the underlying asset. The argument used is as follows.
+
+Let's assume that a price process behaves as a random variable $(S_t)_{t\ge0}$ that follows a geometric 
+Brownian motion give by the stochastic differential process:
+\begin{equation}\label{eq:gbm_single_redux}
+  \mathrm{d}S_t
+  = \mu\,S_t\,\mathrm{d}t
+  + \sigma\,S_t\,\mathrm{d}W^{\mathbb{P}}_t,
+  \qquad
+  S_0>0,
 \end{equation}
-where \(S(T)\) denotes the underlying asset's price at maturity and \(K\) is the strike price 
-\cite{alma99148840908702021}.
-
-In contrast, \textbf{American options} extend additional flexibility, allowing holders to exercise 
-their rights at any time before or at maturity. This feature significantly complicates the valuation, 
-typically necessitating numerical approximation techniques, such as binomial tree methods, finite 
-difference schemes, or Monte Carlo simulations \cite{glasserman2004monte, Wilmott2010PaulWO}.
-
-Other derivative classes include exotic options, such as \textbf{barrier options}, whose payoff 
-depends on whether the underlying asset's price breaches a predetermined barrier; 
-\textbf{Asian options}, with payoffs dependent on the average price of the underlying asset over a 
-specific period; and \textbf{lookback options}, whose payoff depends on the maximum or minimum asset 
-price attained during the contract's life \cite{alma99148840908702021, Wilmott2010PaulWO}. Due to their path-dependent 
-nature, these instruments require advanced computational techniques and sophisticated modeling 
-approaches for accurate pricing.
-
-In multi-asset contexts, derivatives depend on the joint dynamics of multiple underlying assets. For 
-example, \textbf{basket options} are derivatives whose payoffs depend on a weighted portfolio 
-of several underlying assets. A typical payoff structure for a European-style basket call option 
-is given by:
+where $\mu$ is the mean of the process and $\sigma$ its annualized volatility. Now let us propose a 
+portfolio composed of a sum of the derivative $V(S, t) := V_t$, and some units of the underlying asset.
+This portfolio is also a stochastic process given by
 \begin{equation}
-\max\left(\sum_{i=1}^d w_i S_i(T) - K, 0\right),
-\label{basket_payoff}
+  \Pi_t = V_t- \Delta S_t.
 \end{equation}
-where \(S_i(T)\) represents the maturity price of asset \(i\), \(w_i\) its corresponding weight 
-within the basket, and \(K\) the strike price \cite{glasserman2004monte, alma99148840908702021}.
-
-Another commonly traded multi-asset derivative is the \textbf{max-option} or \textbf{best-of option}, whose payoff structure is:
-\begin{equation}
-\max\left(\max (S_1(T),\dots,S_n(T)) - K, 0\right).
-\label{best_of_payoff}
+A well know fact from economics \cite{} is that riskless porfolios are required to yield the same rate of return
+as risk-free investments. This implies that $\Pi_t$ evolves as
+\begin{equation}\label{portfolio}
+	\Pi_t = e^{rt}\implies \mathrm{d}\Pi_t = r\Pi_t\mathrm{d}t = r(V_t-\Delta S_t)\mathrm{d}t.
 \end{equation}
-
-Pricing multi-dimensional derivatives is computationally demanding using traditional numerical 
-methods, as computational complexity increases exponentially with the number of underlying assets. 
-This challenge, known as the \textit{curse of dimensionality} (CoD) —a term originally coined by 
-Richard Bellman \cite{bellman1966dynamic}—limits the practicality of traditional grid-based or PDE-based 
-numerical methods in high-dimensional derivative pricing contexts \cite{glasserman2004monte,Wilmott2010PaulWO}.
-
-Recent developments in computational finance indicate a growing interest in overcoming these 
-dimensionality constraints through machine learning-based methods. Techniques such as Deep 
-Learning and PINNs have demonstrated significant potential 
-in efficiently handling high-dimensional derivative pricing problems, enabling accurate and 
-rapid pricing, sensitivity analysis, and risk assessment (see for example 
-\cite{huge2020differentialmachinelearning, crépey2024cvasensitivitieshedgingrisk, heaton2018deeplearningfinance}).
-
-
-\subsection{Black–Scholes Framework}
-The Black–Scholes model \cite{blackscholes} provides a quantitative method to price different derivatives. 
-Under the risk-neutral measure $\mathbb{Q}$, we assume the underlying asset 
-price process $S_t$ satisfies the stochastic differential equation
-\begin{equation}
-  \mathrm{d}S_t = r\,S_t\,\mathrm{d}t + \sigma\,S_t\,\mathrm{d}W_t^{\mathbb{Q}},
-  \label{eq:gbm_single}
+Applying Ito's lemma to the left side we get
+\begin{equation}\label{riskfree_portfolio}
+	\mathrm{d}\Pi_t = \mathrm{d}V_t - \Delta S_t,
 \end{equation}
-where $r$ is the constant risk-free rate, $\sigma>0$ 
-the volatility, and $W_t^{\mathbb{Q}}$ a standard Brownian motion under $\mathbb{Q}$.  
-
-Let $V(t,S)$ denote the time-$t$ price of a derivative with payoff at maturity $T$.  Applying Itô’s lemma to $V(t,S_t)$ yields
+where $\mathrm{d}V$ is given by the following PDE
+\begin{equation}\label{ito_vadjust}
+	\mathrm{d}V_t = \Big(\frac{\partial V}{\partial t}+\mu S \frac{\partial V}{\partial t} + 
+	\sigma^2 S^2\frac{\partial^2 V}{\partial S^2}\Big)\mathrm{d}t + \sigma \frac{\partial V}{\partial S} \mathrm{d}W^{\mathbb{P}}_t.
+\end{equation}
+Choosing  
+\[
+\Delta_t \;=\; \frac{\partial V}{\partial S}(t,S_t)
+\]
+eliminates the Brownian increment in the hedged portfolio, 
+because the $\sigma\,\partial_S V\,\mathrm{d}W^{\mathbb{P}}_t$ term in
+$\mathrm{d}V_t$ exactly cancels the corresponding term in
+$\Delta_t\,\mathrm{d}S_t$.  The remaining drift of $\Pi_t$
+must equal $r\Pi_t\,\mathrm{d}t$ by \eqref{portfolio}, so
+\[
+r\bigl(V_t-\Delta_t S_t\bigr)
+\;=\;
+\frac{\partial V}{\partial t}
+\;+\;
+\mu S_t\frac{\partial V}{\partial S}
+\;+\;
+\frac{1}{2}\sigma^{2}S_t^{2}\frac{\partial^{2}V}{\partial S^{2}}.
+\]
+Substituting $\Delta_t$ and rearranging yields the
+\emph{Black--Scholes partial differential equation}
 \begin{equation}
-  \mathrm{d}V = \Bigl(
-    \frac{\partial V}{\partial t} + r S\,\frac{\partial V}{\partial S} + \frac{1}{2}\sigma^2 S^2\,\frac{\partial^2 V}{\partial S^2}
-  \Bigr)\,\mathrm{d}t
-  + \sigma S\,\frac{\partial V}{\partial S}\,\mathrm{d}W_t^{\mathbb{Q}}.
-  \label{eq:ito_single}
+\boxed{
+\frac{\partial V}{\partial t}
+\;+\;
+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}
+\;+\;
+rS\,\frac{\partial V}{\partial S}
+\;-\;
+rV
+\;=\;0,
+}\label{eq:BS_complete}
+\end{equation}
+to be solved for $V(t,S)$ with terminal condition
+$V(T,S)=\Phi(S)$, where $\Phi$ denotes the contract’s payoff. For the sake of notation,
+we introduce the operator $\mathcal{L}$, which is defined for the Black-Scholes model as
+\begin{equation}\label{eq:L_BS}
+\mathcal{L}^{\mathrm{BS}}
+:= \frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}}{\partial S^{2}}
+	+ rS\,\frac{\partial }{\partial S},
+\end{equation}
+and rewrite \eqref{eq:BS_complete} as
+\begin{equation}\label{eq:BS_complete_redux}
+\frac{\partial V}{\partial t}+\mathcal{L}^{\mathrm{BS}}V-rV=0.
 \end{equation}
 
-In order to eliminate risks, we construct a self-financing portfolio $\Pi = V - \Delta S$ and choose $\Delta = \partial V/\partial S$.  
-The remaining drift must equal $r\,\Pi$, leading to the Black–Scholes PDE
-\begin{equation}
-  \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2\,\frac{\partial^2 V}{\partial S^2}
-  + r S\,\frac{\partial V}{\partial S} - r V = 0.
-  \label{eq:BS_single}
+One key result of the Black-Scholes model is that the risk-neutral dynamics of the underlying asset
+must has a drift equal to the risk-free rate $r$ in the risk-neutral measure $\mathbb{Q}$. This fact is implied by the
+Feyman-Kac theorem, which states that the solution to the PDE \eqref{eq:BS_complete_redux} can be expressed as
+\begin{equation}\label{eq:FK_solution}
+V(t,S) = e^{-r(T-t)}\mathbb{E}^{\mathbb{Q}}[\Phi(S_T)|S_t=S],
 \end{equation}
-
-\subsubsection{Boundary and Initial Conditions}
-To ensure a unique solution of \eqref{eq:BS_single}, 
-we need to specify boundary and initial conditions. At one hand, boundary conditions are determined by the behavior of the derivative as the underlying asset price approaches certain limits.
-As $S\to0$, a general condition \cite{Wilmott2010PaulWO} to assume is that the diffusion and drift terms vanish, leading to
-\begin{equation}
-  \frac{\partial V}{\partial t} - rV = 0,
-\end{equation}
-and for the case when $S\to+\infty$, is costumary to assume that the derivative price behaves linearly with respect to the underlying asset price. Therefore,
-we have the condition
-\begin{equation}
-  \frac{\partial^2 V}{\partial S^2} = 0.
-\end{equation}
-
-At the other hand, initial conditions reflect the payoff of the derivative we want to price. 
-In this thesis, all tests are based on the case of \textbf{best-of-option}, so our inital condition 
-is given by
-\eqref{best_of_payoff}.
+where $\mathbb{E}^{\mathbb{Q}}[\cdot]$ denotes the expectation under the risk-neutral measure $\mathbb{Q}$ and $S_t$ follows the
+geometric Brownian motion \eqref{eq:gbm_single_redux} with drift $\mu=r$.
 
 
-\subsection{Multi–Asset Extension and Dimensionless Formulation}
-Now suppose we have $d$ assets $S_t^1,\dots,S_t^d$, each given by the dynamics
-\begin{equation}
-  \mathrm{d}S_t^i = r\,S_t^i\,\mathrm{d}t + \sigma_i S_t^i\,\mathrm{d}W_t^{\mathbb{Q},i},
-  \quad
-  \mathrm{d}W_t^{\mathbb{Q},i}\mathrm{d}W_t^{\mathbb{Q},j}=\rho_{ij}\,\mathrm{d}t,
-  \label{eq:gbm_multi}
+\subsection{Multi-Asset Extension of the Black-Scholes Model}\label{sec:multiasset}
+
+Now we proceed to extend the model for multiple underlying assets. From the previous section we know that the underlying assets
+must have a drift equal to the risk-free rate $r$ in the risk-neutral measure $\mathbb{Q}$. For $d\ge2$ underlyings the vector
+$\mathbf{S}_t=(S^1_t,\dots,S^d_t)^{\!\top}$ satisfies
+\begin{equation}\label{eq:gbm_multi_redux}
+  \mathrm{d}S^i_t
+  = r\,S^i_t\,\mathrm{d}t
+  + \sigma_i S^i_t\,\mathrm{d}W^{\mathbb{Q},i}_t,
+  \qquad
+  \mathrm{d}W^{\mathbb{Q},i}_t\,\mathrm{d}W^{\mathbb{Q},j}_t
+  = \rho_{ij}\,\mathrm{d}t,
+  \quad 1\le i,j\le d.
 \end{equation}
-and with correlation matrix $\mathbf{R}=(\rho_{ij})$. Applying Itô’s lemma to the multi–asset price $V(t,\mathbf{S})$ leads to
+Let $V(t,\mathbf{S})$ denote the option value. The same replication argument gives
+\begin{equation}\label{eq:L_multi}
+  \mathcal{L}^{\mathrm{BS},d}
+  := \frac12\sum_{i=1}^d\sum_{j=1}^{d}
+        \sigma_i\sigma_j\rho_{ij}
+        S_iS_j\,\frac{\partial }{\partial S_i S_j}
+     + r\sum_{i=1}^{d}S_i\partial_{S_i}
+     - r,
+\end{equation}
+with the same PDE to solve 
 \begin{equation}
-  \frac{\partial V}{\partial t}
-  + \frac{1}{2}\sum_{i=1}^d\sum_{j=1}^d
-    \sigma_i\sigma_j\,S_iS_j\,\frac{\partial^2 V}{\partial S_i\,\partial S_j}
-  + r\sum_{i=1}^d S_i\,\frac{\partial V}{\partial S_i} - rV = 0.
-  \label{eq:BS_multi}
+	\frac{\partial V}{\partial t} + \mathcal{L}^{\mathrm{BS},d}V - rV=0.
 \end{equation}
 
-A general recomendation when working with machine learning models is to apply scaling and nondimensionalization to the problem \cite{wang2023expertsguidetrainingphysicsinformed},
-because it helps improve the stability, convergence, and generalization of the model. In our case we can transform our equation to 
-log–strike coordinates and backward time using the following change of variables
-\begin{equation}
-  x_i=\ln\bigl(S_i/K\bigr),
-  \quad
-  \tau=T-t,
-  \quad
-  u(\tau,\mathbf{x})=V(t,\mathbf{S})/K.
-\end{equation}
-
-Applying the chain rule to \eqref{eq:BS_multi} and substituting the new variables leads to the scaled PDE
+As the goal is to price using PINNs, is important to mention this technique benefits 
+from input variables that are centred and have comparable magnitudes.  
+Its possible to achieve this by expressing prices in \emph{log-moneyness}
+$x_i:=\ln(S_i/K)$ and by running the problem backward in time.
+Formally, for maturity \(T\) define
+\[
+x_i=\ln\frac{S_i}{K},\qquad
+\tau=T-t,\qquad
+u(\tau,\mathbf{x})=\frac{V(t,\mathbf{S})}{K},
+\]
+where \(\mathbf{S}=(S_1,\dots,S_d)^{\!\top}\) and
+\(K\) is the strike. Starting from the multi-asset Black-Scholes PDE and applying 
+the above change of variables, the chain rule yields the
+ \emph{dimensionless backward} equation  
 \begin{equation}
   \frac{\partial u}{\partial \tau} =
-    \tfrac12\sum_{i=1}^d \sigma_i^2
-      \Bigl(\frac{\partial^2 u}{\partial x_i^2}-\frac{\partial u}{\partial x_i}\Bigr)
-    + \tfrac12\sum_{i,j=1}^d \sigma_i\sigma_j\rho_{ij}
-      \frac{\partial^2 u}{\partial x_i\,\partial x_j}
-    + r\sum_{i=1}^d \frac{\partial u}{\partial x_i}
-    - ru.
-  \label{eq:scaled_PDE}
+    \frac12\sum_{i=1}^{d}\sigma_i^{2}
+        \Bigl(
+            \frac{\partial^{2}u}{\partial x_i^{2}}
+          - \frac{\partial u}{\partial x_i}
+        \Bigr)
+  + \frac12\sum_{i,j=1}^{d}\sigma_i\sigma_j\rho_{ij}
+        \,\frac{\partial^{2}u}{\partial x_i\,\partial x_j}
+  + r\sum_{i=1}^{d}\frac{\partial u}{\partial x_i}
+  - ru.
+  \label{eq:scaled_PDE_exact}
+\end{equation}
+to be solved for
+\(\tau\in(0,T]\) and \(\mathbf{x}\in\mathbb{R}^{d}\) with terminal
+condition \(u(0,\mathbf{x})=\Phi(\mathbf{x})/K\). Again, it is convenient to rewrite \eqref{eq:scaled_PDE_exact} in operator
+form
+\[
+\;
+-\frac{\partial u}{\partial \tau} + 
+\widetilde{\mathcal{L}}^{\mathrm{BS},d}u - ru = 0,
+\qquad
+u(0,\mathbf{x})=\frac{\Phi(\mathbf{x})}{K}
+\;,
+\]
+where the \emph{dimensionless generator}
+\begin{equation}\label{eq:L_tilde_BS}
+  \;
+  \widetilde{\mathcal{L}}^{\mathrm{BS},d}
+  := \frac{1}{2}\sum_{i=1}^{d}\sum_{j=1}^{d}
+       \sigma_i\sigma_j\rho_{ij}\,
+       \frac{\partial}{\partial x_i x_j}
+     - \frac{1}{2}\sum_{i=1}^{d}\sigma_i^{2}\,
+       \frac{\partial}{\partial x_i}
+  \;
+\end{equation}
+acts on twice differentiable test functions
+and is elliptic with constant coefficients.
+Equation~\eqref{eq:scaled_PDE_final} will serve as the reference
+problem for the mesh-free PINN solver in
+Section~\ref{sec:pinn_implementation}.
+
+%---------------------------------------------------------------------
+\subsection{Extensions Beyond Black-Scholes}\label{sec:extensions}
+
+\subsubsection{Stochastic Volatility}
+Its a common observation in the market that option prices do not follow the
+log-normal distribution assumed by the Black-Scholes model. In general, the implied volatilities vary with strike and
+maturity, forming the well-known \emph{volatility smile}. A single constant parameter~$\sigma$ is
+therefore insufficient to reproduce observed prices \cite{Wilmott2010PaulWO}.  
+Moreover, for maturities beyond one year the assumption of a
+deterministic discount rate becomes untenable; the entire yield curve
+moves randomly in response to macroeconomic news and monetary policy
+\cite{Wilmott2010PaulWO}. This is key when pricing long-dated
+equity options, which are sensitive to equity, volatility, and interest rate dynamics.  These
+considerations motivate models that combine \emph{stochastic
+volatility} with \emph{stochastic interest rates}.
+
+Among the many specifications proposed, the square-root process of
+\cite{hestonmodel} offers a parsimonious and analytically tractable
+alternative to Black-Scholes.  Under the risk-neutral measure
+$\mathbb{Q}$ the state vector $(S_t,v_t)$ satisfies
+\begin{equation}\label{eq:heston_sde}
+\begin{aligned}
+  \mathrm{d}S_t &= r\,S_t\,\mathrm{d}t
+                + \sqrt{v_t}\,S_t\,\mathrm{d}W_t^{\mathbb{Q},S},\\
+  \mathrm{d}v_t &= \kappa(\theta-v_t)\,\mathrm{d}t
+                + \sigma_v\sqrt{v_t}\,\mathrm{d}W_t^{\mathbb{Q},v},\\
+  \mathrm{d}W_t^{\mathbb{Q},S}\,\mathrm{d}W_t^{\mathbb{Q},v}
+                &=\rho\,\mathrm{d}t,
+\end{aligned}
+\end{equation}
+where $\kappa>0$ is the mean-reversion speed,
+$\theta>0$ the long-run variance,
+$\sigma_v>0$ the volatility of volatility, and
+$\rho\in[-1,1]$ the instantaneous correlation.
+The Feller condition $2\kappa\theta\!>\!\sigma_v^{2}$
+guarantees $v_t>0$ almost surely.
+
+In order to get the pricing PDE, we set $V(t,S,v)$ to denote the price, at time $t$, of a derivative maturing
+at $T$ with payoff $\Phi(S_T)$. Assuming $V$ is twice continuously
+differentiable in $S$ and $v$ and once in $t$, Itô's lemma applied to
+$V(t, S_t, v_t)$ gives
+\[
+\begin{aligned}
+\mathrm{d}V
+&=
+\Biggl(
+      \frac{\partial V}{\partial t}
+    + r S \frac{\partial V}{\partial S}
+    + \kappa(\theta-v)\,\frac{\partial V}{\partial v}
+    + \frac{1}{2} v S^{2}\,\frac{\partial^{2} V}{\partial S^{2}}
+    + \frac{1}{2}\sigma_{v}^{2} v\,\frac{\partial^{2} V}{\partial v^{2}}
+    + \rho\,\sigma_{v} v S\,\frac{\partial^{2} V}{\partial S\,\partial v}
+\Biggr)\,\mathrm{d}t \\[6pt]
+&\quad
+  + \sqrt{v}\,S\,\frac{\partial V}{\partial S}\,
+      \mathrm{d}W_{t}^{\mathbb{Q},S}
+  + \sigma_{v}\sqrt{v}\,\frac{\partial V}{\partial v}\,
+      \mathrm{d}W_{t}^{\mathbb{Q},v}.
+\end{aligned}
+\]
+From the risk-neutral valuation theory \cite{björk2004arbitrage}, we know that all assets, including the derivative
+$V$, must have a drift equalt to the risk-free rate $r$ in the risk-neutral measure $\mathbb{Q}$.
+This implies that the drift of the process $\mathrm{d}V$ must be equal to
+\begin{equation}
+\mathrm{d}V_t = r V_t \mathrm{d}t.
+\end{equation}
+Using this fact and the Feynman-Kac theorem, which states that given the terminal condition $V(T,S,v)=\Phi(S)$, the equation
+\begin{equation}\label{eq:FK_heston}
+V(t,S,v) = e^{-r(T-t)}\mathbb{E}^{\mathbb{Q}}[\Phi(S_T)|S_t=S,v_t=v],
+\end{equation}
+is solution to the PDE
+\begin{equation}\label{eq:heston_pde}
+\begin{aligned}
+  &\frac{\partial V}{\partial t}
+  + \tfrac12 v S^{2}\,\frac{\partial^{2} V}{\partial S^{2}}
+  + \rho\sigma_{v} v S\,\frac{\partial^{2} V}{\partial S\,\partial v}
+  + \tfrac12\sigma_{v}^{2} v\,\frac{\partial^{2} V}{\partial v^{2}}
+  + \kappa(\theta-v)\,\frac{\partial V}{\partial v}
+  + r S\,\frac{\partial V}{\partial S}
+  - r V
+  = 0,
+\end{aligned}
+\end{equation}
+which is the \emph{Heston PDE}. Again, we can rewrite this PDE in operator form
+\begin{equation}\label{eq:L_Heston}
+  \mathcal{L}^{\mathrm{Heston}}
+  := \frac{1}{2}v S^{2}\frac{\partial^{2}}{\partial S^{2}}
+  + \rho\sigma_{v} v S\frac{\partial^{2}}{\partial S\,\partial v}
+  + \frac{1}{2}\sigma_{v}^{2} v\frac{\partial^{2}}{\partial v^{2}}
+  + \kappa(\theta-v)\frac{\partial}{\partial v}		
+  + r S\frac{\partial}{\partial S},
+\end{equation}
+and rewrite the PDE as
+\begin{equation}\label{eq:heston_pde_redux}
+  \frac{\partial V}{\partial t} + \mathcal{L}^{\mathrm{Heston}}V - rV = 0.
 \end{equation}
 
-\subsubsection{Dimensionless Boundary and Initial Conditions}
-\textit{Hay un error en las condiciones de borde-> k no esta definido.}
-In the new problem setting we also need to update our boundary conditions. In the dimensionless 
-case, the spatial variable $x_i$ is unbounded, so we need to specify the behavior 
-of the solution as $x_i\to-\infty$ and $x_i\to+\infty$. Taking the same ideas as in 
-the single–asset case, the lower boundary condition ($x_i \to -\infty$) is given by
-\begin{equation}
-	\frac{\partial u}{\partial \tau} \;=\;
-	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d 
-	\sigma_i^{2}\!\left(
-	\frac{\partial^{2}u}{\partial x_i^{2}}
-	-\frac{\partial u}{\partial x_i}\right)
-	\;+\;
-	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d
-		\sum_{\substack{j=1 \\ j\neq k}}^d
-	\sigma_i\sigma_j\rho_{ij}\,
-	\frac{\partial^{2}u}{\partial x_i\,\partial x_j}
-	\;+\;
-	r\sum_{\substack{i=1 \\ i\neq k}}^d
-	\frac{\partial u}{\partial x_i}
-	\;-\;
-	r\,u ,
-  \label{eq:boundary_multi_1}
+\subsubsection{Stochastic Interest Rates}
+
+For maturities beyond a few months or for product where the underlying is a interest rate, modelling the short rate as a
+constant parameter is inadequate \cite{brigo2013interest} as it fails to capture the
+time-varying nature of interest rates. A more realistic approach is to assume that the
+short rate \(r_t\) follows a stochastic process, which allows it to evolve in response
+to macroeconomic factors, monetary policy, and other market dynamics.
+There is a plethora of models that capture this behaviour, but two of the most popular are the
+\emph{Vasicek} model \cite{VASICEK1977177} and the
+\emph{Hull-White} model \cite{hullwhitemodel}.  
+Both models assume that the short rate follows a mean-reverting process, which is
+a common feature in interest rate dynamics.  The key difference is that the Hull-White model
+allows for a time-dependent mean reversion level, making it more flexible in fitting the
+current yield curve.
+
+We can define both models in terms of the following stochastic differential equations (SDEs):
+\begin{equation}\label{eq:vasicek_sde}
+  \mathrm{d}r_t
+  = \kappa(\theta_t-r_t)\,\mathrm{d}t
+    + \sigma_r\,\mathrm{d}W^{\mathbb{Q},r}_t.
 \end{equation}
-and the upper boundary condition ($x_i \to +\infty$) is given by
-\begin{equation}
-	\frac{\partial u}{\partial \tau} \;=\;
-	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d 
-	\sigma_i^{2}\!\left(
-	\frac{\partial^{2}u}{\partial x_i^{2}}
-	-\frac{\partial u}{\partial x_i}\right)
-	\;+\;
-	\frac{1}{2}\sum_{\substack{i=1 \\ i\neq k}}^d
-		\sum_{\substack{j=1 \\ j\neq k}}^d
-	\sigma_i\sigma_j\rho_{ij}\,
-	\frac{\partial^{2}u}{\partial x_i\,\partial x_j}
-	\;+\;
-	r\sum_{i=1}^d\frac{\partial u}{\partial x_i}
-	\;-\;
-	r\,u .
-  \label{eq:boundary_multi_2}
+where in both \(\kappa\) is the mean-reversion speed and \(\theta_t\) is the time-dependent long-run mean. 
+In the Vasicek model, \(\theta_t\) is a constant, while in the Hull-White model it can be a deterministic 
+function of time. A derivative whose value depends on the short rate , $V(t,r)$, has a pricing PDE
+\begin{equation}\label{eq:vasicek_pde}
+\begin{aligned}
+  &\frac{\partial V}{\partial t}
+  + \kappa(\theta_t-r)\,\frac{\partial V}{\partial r}
+  + \frac12\sigma_r^{2}\,\frac{\partial^{2} V}{\partial r^{2}}
+  - rV
+  = 0.
+\end{aligned}
 \end{equation}
-Also we need to update the inital condition we will use in our problem. 
-In particular, we will use the payoff of the best-of option as our 
-initial condition, which is given by \eqref{best_of_payoff} now becomes
-\begin{equation}
-	u(0,\mathbf{x})=\max\bigl(e^{\max x_i}-1,0\bigr).
-	\label{eq:terminal_multi}
+This PDE is derived in the same fashion as the ones from the previous sections. In operator form, we can write
+\begin{equation}\label{eq:L_SR}
+  \mathcal{L}^{\mathrm{SR}}
+  := \frac12\sigma_r^{2}\frac{\partial}{\partial r^{2}}
+  + \kappa(\theta_t-r)\frac{\partial}{\partial r},
 \end{equation}
-These boundary specifications, together with \eqref{eq:scaled_PDE} and \eqref{best_of_payoff}, define 
-the problem that the PINN approximates. 
-There a few things that are interesting to point out about this problem. For example, the equation we attempt to solve is a linear parabolic PDE which grows cuadratically
-in the number of derivatives we need to compute when $d$ grows. This means that the computational cost of the PINN will grow significantly with the number of assets.
-Also, notice that the lower boundary condition (when $x_i\to-\infty$) is independent of the $k$-th asset, which means that we could
-use the solution of the $d-1$-assets case as boundary, reducing the complexity of the problem.
+and rewrite the PDE as
+\begin{equation}\label{eq:vasicek_pde_redux}
+  \frac{\partial V}{\partial t} + \mathcal{L}^{\mathrm{SR}}V - rV = 0.
+\end{equation}
+What sets aside short-rate models from the previous sections is that they are \emph{affine} in the state variable \(r_t\).
+Affine models are those whose dynamics can be expressed as a linear combination of the state variable and its
+exponential function. This property allows for closed-form solutions for the prices of certain derivatives, 
+such as zero-coupon bonds. See anex~\ref{sec:affine_models} for a more detailed discussion on affine models.
+
+
+%---------------------------------------------------------------------
+\subsection{Joint Stochastic Volatility and Stochastic Rates}\label{sec:sv_rates}
+
+Finally, we drop both the assumption of constant volatility and the
+assumption of constant interest rates, and consider a model that combines
+stochastic volatility and stochastic interest rates. As already mentioned, this is desirable for
+pricing long-dated products.
+
+
 
 \section{Traditional Numerical Approaches}
 
@@ -691,7 +911,7 @@ counterpart \eqref{eq:BS_multi}. The core idea behind FDM is to discretize the t
 asset domains into a structured grid and approximate the derivatives in the PDE using finite 
 differences.
 
-For example, in the single–asset case, the time derivative can be approximated by a backward 
+For example, in the single-asset case, the time derivative can be approximated by a backward 
 difference:
 \begin{equation}
 	\frac{\partial V}{\partial t} \approx \frac{V^{n} - V^{n-1}}{\Delta t},
@@ -714,7 +934,7 @@ strategies can be employed to reduce complexity.
 \subsubsection{Monte Carlo Methods}
 Monte Carlo (MC) methods are stochastic techniques that simulate multiple sample paths 
 of the underlying assets under the risk-neutral measure $\mathbb{Q}$ and average the 
-discounted payoff \cite{glasserman2004monte}. In the context of the multi–asset Black–Scholes 
+discounted payoff \cite{glasserman2004monte}. In the context of the multi-asset Black-Scholes 
 model \eqref{eq:gbm_multi}, this involves simulating correlated geometric Brownian motions. 
 An example of a MC pricing algorithm is shown below:
 \begin{algorithm}[H]
@@ -743,127 +963,6 @@ the ability to exercise at multiple points in time. While there are techniques t
 methods for American options, such as the Longstaff-Schwartz method \cite{longstaffshawrtz}, they are often less
 efficient than PDE-based methods. This is where PINNs can provide a significant advantage, 
 as they can naturally handle path-dependent payoffs and American-style options, among others.
-
-% \chapter{Physics-Informed Machine Learning}
-
-% As already mentioned, over the past decade, machine learning -and in particular, deep learning-
-% has seen explosive growth across science and engineering \cite{ref1}. Neural networks have demonstrated
-% remarkable capabilities in approximating complex, high-dimensional functions \cite{RAISSI2019686}. However, 
-% traditional data-driven approaches often require large amounts of labeled data and lack 
-% built-in knowledge of physical laws \cite{RAISSI2019686}. This gap is where PINNs come into play,
-% offering a framework that combines the strengths of deep learning with the constraints
-% of physics-based models \cite{RAISSI2019686}.
-
-% Before diving into the specific structure and implementation of PINNs, 
-% this chapter provides a high-level introduction to the neural network models 
-% they are built upon, and discusses how the universal approximation capabilities 
-% of these networks make them suitable candidates for solving PDEs. We also explore the 
-% key motivations behind physics-informed models, and how they represent an evolution 
-% in the use of machine learning in the sciences.
-
-% \section{Introduction to Neural Networks}
-
-% Neural networks are function approximators inspired by the structure of biological brains \cite{}. 
-% At their core, they transform inputs through successive layers of simple nonlinear operations 
-% to produce outputs. The power of neural networks lies in their ability to model highly nonlinear, 
-% high-dimensional functions, \cite{} a fact formalized by the Universal Approximation Theorem (UAT) \cite{}, which 
-% guarantees that even simple neural networks can approximate any continuous function on a compact domain \cite{}.
-
-% \subsection{Universal Approximation Theorem}
-
-% The UAT is a foundational result that underpins much of the theoretical motivation for using neural 
-% networks in scientific applications. It asserts that neural networks with a single hidden layer 
-% and a suitable activation function can approximate any continuous function on a compact domain,
-% given enough neurons \cite{}. While the theorem guarantees \emph{existence} of such approximations, 
-% it does not address how to find the right parameters or how efficiently this can be done in practice.
-
-% Let \(K\subset\mathbb{R}^n\) be compact, and denote by \(C(K)\) the Banach space of 
-% continuous functions \(f:K\to\mathbb{R}\) equipped with the uniform norm
-% \begin{equation}	
-% 	\|f\|_{\infty} \;=\;\max_{x\in K}|f(x)|\,.
-% \end{equation}
-
-% \begin{definition}
-% A function \(\sigma:\mathbb{R}\to\mathbb{R}\) is called \emph{sigmoidal} if
-% \[
-% \lim_{t\to -\infty}\sigma(t)=0
-% \quad\text{and}\quad
-% \lim_{t\to +\infty}\sigma(t)=1\,.
-% \]
-% \end{definition}
-
-% \begin{theorem}[Cybenko (1989)\cite{cybenko:hal-03753170}]\label{thm:cybenko}
-% Let \(\sigma\) be any continuous sigmoidal function.  Then the set
-% \[
-% \mathcal{H} \;=\;
-% \Bigl\{\, x\mapsto \sum_{j=1}^N \alpha_j\,\sigma\bigl(w_j^T x + b_j\bigr)
-% \;\Big|\; N\in\mathbb{N},\;\alpha_j\in\mathbb{R},\;w_j\in\mathbb{R}^n,\;b_j\in\mathbb{R}\Bigr\}
-% \]
-% is dense in \(C(K)\).  That is, for every \(f\in C(K)\) and every \(\varepsilon>0\) there exist \(N,\{\alpha_j,w_j,b_j\}\) such that
-% \[
-% \sup_{x\in K}\Bigl|\,f(x)\;-\,\sum_{j=1}^N \alpha_j\,\sigma(w_j^T x + b_j)\Bigr| < \varepsilon.
-% \]
-% \end{theorem}
-
-% \section{Physics‐Informed Neural Networks (PINNs)}
-
-% \textit{Revisar: estructura no hace mucho sentido, quizas hay que modificar las 
-% secciones.}
-
-% Building on the UAT, Physics‐Informed Neural Networks (PINNs) \cite{RAISSI2019686} embed differential equations 
-% into the training of a neural network.  Let \(\Omega\subset\mathbb{R}^d\) be a spatial domain and consider the PDE
-% problem
-
-% \begin{equation}
-% 	\begin{aligned}
-% 	\mathcal{N}_I[u(t,x)] = 0, & \quad x\in\Omega,\, t\in [0,T], \\
-% 	\mathcal{N}_B[u(t,x)] = 0, & \quad x\in\partial\Omega,\, t\in [0,T], \\
-% 	\mathcal{N}_0[u(t^*,x)] = 0, & \quad x\in\Omega_0,\, t^*=0\,\text{ or }\,t^*=T,
-% 	\end{aligned}
-% \end{equation}
-
-% where \(\mathcal{N}_I\) is the PDE operator, \(\mathcal{N}_B\) is the boundary operator, 
-% and \(\mathcal{N}_0\) is the initial condition operator. The PINN approximates the
-% solution \(u(t,x)\) by a surrogate neural network \(u_\theta(t,x)\) with parameters 
-% \(\theta\). Our goal is obtain the parameters \(\theta\) by minimizing the total loss function
-% \begin{equation}
-% 	\mathcal{L}(\theta) = \lambda_1 \mathcal{L}_{\text{PDE}} + \lambda_2 \mathcal{L}_{\text{boundary}} + \lambda_3 \mathcal{L}_{\text{initial}},
-% 	\label{eq:total_loss}
-% \end{equation}
-% where each residual term is defined as
-% \begin{equation}
-% 	\begin{aligned}
-% 		\mathcal{L}_{\text{PDE}} = \lambda_1 \int_{\Omega} \bigl|\mathcal{N}_I[u_\theta(t,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t, \\
-% 		\mathcal{L}_{\text{Boundary}} = \lambda_2 \int_{\partial\Omega} \bigl|\mathcal{N}_B[u_\theta(t,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t, \\
-% 		\mathcal{L}_{\text{Initial}} = \lambda_3 \int_{\Omega_0} \bigl|\mathcal{N}_0[u_\theta(t^*,x)]\bigr|^2\,\mathrm{d}x\,\mathrm{d}t.
-% 	\end{aligned}
-% 	\label{eq:loss_terms}
-% \end{equation}
-
-% In general, the loss terms are computed using Monte Carlo sampling, where each integral is approximated 
-% by a finite sum over collocation points.
-
-% \subsection{Challenges in Training PINNs}
-
-% As we already saw, training a PINN involves minimizing the total loss $\mathcal{L}(\theta)$. This 
-% presents some challenges:
-% \begin{itemize}
-%     \item \textbf{Imbalance of loss terms}: Given the different nature of the loss terms,
-% 	the PDE residuals can be of orders of magnitude larger than the boundary and initial conditions, therefore leading
-% 	gradient pathologies \cite{wang2020understandingmitigatinggradientpathologies, BISCHOF2025117914}. This imbalance can
-% 	be troublesome, as the optimizer may focus on minimizing the PDE residuals at the expense of the boundary and initial conditions.
-
-% 	\item \textbf{Slow convergence}: Arising from a variety of factors, including the
-% 	complexity of the PDE, the choice of neural network architecture, and the optimization algorithm used,
-% 	PINNs can have trouble converging to a solution in a timely manner. This a relevant issue in applications 
-% 	where real-time or near-real-time solutions are required, such as in financial applications.
-	
-% 	\item \textbf{Memory and computational cost}: The memory and computational cost of training a PINN ,
-% 	can be significant, especially for high-dimensional PDEs. Even though neural networks are often fast to
-% 	evaluate, training big arquitectures can be very memory consuming when taking to account the number of parameters, gradients
-% 	and collocation to be computed \cite{cho2023separablephysicsinformedneuralnetworks}.
-
-% \end{itemize}
 
 \chapter{Physics-Informed Machine Learning}
 
@@ -933,45 +1032,45 @@ their inherent limitations, such as training inefficiencies, scalability challen
 and difficulties in capturing complex solution behaviors. This section delineates notable 
 developments that enhance the capability and applicability of PINNs.
 
-\subsubsection{Extended Physics-Informed Neural Networks (XPINNs)}
+\subsubsection{Extended Physics-Informed Neural Networks}
 Extended Physics-Informed Neural Networks (XPINNs) introduce a generalized space-time domain 
 decomposition strategy, partitioning the problem domain into multiple subdomains. 
 Each subdomain is assigned a distinct neural network, facilitating parallel training 
 and improved scalability. This approach is particularly effective for complex geometries 
 and high-dimensional problems, as it allows for localized learning and reduces computational 
-overhead~\cite{jagtap2020extended}.
+overhead~\cite{Hu_2022}.
 
 \subsubsection{Variational and Augmented PINNs}
 Variational PINNs (VPINNs) reformulate the loss function using variational principles, 
 integrating test functions and quadrature rules to enhance solution accuracy and convergence 
 rates. This method is beneficial for problems where traditional PINNs struggle with stability 
-and precision~\cite{kharazmi2021hp}. Augmented PINNs (APINNs) incorporate additional physical 
-constraints or auxiliary variables into the neural network architecture, improving the network's 
+and precision~\cite{kharazmi2019variationalphysicsinformedneuralnetworks}. \textbf{Revisar} Augmented PINNs 
+(APINNs) incorporate additional physical constraints or auxiliary variables into the neural network architecture, improving the network's 
 ability to capture complex solution features and ensuring adherence to 
-underlying physical laws~\cite{patel2023turbulence}.
+underlying physical laws~\cite{Hu_2023}.
 
-\subsubsection{Neural Operators: DeepONet and Fourier Neural Operators (FNO)}
+\subsubsection{Neural Operators: DeepONet and Fourier Neural Operators}
 Neural operators, such as Deep Operator Networks (DeepONet) and Fourier Neural 
 Operators (FNO), represent a paradigm shift by learning mappings between function 
 spaces rather than individual function evaluations. DeepONet employs a branch and 
 trunk network to approximate nonlinear operators, enabling rapid predictions 
-across varying input functions~\cite{lu2021learning}. FNO leverages the Fourier 
+across varying input functions~\cite{Lu_2021}. FNO leverages the Fourier 
 transform to learn global solution operators efficiently, offering advantages in 
-handling complex, high-dimensional PDEs with reduced computational costs~\cite{li2020fourier}.
+handling complex, high-dimensional PDEs with reduced computational costs~\cite{li2021fourierneuraloperatorparametric}.
 
 \subsubsection{Applications of PINNs}
 In terms of applications, PINNs have been successfully employed in various fields, including:
 \begin{itemize}
-    \item \textbf{Fluid dynamics:} Modeling complex flows including turbulent and laminar regimes, 
-	and inferring hidden physical fields from sparse observational 
-	data~\cite{RAISSI2019686, bhatnagar2019prediction}.
+    \item \textbf{Fluid dynamics:} Modeling complex flows including turbulent 
+	and laminar regimes, and inferring hidden physical fields from sparse observational 
+	data \cite{RAISSI2019686, Bhatnagar_2019}.
     
     \item \textbf{Biomedicine:} Improving medical imaging reconstruction and personalized patient 
 	modeling via inverse problems involving PDE constraints \cite{banerjee2024pinnsmedicalimageanalysis}.
     
     \item \textbf{Materials science and climate modeling:} Inferring material properties and 
 	assimilating observational data into physics-based climate models for improved 
-	predictions~\cite{karniadakis2021physics}.
+	predictions \cite{karniadakis2021physics}.
 \end{itemize}
 Overall, the PINN methodology represents a robust integration of deep learning and physical 
 modeling, actively evolving through continuous theoretical improvements and expanding applications.
@@ -1018,105 +1117,310 @@ make informed decisions about which techniques to apply in our specific use case
 more accurate and efficient solutions for pricing multi-asset derivatives.
 
 
-\chapter{Implementation and Experiments}
+% \chapter{Implementation and Experiments}
 
-In this chapter, we present the implementation details and benchmarks different techniques used in this thesis.
-We will discuss the architecture altenatives of the neural networks, the sampling strategies that can be employed,
-the optimization techniques used to train the models, and the various experiments conducted to evaluate 
-the best approach for pricing multi-asset derivatives.
+% In this chapter, we present the implementation details and benchmarks different techniques used in this thesis.
+% We will discuss the architecture altenatives of the neural networks, the sampling strategies that can be employed,
+% the optimization techniques used to train the models, and the various experiments conducted to evaluate 
+% the best approach for pricing multi-asset derivatives.
 
-\section{Sampling Point Strategies}
+% \section{Sampling Point Strategies}
 
-\section{Neural Network Arquitectures}
+% \section{Neural Network Arquitectures}
 
-When we talk about the architecture of a neural network, we are referring to the number of 
-layers and the number of neurons in each layer, as well as the activation functions used or 
-any other modification we want to apply to the networks.
+% When we talk about the architecture of a neural network, we are referring to the number of 
+% layers and the number of neurons in each layer, as well as the activation functions used or 
+% any other modification we want to apply to the networks.
 
-\subsubsection{Feedforward Neural Network}
+% \subsubsection{Feedforward Neural Network}
 
-The first arquitectures and most traditional arquitecture is the feedforward neural network. It is a
-fully connected neural network, where each neuron in a layer is connected to every neuron in the
-previous layer. The output of each neuron is computed as a weighted sum of the inputs, followed by
-an activation function. Some of the most common activation functions are the sigmoid, hyperbolic tangent (tanh),
-and rectified linear unit (ReLU) functions and their choice can have a significant impact on the performance of the network.
+% The first arquitectures and most traditional arquitecture is the feedforward neural network. It is a
+% fully connected neural network, where each neuron in a layer is connected to every neuron in the
+% previous layer. The output of each neuron is computed as a weighted sum of the inputs, followed by
+% an activation function. Some of the most common activation functions are the sigmoid, hyperbolic tangent (tanh),
+% and rectified linear unit (ReLU) functions and their choice can have a significant impact on the performance of the network.
 
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=0.5\textwidth]{imagenes/ffnn.png}
+% 	\caption{Feedforward neural network: a fully connected neural network,
+% 		where each neuron in a layer is connected to every neuron in the previous layer.}
+% 	\label{fig:ffnn}
+% \end{figure}
+
+% \subsubsection{Neural Network with Ansatz Layer}
+
+% The second arquitecture is inspired in \cite{SUKUMAR2022114333}, where Sukumar et al. propose modifying the
+% traditional feedforward neural network by adding an ansatz layer in order to impose exact 
+% satisfaction of the boundary conditions. This method in turn simplifies the training process,
+% as the neural network is only required to satisfy the PDE and boundary conditions, rather than the
+% initial condition. In other words, the ansatz layer is a function that takes the output of the neural 
+% network and passes it as an argument of an ansatz function $f(u)$ that attempts to provide an 
+% approximation of the real solution of the problem. In our case, the form of the ansatz function is
+% \begin{equation}
+% 	\begin{aligned}
+% 	\text{Payoff}(\mathbf{x}) &= \max\left(0, \max_{1 \leq j \leq d} \left( e^{x_j} - 1 \right) \right), \\
+% 	f(u_\theta, \mathbf{x}, \tau) &= \text{Payoff}(\mathbf{x}) + u_\theta(\mathbf{x}, \tau) \times \tau
+% 	\end{aligned}
+% 	\end{equation}
+	
+
+
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{imagenes/ansatz.png}
+% 	\caption{Neural network with ansatz layer: the main change in this setup is the addition of an ansatz function $f(u)$
+% 		that takes the output of the neural network and passes it as an argument.}
+% 	\label{fig:ffnn_ansatz}
+% \end{figure}
+
+% \subsubsection{First-Order Neural Network}
+
+% Finally, the last approach we explore attempts to enhance the training process by complementing the output
+% of the neural network by also providing estimates of the first order derivatives of the solution. This
+% requires us adding a new loss term to the total loss function, which is computed against
+% the derivates using automatic differentiation (compatibility loss.)
+
+% The befenits of this approach are twofold: first, it allows us to
+% compute the derivatives of the solution without having to compute them using automatic differentiation,
+% which can be computationally expensive. Second, it allows us to use the derivatives of the solution
+% as additional information to guide the training process, which can help improve convergence and accuracy.
+
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=0.8\textwidth]{imagenes/ansatz.png}
+% 	\caption{Neural network with ansatz layer.}
+% 	\label{fig:ansatz_layer}
+% \end{figure}
+
+% \subsubsection{Performance Metrics and Benchmarks}
+
+% Now we proceed to evaluate the performance of the different neural network architectures.
+% For this tests, we analyze how each arquitecture behaves under the following option
+% parameters:
+
+% % table
+% \begin{table}[H]
+% 	\caption{Option parameters.}
+% 	\label{tab:params}
+% 	\centering
+% 	\begin{tabular}{|c|c|c|c|c|}
+% 		\hline
+% 		\textbf{Parameter} & \textbf{Value} \\
+% 		\hline
+% 		Number of assets $d$ & 1 \\
+% 		\hline
+% 		Strike $K$ & \$15 \\
+% 		\hline
+% 		Maturity $T$ & 1.0 \\
+% 		\hline
+% 		Risk-free rate $r$ & 0.05 \\
+% 		\hline
+% 		Diffusion $\sigma_i$ & 0.2 \\
+% 		\hline
+% 		Corrleation $\rho_{ij}$ & 0.25 \\
+% 		\hline
+% 	\end{tabular}
+% \end{table}
+
+% First, we begin by analysing the $L_2$ relative error evolution of the different
+% arquitectures during the training process (Figure \ref{fig:rel_error}). The $L_2$ relative error is defined as
+% \begin{equation}
+% 	\text{Rel. Error} = \frac{\|u_\theta - u^*\|_2}{\|u^*\|_2},
+% \end{equation}
+% where $u_\theta$ is the output of the neural network and $u^*$ is the real solution. In this thesis,
+% two different metrics are used to compute the $L_2$ relative error: when time evolutions of the error are presented,
+% this are computed using the MC solution because it is the only possible solution when multiple assets are involved.
+% When the error is computed across the surface, the $L_2$ relative error is computed using the analytical solution
+% of the problem, which is available in the single asset case.
+
+% The first thing we
+% can notice is that all networks are able to produce solutions with relative small 
+% errors, but the FFNN and the FOPINN outperform the FFNN with ansatz layer in the long run. Although the FFNN with ansatz layer
+% is capable of producing a solution with small relative error after a few training iterations,
+% is unable to progress further and the error stagnates. This could be related to serval issues: first, 
+% the ansatz solution is not differentiable, making the computation of the gradients
+% difficult. This could lead to a situation where the gradients are not informative enough to guide the training process. 
+% Second, the fact the optimization process is not having information about the initial condition seems to restrict 
+% the ability of the network to learn the solution. 
+
+% This can be seen in Figure \ref{fig:nets_heatmaps}, where the FFNN with ansatz layer
+% produces higher errors close to the strike at the inital condition, diffusing the error to the rest of the domain.
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{imagenes/nets_heatmaps.png}
+% 	\caption{$L_2$ errors accros the surface.}
+% 	\label{fig:nets_heatmaps}
+% \end{figure}
+% Another interesting thing to notice is that the FFNN and the FOPINN are both able to produce solutions with relative errors
+% of around $10^{-4}$, but the FFNN is able to do it in less steps. This can be explained by the additional compatibility
+% loss term that the FOPINN has to compute, which makes the training process harder. As a benefit, the FOPINN is able to produce
+% not only the solution of the problem, but also the first order derivatives of the solution, which can be useful in applications where the
+% \textit{greeks} \cite{alma99148840908702021} are required.
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=1\textwidth]{imagenes/nets_error_histories.png}
+% 	\caption{$L_2$ relative error evolution of the different architectures during the training process.}
+% 	\label{fig:rel_error}
+% \end{figure}
+
+% \section{Loss Balancing Strategies}
+% Loss balacing is another studied technique in PINNs, which aims to 
+% improve also the convergence and accuracy of the solution by assigning specific weights to the 
+% different loss terms in the total loss function. According to \cite{wang2023expertsguidetrainingphysicsinformed},
+% gradient pathologies... 
+
+% \subsection{GradNorm}
+
+% \subsection{ReBRoLaBRo}
+
+% \subsection{Performance Metrics and Benchmarks}
+
+% \subsection{Optimization techniques}
+
+% \subsubsection{Gradient Descent}
+% \subsubsection{Quasi-Newton Methods}
+% \subsubsection{Performance Metrics and Benchmarks}
+
+\chapter{Implementations and Results}
+\section{Implementation Details}
+\section{Call Option}
+We begin by attempting to price a call option using the Black-Scholes model. The price surface can be 
+seen in Figure \ref{fig:call_option}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{imagenes/heston_hullwhite_call.png}
+	\caption{Call option pricing using the Black-Scholes model. The neural network 
+	is able to produce a solution with a relative error of around $10^{-4}$.}
+	\label{fig:call_option}
+\end{figure}
+
+The relative error of the solution is shown in Figure \ref{fig:call_option_error}, where we can see that the error is concentrated around the maturity, close to the strike price,
+which is expected as the payoff of a call option is not differentiable near this region.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{imagenes/vanilla.png}
-	\caption{Components of the training procedure of a vanilla PINN.}
-	\label{fig:vanilla_pinn}
+	\includegraphics[width=0.5\textwidth]{imagenes/vanilla_put_error.png}
+	\caption{Relative error of the call option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}
+	\label{fig:call_option_error}
 \end{figure}
 
-\subsubsection{Neural Network with Ansatz Layer}
+This results were obtained using a small feedforward neural network with just one hidden layer with 10 neurons, 
+and a total of 1000 collocation points sampled uniformly across the domain. The training process took around 1000 iterations to converge, and the total loss was computed using the PDE residuals and the boundary conditions.
+collocation points, drawn from a uniform distribution across the domain. Training took around 1000 iterations to converge, 
+with the total time of 2 minutes in total. 
 
-The second arquitecture takes the output of the neural network and passes it as an argument of an ansatz 
-function $f(u)$ that attempts to provide an approximation of the real solution of the problem, 
-in order to accelerate convergence and improve accuracy of the solution. Ideally but not necessarily, 
-the ansatz function $f(u)$ should be differentiable, so that we can compute the derivatives of the output correctly 
-using automatic differentiation.
+\subsection{Multi-Asset Option}
 
-In the case of option pricing, we found that the ansatz function works best when it resembles the payoff of the derivative.
-
-\textbf{Continuar}.
+As metioned in previous sections, we can extend the previous case to many assets in order to assess PINNs
+capabilities to tackle PDEs with multiple state variables. We train again a small neural networks but now
+using the dimensionless form of the Black-Scholes PDE defined in \eqref{eq:BS_multi}. Figure \ref{fig:multi_asset_call} shows the price surface 
+for 2, 3, 5, and 7 assets.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{imagenes/ansatz.png}
-	\caption{Neural network with ansatz layer.}
-	\label{fig:ansatz}
+	\includegraphics[width=0.8\textwidth]{imagenes/nets_surfaces.png}
+	\caption{Call option pricing using the Black-Scholes model for multiple assets. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}
+	\label{fig:multi_asset_call}
 \end{figure}
 
-\subsubsection{First-Order Neural Network}
+As expected, the problems becomes more challenging as the number of assets (dimensions) increases. To asses this increased complexity, we train each
+model for the same number of iterations and number of collocation points. 
 
-Finally, the last approach we explore attempts to enhance the training process by complementing the output
-of the neural network by also providing estimates of the first order derivatives of the solution. This
-requires us adding a new loss term to the total loss function, which is computed against
-the derivates using automatic differentiation (compatibility loss.)
+\subsection{Call Option with Stochastic Volatility and Interest Rates}
 
-The befenits of this approach are twofold: first, it allows us to
-compute the derivatives of the solution without having to compute them using automatic differentiation,
-which can be computationally expensive. Second, it allows us to use the derivatives of the solution
-as additional information to guide the training process, which can help improve convergence and accuracy.
+Finally, we can extend the previous case to include stochastic volatility and interest rates. In 
+Figure \ref{fig:call_option_heston_hullwhite}, we shown the behaviour of the price surface for different values of the
+volatility of volatility. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{imagenes/ansatz.png}
-	\caption{Neural network with ansatz layer.}
-	\label{fig:ansatz}
+	\includegraphics[width=0.8\textwidth]{imagenes/heston_hullwhite_surfaces.png}
+	\caption{Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}
+	\label{fig:call_option_heston_hullwhite_surface}
 \end{figure}
 
-\subsubsection{Performance Metrics and Benchmarks}
+As expected, higher values make the surface flatter as the 
+uncertainty of the underlying increases, as seen in Figure \ref{fig:call_option_heston_hullwhite_vols}. 
 
-Loss balacing is another studied technique in PINNs, which aims to 
-improve also the convergence and accuracy of the solution by assigning specific weights to the 
-different loss terms in the total loss function. According to \cite{wang2023expertsguidetrainingphysicsinformed},
-gradient pathologies... 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/heston_hullwhite_vols.png}
+	\caption{Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}
+	\label{fig:call_option_heston_hullwhite}
+\end{figure}
 
-Different methods have emerged in order to tackle this problem. For example, \cite{} proposes ...
-in order to ... . Another approach is ... .
+Another key feature as already mentioned is that for longer maturities, interest rate curves have a significant impact on the
+price of the option, making this feature a key component of the model. 
 
-\subsection{Loss Balancing Strategies}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/heston_hullwhite_rates.png}
+	\caption{Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}
+	\label{fig:call_option_heston_hullwhite_interest_rates}
+\end{figure}
 
-\subsubsection{GradNorm}
+\section{Put Option}
+The next product is the European Put Option, which is similar to the call option but with a different payoff function. 
+The price surface can be seen in Figure \ref{fig:put_option}. Notice that in this case, the stock axis is reversed, as the payoff of a put option is the opposite of a call option.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{imagenes/vanilla_put_surface.png}
+	\caption{European put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}
+	\label{fig:put_option}
+\end{figure}
 
-\subsubsection{ReBRoLaBRo}
+The absolute error of the solution is shown in Figure \ref{fig:put_option_error}, 
+where we can see that the error is concentrated around the maturity, 
+close to the strike price, which is expected as the payoff of 
+a put option is not differentiable near this region.
 
-\subsubsection{Performance Metrics and Benchmarks}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{imagenes/vanilla_put_error.png}
+	\caption{Absolute error of the put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}
+	\label{fig:put_option_error}
+\end{figure}
 
-\subsection{Optimization techniques}
+\subsection{American Put Option}
 
-\subsubsection{Gradient Descent}
-\subsubsection{Quasi-Newton Methods}
-\subsubsection{Performance Metrics and Benchmarks}
+A interesting variant of the put option is the American Put Option, which allows the holder to exercise the option at any time before maturity.
+This variantion makes the problem more complex, as we need to take into account the early exercise feature of the option.
 
-\chapter{Results and Discussion}
-\section{Single-Asset Cases}
-\section{Multi-Asset Case}
-\section{Discussion}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{imagenes/american_put_surface.png}
+	\caption{American put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}
+	\label{fig:american_put_option}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{imagenes/american_put_error.png}
+	\caption{Absolute error of the American put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}
+	\label{fig:american_put_option_error}
+\end{figure}
+
+\section{Swaption}
+
+Finally, our last product to evaluate is the European Swaption, for which we use the Hull-White model to price it.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/hullwhite_swaption_surface.png}
+	\caption{European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}
+	\label{fig:swaption_surface}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{imagenes/hullwhite_swaption_error.png}
+	\caption{European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}
+	\label{fig:swaption_error}
+\end{figure}
 
 \chapter{Conclusions and Future Work}
+\section{Discussion}
 \section{Summary of Findings}
 \section{Limitations and Future Research Directions}
 

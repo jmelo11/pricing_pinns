@@ -1,3 +1,9 @@
+from typing import List, Dict, Tuple
+from enum import Enum
+from typing import List
+import torch.nn as nn
+from typing import List, Tuple
+import torch.nn.functional as F
 from torch.autograd import grad
 from abc import ABC, abstractmethod
 import torch
@@ -347,7 +353,7 @@ class LossBalancingDimlessBS(DimlessBS):
     """
 
     def __init__(self, alpha: torch.Tensor, tau: torch.Tensor, rho_prob: torch.Tensor):
-        super(DimlessBS).__init__()
+        super().__init__()
         self.alpha = alpha
         self.tau = tau
         self.rho_prob = rho_prob
@@ -395,6 +401,213 @@ class LossBalancingDimlessBS(DimlessBS):
             self.update_losses_state(
                 losses[0].item(), losses[2:].sum().item(), losses[1].item())
         return losses.sum()
+
+
+class _Mode(Enum):
+    MANUAL = "MANUAL"
+    LR_ANNEALING = "LR_ANNEALING"
+    SOFTADAPT = "SOFTADAPT"
+    RELOBRALO = "RELOBRALO"
+    GRADNORM = "GRADNORM"
+
+
+class MultiBalanceDimlessBS(DimlessBS):
+    """
+    A DimlessBS closure that can run one of five loss-balancing rules.
+
+    Parameters
+    ----------
+    mode : str
+        One of "MANUAL", "LR_ANNEALING", "SOFTADAPT",
+        "RELOBRALO", "GRADNORM".
+    alpha : float
+        Smoothing / exponent parameter used by most rules.
+    tau   : float
+        Temperature (SoftAdapt / ReLoBRaLo).
+    rho_prob : float
+        Bernoulli probability for ReLoBRaLo.
+    """
+
+    # ------------------------------------------------------------------ #
+    # construction                                                       #
+    # ------------------------------------------------------------------ #
+    def __init__(self,
+                 mode: str,
+                 alpha: float = 0.5,
+                 tau:   float = 1.0,
+                 rho_prob: float = 0.5,
+                 shared_param_id: int = -2):
+        DimlessBS.__init__(self)
+
+        self.mode = _Mode(mode.upper())
+        self.alpha = alpha
+        self.tau = tau          # also called T in SoftAdapt / ReLoBRaLo
+        self.rho_prob = rho_prob
+        self.shared_id = shared_param_id
+
+        # --- state -----------------------------------------------------
+        self._lambda = None         # vector of λᵢ (learnable for GradNorm)
+        self.l_hist = None         # last-step losses  (SoftAdapt/ReLoB)
+        self.l0_hist = None         # first-step losses (ReLoB)
+        self._eps = 1e-8
+
+    # ------------------------------------------------------------------ #
+    # utilities                                                          #
+    # ------------------------------------------------------------------ #
+
+    def _init_vectors(self, m: int, device, dtype):
+        if self._lambda is None:
+            if self.mode is _Mode.GRADNORM:
+                # GRADNORM – λ are learnable → keep log-space, softplus later
+                self._lambda = nn.Parameter(torch.zeros(m, dtype=dtype,
+                                                        device=device))
+            else:
+                # all other rules – λ are plain buffers
+                self._lambda = torch.ones(m, dtype=dtype, device=device)
+
+            self.l_hist = torch.ones(m, dtype=dtype, device=device)
+            self.l0_hist = torch.ones(m, dtype=dtype, device=device)
+
+    # ------------------------------------------------------------------ #
+    # callable                                                           #
+    # ------------------------------------------------------------------ #
+
+    def __call__(self, *args, **kwargs) -> torch.Tensor:  # noqa: C901
+        # 1) gather raw losses -------------------------------------------------
+        m = self.n_assets * 2 + 2
+        f_loss, b_losses, n_loss = self.compute_losses()
+        current = torch.zeros(m, dtype=self.dtype, device=self.device)
+        current[0] = f_loss
+        current[1] = n_loss
+        current[2:] = b_losses
+
+        self._init_vectors(m, current.device, current.dtype)
+
+        # 2) dispatch by rule --------------------------------------------------
+        if self.mode is _Mode.MANUAL:
+            total = self._manual(current)
+
+        elif self.mode is _Mode.LR_ANNEALING:
+            total = self._lr_annealing(current)
+
+        elif self.mode is _Mode.SOFTADAPT:
+            total = self._softadapt(current)
+
+        elif self.mode is _Mode.RELOBRALO:
+            total = self._relobralo(current)
+
+        elif self.mode is _Mode.GRADNORM:
+            total = self._gradnorm(current)
+
+        else:  # pragma: no cover
+            raise ValueError(f"unsupported mode {self.mode}")
+
+        # 3) update history (used by several rules) ----------------------------
+        self.l_hist.copy_(current.detach())
+        self.l0_hist = torch.where(self.model.training & (self.l0_hist == 1),
+                                   current.detach(),
+                                   self.l0_hist)
+
+        # 4) status panel ------------------------------------------------------
+        if kwargs.get("update_status", True):
+            self.update_losses_state(f_loss.item(),
+                                     b_losses.sum().item(),
+                                     n_loss.item())
+        return total
+
+    # --- MANUAL -------------------------------------------------------- #
+
+    def _manual(self, current: torch.Tensor) -> torch.Tensor:
+        loss = (self._lambda * current).sum()
+        return loss
+
+    # --- LR-ANNEALING -------------------------------------------------- #
+    def _lr_annealing(self, current: torch.Tensor) -> torch.Tensor:
+        # pick one shared parameter tensor to measure gradients
+        W = list(self.model.parameters())[self.shared_id]
+
+        # grads for interior + each boundary loss separately
+        grads_f = torch.autograd.grad(current[0], W,
+                                      retain_graph=True,
+                                      create_graph=True)[0]
+        mean_grad_f = grads_f.abs().mean()
+
+        lambs_hat = []
+        for j in range(2, len(current)):         # boundary terms only
+            gj = torch.autograd.grad(current[j], W,
+                                     retain_graph=True,
+                                     create_graph=True)[0]
+            mean_gj = gj.abs().mean()
+            lambs_hat.append(mean_grad_f / (mean_gj + self._eps))
+
+        # EMA update
+        self._lambda[2:] = (self.alpha * self._lambda[2:]
+                            + (1 - self.alpha) * torch.stack(lambs_hat))
+
+        total = current[0] + (self._lambda[2:] * current[2:]).sum()
+        return total
+
+    # --- SOFTADAPT ----------------------------------------------------- #
+    def _softadapt(self, current: torch.Tensor) -> torch.Tensor:
+        diff = (current - self.l_hist) * self.tau
+        lambs_hat = torch.softmax(diff.detach(), 0) * len(current)
+
+        self._lambda = (self.alpha * self._lambda
+                        + (1 - self.alpha) * lambs_hat)
+
+        return (self._lambda * current).sum()
+
+    # --- RELOBRALO ----------------------------------------------------- #
+    def _relobralo(self, current: torch.Tensor) -> torch.Tensor:
+        lambs_hat = torch.softmax(current / (self.l_hist * self.tau + self._eps),
+                                  0).detach() * len(current)
+        lambs0_hat = torch.softmax(current / (self.l0_hist * self.tau + self._eps),
+                                   0).detach() * len(current)
+
+        rho = torch.bernoulli(torch.tensor(self.rho_prob,
+                                           device=current.device))
+        self._lambda = (rho * self.alpha * self._lambda
+                        + (1 - rho) * self.alpha * lambs0_hat
+                        + (1 - self.alpha) * lambs_hat)
+
+        return (self._lambda * current).sum()
+
+    # --- GRADNORM ------------------------------------------------------ #
+    def _gradnorm(self, current: torch.Tensor) -> torch.Tensor:
+        # softplus keeps λᵢ positive
+        lambdas = F.softplus(self._lambda) + self._eps
+
+        # primary weighted loss
+        L_W = (lambdas * current).sum()
+
+        # gradient norms wrt one shared param
+        W = list(self.model.parameters())[self.shared_id]
+        GiW = torch.stack([
+            torch.autograd.grad(L_W_i, W,
+                                retain_graph=True,
+                                create_graph=True)[0].norm()
+            for L_W_i in lambdas * current
+        ])
+        GiW_mean = GiW.mean()
+
+        with torch.no_grad():
+            li_tilde = current / self.l_hist
+            Ri = li_tilde / li_tilde.mean()
+
+        target = GiW_mean * (Ri ** self.alpha)
+        L_w = (GiW - target.detach()).abs().sum()
+
+        return L_W + L_w
+
+    # ------------------------------------------------------------------ #
+    # expose current λ for logging ------------------------------------- #
+    # ------------------------------------------------------------------ #
+
+    def lambda_weights(self) -> torch.Tensor:
+        if self._lambda is None:
+            raise RuntimeError("call the closure once before accessing λ")
+        return (F.softplus(self._lambda) if self.mode is _Mode.GRADNORM
+                else self._lambda).detach()
 
 
 class PINNBoundaryDimlessBS(DimlessBS):
@@ -484,8 +697,8 @@ class FOPINNClosure(DimlessBS):
 
     def compute_losses(self):
         # get all six pieces
-        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = \
-            self.compute_derivatives(self.x)
+        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = self.compute_derivatives(
+            self.x)
 
         # 1) compatibility MSE between predicted vs true first‐derivs
         comp_time = (u_tau_hat - u_tau_true).square().mean()
@@ -524,8 +737,8 @@ class FOPINNClosure(DimlessBS):
 
     def compute_losses(self):
         # get all six pieces
-        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = \
-            self.compute_derivatives(self.x)
+        u, u_tau_hat, u_x_hat, u_xx, u_tau_true, u_x_true = self.compute_derivatives(
+            self.x)
 
         # 1) compatibility MSE between predicted vs true first‐derivs
         comp_time = (u_tau_hat - u_tau_true).square().mean()

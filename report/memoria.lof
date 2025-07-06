@@ -1,0 +1,19 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Call option pricing using the Black-Scholes model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{17}{figure.caption.8}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Relative error of the call option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{18}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Call option pricing using the Black-Scholes model for multiple assets. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{18}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{19}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{19}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces European put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{20}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Absolute error of the put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{21}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces American put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{21}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{22}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Absolute error of the American put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{22}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{23}{figure.caption.19}%
+\addvspace {10\p@ }
+\contentsfinish 

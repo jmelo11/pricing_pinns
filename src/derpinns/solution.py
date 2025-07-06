@@ -17,6 +17,7 @@ def compare_with_mc(
     device=torch.device("cpu"),
     seed=None,
     split_output=False,
+    opt_type="call",
 ):
     """
         Vectorised NN-vs-MC comparison.
@@ -72,7 +73,10 @@ def compare_with_mc(
     diffusion = vol_sqrt * Z          # (n_prices, n_sim, n_assets)
     ST = s0.unsqueeze(1) * torch.exp(drift + diffusion)
 
-    payoffs = torch.clamp(ST.max(dim=-1).values - params.strike, min=0)
+    if opt_type.lower() == "call":
+        payoffs = torch.clamp(ST.max(dim=-1).values - params.strike, min=0)
+    elif opt_type.lower() == "put":
+        payoffs = torch.clamp(params.strike - ST.min(dim=-1).values, min=0)
     mc_prices = torch.exp(-r * tau) * payoffs.mean(dim=1)
     mc_time = time.perf_counter() - t0
 

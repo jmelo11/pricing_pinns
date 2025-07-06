@@ -144,26 +144,15 @@ class NNWithAnsatz(nn.Module):
         self.output_layer = nn.Linear(hidden_dim, output_dim, dtype=dtype)
 
     def payoff(self, x):
-        x = self.smooth_max_exp(x, alpha=self.alpha)
-        ones = torch.ones_like(x)
-        payoff_values = F.gelu(x - ones)
-        return payoff_values.reshape([-1, 1])
-
-    def smooth_max_exp(self, x: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
-        """
-        Differentiable approximation of max(exp(x_j)) across the last dimension of x
-          smooth_max_exp(x, alpha) = ( sum_j exp(alpha * (x_j - x_max)) )^(1/alpha) * exp(x_max)
-        where x_max is the max across each row to improve numerical stability.
-        """
-        x_max = x.max(dim=1, keepdim=True).values
-        lse = torch.logsumexp(alpha * (x - x_max), dim=1, keepdim=True)
-        return torch.exp((lse + alpha * x_max) / alpha).squeeze(1)
+        x = torch.exp(x) - 1
+        x = x.max(dim=1, keepdim=True).values
+        return F.relu(x).reshape([-1, 1])
 
     def forward(self, inputs):
         x = self.hidden_layers(inputs)
         x = self.output_layer(x)
         p = self.payoff(inputs[:, :self.input_dim-1])
-        return p + x
+        return p + x * inputs[:, -1].unsqueeze(1)
 
 
 class SPINN(nn.Module):

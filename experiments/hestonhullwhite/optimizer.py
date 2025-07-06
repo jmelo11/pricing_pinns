@@ -1,12 +1,10 @@
 from __future__ import annotations
-from typing import Optional, List
+from typing import Optional
 from torch.optim.optimizer import Optimizer
 from torch.optim import Optimizer
-from copy import deepcopy
 import torch
 from torch.func import vmap
 from functools import reduce
-from torch.nn.utils import parameters_to_vector, vector_to_parameters
 
 from typing import Optional, Union, TypeAlias, Iterable, Dict, Any, Tuple
 

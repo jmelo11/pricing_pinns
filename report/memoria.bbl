@@ -1,0 +1,1224 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{lecun}{article}{}
+      \name{author}{3}{}{%
+        {{hash=6a1aa6b7eab12b931ca7c7e3f927231d}{%
+           family={LeCun},
+           familyi={L\bibinitperiod},
+           given={Yann},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=419350ebbeb4eba5351469f378dee007}{%
+           family={Bengio},
+           familyi={B\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9a8750ccdb2a4cf14d2655face1ce016}{%
+           family={Hinton},
+           familyi={H\bibinitperiod},
+           given={Geoffrey},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \strng{fullhash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \strng{bibnamehash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \strng{authorbibnamehash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \strng{authornamehash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \strng{authorfullhash}{4cdbdf6bda52e35be20da5dd176c4431}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{month}{05}
+      \field{title}{Deep Learning}
+      \field{volume}{521}
+      \field{year}{2015}
+      \field{pages}{436\bibrangedash 44}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1038/nature14539
+      \endverb
+    \endentry
+    \entry{alma99148840908702021}{book}{}
+      \name{author}{1}{}{%
+        {{hash=8eb46e2417b472d17c974e4c3bc21987}{%
+           family={Hull},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Education Limited}%
+      }
+      \strng{namehash}{8eb46e2417b472d17c974e4c3bc21987}
+      \strng{fullhash}{8eb46e2417b472d17c974e4c3bc21987}
+      \strng{bibnamehash}{8eb46e2417b472d17c974e4c3bc21987}
+      \strng{authorbibnamehash}{8eb46e2417b472d17c974e4c3bc21987}
+      \strng{authornamehash}{8eb46e2417b472d17c974e4c3bc21987}
+      \strng{authorfullhash}{8eb46e2417b472d17c974e4c3bc21987}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Options, futures, and other derivatives}
+      \field{edition}{Ninth edition, Global edition}
+      \field{isbn}{1292212896}
+      \field{title}{Options, futures, and other derivatives}
+      \field{year}{2018 - 2018}
+      \keyw{Futures ; Stock options ; Derivative securities}
+    \endentry
+    \entry{Wilmott2010PaulWO}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=b4eae05c5ac84581289f65180c29143e}{%
+           family={Wilmott},
+           familyi={W\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{b4eae05c5ac84581289f65180c29143e}
+      \strng{fullhash}{b4eae05c5ac84581289f65180c29143e}
+      \strng{bibnamehash}{b4eae05c5ac84581289f65180c29143e}
+      \strng{authorbibnamehash}{b4eae05c5ac84581289f65180c29143e}
+      \strng{authornamehash}{b4eae05c5ac84581289f65180c29143e}
+      \strng{authorfullhash}{b4eae05c5ac84581289f65180c29143e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Paul Wilmott on Quantitative Finance}
+      \field{year}{2010}
+      \verb{urlraw}
+      \verb https://api.semanticscholar.org/CorpusID:153668090
+      \endverb
+      \verb{url}
+      \verb https://api.semanticscholar.org/CorpusID:153668090
+      \endverb
+    \endentry
+    \entry{glasserman2004monte}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ad8512135fae00796ff8f92716d977c9}{%
+           family={Glasserman},
+           familyi={G\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ad8512135fae00796ff8f92716d977c9}
+      \strng{fullhash}{ad8512135fae00796ff8f92716d977c9}
+      \strng{bibnamehash}{ad8512135fae00796ff8f92716d977c9}
+      \strng{authorbibnamehash}{ad8512135fae00796ff8f92716d977c9}
+      \strng{authornamehash}{ad8512135fae00796ff8f92716d977c9}
+      \strng{authorfullhash}{ad8512135fae00796ff8f92716d977c9}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{"This book develops the use of Monte Carlo methods in finance, and it also uses simulation as a vehicle for presenting models and ideas from financial engineering. It divides roughly into three parts. The first part develops the fundamentals of Monte Carlo methods, the foundations of derivatives pricing, and the implementation of several of the most important models used in financial engineering. The next part describes techniques for improving simulation accuracy and efficiency. The final third of the book addresses special topics: estimating price sensitivities, valuing American options, and measuring market risk and credit risk in financial portfolios." "The most important prerequisite is familiarity with the mathematical tools used to specify and analyze continuous time models in finance, in particular the key ideas of stochastic calculus. Prior exposure to the basic principles of option pricing is useful but not essential." "The book is aimed at graduate students in financial engineering, researchers in Monte Carlo simulation, and practitioners implementing models in industry."--Jacket.}
+      \field{isbn}{0387004513 9780387004518 1441918221 9781441918222}
+      \field{title}{Monte Carlo methods in financial engineering}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb http://www.amazon.com/Financial-Engineering-Stochastic-Modelling-Probability/dp/0387004513/ref=pd_sim_b_68?ie=UTF8&refRID=1AN8JXSDGMEV2RPHFC2A
+      \endverb
+      \verb{url}
+      \verb http://www.amazon.com/Financial-Engineering-Stochastic-Modelling-Probability/dp/0387004513/ref=pd_sim_b_68?ie=UTF8&refRID=1AN8JXSDGMEV2RPHFC2A
+      \endverb
+      \keyw{economics mathematics}
+    \endentry
+    \entry{blackscholes}{article}{}
+      \name{author}{2}{}{%
+        {{hash=93277dfc1ebe8d44428e74799781e4d7}{%
+           family={Black},
+           familyi={B\bibinitperiod},
+           given={Fischer},
+           giveni={F\bibinitperiod}}}%
+        {{hash=301bb16d9f303a488dac1c73931c0eff}{%
+           family={Scholes},
+           familyi={S\bibinitperiod},
+           given={Myron},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The University of Chicago Press}%
+      }
+      \strng{namehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{fullhash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{bibnamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authorbibnamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authornamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authorfullhash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \field{extraname}{1}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{If options are correctly priced in the market, it should not be possible to make sure profits by creating portfolios of long and short positions in options and their underlying stocks. Using this principle, a theoretical valuation formula for options is derived. Since almost all corporate liabilities can be viewed as combinations of options, the formula and the analysis that led to it are also applicable to corporate liabilities such as common stock, corporate bonds, and warrants. In particular, the formula can be used to derive the discount that should be applied to a corporate bond because of the possibility of default.}
+      \field{issn}{00223808, 1537534X}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{3}
+      \field{title}{The Pricing of Options and Corporate Liabilities}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{volume}{81}
+      \field{year}{1973}
+      \field{urldateera}{ce}
+      \field{pages}{637\bibrangedash 654}
+      \range{pages}{18}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/1831029
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/1831029
+      \endverb
+    \endentry
+    \entry{bellman1966dynamic}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7bb51e859e70aaedef4ed1f3bb67779b}{%
+           family={Bellman},
+           familyi={B\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Association for the Advancement of Science}%
+      }
+      \strng{namehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{fullhash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{bibnamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authorbibnamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authornamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authorfullhash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science}
+      \field{number}{3731}
+      \field{title}{Dynamic programming}
+      \field{volume}{153}
+      \field{year}{1966}
+      \field{pages}{34\bibrangedash 37}
+      \range{pages}{4}
+    \endentry
+    \entry{Han_2018}{article}{}
+      \name{author}{3}{}{%
+        {{hash=dcbed821c92a82aa9d46cf353c58ec62}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Jiequn},
+           giveni={J\bibinitperiod}}}%
+        {{hash=31ce46557e2d08499e8b06d041f40bf2}{%
+           family={Jentzen},
+           familyi={J\bibinitperiod},
+           given={Arnulf},
+           giveni={A\bibinitperiod}}}%
+        {{hash=268e9715905f2ab3cb20df636d3750c1}{%
+           family={E},
+           familyi={E\bibinitperiod},
+           given={Weinan},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Proceedings of the National Academy of Sciences}%
+      }
+      \strng{namehash}{d917cfee603f491b8bf02638f1d9d19c}
+      \strng{fullhash}{d917cfee603f491b8bf02638f1d9d19c}
+      \strng{bibnamehash}{d917cfee603f491b8bf02638f1d9d19c}
+      \strng{authorbibnamehash}{d917cfee603f491b8bf02638f1d9d19c}
+      \strng{authornamehash}{d917cfee603f491b8bf02638f1d9d19c}
+      \strng{authorfullhash}{d917cfee603f491b8bf02638f1d9d19c}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{month}{8}
+      \field{number}{34}
+      \field{title}{Solving high-dimensional partial differential equations using deep learning}
+      \field{volume}{115}
+      \field{year}{2018}
+      \field{pages}{8505\bibrangedash 8510}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1718942115
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1073/pnas.1718942115
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1073/pnas.1718942115
+      \endverb
+    \endentry
+    \entry{RAISSI2019686}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a3194cb4f8e3959e569236521aa2fd86}{%
+           family={Raissi},
+           familyi={R\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c2e8423b7b49343a85abf9af92ee2a82}{%
+           family={Perdikaris},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1c2f5930e36485e8d38a87746769fdcc}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={G.E.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{fullhash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{bibnamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authorbibnamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authornamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authorfullhash}{a17a0649dc8bad70026488d4ea37c508}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce physics-informed neural networks – neural networks that are trained to solve supervised learning tasks while respecting any given laws of physics described by general nonlinear partial differential equations. In this work, we present our developments in the context of solving two main classes of problems: data-driven solution and data-driven discovery of partial differential equations. Depending on the nature and arrangement of the available data, we devise two distinct types of algorithms, namely continuous time and discrete time models. The first type of models forms a new family of data-efficient spatio-temporal function approximators, while the latter type allows the use of arbitrarily accurate implicit Runge–Kutta time stepping schemes with unlimited number of stages. The effectiveness of the proposed framework is demonstrated through a collection of classical problems in fluids, quantum mechanics, reaction–diffusion systems, and the propagation of nonlinear shallow-water waves.}
+      \field{issn}{0021-9991}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{title}{Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations}
+      \field{volume}{378}
+      \field{year}{2019}
+      \field{pages}{686\bibrangedash 707}
+      \range{pages}{22}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.jcp.2018.10.045
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0021999118307125
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0021999118307125
+      \endverb
+      \keyw{Data-driven scientific computing,Machine learning,Predictive modeling,Runge–Kutta methods,Nonlinear dynamics}
+    \endentry
+    \entry{huge2020differentialmachinelearning}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=3ea5e233d16b718dd3a26a4a8fb8fc87}{%
+           family={Huge},
+           familyi={H\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=12bf893a63ca677f6b39f5b44225152a}{%
+           family={Savine},
+           familyi={S\bibinitperiod},
+           given={Antoine},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e5d4733164cebce7f542877e6422ce07}
+      \strng{fullhash}{e5d4733164cebce7f542877e6422ce07}
+      \strng{bibnamehash}{e5d4733164cebce7f542877e6422ce07}
+      \strng{authorbibnamehash}{e5d4733164cebce7f542877e6422ce07}
+      \strng{authornamehash}{e5d4733164cebce7f542877e6422ce07}
+      \strng{authorfullhash}{e5d4733164cebce7f542877e6422ce07}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{q-fin.CP}
+      \field{eprinttype}{arXiv}
+      \field{title}{Differential Machine Learning}
+      \field{year}{2020}
+      \verb{eprint}
+      \verb 2005.02347
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2005.02347
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2005.02347
+      \endverb
+    \endentry
+    \entry{heaton2018deeplearningfinance}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=e86526d2ca4a06651b23e78e2786385c}{%
+           family={Heaton},
+           familyi={H\bibinitperiod},
+           given={J.\bibnamedelimi B.},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=c7ff3f5355edcaff83c15c24eb8bf470}{%
+           family={Polson},
+           familyi={P\bibinitperiod},
+           given={N.\bibnamedelimi G.},
+           giveni={N\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=b29e8b7143110a5fca0ab4035d776fed}{%
+           family={Witte},
+           familyi={W\bibinitperiod},
+           given={J.\bibnamedelimi H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{d958d28d7fabdf0ce855df06b1173c79}
+      \strng{fullhash}{d958d28d7fabdf0ce855df06b1173c79}
+      \strng{bibnamehash}{d958d28d7fabdf0ce855df06b1173c79}
+      \strng{authorbibnamehash}{d958d28d7fabdf0ce855df06b1173c79}
+      \strng{authornamehash}{d958d28d7fabdf0ce855df06b1173c79}
+      \strng{authorfullhash}{d958d28d7fabdf0ce855df06b1173c79}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Deep Learning in Finance}
+      \field{year}{2018}
+      \verb{eprint}
+      \verb 1602.06561
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1602.06561
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1602.06561
+      \endverb
+    \endentry
+    \entry{black1973}{article}{}
+      \name{author}{2}{}{%
+        {{hash=93277dfc1ebe8d44428e74799781e4d7}{%
+           family={Black},
+           familyi={B\bibinitperiod},
+           given={Fischer},
+           giveni={F\bibinitperiod}}}%
+        {{hash=301bb16d9f303a488dac1c73931c0eff}{%
+           family={Scholes},
+           familyi={S\bibinitperiod},
+           given={Myron},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The University of Chicago Press}%
+      }
+      \strng{namehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{fullhash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{bibnamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authorbibnamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authornamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \strng{authorfullhash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{If options are correctly priced in the market, it should not be possible to make sure profits by creating portfolios of long and short positions in options and their underlying stocks. Using this principle, a theoretical valuation formula for options is derived. Since almost all corporate liabilities can be viewed as combinations of options, the formula and the analysis that led to it are also applicable to corporate liabilities such as common stock, corporate bonds, and warrants. In particular, the formula can be used to derive the discount that should be applied to a corporate bond because of the possibility of default.}
+      \field{issn}{00223808, 1537534X}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{number}{3}
+      \field{title}{The Pricing of Options and Corporate Liabilities}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{volume}{81}
+      \field{year}{1973}
+      \field{urldateera}{ce}
+      \field{pages}{637\bibrangedash 654}
+      \range{pages}{18}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/1831029
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/1831029
+      \endverb
+    \endentry
+    \entry{hestonmodel}{article}{}
+      \name{author}{1}{}{%
+        {{hash=da886e16f39671df2e1cc9208589b67d}{%
+           family={Heston},
+           familyi={H\bibinitperiod},
+           given={Steven\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {[Oxford University Press, Society for Financial Studies]}%
+      }
+      \strng{namehash}{da886e16f39671df2e1cc9208589b67d}
+      \strng{fullhash}{da886e16f39671df2e1cc9208589b67d}
+      \strng{bibnamehash}{da886e16f39671df2e1cc9208589b67d}
+      \strng{authorbibnamehash}{da886e16f39671df2e1cc9208589b67d}
+      \strng{authornamehash}{da886e16f39671df2e1cc9208589b67d}
+      \strng{authorfullhash}{da886e16f39671df2e1cc9208589b67d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{I use a new technique to derive a closed-form solution for the price of a European call option on an asset with stochastic volatility. The model allows arbitrary correlation between volatility and spot-asset returns. I introduce stochastic interest rates and show how to apply the model to bond options and foreign currency options. Simulations show that correlation between volatility and the spot asset's price is important for explaining return skewness and strike-price biases in the Black-Scholes (1973) model. The solution technique is based on characteristic functions and can be applied to other problems.}
+      \field{issn}{08939454, 14657368}
+      \field{journaltitle}{The Review of Financial Studies}
+      \field{number}{2}
+      \field{title}{A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options}
+      \field{urlday}{6}
+      \field{urlmonth}{7}
+      \field{urlyear}{2025}
+      \field{volume}{6}
+      \field{year}{1993}
+      \field{urldateera}{ce}
+      \field{pages}{327\bibrangedash 343}
+      \range{pages}{17}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/2962057
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/2962057
+      \endverb
+    \endentry
+    \entry{björk2004arbitrage}{book}{}
+      \name{author}{1}{}{%
+        {{hash=203221c9f27beb773284ae1c0725f1b4}{%
+           family={Björk},
+           familyi={B\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press, Incorporated}%
+      }
+      \strng{namehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{fullhash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{bibnamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authorbibnamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authornamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authorfullhash}{203221c9f27beb773284ae1c0725f1b4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780191533846}
+      \field{series}{Oxford Finance Series}
+      \field{title}{Arbitrage Theory in Continuous Time}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb https://books.google.es/books?id=TJgjgJATeVIC
+      \endverb
+      \verb{url}
+      \verb https://books.google.es/books?id=TJgjgJATeVIC
+      \endverb
+    \endentry
+    \entry{brigo2013interest}{book}{}
+      \name{author}{2}{}{%
+        {{hash=ee93b5d9ae53fa6e839a0c53c6f361b1}{%
+           family={Brigo},
+           familyi={B\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=29a69cabfb059c68cd665bc5f1d8dca4}{%
+           family={Mercurio},
+           familyi={M\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{741dadd3d5ff4a3158081918599a98c2}
+      \strng{fullhash}{741dadd3d5ff4a3158081918599a98c2}
+      \strng{bibnamehash}{741dadd3d5ff4a3158081918599a98c2}
+      \strng{authorbibnamehash}{741dadd3d5ff4a3158081918599a98c2}
+      \strng{authornamehash}{741dadd3d5ff4a3158081918599a98c2}
+      \strng{authorfullhash}{741dadd3d5ff4a3158081918599a98c2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783662045534}
+      \field{series}{Springer Finance}
+      \field{title}{Interest Rate Models Theory and Practice}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://books.google.es/books?id=USvrCAAAQBAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.es/books?id=USvrCAAAQBAJ
+      \endverb
+    \endentry
+    \entry{VASICEK1977177}{article}{}
+      \name{author}{1}{}{%
+        {{hash=0aa13a6f2036d537b33195b22d087aab}{%
+           family={Vasicek},
+           familyi={V\bibinitperiod},
+           given={Oldrich},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{0aa13a6f2036d537b33195b22d087aab}
+      \strng{fullhash}{0aa13a6f2036d537b33195b22d087aab}
+      \strng{bibnamehash}{0aa13a6f2036d537b33195b22d087aab}
+      \strng{authorbibnamehash}{0aa13a6f2036d537b33195b22d087aab}
+      \strng{authornamehash}{0aa13a6f2036d537b33195b22d087aab}
+      \strng{authorfullhash}{0aa13a6f2036d537b33195b22d087aab}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The paper derives a general form of the term structure of interest rates. The following assumptions are made: (A.1) The instantaneous (spot) interest rate follows a diffusion process; (A.2) the price of a discount bond depends only on the spot rate over its term; and (A.3) the market is efficient. Under these assumptions, it is shown by means of an arbitrage argument that the expected rate of return on any bond in excess of the spot rate is proportional to its standard deviation. This property is then used to derive a partial differential equation for bond prices. The solution to that equation is given in the form of a stochastic integral representation. An interpretation of the bond pricing formula is provided. The model is illustrated on a specific case.}
+      \field{issn}{0304-405X}
+      \field{journaltitle}{Journal of Financial Economics}
+      \field{number}{2}
+      \field{title}{An equilibrium characterization of the term structure}
+      \field{volume}{5}
+      \field{year}{1977}
+      \field{pages}{177\bibrangedash 188}
+      \range{pages}{12}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0304-405X(77)90016-2
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0304405X77900162
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0304405X77900162
+      \endverb
+    \endentry
+    \entry{hullwhitemodel}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8eb46e2417b472d17c974e4c3bc21987}{%
+           family={Hull},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=46972b2421a0750ab7f87316d6355570}{%
+           family={White},
+           familyi={W\bibinitperiod},
+           given={Alan},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \strng{fullhash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \strng{bibnamehash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \strng{authorbibnamehash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \strng{authornamehash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \strng{authorfullhash}{6cf2f2c1f3183acd87195d7dc5af9158}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article shows that the one-state-variable interest-rate models of Vasicek (1977) and Cox, Ingersoll, and Ross (1985b) can be extended so that they are consistent with both the current term structure of interest rates and either the current volatilities of all spot interest rates or the current volatilities of all forward interest rates. The extended Vasicek model is shown to be very tractable analytically. The article compares option prices obtained using the extended Vasicek model with those obtained using a number of other models.}
+      \field{issn}{0893-9454}
+      \field{journaltitle}{The Review of Financial Studies}
+      \field{month}{04}
+      \field{number}{4}
+      \field{title}{Pricing Interest-Rate-Derivative Securities}
+      \field{volume}{3}
+      \field{year}{2015}
+      \field{pages}{573\bibrangedash 592}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1093/rfs/3.4.573
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/rfs/article-pdf/3/4/573/24416170/030573.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/rfs/3.4.573
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/rfs/3.4.573
+      \endverb
+    \endentry
+    \entry{longstaffshawrtz}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c1db9c877138a270ff66bb41ccc50279}{%
+           family={Longstaff},
+           familyi={L\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1db9c877138a270ff66bb41ccc50279}
+      \strng{fullhash}{c1db9c877138a270ff66bb41ccc50279}
+      \strng{bibnamehash}{c1db9c877138a270ff66bb41ccc50279}
+      \strng{authorbibnamehash}{c1db9c877138a270ff66bb41ccc50279}
+      \strng{authornamehash}{c1db9c877138a270ff66bb41ccc50279}
+      \strng{authorfullhash}{c1db9c877138a270ff66bb41ccc50279}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Finance Studies}
+      \field{month}{01}
+      \field{title}{Valuing american options by simulation: a simple least squares approach}
+      \field{volume}{14}
+      \field{year}{2001}
+      \field{pages}{113\bibrangedash 147}
+      \range{pages}{35}
+    \endentry
+    \entry{wang2020understandingmitigatinggradientpathologies}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=15db674b3efc6848f40514aa0034717a}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Sifan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=00a1efab84cff4f68ff48983d8397f76}{%
+           family={Teng},
+           familyi={T\bibinitperiod},
+           given={Yujun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=197d71332633e07aa578718628fdc405}{%
+           family={Perdikaris},
+           familyi={P\bibinitperiod},
+           given={Paris},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{cd1083c1f65115a089ff8588b82928cf}
+      \strng{fullhash}{cd1083c1f65115a089ff8588b82928cf}
+      \strng{bibnamehash}{cd1083c1f65115a089ff8588b82928cf}
+      \strng{authorbibnamehash}{cd1083c1f65115a089ff8588b82928cf}
+      \strng{authornamehash}{cd1083c1f65115a089ff8588b82928cf}
+      \strng{authorfullhash}{cd1083c1f65115a089ff8588b82928cf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Understanding and mitigating gradient pathologies in physics-informed neural networks}
+      \field{year}{2020}
+      \verb{eprint}
+      \verb 2001.04536
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2001.04536
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2001.04536
+      \endverb
+    \endentry
+    \entry{wang2023expertsguidetrainingphysicsinformed}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=15db674b3efc6848f40514aa0034717a}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Sifan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a3e2e25bd681c86b4f52eff42c3197ff}{%
+           family={Sankaran},
+           familyi={S\bibinitperiod},
+           given={Shyam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=750f950ac7e7c6eb92db4793d9c16a0d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Hanwen},
+           giveni={H\bibinitperiod}}}%
+        {{hash=197d71332633e07aa578718628fdc405}{%
+           family={Perdikaris},
+           familyi={P\bibinitperiod},
+           given={Paris},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{da0521d78de4d2085c12fa57fb56fa62}
+      \strng{fullhash}{1b49b5b93e091647434d31cd34f2625e}
+      \strng{bibnamehash}{1b49b5b93e091647434d31cd34f2625e}
+      \strng{authorbibnamehash}{1b49b5b93e091647434d31cd34f2625e}
+      \strng{authornamehash}{da0521d78de4d2085c12fa57fb56fa62}
+      \strng{authorfullhash}{1b49b5b93e091647434d31cd34f2625e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{An Expert's Guide to Training Physics-informed Neural Networks}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2308.08468
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2308.08468
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2308.08468
+      \endverb
+    \endentry
+    \entry{wang2022respectingcausalityneedtraining}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=15db674b3efc6848f40514aa0034717a}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Sifan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a3e2e25bd681c86b4f52eff42c3197ff}{%
+           family={Sankaran},
+           familyi={S\bibinitperiod},
+           given={Shyam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=197d71332633e07aa578718628fdc405}{%
+           family={Perdikaris},
+           familyi={P\bibinitperiod},
+           given={Paris},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c8c8782e17ad24757a70990ffc7545a2}
+      \strng{fullhash}{c8c8782e17ad24757a70990ffc7545a2}
+      \strng{bibnamehash}{c8c8782e17ad24757a70990ffc7545a2}
+      \strng{authorbibnamehash}{c8c8782e17ad24757a70990ffc7545a2}
+      \strng{authornamehash}{c8c8782e17ad24757a70990ffc7545a2}
+      \strng{authorfullhash}{c8c8782e17ad24757a70990ffc7545a2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Respecting causality is all you need for training physics-informed neural networks}
+      \field{year}{2022}
+      \verb{eprint}
+      \verb 2203.07404
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2203.07404
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2203.07404
+      \endverb
+    \endentry
+    \entry{karniadakis2021physics}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a242fd6b76af7f68dbfa7a467ecca526}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelimb Em\bibnamedelimb et\bibnamedelima al.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim e\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+      }
+      \strng{namehash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \strng{fullhash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \strng{bibnamehash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \strng{authorbibnamehash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \strng{authornamehash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \strng{authorfullhash}{a242fd6b76af7f68dbfa7a467ecca526}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Reviews Physics}
+      \field{title}{Physics-informed machine learning}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{pages}{422\bibrangedash 440}
+      \range{pages}{19}
+    \endentry
+    \entry{Hu_2022}{article}{}
+      \name{author}{4}{}{%
+        {{hash=2ee0f5126fb47a45d75ddf6f5cd7fff6}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Zheyuan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=2ec3a0d3b4991770ca090090475360d1}{%
+           family={Jagtap},
+           familyi={J\bibinitperiod},
+           given={Ameya\bibnamedelima D.},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=bfaf154b1f300f885a75adce4c6b773e}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima Em},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=e6710bfa0fd4c3d0c8e305c8035df221}{%
+           family={Kawaguchi},
+           familyi={K\bibinitperiod},
+           given={Kenji},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Society for Industrial & Applied Mathematics (SIAM)}%
+      }
+      \strng{namehash}{399c278b58087df636d519d202906c61}
+      \strng{fullhash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{bibnamehash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{authorbibnamehash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{authornamehash}{399c278b58087df636d519d202906c61}
+      \strng{authorfullhash}{b6d1d9056f2bd27911be35a533185221}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1095-7197}
+      \field{journaltitle}{SIAM Journal on Scientific Computing}
+      \field{month}{9}
+      \field{number}{5}
+      \field{title}{When Do Extended Physics-Informed Neural Networks (XPINNs) Improve Generalization?}
+      \field{volume}{44}
+      \field{year}{2022}
+      \field{pages}{A3158\bibrangedash A3182}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1137/21m1447039
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1137/21M1447039
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1137/21M1447039
+      \endverb
+    \endentry
+    \entry{kharazmi2019variationalphysicsinformedneuralnetworks}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=74a6c909cfcf1bf3b24fa5ae7195eb2f}{%
+           family={Kharazmi},
+           familyi={K\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=5ee5d3d5470ac29a2e7c8df70ed54725}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=1c2f5930e36485e8d38a87746769fdcc}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={G.\bibnamedelimi E.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \strng{fullhash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \strng{bibnamehash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \strng{authorbibnamehash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \strng{authornamehash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \strng{authorfullhash}{a87f83762d8ec61194d5219c85e2fa3d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.NE}
+      \field{eprinttype}{arXiv}
+      \field{title}{Variational Physics-Informed Neural Networks For Solving Partial Differential Equations}
+      \field{year}{2019}
+      \verb{eprint}
+      \verb 1912.00873
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1912.00873
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1912.00873
+      \endverb
+    \endentry
+    \entry{Hu_2023}{article}{}
+      \name{author}{4}{}{%
+        {{hash=2ee0f5126fb47a45d75ddf6f5cd7fff6}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Zheyuan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=2ec3a0d3b4991770ca090090475360d1}{%
+           family={Jagtap},
+           familyi={J\bibinitperiod},
+           given={Ameya\bibnamedelima D.},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=bfaf154b1f300f885a75adce4c6b773e}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima Em},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=e6710bfa0fd4c3d0c8e305c8035df221}{%
+           family={Kawaguchi},
+           familyi={K\bibinitperiod},
+           given={Kenji},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier BV}%
+      }
+      \strng{namehash}{399c278b58087df636d519d202906c61}
+      \strng{fullhash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{bibnamehash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{authorbibnamehash}{b6d1d9056f2bd27911be35a533185221}
+      \strng{authornamehash}{399c278b58087df636d519d202906c61}
+      \strng{authorfullhash}{b6d1d9056f2bd27911be35a533185221}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0952-1976}
+      \field{journaltitle}{Engineering Applications of Artificial Intelligence}
+      \field{month}{11}
+      \field{title}{Augmented Physics-Informed Neural Networks (APINNs): A gating network-based soft domain decomposition methodology}
+      \field{volume}{126}
+      \field{year}{2023}
+      \field{pages}{107183}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.engappai.2023.107183
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1016/j.engappai.2023.107183
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.engappai.2023.107183
+      \endverb
+    \endentry
+    \entry{Lu_2021}{article}{}
+      \name{author}{5}{}{%
+        {{hash=6f6f1357e5a7fb658e3e9c999886ce83}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+        {{hash=b367d1bdfec4169342f6797addd1c5d7}{%
+           family={Jin},
+           familyi={J\bibinitperiod},
+           given={Pengzhan},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b04db7dd7744ba0a4c8516ea52b2b2a4}{%
+           family={Pang},
+           familyi={P\bibinitperiod},
+           given={Guofei},
+           giveni={G\bibinitperiod}}}%
+        {{hash=8d7acff517951d0a9eba8e9b39a167dc}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Zhongqiang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=bfaf154b1f300f885a75adce4c6b773e}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima Em},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media LLC}%
+      }
+      \strng{namehash}{a4021fa953a5bdfcfa24d6e4f0debd5c}
+      \strng{fullhash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{bibnamehash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{authorbibnamehash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{authornamehash}{a4021fa953a5bdfcfa24d6e4f0debd5c}
+      \strng{authorfullhash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2522-5839}
+      \field{journaltitle}{Nature Machine Intelligence}
+      \field{month}{3}
+      \field{number}{3}
+      \field{title}{Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{pages}{218\bibrangedash 229}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1038/s42256-021-00302-5
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1038/s42256-021-00302-5
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1038/s42256-021-00302-5
+      \endverb
+    \endentry
+    \entry{li2021fourierneuraloperatorparametric}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=009036050bf23abe561429f6eaa0b018}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zongyi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=d3715d69863d59245589f244c5866bd4}{%
+           family={Kovachki},
+           familyi={K\bibinitperiod},
+           given={Nikola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=3648b51d63e1ae389e46f87296d4c89a}{%
+           family={Azizzadenesheli},
+           familyi={A\bibinitperiod},
+           given={Kamyar},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9caea1a7b561311e5146f4c7f740496c}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Burigede},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1e523aae18c868f77439b35add494ff9}{%
+           family={Bhattacharya},
+           familyi={B\bibinitperiod},
+           given={Kaushik},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9fdd1b883dec513483f9ee5c99b7e251}{%
+           family={Stuart},
+           familyi={S\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd4a2be6ede169a3c794a1cd7e3fb9a2}{%
+           family={Anandkumar},
+           familyi={A\bibinitperiod},
+           given={Anima},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{fullhash}{3e58006f2c869702116637d04136c3b9}
+      \strng{bibnamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authorbibnamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authornamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authorfullhash}{3e58006f2c869702116637d04136c3b9}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Fourier Neural Operator for Parametric Partial Differential Equations}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2010.08895
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2010.08895
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2010.08895
+      \endverb
+    \endentry
+    \entry{Bhatnagar_2019}{article}{}
+      \name{author}{5}{}{%
+        {{hash=79039196bbaa6500d61af8f2ba2032a8}{%
+           family={Bhatnagar},
+           familyi={B\bibinitperiod},
+           given={Saakaar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d645537d997fb032f1472a2738d00982}{%
+           family={Afshar},
+           familyi={A\bibinitperiod},
+           given={Yaser},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ec6c0bf244703cb22b33bf75ad607383}{%
+           family={Pan},
+           familyi={P\bibinitperiod},
+           given={Shaowu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=652768fc415935cb81439f4c2d4ec6b6}{%
+           family={Duraisamy},
+           familyi={D\bibinitperiod},
+           given={Karthik},
+           giveni={K\bibinitperiod}}}%
+        {{hash=fee9f363603c6a7e0d179a6417260f3d}{%
+           family={Kaushik},
+           familyi={K\bibinitperiod},
+           given={Shailendra},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media LLC}%
+      }
+      \strng{namehash}{01b8176627f2ff2beac7667a8e0512bb}
+      \strng{fullhash}{dc1ba90ba48089f1bba83e111e5f18dc}
+      \strng{bibnamehash}{dc1ba90ba48089f1bba83e111e5f18dc}
+      \strng{authorbibnamehash}{dc1ba90ba48089f1bba83e111e5f18dc}
+      \strng{authornamehash}{01b8176627f2ff2beac7667a8e0512bb}
+      \strng{authorfullhash}{dc1ba90ba48089f1bba83e111e5f18dc}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1432-0924}
+      \field{journaltitle}{Computational Mechanics}
+      \field{month}{6}
+      \field{number}{2}
+      \field{title}{Prediction of aerodynamic flow fields using convolutional neural networks}
+      \field{volume}{64}
+      \field{year}{2019}
+      \field{pages}{525\bibrangedash 545}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1007/s00466-019-01740-0
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/s00466-019-01740-0
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/s00466-019-01740-0
+      \endverb
+    \endentry
+    \entry{banerjee2024pinnsmedicalimageanalysis}{misc}{}
+      \name{author}{5}{}{%
+        {{hash=2397879fba91f36b8b849b35424971d2}{%
+           family={Banerjee},
+           familyi={B\bibinitperiod},
+           given={Chayan},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3af9d9ce4ac5bf2bd1c37458e24ff992}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Kien},
+           giveni={K\bibinitperiod}}}%
+        {{hash=e83da5dfc767b27f3269616aff89fef9}{%
+           family={Salvado},
+           familyi={S\bibinitperiod},
+           given={Olivier},
+           giveni={O\bibinitperiod}}}%
+        {{hash=712118382b634adc549261cad3f73a82}{%
+           family={Tran},
+           familyi={T\bibinitperiod},
+           given={Truyen},
+           giveni={T\bibinitperiod}}}%
+        {{hash=0e9d1911dcc74735d9e6618ef1a30843}{%
+           family={Fookes},
+           familyi={F\bibinitperiod},
+           given={Clinton},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{5e8a428070c0173ae4c7ac0af8b10f82}
+      \strng{fullhash}{3eec866f01227e4ab086ae4eec60913d}
+      \strng{bibnamehash}{3eec866f01227e4ab086ae4eec60913d}
+      \strng{authorbibnamehash}{3eec866f01227e4ab086ae4eec60913d}
+      \strng{authornamehash}{5e8a428070c0173ae4c7ac0af8b10f82}
+      \strng{authorfullhash}{3eec866f01227e4ab086ae4eec60913d}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{eess.IV}
+      \field{eprinttype}{arXiv}
+      \field{title}{PINNs for Medical Image Analysis: A Survey}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2408.01026
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2408.01026
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2408.01026
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
