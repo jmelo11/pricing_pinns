@@ -2371,37 +2371,28 @@
     <bcf:citekey order="4" intorder="1">glasserman2004monte</bcf:citekey>
     <bcf:citekey order="5" intorder="1">blackscholes</bcf:citekey>
     <bcf:citekey order="6" intorder="1">bellman1966dynamic</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">Han_2018</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">RAISSI2019686</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">RAISSI2019686</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">alma99148840908702021</bcf:citekey>
-    <bcf:citekey order="10" intorder="2">Wilmott2010PaulWO</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">huge2020differentialmachinelearning</bcf:citekey>
-    <bcf:citekey order="11" intorder="2">heaton2018deeplearningfinance</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">black1973</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">Wilmott2010PaulWO</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">Wilmott2010PaulWO</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">hestonmodel</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">björk2004arbitrage</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">RAISSI2019686</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">alma99148840908702021</bcf:citekey>
+    <bcf:citekey order="8" intorder="2">Wilmott2010PaulWO</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">hestonmodel</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">huge2020differentialmachinelearning</bcf:citekey>
+    <bcf:citekey order="10" intorder="2">heaton2018deeplearningfinance</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">black1973</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Wilmott2010PaulWO</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">duffy2022numerical</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">brigo2013interest</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">VASICEK1977177</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">hullwhitemodel</bcf:citekey>
     <bcf:citekey order="17" intorder="1">brigo2013interest</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">VASICEK1977177</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">hullwhitemodel</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">glasserman2004monte</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">longstaffshawrtz</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">RAISSI2019686</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">wang2020understandingmitigatinggradientpathologies</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">wang2023expertsguidetrainingphysicsinformed</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">wang2022respectingcausalityneedtraining</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">karniadakis2021physics</bcf:citekey>
-    <bcf:citekey order="27" intorder="1">Hu_2022</bcf:citekey>
-    <bcf:citekey order="28" intorder="1">kharazmi2019variationalphysicsinformedneuralnetworks</bcf:citekey>
-    <bcf:citekey order="29" intorder="1">Hu_2023</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">Lu_2021</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">li2021fourierneuraloperatorparametric</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">RAISSI2019686</bcf:citekey>
-    <bcf:citekey order="32" intorder="2">Bhatnagar_2019</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">banerjee2024pinnsmedicalimageanalysis</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">karniadakis2021physics</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">duffy2022numerical</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">glasserman2004monte</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">longstaffshawrtz</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">RAISSI2019686</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">Urb_n_2025</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">nondimensionalinputs2025</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">Melo2025pricingpinns</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">wilmott1995mathematics</bcf:citekey>
+    <bcf:citekey order="25" intorder="2">IKONEN2004809</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

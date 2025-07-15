@@ -11,7 +11,7 @@ class OptionParameters:
         self.n_assets = n_assets
         self.n_dim = n_assets + 1
         self.x_min = np.log(1 / strike)
-        self.x_max = np.log(8)
+        self.x_max = np.log(4)
         self.tau = tau
         self.sigma = sigma
         self.rho = rho

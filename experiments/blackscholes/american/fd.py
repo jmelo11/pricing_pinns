@@ -31,7 +31,7 @@ def option_value_fd_american(vol, int_rate, strike, expiration, option_type='put
         Array of times for each index k, from 0 up to T.
     """
     # 1) Set up the grid
-    Smax = 4.0 * strike  # large enough upper bound for S
+    Smax = 2.0 * strike  # large enough upper bound for S
     ds = Smax / nas
     s = np.linspace(1e-4, Smax, nas+1)
     

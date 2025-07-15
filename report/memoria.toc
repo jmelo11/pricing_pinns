@@ -1,41 +1,37 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Objectives}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.2}Objectives}{1}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Thesis Structure}{2}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Theoretical Background}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Derivative Pricing Fundamentals}{4}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Derivatives Overview}{4}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Modelling Framework}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}The Black-Scholes Model}{6}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Multi-Asset Extension of the Black-Scholes Model}{7}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Extensions Beyond Black-Scholes}{8}{subsection.2.2.3}%
-\contentsline {subsubsection}{Stochastic Volatility}{8}{subsection.2.2.3}%
-\contentsline {subsubsection}{Stochastic Interest Rates}{9}{equation.2.2.20}%
-\contentsline {subsection}{\numberline {2.2.4}Joint Stochastic Volatility and Stochastic Rates}{10}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Traditional Numerical Approaches}{10}{section.2.3}%
-\contentsline {subsubsection}{Brief Overview of Finite Difference Methods}{10}{section.2.3}%
-\contentsline {subsubsection}{Monte Carlo Methods}{11}{equation.2.3.26}%
-\contentsline {chapter}{\numberline {3}Physics-Informed Machine Learning}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction to Physics-Informed Neural Networks (PINNs)}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Challenges in Training PINNs}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Developments and Applications}{14}{section.3.3}%
-\contentsline {subsubsection}{Extended Physics-Informed Neural Networks}{14}{section.3.3}%
-\contentsline {subsubsection}{Variational and Augmented PINNs}{14}{section.3.3}%
-\contentsline {subsubsection}{Neural Operators: DeepONet and Fourier Neural Operators}{15}{section.3.3}%
-\contentsline {subsubsection}{Applications of PINNs}{15}{section.3.3}%
-\contentsline {subsubsection}{Training PINNs}{15}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Implementations and Results}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementation Details}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Call Option}{17}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Multi-Asset Option}{18}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Call Option with Stochastic Volatility and Interest Rates}{19}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Put Option}{20}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}American Put Option}{21}{subsection.4.3.1}%
-\contentsline {section}{\numberline {4.4}Swaption}{22}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{24}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Discussion}{24}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Summary of Findings}{24}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Limitations and Future Research Directions}{24}{section.5.3}%
-\contentsline {chapter}{Bibliography}{25}{section.5.3}%
+\contentsline {chapter}{\numberline {2}Theoretical Background}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Derivative Pricing Fundamentals}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Modelling Framework}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Feynman-Kac Representation}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}The Black-Scholes Model}{6}{subsection.2.2.2}%
+\contentsline {subsubsection}{Boundary Conditions}{6}{equation.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.3}Multi-Asset Extension of the Black--Scholes Model}{7}{subsection.2.2.3}%
+\contentsline {subsubsection}{Dimensionless Backward Equation}{7}{equation.2.2.8}%
+\contentsline {subsubsection}{Boundary Conditions}{8}{equation.2.2.9}%
+\contentsline {subsection}{\numberline {2.2.4}Stochastic Volatility Extension}{8}{subsection.2.2.4}%
+\contentsline {subsubsection}{Boundary Conditions}{11}{equation.2.2.21}%
+\contentsline {subsection}{\numberline {2.2.5}Stochastic Interest Rates Extension}{11}{subsection.2.2.5}%
+\contentsline {subsubsection}{Boundary Conditions}{11}{equation.2.2.23}%
+\contentsline {subsection}{\numberline {2.2.6}Joint Stochastic Volatility and Stochastic Rates}{12}{subsection.2.2.6}%
+\contentsline {section}{\numberline {2.3}Traditional Numerical Approaches}{12}{section.2.3}%
+\contentsline {subsubsection}{Overview of Finite Difference Methods}{12}{section.2.3}%
+\contentsline {subsubsection}{Monte Carlo Methods}{13}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Physics-Informed Machine Learning}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction to Physics-Informed Neural Networks (PINNs)}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Training PINNs}{15}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Implementation and Results}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementation Details}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Call Option}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Multi-Asset Option}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Call Option with Stochastic Volatility and Interest Rates}{25}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Put Option Pricing}{28}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}American Put Option Pricing}{30}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}Swaption Pricing}{31}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Discussion, Limitations, and Outlook}{34}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Discussion of the Main Findings}{34}{section.5.1}%
+\contentsline {chapter}{Bibliography}{35}{section.5.1}%
 \contentsfinish 

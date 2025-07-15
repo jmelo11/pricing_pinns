@@ -2,18 +2,28 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Collocation points for a put option. Points are sampled inside the domain~$\Omega $, on the boundary~$\partial \Omega $, and on the initial slice $\Omega _0$.}}{16}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schematic of PINN training. (1) Collocation points are fed into the neural network. (2) Automatic differentiation yields spatial and temporal derivatives. (3) PDE residuals—and hence the loss terms—are evaluated at those points. (4) The resulting losses are combined to form $\mathcal {L}(\theta )$; its gradient drives an optimisation step on~$\theta $. The cycle repeats until convergence.}}{17}{figure.caption.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Call option pricing using the Black-Scholes model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{17}{figure.caption.8}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Relative error of the call option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{18}{figure.caption.9}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Call option pricing using the Black-Scholes model for multiple assets. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{18}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{19}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{19}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Call option pricing using the Heston-Hull-White model. The neural network is able to produce a solution with a relative error of around $10^{-4}$.}}{20}{figure.caption.13}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces European put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{20}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Absolute error of the put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{21}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces American put prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{21}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{22}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Absolute error of the American put option pricing using the Black-Scholes model. The error is concentrated around the maturity, close to the strike price.}}{22}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces European swaption prices. At the left, the price surface using a PINN and at the right, the price surface using the exact solution.}}{23}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Call option price under the Black-Scholes PDE. The PINN solution closely matches the analytical benchmark.}}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Absolute error of the PINN solution. Errors peak close to maturity and the strike price.}}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Solution at expiry. The PINN solution closely matches the analytical benchmark, except around the strike price where the absolute error peaks.}}{21}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Relative error of the PINN solution. The error is concentrated around the strike price and maturity.}}{21}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Dimensionless multi-asset call option price (first two asset axes).}}{23}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Multi-asset call option price in original coordinates (first two asset axes).}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Seven-asset call option surfaces for two architectures. The network with 60 neurons per layer captures the solution more faithfully than the smaller 10-neuron model.}}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Training loss for multi-asset PINNs. Higher dimensions slow convergence and flatten the loss curve. The smaller network sometimes terminates early, yielding a shorter training time but a noticeably larger error.}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces CPU timing comparison between PINN inference and Monte Carlo simulation (50000 simulations).}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Call option pricing surfaces using the Heston-Hull-White model for different volatility levels.}}{26}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Price sensitivity to changes in volatility ($v$). Higher values decrease curvature in the price surface.}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Price sensitivity to short rates in the Heston-Hull-White model. Higher interest rates raise the option's hedging cost, increasing the option price.}}{27}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Price surface at $t=0$ for the stock and volatility dimension.}}{28}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Price surface at $t=0$ for the stock and volatility dimension.}}{28}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces European put option pricing: comparison between PINN (left) and analytical Black-Scholes solution (right).}}{29}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Absolute error distribution for the European put option. Errors peak around maturity near the strike price.}}{29}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces American put option prices: PINN solution (left) compared to a numerical benchmark solution (right).}}{30}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Absolute error for American put option pricing. Errors primarily arise around the dynamic early-exercise boundary.}}{31}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces European payer swaption pricing surface. Left: PINN solution. Right: reference solution computed with an analytic approximation or semi-analytical method.}}{32}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Absolute error in pricing the European payer swaption. The error is primarily concentrated near expiry and around the strike.}}{33}{figure.caption.31}%
 \addvspace {10\p@ }
 \contentsfinish 
