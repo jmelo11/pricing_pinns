@@ -1,0 +1,21 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'memoria.blg'
+[37] biber-darwin:340> INFO - === Thu Jul 24, 2025, 11:02:10
+[45] Biber.pm:419> INFO - Reading 'memoria.bcf'
+[95] Biber.pm:979> INFO - Found 37 citekeys in bib section 0
+[102] Biber.pm:4419> INFO - Processing section 0
+[108] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
+[112] bibtex.pm:1713> INFO - LaTeX decoding ...
+[152] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
+[282] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[282] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[283] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[283] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[297] bbl.pm:660> INFO - Writing 'memoria.bbl' with encoding 'UTF-8'
+[312] bbl.pm:763> INFO - Output to memoria.bbl
+[312] Biber.pm:131> WARN - Duplicate entry key: 'li2021fourierneuraloperatorparametric' in file 'referencias.bib', skipping ...
+[312] Biber.pm:131> WARN - Duplicate entry key: 'WU2023115671' in file 'referencias.bib', skipping ...
+[312] Biber.pm:131> WARN - ISBN '0387004513 9780387004518 1441918221 9781441918222' in entry 'glasserman2004monte' is invalid - run biber with '--validate_datamodel' for details.
+[312] Biber.pm:131> WARN - article entry 'deeponets' (referencias.bib): Invalid format '2021/03/01' of date field 'date' - ignoring
+[313] Biber.pm:131> WARN - ISBN '2522-5839' in entry 'deeponets' is invalid - run biber with '--validate_datamodel' for details.
+[313] Biber.pm:133> INFO - WARNINGS: 5

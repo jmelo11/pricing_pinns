@@ -6,32 +6,33 @@
 \contentsline {chapter}{\numberline {2}Theoretical Background}{3}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Derivative Pricing Fundamentals}{3}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Modelling Framework}{5}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Feynman-Kac Representation}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.1}Feynman-Kac Representation}{6}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}The Black-Scholes Model}{6}{subsection.2.2.2}%
-\contentsline {subsubsection}{Boundary Conditions}{6}{equation.2.2.6}%
-\contentsline {subsection}{\numberline {2.2.3}Multi-Asset Extension of the Black--Scholes Model}{7}{subsection.2.2.3}%
-\contentsline {subsubsection}{Dimensionless Backward Equation}{7}{equation.2.2.8}%
+\contentsline {subsubsection}{Boundary Conditions}{7}{equation.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.3}Multi-Asset Extension of the Black-Scholes Model}{8}{subsection.2.2.3}%
+\contentsline {subsubsection}{Dimensionless Backward Equation}{8}{equation.2.2.8}%
 \contentsline {subsubsection}{Boundary Conditions}{8}{equation.2.2.9}%
-\contentsline {subsection}{\numberline {2.2.4}Stochastic Volatility Extension}{8}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.4}Stochastic Volatility Extension}{9}{subsection.2.2.4}%
 \contentsline {subsubsection}{Boundary Conditions}{11}{equation.2.2.21}%
-\contentsline {subsection}{\numberline {2.2.5}Stochastic Interest Rates Extension}{11}{subsection.2.2.5}%
-\contentsline {subsubsection}{Boundary Conditions}{11}{equation.2.2.23}%
-\contentsline {subsection}{\numberline {2.2.6}Joint Stochastic Volatility and Stochastic Rates}{12}{subsection.2.2.6}%
-\contentsline {section}{\numberline {2.3}Traditional Numerical Approaches}{12}{section.2.3}%
-\contentsline {subsubsection}{Overview of Finite Difference Methods}{12}{section.2.3}%
-\contentsline {subsubsection}{Monte Carlo Methods}{13}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Physics-Informed Machine Learning}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction to Physics-Informed Neural Networks (PINNs)}{15}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Training PINNs}{15}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Implementation and Results}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementation Details}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Call Option}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Multi-Asset Option}{22}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Call Option with Stochastic Volatility and Interest Rates}{25}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Put Option Pricing}{28}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}American Put Option Pricing}{30}{subsection.4.3.1}%
-\contentsline {section}{\numberline {4.4}Swaption Pricing}{31}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Discussion, Limitations, and Outlook}{34}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Discussion of the Main Findings}{34}{section.5.1}%
-\contentsline {chapter}{Bibliography}{35}{section.5.1}%
+\contentsline {subsection}{\numberline {2.2.5}Stochastic Interest Rates Extension}{12}{subsection.2.2.5}%
+\contentsline {subsubsection}{Boundary Conditions}{13}{equation.2.2.28}%
+\contentsline {subsection}{\numberline {2.2.6}Joint Stochastic Volatility and Stochastic Rates}{14}{subsection.2.2.6}%
+\contentsline {section}{\numberline {2.3}Traditional Numerical Approaches}{14}{section.2.3}%
+\contentsline {subsubsection}{Finite Difference Methods}{14}{section.2.3}%
+\contentsline {subsubsection}{Monte Carlo Methods}{15}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Physics-Informed Machine Learning}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction to Physics-Informed Neural Networks (PINNs)}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Training PINNs}{18}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Implementation and Results}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementation Details}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Call Option}{21}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Multi-Asset Option}{26}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Call Option with Stochastic Volatility and Interest Rates}{30}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Put Option Pricing}{33}{section.4.5}%
+\contentsline {section}{\numberline {4.6}American Put Option Pricing}{35}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Swaption Pricing}{37}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Discussion, Limitations, and Outlook}{40}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Discussion of the Main Findings}{40}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Further Research}{41}{section.5.2}%
+\contentsline {chapter}{Bibliography}{43}{section.5.2}%
 \contentsfinish 

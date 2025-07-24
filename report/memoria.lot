@@ -3,8 +3,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Call Option Parameters}}{19}{table.caption.9}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Multi-Asset Call Option Parameters}}{22}{table.caption.14}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Parameters for the Call Option under the Heston-Hull-White Model}}{26}{table.caption.20}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Call Option Parameters}}{22}{table.caption.10}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Relative $L_{2}$-errors of the Greeks.}}{26}{table.caption.17}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Best-Of Call Option Parameters}}{27}{table.caption.19}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Parameters for the Call Option under the Heston-Hull-White Model}}{30}{table.caption.25}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Parameters for the European Put Option}}{33}{table.caption.31}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces PINN training results across models and dimensions.}}{40}{table.caption.39}%
 \contentsfinish 

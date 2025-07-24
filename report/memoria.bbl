@@ -89,7 +89,7 @@
       \field{edition}{Ninth edition, Global edition}
       \field{isbn}{1292212896}
       \field{title}{Options, futures, and other derivatives}
-      \field{year}{2018 - 2018}
+      \field{year}{2018}
       \keyw{Futures ; Stock options ; Derivative securities}
     \endentry
     \entry{Wilmott2010PaulWO}{inproceedings}{}
@@ -278,6 +278,110 @@
       \endverb
       \keyw{Data-driven scientific computing,Machine learning,Predictive modeling,Runge–Kutta methods,Nonlinear dynamics}
     \endentry
+    \entry{GATTA202368}{article}{}
+      \name{author}{5}{}{%
+        {{hash=094e5ee469d6e3d105fec845405d8c19}{%
+           family={Gatta},
+           familyi={G\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d8310f78a6acc62b53d3fdaa57b0a84d}{%
+           family={{Di Cola}},
+           familyi={D\bibinitperiod},
+           given={Vincenzo\bibnamedelima Schiano},
+           giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=07970330b2a43b5c2e55ae13af5a7097}{%
+           family={Giampaolo},
+           familyi={G\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=5e071190ec9de33600de48969adb345b}{%
+           family={Piccialli},
+           familyi={P\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a149dbc0c7d8c7b44289299d659521f4}{%
+           family={Cuomo},
+           familyi={C\bibinitperiod},
+           given={Salvatore},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{21ea092f7eb68f8b1cd6fd2ead40fad1}
+      \strng{fullhash}{d4f693b79fc6d54ce21a46633b3b214e}
+      \strng{bibnamehash}{d4f693b79fc6d54ce21a46633b3b214e}
+      \strng{authorbibnamehash}{d4f693b79fc6d54ce21a46633b3b214e}
+      \strng{authornamehash}{21ea092f7eb68f8b1cd6fd2ead40fad1}
+      \strng{authorfullhash}{d4f693b79fc6d54ce21a46633b3b214e}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Nowadays, Deep Learning is drastically revolutionizing financial research as well as industry. Many methods have been discussed in the last few years, mainly related to option pricing. In fact, traditional approaches such as Monte Carlo simulation or finite difference methods are seriously harmed by multi-dimensional underlying and path dependency. Thus, dealing with particular contracts such as American multi-asset options is still rough. This paper addresses such a problem by pricing said put options with a novel meshless methodology, named Physics-Informed Neural Networks (PINNs), based on Artificial Intelligence. PINN paradigm has been recently introduced in Deep Learning literature. It exploits the theoretical background of the universal approximation theorem for neural networks to solve Partial Differential Equations numerically. This Deep Learning meshless method incorporates the equation and its initial and boundary conditions thanks to a specially designed loss function. We develop a suitable PINN for the proposed problem by introducing an algorithmic trick for improving the convergence of the free boundary problem. Furthermore, the worthiness of the proposal is assessed by several experiments concerned with single and multi-asset options. Finally, a parametric model is built to benefit further studies of option value behaviour related to particular market conditions.}
+      \field{issn}{0955-7997}
+      \field{journaltitle}{Engineering Analysis with Boundary Elements}
+      \field{title}{Meshless methods for American option pricing through Physics-Informed Neural Networks}
+      \field{volume}{151}
+      \field{year}{2023}
+      \field{pages}{68\bibrangedash 82}
+      \range{pages}{15}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.enganabound.2023.02.040
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0955799723000978
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0955799723000978
+      \endverb
+      \keyw{Finance,Black-Scholes,PINN,Free boundary problem,Deep learning,Parametric model}
+    \endentry
+    \entry{math9010046}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9ea58b88a58093b75de35f6645dedf5f}{%
+           family={Salvador},
+           familyi={S\bibinitperiod},
+           given={Beatriz},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e4d6242da89d793ce43ab3dd4e38a3c8}{%
+           family={Oosterlee},
+           familyi={O\bibinitperiod},
+           given={Cornelis\bibnamedelima W.},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=be9f499ec5ac19449d390f4edbb4d070}{%
+           family={Meer},
+           familyi={M\bibinitperiod},
+           given={Remco},
+           giveni={R\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \strng{namehash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \strng{fullhash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \strng{bibnamehash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \strng{authorbibnamehash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \strng{authornamehash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \strng{authorfullhash}{d233b5957b26b0fa2c35a3142ee87e35}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Artificial neural networks (ANNs) have recently also been applied to solve partial differential equations (PDEs). The classical problem of pricing European and American financial options, based on the corresponding PDE formulations, is studied here. Instead of using numerical techniques based on finite element or difference methods, we address the problem using ANNs in the context of unsupervised learning. As a result, the ANN learns the option values for all possible underlying stock values at future time points, based on the minimization of a suitable loss function. For the European option, we solve the linear Black–Scholes equation, whereas for the American option we solve the linear complementarity problem formulation. Two-asset exotic option values are also computed, since ANNs enable the accurate valuation of high-dimensional options. The resulting errors of the ANN approach are assessed by comparing to the analytic option values or to numerical reference solutions (for American options, computed by finite elements). In the short note, previously published, a brief introduction to this work was given, where some ideas to price vanilla options by ANNs were presented, and only European options were addressed. In the current work, the methodology is introduced in much more detail.}
+      \field{issn}{2227-7390}
+      \field{journaltitle}{Mathematics}
+      \field{number}{1}
+      \field{title}{Financial Option Valuation by Unsupervised Learning with Artificial Neural Networks}
+      \field{volume}{9}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.3390/math9010046
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/2227-7390/9/1/46
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/2227-7390/9/1/46
+      \endverb
+    \endentry
     \entry{hestonmodel}{article}{}
       \name{author}{1}{}{%
         {{hash=da886e16f39671df2e1cc9208589b67d}{%
@@ -295,8 +399,8 @@
       \strng{authorbibnamehash}{da886e16f39671df2e1cc9208589b67d}
       \strng{authornamehash}{da886e16f39671df2e1cc9208589b67d}
       \strng{authorfullhash}{da886e16f39671df2e1cc9208589b67d}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{I use a new technique to derive a closed-form solution for the price of a European call option on an asset with stochastic volatility. The model allows arbitrary correlation between volatility and spot-asset returns. I introduce stochastic interest rates and show how to apply the model to bond options and foreign currency options. Simulations show that correlation between volatility and the spot asset's price is important for explaining return skewness and strike-price biases in the Black-Scholes (1973) model. The solution technique is based on characteristic functions and can be applied to other problems.}
@@ -445,6 +549,38 @@
       \verb http://www.jstor.org/stable/1831029
       \endverb
     \endentry
+    \entry{björk2004arbitrage}{book}{}
+      \name{author}{1}{}{%
+        {{hash=203221c9f27beb773284ae1c0725f1b4}{%
+           family={Björk},
+           familyi={B\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press, Incorporated}%
+      }
+      \strng{namehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{fullhash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{bibnamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authorbibnamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authornamehash}{203221c9f27beb773284ae1c0725f1b4}
+      \strng{authorfullhash}{203221c9f27beb773284ae1c0725f1b4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780191533846}
+      \field{series}{Oxford Finance Series}
+      \field{title}{Arbitrage Theory in Continuous Time}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb https://books.google.es/books?id=TJgjgJATeVIC
+      \endverb
+      \verb{url}
+      \verb https://books.google.es/books?id=TJgjgJATeVIC
+      \endverb
+    \endentry
     \entry{duffy2022numerical}{book}{}
       \name{author}{1}{}{%
         {{hash=16db8c7aaea3f50e323b9ce06f66c0c1}{%
@@ -512,43 +648,6 @@
       \endverb
       \verb{url}
       \verb https://books.google.es/books?id=USvrCAAAQBAJ
-      \endverb
-    \endentry
-    \entry{VASICEK1977177}{article}{}
-      \name{author}{1}{}{%
-        {{hash=0aa13a6f2036d537b33195b22d087aab}{%
-           family={Vasicek},
-           familyi={V\bibinitperiod},
-           given={Oldrich},
-           giveni={O\bibinitperiod}}}%
-      }
-      \strng{namehash}{0aa13a6f2036d537b33195b22d087aab}
-      \strng{fullhash}{0aa13a6f2036d537b33195b22d087aab}
-      \strng{bibnamehash}{0aa13a6f2036d537b33195b22d087aab}
-      \strng{authorbibnamehash}{0aa13a6f2036d537b33195b22d087aab}
-      \strng{authornamehash}{0aa13a6f2036d537b33195b22d087aab}
-      \strng{authorfullhash}{0aa13a6f2036d537b33195b22d087aab}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The paper derives a general form of the term structure of interest rates. The following assumptions are made: (A.1) The instantaneous (spot) interest rate follows a diffusion process; (A.2) the price of a discount bond depends only on the spot rate over its term; and (A.3) the market is efficient. Under these assumptions, it is shown by means of an arbitrage argument that the expected rate of return on any bond in excess of the spot rate is proportional to its standard deviation. This property is then used to derive a partial differential equation for bond prices. The solution to that equation is given in the form of a stochastic integral representation. An interpretation of the bond pricing formula is provided. The model is illustrated on a specific case.}
-      \field{issn}{0304-405X}
-      \field{journaltitle}{Journal of Financial Economics}
-      \field{number}{2}
-      \field{title}{An equilibrium characterization of the term structure}
-      \field{volume}{5}
-      \field{year}{1977}
-      \field{pages}{177\bibrangedash 188}
-      \range{pages}{12}
-      \verb{doi}
-      \verb https://doi.org/10.1016/0304-405X(77)90016-2
-      \endverb
-      \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/0304405X77900162
-      \endverb
-      \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/0304405X77900162
       \endverb
     \endentry
     \entry{hullwhitemodel}{article}{}
@@ -623,6 +722,43 @@
       \field{pages}{113\bibrangedash 147}
       \range{pages}{35}
     \endentry
+    \entry{kingma2017adammethodstochasticoptimization}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=b6fbd171848aad4edf3925543f1f1522}{%
+           family={Kingma},
+           familyi={K\bibinitperiod},
+           given={Diederik\bibnamedelima P.},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=8aa66e8231cc2fdbe67aa4f18ca970c6}{%
+           family={Ba},
+           familyi={B\bibinitperiod},
+           given={Jimmy},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{a09df9f123146b8e2c7f1134c9496932}
+      \strng{fullhash}{a09df9f123146b8e2c7f1134c9496932}
+      \strng{bibnamehash}{a09df9f123146b8e2c7f1134c9496932}
+      \strng{authorbibnamehash}{a09df9f123146b8e2c7f1134c9496932}
+      \strng{authornamehash}{a09df9f123146b8e2c7f1134c9496932}
+      \strng{authorfullhash}{a09df9f123146b8e2c7f1134c9496932}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Adam: A Method for Stochastic Optimization}
+      \field{year}{2017}
+      \verb{eprint}
+      \verb 1412.6980
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1412.6980
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1412.6980
+      \endverb
+    \endentry
     \entry{Urb_n_2025}{article}{}
       \name{author}{3}{}{%
         {{hash=085a346d9b465d78a575c953a35247a3}{%
@@ -672,6 +808,115 @@
       \verb http://dx.doi.org/10.1016/j.jcp.2024.113656
       \endverb
     \endentry
+    \entry{XIANG202211}{article}{}
+      \name{author}{4}{}{%
+        {{hash=d4afe4e72ab1a9420f442b77841e08cc}{%
+           family={Xiang},
+           familyi={X\bibinitperiod},
+           given={Zixue},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=0ffbf7da53582dbc0a920a400eddc057}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=0acb094e371db85d102e7a7366a7fcd5}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Xu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=8143764259d18006825b2e098797ac35}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Wen},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{1bb327dc8014b9c234d2f543607e1e69}
+      \strng{fullhash}{5ccd9bc1dfb00d984d0791fe97d9619d}
+      \strng{bibnamehash}{5ccd9bc1dfb00d984d0791fe97d9619d}
+      \strng{authorbibnamehash}{5ccd9bc1dfb00d984d0791fe97d9619d}
+      \strng{authornamehash}{1bb327dc8014b9c234d2f543607e1e69}
+      \strng{authorfullhash}{5ccd9bc1dfb00d984d0791fe97d9619d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Physics-informed neural networks (PINNs) have received significant attention as a representative deep learning-based technique for solving partial differential equations (PDEs). The loss function of PINNs is a weighted sum of multiple terms, including the mismatch of observed data, boundary and initial constraints, as well as PDE residuals. In this paper, we observe that the performance of PINNs is susceptible to the weighted combination of competitive multiple loss functions. Therefore, we establish Gaussian probabilistic models to define the self-adaptive loss function through the adaptive weights for each loss term. In particular, we propose a self-adaptive loss balanced method that automatically assigns the weights of losses by updating adaptive weights in each epoch based on the maximum likelihood estimation. Finally, we perform a series of numerical experiments with self-adaptive loss balanced physics-informed neural networks (lbPINNs), including solving Poisson, Burgers, Helmholtz, Navier–Stokes, and Allen–Cahn equations in regular and irregular areas. We also test the robustness of lbPINNs by varying the initial adaptive weights, numbers of observations, hidden layers, and neurons per layer. These experimental results demonstrate that lbPINNs consistently achieve better performance than PINNs, and reduce the relative L2 error by about two orders of magnitude.}
+      \field{issn}{0925-2312}
+      \field{journaltitle}{Neurocomputing}
+      \field{title}{Self-adaptive loss balanced Physics-informed neural networks}
+      \field{volume}{496}
+      \field{year}{2022}
+      \field{pages}{11\bibrangedash 34}
+      \range{pages}{24}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.neucom.2022.05.015
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S092523122200546X
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S092523122200546X
+      \endverb
+      \keyw{Physics-informed neural networks,Partial differential equations,Loss balancing}
+    \endentry
+    \entry{WU2023115671}{article}{}
+      \name{author}{5}{}{%
+        {{hash=7a5a43a5f4aa32b6e4676bbda28a231c}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Chenxi},
+           giveni={C\bibinitperiod}}}%
+        {{hash=471faf15c70338fe50cbe7bf59d274fb}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Min},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b604cb75e2166b96f0b8e5fd3fd2972c}{%
+           family={Tan},
+           familyi={T\bibinitperiod},
+           given={Qinyang},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=7ab72646328b50c386b39a043e091e06}{%
+           family={Kartha},
+           familyi={K\bibinitperiod},
+           given={Yadhu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=6f6f1357e5a7fb658e3e9c999886ce83}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{da175abba5f3b8139de294a1b65f20e8}
+      \strng{fullhash}{ef175768a4d898ffd661bb0a2cb3a31c}
+      \strng{bibnamehash}{ef175768a4d898ffd661bb0a2cb3a31c}
+      \strng{authorbibnamehash}{ef175768a4d898ffd661bb0a2cb3a31c}
+      \strng{authornamehash}{da175abba5f3b8139de294a1b65f20e8}
+      \strng{authorfullhash}{ef175768a4d898ffd661bb0a2cb3a31c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Physics-informed neural networks (PINNs) have shown to be effective tools for solving both forward and inverse problems of partial differential equations (PDEs). PINNs embed the PDEs into the loss of the neural network using automatic differentiation, and this PDE loss is evaluated at a set of scattered spatio-temporal points (called residual points). The location and distribution of these residual points are highly important to the performance of PINNs. However, in the existing studies on PINNs, only a few simple residual point sampling methods have mainly been used. Here, we present a comprehensive study of two categories of sampling for PINNs: non-adaptive uniform sampling and adaptive nonuniform sampling. We consider six uniform sampling methods, including (1) equispaced uniform grid, (2) uniformly random sampling, (3) Latin hypercube sampling, (4) Halton sequence, (5) Hammersley sequence, and (6) Sobol sequence. We also consider a resampling strategy for uniform sampling. To improve the sampling efficiency and the accuracy of PINNs, we propose two new residual-based adaptive sampling methods: residual-based adaptive distribution (RAD) and residual-based adaptive refinement with distribution (RAR-D), which dynamically improve the distribution of residual points based on the PDE residuals during training. Hence, we have considered a total of 10 different sampling methods, including six non-adaptive uniform sampling, uniform sampling with resampling, two proposed adaptive sampling, and an existing adaptive sampling. We extensively tested the performance of these sampling methods for four forward problems and two inverse problems in many setups. Our numerical results presented in this study are summarized from more than 6000 simulations of PINNs. We show that the proposed adaptive sampling methods of RAD and RAR-D significantly improve the accuracy of PINNs with fewer residual points for both forward and inverse problems. The results obtained in this study can also be used as a practical guideline in choosing sampling methods.}
+      \field{issn}{0045-7825}
+      \field{journaltitle}{Computer Methods in Applied Mechanics and Engineering}
+      \field{title}{A comprehensive study of non-adaptive and residual-based adaptive sampling for physics-informed neural networks}
+      \field{volume}{403}
+      \field{year}{2023}
+      \field{pages}{115671}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cma.2022.115671
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0045782522006260
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0045782522006260
+      \endverb
+      \keyw{Partial differential equations,Physics-informed neural networks,Residual point distribution,Non-adaptive uniform sampling,Uniform sampling with resampling,Residual-based adaptive sampling}
+    \endentry
     \entry{nondimensionalinputs2025}{article}{}
       \name{author}{3}{}{%
         {{hash=5ea5b78dd2a9508a51cbf35fd1a17988}{%
@@ -713,18 +958,19 @@
     \endentry
     \entry{Melo2025pricingpinns}{misc}{}
       \name{author}{1}{}{%
-        {{hash=1174ff8b6124b8d803948e0ac04e4d2d}{%
+        {{hash=cf29ca70de7e24ca1467f4603e8b6cb9}{%
            family={Melo},
            familyi={M\bibinitperiod},
-           given={José},
+           given={J.},
            giveni={J\bibinitperiod}}}%
       }
-      \strng{namehash}{1174ff8b6124b8d803948e0ac04e4d2d}
-      \strng{fullhash}{1174ff8b6124b8d803948e0ac04e4d2d}
-      \strng{bibnamehash}{1174ff8b6124b8d803948e0ac04e4d2d}
-      \strng{authorbibnamehash}{1174ff8b6124b8d803948e0ac04e4d2d}
-      \strng{authornamehash}{1174ff8b6124b8d803948e0ac04e4d2d}
-      \strng{authorfullhash}{1174ff8b6124b8d803948e0ac04e4d2d}
+      \strng{namehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{fullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{bibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorbibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authornamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorfullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \field{extraname}{1}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
@@ -733,6 +979,116 @@
       \field{note}{GitHub repository, accessed July 2025}
       \field{title}{Leveraging Physics-Informed Neural Networks for Option Pricing Problems}
       \field{year}{2025}
+    \endentry
+    \entry{melo_options_pinns_2025}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=cf29ca70de7e24ca1467f4603e8b6cb9}{%
+           family={Melo},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{fullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{bibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorbibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authornamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorfullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://jmelo11.github.io/notebook/options-pinns/}}
+      \field{note}{Accessed: 2025-07-24}
+      \field{title}{Options-PINNs: A Physics-Informed Neural Network approach to option pricing}
+      \field{year}{2025}
+    \endentry
+    \entry{Mattey_2022}{article}{}
+      \name{author}{2}{}{%
+        {{hash=382bf573357563de43999e7a5517e2ae}{%
+           family={Mattey},
+           familyi={M\bibinitperiod},
+           given={Revanth},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3e784597504830f63dd5d44788b7796c}{%
+           family={Ghosh},
+           familyi={G\bibinitperiod},
+           given={Susanta},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier BV}%
+      }
+      \strng{namehash}{4b303e162a9fdf9b69822133a965b85f}
+      \strng{fullhash}{4b303e162a9fdf9b69822133a965b85f}
+      \strng{bibnamehash}{4b303e162a9fdf9b69822133a965b85f}
+      \strng{authorbibnamehash}{4b303e162a9fdf9b69822133a965b85f}
+      \strng{authornamehash}{4b303e162a9fdf9b69822133a965b85f}
+      \strng{authorfullhash}{4b303e162a9fdf9b69822133a965b85f}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0045-7825}
+      \field{journaltitle}{Computer Methods in Applied Mechanics and Engineering}
+      \field{month}{2}
+      \field{title}{A novel sequential method to train physics informed neural networks for Allen Cahn and Cahn Hilliard equations}
+      \field{volume}{390}
+      \field{year}{2022}
+      \field{pages}{114474}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.cma.2021.114474
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1016/j.cma.2021.114474
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.cma.2021.114474
+      \endverb
+    \endentry
+    \entry{STIASNY2023109748}{article}{}
+      \name{author}{2}{}{%
+        {{hash=128f70ae4fcdb7ae17172e1d2c893618}{%
+           family={Stiasny},
+           familyi={S\bibinitperiod},
+           given={Jochen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=92b0072154fb6d7cc6a5d31812932f43}{%
+           family={Chatzivasileiadis},
+           familyi={C\bibinitperiod},
+           given={Spyros},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1590a51abe78e7b732deea0b84baed9}
+      \strng{fullhash}{a1590a51abe78e7b732deea0b84baed9}
+      \strng{bibnamehash}{a1590a51abe78e7b732deea0b84baed9}
+      \strng{authorbibnamehash}{a1590a51abe78e7b732deea0b84baed9}
+      \strng{authornamehash}{a1590a51abe78e7b732deea0b84baed9}
+      \strng{authorfullhash}{a1590a51abe78e7b732deea0b84baed9}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The simulation of power system dynamics poses a computationally expensive task. Considering the growing uncertainty of generation and demand patterns, thousands of scenarios need to be continuously assessed to ensure the safety of power systems. Physics-Informed Neural Networks (PINNs) have recently emerged as a promising solution for drastically accelerating computations of non-linear dynamical systems. This work investigates the applicability of these methods for power system dynamics, focusing on the dynamic response to load disturbances. Comparing the prediction of PINNs to the solution of conventional solvers, we find that PINNs can be 10 to 1’000 times faster than conventional solvers. At the same time, we find them to be sufficiently accurate and numerically stable even for large time steps. To facilitate a deeper understanding, this paper also present a new regularisation of Neural Network (NN) training by introducing a gradient-based term in the loss function. The resulting NNs, which we call dtNNs, help us deliver a comprehensive analysis about the strengths and weaknesses of the NN based approaches, how incorporating knowledge of the underlying physics affects NN performance, and how this compares with conventional solvers for power system dynamics.}
+      \field{issn}{0378-7796}
+      \field{journaltitle}{Electric Power Systems Research}
+      \field{title}{Physics-informed neural networks for time-domain simulations: Accuracy, computational cost, and flexibility}
+      \field{volume}{224}
+      \field{year}{2023}
+      \field{pages}{109748}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.epsr.2023.109748
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378779623006375
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378779623006375
+      \endverb
+      \keyw{Dynamical systems,Neural networks,Scientific machine learning,Time-domain simulation}
     \endentry
     \entry{wilmott1995mathematics}{book}{}
       \name{author}{3}{}{%
@@ -761,8 +1117,8 @@
       \strng{authorbibnamehash}{1688e7cebd6211439eb21864aebf873b}
       \strng{authornamehash}{1688e7cebd6211439eb21864aebf873b}
       \strng{authorfullhash}{1688e7cebd6211439eb21864aebf873b}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{9780521497893}
@@ -795,8 +1151,8 @@
       \strng{authorbibnamehash}{859799ab06a76acaefeca7d8d458cd68}
       \strng{authornamehash}{859799ab06a76acaefeca7d8d458cd68}
       \strng{authorfullhash}{859799ab06a76acaefeca7d8d458cd68}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We propose operator splitting methods for solving the linear complementarity problems arising from the pricing of American options. The space discretization of the underlying Black-Scholes Scholes equation is done using a central finite-difference scheme. The time discretization as well as the operator splittings are based on the Crank-Nicolson method and the two-step backward differentiation formula. Numerical experiments show that the operator splitting methodology is much more efficient than the projected SOR, while the accuracy of both methods are similar.}
@@ -818,6 +1174,412 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0893965904804968
       \endverb
       \keyw{American option,Operator splitting method,Time discretization,Linear complementarity problem}
+    \endentry
+    \entry{li2021fourierneuraloperatorparametric}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=009036050bf23abe561429f6eaa0b018}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zongyi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=d3715d69863d59245589f244c5866bd4}{%
+           family={Kovachki},
+           familyi={K\bibinitperiod},
+           given={Nikola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=3648b51d63e1ae389e46f87296d4c89a}{%
+           family={Azizzadenesheli},
+           familyi={A\bibinitperiod},
+           given={Kamyar},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9caea1a7b561311e5146f4c7f740496c}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Burigede},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1e523aae18c868f77439b35add494ff9}{%
+           family={Bhattacharya},
+           familyi={B\bibinitperiod},
+           given={Kaushik},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9fdd1b883dec513483f9ee5c99b7e251}{%
+           family={Stuart},
+           familyi={S\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd4a2be6ede169a3c794a1cd7e3fb9a2}{%
+           family={Anandkumar},
+           familyi={A\bibinitperiod},
+           given={Anima},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{fullhash}{3e58006f2c869702116637d04136c3b9}
+      \strng{bibnamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authorbibnamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authornamehash}{b16598cfd68a21333b13de477a9f94a7}
+      \strng{authorfullhash}{3e58006f2c869702116637d04136c3b9}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Fourier Neural Operator for Parametric Partial Differential Equations}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2010.08895
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2010.08895
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2010.08895
+      \endverb
+    \endentry
+    \entry{deeponets}{article}{}
+      \name{author}{5}{}{%
+        {{hash=6f6f1357e5a7fb658e3e9c999886ce83}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+        {{hash=b367d1bdfec4169342f6797addd1c5d7}{%
+           family={Jin},
+           familyi={J\bibinitperiod},
+           given={Pengzhan},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b04db7dd7744ba0a4c8516ea52b2b2a4}{%
+           family={Pang},
+           familyi={P\bibinitperiod},
+           given={Guofei},
+           giveni={G\bibinitperiod}}}%
+        {{hash=8d7acff517951d0a9eba8e9b39a167dc}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Zhongqiang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=bfaf154b1f300f885a75adce4c6b773e}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima Em},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a4021fa953a5bdfcfa24d6e4f0debd5c}
+      \strng{fullhash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{bibnamehash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{authorbibnamehash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \strng{authornamehash}{a4021fa953a5bdfcfa24d6e4f0debd5c}
+      \strng{authorfullhash}{ff79a03c159d9858e9715a9ba15ffe27}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{It is widely known that neural networks (NNs) are universal approximators of continuous functions. However, a less known but powerful result is that a NN with a single hidden layer can accurately approximate any nonlinear continuous operator. This universal approximation theorem of operators is suggestive of the structure and potential of deep neural networks (DNNs) in learning continuous operators or complex systems from streams of scattered data. Here, we thus extend this theorem to DNNs. We design a new network with small generalization error, the deep operator network (DeepONet), which consists of a DNN for encoding the discrete input function space (branch net) and another DNN for encoding the domain of the output functions (trunk net). We demonstrate that DeepONet can learn various explicit operators, such as integrals and fractional Laplacians, as well as implicit operators that represent deterministic and stochastic differential equations. We study different formulations of the input function space and its effect on the generalization error for 16 different diverse applications.}
+      \field{isbn}{2522-5839}
+      \field{journaltitle}{Nature Machine Intelligence}
+      \field{number}{3}
+      \field{title}{Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{pages}{218\bibrangedash 229}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1038/s42256-021-00302-5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1038/s42256-021-00302-5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/s42256-021-00302-5
+      \endverb
+      \warn{\item article entry 'deeponets' (referencias.bib): Invalid format '2021/03/01' of date field 'date' - ignoring}
+    \endentry
+    \entry{LI2025128675}{article}{}
+      \name{author}{4}{}{%
+        {{hash=926018fcc58b141b7dcfddde6e317b53}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Haolin},
+           giveni={H\bibinitperiod}}}%
+        {{hash=13816ed63f46d9b8d608364ac3731080}{%
+           family={Miao},
+           familyi={M\bibinitperiod},
+           given={Yuyang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ef92f91422ca5564d0098be388139849}{%
+           family={Khodaei},
+           familyi={K\bibinitperiod},
+           given={Zahra\bibnamedelima Sharif},
+           giveni={Z\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4f0f2b2573836a2b0414a388013bf50e}{%
+           family={Aliabadi},
+           familyi={A\bibinitperiod},
+           given={M.H.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7b81cf84ff761b781b73fcd72340ce9}
+      \strng{fullhash}{638f8181c33d2ff0de7e3f2fd3691e66}
+      \strng{bibnamehash}{638f8181c33d2ff0de7e3f2fd3691e66}
+      \strng{authorbibnamehash}{638f8181c33d2ff0de7e3f2fd3691e66}
+      \strng{authornamehash}{f7b81cf84ff761b781b73fcd72340ce9}
+      \strng{authorfullhash}{638f8181c33d2ff0de7e3f2fd3691e66}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Deep Neural Operator, as proposed by Lu et al. (2021), marks a considerable advancement in solving parametric partial differential equations. This paper examines the DeepOnet model’s neural network design, focusing on the effectiveness of its trunk-branch structure in operator learning tasks. Three key advantages of the trunk-branch structure are identified: the global learning strategy, the independent operation of the trunk and branch networks, and the consistent representation of solutions. These features are especially beneficial for operator learning. Building upon these findings, we have evolved the traditional DeepOnet into a more general form from a network perspective, allowing a nonlinear interfere of the branch net on the trunk net than the linear combination limited by the conventional DeepOnet. The operator model also incorporates physical information for enhanced integration. In a series of experiments tackling partial differential equations, the extended DeepOnet consistently outperforms than the traditional DeepOnet, particularly in complex problems. Notably, the extended DeepOnet model shows substantial advancements in operator learning with nonlinear parametric partial differential equations and exhibits a remarkable capacity for reducing physics loss.}
+      \field{issn}{0925-2312}
+      \field{journaltitle}{Neurocomputing}
+      \field{title}{An architectural analysis of DeepOnet and a general extension of the physics-informed DeepOnet model on solving nonlinear parametric partial differential equations}
+      \field{volume}{611}
+      \field{year}{2025}
+      \field{pages}{128675}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.neucom.2024.128675
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231224014462
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0925231224014462
+      \endverb
+      \keyw{DeepOnet,Nonlinear parametric PDEs,Neural operators,Physic-informed neural networks}
+    \endentry
+    \entry{CiCP-28-5}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2ec3a0d3b4991770ca090090475360d1}{%
+           family={Jagtap},
+           familyi={J\bibinitperiod},
+           given={Ameya},
+           giveni={A\bibinitperiod},
+           suffix={D.},
+           suffixi={D\bibinitperiod}}}%
+        {{hash=852047075bbfd0e4b4d87b4ce4dccc6b}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={Em},
+           giveni={E\bibinitperiod},
+           suffix={George},
+           suffixi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \strng{fullhash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \strng{bibnamehash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \strng{authorbibnamehash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \strng{authornamehash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \strng{authorfullhash}{8542ddfae81fb63f28a6d6dde95dba1a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{<p style="text-align: justify;">We propose a generalized space-time domain decomposition approach for the physics-informed neural networks (PINNs) to solve nonlinear partial differential equations (PDEs) on arbitrary complex-geometry domains. The proposed framework, named eXtended PINNs ($XPINNs$), further pushes the boundaries of both PINNs as well as conservative PINNs (cPINNs), which is a recently proposed domain decomposition approach in the PINN framework tailored to conservation laws. Compared to PINN, the XPINN method has large representation and parallelization capacity due to the inherent property of deployment of multiple neural networks in the smaller subdomains. Unlike cPINN, XPINN can be extended to any type of PDEs. Moreover, the domain can be decomposed in any arbitrary way (in space and time), which is not possible in cPINN. Thus, XPINN offers both space and time parallelization, thereby reducing the training cost more effectively. In each subdomain, a separate neural network is employed with optimally selected hyperparameters, e.g., depth/width of the network, number and location of residual points, activation function, optimization method, etc. A deep network can be employed in a subdomain with complex solution, whereas a shallow neural network can be used in a subdomain with relatively simple and smooth solutions. We demonstrate the versatility of XPINN by solving both forward and inverse PDE problems, ranging from one-dimensional to three-dimensional problems, from time-dependent to time-independent problems, and from continuous to discontinuous problems, which clearly shows that the XPINN method is promising in many practical problems. The proposed XPINN method is the generalization of PINN and cPINN methods, both in terms of applicability as well as domain decomposition approach, which efficiently lends itself to parallelized computation. The XPINN code is available on $https://github.com/AmeyaJagtap/XPINNs$.</p>}
+      \field{issn}{1991-7120}
+      \field{journaltitle}{Communications in Computational Physics}
+      \field{number}{5}
+      \field{title}{Extended Physics-Informed Neural Networks (XPINNs): A Generalized Space-Time Domain Decomposition Based Deep Learning Framework for Nonlinear Partial Differential Equations}
+      \field{volume}{28}
+      \field{year}{2020}
+      \field{pages}{2002\bibrangedash 2041}
+      \range{pages}{40}
+      \verb{doi}
+      \verb https://doi.org/10.4208/cicp.OA-2020-0164
+      \endverb
+      \verb{urlraw}
+      \verb https://global-sci.com/article/79747/extended-physics-informed-neural-networks-xpinns-a-generalized-space-time-domain-decomposition-based-deep-learning-framework-for-nonlinear-partial-differential-equations
+      \endverb
+      \verb{url}
+      \verb https://global-sci.com/article/79747/extended-physics-informed-neural-networks-xpinns-a-generalized-space-time-domain-decomposition-based-deep-learning-framework-for-nonlinear-partial-differential-equations
+      \endverb
+    \endentry
+    \entry{pellegrin2022transferlearningphysicsinformedneural}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=7cd25627e40892384b845cdf8afe02a3}{%
+           family={Pellegrin},
+           familyi={P\bibinitperiod},
+           given={Raphaël},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e0f06fd4c00c066011154c96edb19815}{%
+           family={Bullwinkel},
+           familyi={B\bibinitperiod},
+           given={Blake},
+           giveni={B\bibinitperiod}}}%
+        {{hash=c79392b205eb354b0862fc0b3551e395}{%
+           family={Mattheakis},
+           familyi={M\bibinitperiod},
+           given={Marios},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fdc9616728b141c7487d4e014be5a68f}{%
+           family={Protopapas},
+           familyi={P\bibinitperiod},
+           given={Pavlos},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{aa72fe3d4fe4809576daadf47f091797}
+      \strng{fullhash}{4bf6b33f92ecf12b673d947b29638520}
+      \strng{bibnamehash}{4bf6b33f92ecf12b673d947b29638520}
+      \strng{authorbibnamehash}{4bf6b33f92ecf12b673d947b29638520}
+      \strng{authornamehash}{aa72fe3d4fe4809576daadf47f091797}
+      \strng{authorfullhash}{4bf6b33f92ecf12b673d947b29638520}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Transfer Learning with Physics-Informed Neural Networks for Efficient Simulation of Branched Flows}
+      \field{year}{2022}
+      \verb{eprint}
+      \verb 2211.00214
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2211.00214
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2211.00214
+      \endverb
+    \endentry
+    \entry{Gao_2022}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=05816972910145e319915797998aafb0}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yihang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=15602977e193d9042be679f8a580e6f2}{%
+           family={Cheung},
+           familyi={C\bibinitperiod},
+           given={Ka\bibnamedelima Chun},
+           giveni={K\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=4a2222ab6569b8b6272c036f34204c1d}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={Michael\bibnamedelima K.},
+           giveni={M\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \strng{fullhash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \strng{bibnamehash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \strng{authorbibnamehash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \strng{authornamehash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \strng{authorfullhash}{fdbf7e577cc8cbceeb46814b51c43d6e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2022 IEEE Symposium Series on Computational Intelligence (SSCI)}
+      \field{month}{12}
+      \field{title}{SVD-PINNs: Transfer Learning of Physics-Informed Neural Networks via Singular Value Decomposition}
+      \field{year}{2022}
+      \field{pages}{1443\bibrangedash 1450}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ssci51031.2022.10022281
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1109/SSCI51031.2022.10022281
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1109/SSCI51031.2022.10022281
+      \endverb
+    \endentry
+    \entry{LI202460}{article}{}
+      \name{author}{6}{}{%
+        {{hash=214449ddb943a0d76d4db7d010f497ea}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xi'an},
+           giveni={X\bibinitperiod}}}%
+        {{hash=91a2634c73b321d625d0e4cc15d4863b}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Jiaxin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cd11a2d527da3855760876efc2c77355}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Jinran},
+           giveni={J\bibinitperiod}}}%
+        {{hash=92093f0f45ea9c56fa0faf462f11aba8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shaotong},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f399c7a2bb9903322993034e1f6cf281}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Weide},
+           giveni={W\bibinitperiod}}}%
+        {{hash=67cc57e1241958aa55b82f7becf5c154}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={You-Gan},
+           giveni={Y\bibinithyphendelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{d8d9adbeb460388f15cf2715af19b353}
+      \strng{fullhash}{e6c0b3c7c063d4fa926ab440a1a29fce}
+      \strng{bibnamehash}{e6c0b3c7c063d4fa926ab440a1a29fce}
+      \strng{authorbibnamehash}{e6c0b3c7c063d4fa926ab440a1a29fce}
+      \strng{authornamehash}{d8d9adbeb460388f15cf2715af19b353}
+      \strng{authorfullhash}{e6c0b3c7c063d4fa926ab440a1a29fce}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Deep learning methods have gained considerable interest in the numerical solution of various partial differential equations (PDEs). One particular focus is physics-informed neural networks (PINN), which integrate physical principles into neural networks. This transforms the process of solving PDEs into optimization problems for neural networks. To address a collection of advection-diffusion equations (ADE) in a range of difficult circumstances, this paper proposes a novel network structure. This architecture integrates the solver, a multi-scale deep neural networks (MscaleDNN) utilized in the PINN method, with a hard constraint technique known as HCPINN. This method introduces a revised formulation of the desired solution for ADE by utilizing a loss function that incorporates the residuals of the governing equation and penalizes any deviations from the specified boundary and initial constraints. By surpassing the boundary constraints automatically, this method improves the accuracy and efficiency of the PINN technique. To address the “spectral bias” phenomenon in neural networks, a subnetwork structure of MscaleDNN and a Fourier-induced activation function are incorporated into the HCPINN, resulting in a hybrid approach called SFHCPINN. The effectiveness of SFHCPINN is demonstrated through various numerical experiments involving ADE in different dimensions. The numerical results indicate that SFHCPINN outperforms both standard PINN and its subnetwork version with Fourier feature embedding. It achieves remarkable accuracy and efficiency while effectively handling complex boundary conditions and high-frequency scenarios in ADE.}
+      \field{issn}{0898-1221}
+      \field{journaltitle}{Computers and Mathematics with Applications}
+      \field{title}{Physical informed neural networks with soft and hard boundary constraints for solving advection-diffusion equations using Fourier expansions}
+      \field{volume}{159}
+      \field{year}{2024}
+      \field{pages}{60\bibrangedash 75}
+      \range{pages}{16}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.camwa.2024.01.021
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0898122124000348
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0898122124000348
+      \endverb
+      \keyw{Advection-diffusion equation,PINN,Hard constraint,Subnetworks,Fourier feature mapping}
+    \endentry
+    \entry{bekele2024physicsinformedneuralnetworkscurriculum}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=454694c3e320b85ff956444cb3b0e741}{%
+           family={Bekele},
+           familyi={B\bibinitperiod},
+           given={Yared\bibnamedelima W.},
+           giveni={Y\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{454694c3e320b85ff956444cb3b0e741}
+      \strng{fullhash}{454694c3e320b85ff956444cb3b0e741}
+      \strng{bibnamehash}{454694c3e320b85ff956444cb3b0e741}
+      \strng{authorbibnamehash}{454694c3e320b85ff956444cb3b0e741}
+      \strng{authornamehash}{454694c3e320b85ff956444cb3b0e741}
+      \strng{authorfullhash}{454694c3e320b85ff956444cb3b0e741}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CE}
+      \field{eprinttype}{arXiv}
+      \field{title}{Physics-informed neural networks with curriculum training for poroelastic flow and deformation processes}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2404.13909
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2404.13909
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2404.13909
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

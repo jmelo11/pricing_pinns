@@ -7,7 +7,7 @@
 \BOOKMARK [1][-]{section.2.2}{Modelling\040Framework}{chapter.2}% 7
 \BOOKMARK [2][-]{subsection.2.2.1}{Feynman-Kac\040Representation}{section.2.2}% 8
 \BOOKMARK [2][-]{subsection.2.2.2}{The\040Black-Scholes\040Model}{section.2.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.3}{Multi-Asset\040Extension\040of\040the\040Black\205Scholes\040Model}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.3}{Multi-Asset\040Extension\040of\040the\040Black-Scholes\040Model}{section.2.2}% 10
 \BOOKMARK [2][-]{subsection.2.2.4}{Stochastic\040Volatility\040Extension}{section.2.2}% 11
 \BOOKMARK [2][-]{subsection.2.2.5}{Stochastic\040Interest\040Rates\040Extension}{section.2.2}% 12
 \BOOKMARK [2][-]{subsection.2.2.6}{Joint\040Stochastic\040Volatility\040and\040Stochastic\040Rates}{section.2.2}% 13
@@ -18,11 +18,12 @@
 \BOOKMARK [0][-]{chapter.4}{Implementation\040and\040Results}{}% 18
 \BOOKMARK [1][-]{section.4.1}{Implementation\040Details}{chapter.4}% 19
 \BOOKMARK [1][-]{section.4.2}{Call\040Option}{chapter.4}% 20
-\BOOKMARK [2][-]{subsection.4.2.1}{Multi-Asset\040Option}{section.4.2}% 21
-\BOOKMARK [2][-]{subsection.4.2.2}{Call\040Option\040with\040Stochastic\040Volatility\040and\040Interest\040Rates}{section.4.2}% 22
-\BOOKMARK [1][-]{section.4.3}{Put\040Option\040Pricing}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.3.1}{American\040Put\040Option\040Pricing}{section.4.3}% 24
-\BOOKMARK [1][-]{section.4.4}{Swaption\040Pricing}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{Multi-Asset\040Option}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.4}{Call\040Option\040with\040Stochastic\040Volatility\040and\040Interest\040Rates}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.5}{Put\040Option\040Pricing}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.6}{American\040Put\040Option\040Pricing}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.7}{Swaption\040Pricing}{chapter.4}% 25
 \BOOKMARK [0][-]{chapter.5}{Discussion,\040Limitations,\040and\040Outlook}{}% 26
 \BOOKMARK [1][-]{section.5.1}{Discussion\040of\040the\040Main\040Findings}{chapter.5}% 27
-\BOOKMARK [0][-]{section.5.1}{Bibliography}{}% 28
+\BOOKMARK [1][-]{section.5.2}{Further\040Research}{chapter.5}% 28
+\BOOKMARK [0][-]{section.5.2}{Bibliography}{}% 29

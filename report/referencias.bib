@@ -2,6 +2,89 @@
 
 % Use BIBTEX format for reference entries:
 
+@book{alma99148840908702021,
+  author    = {Hull, John},
+  title     = {Options, futures, and other derivatives },
+  year      = {2018},
+  address   = {Boston},
+  booktitle = {Options, futures, and other derivatives},
+  edition   = {Ninth edition, Global edition},
+  isbn      = {1292212896},
+  keywords  = {Futures ; Stock options ; Derivative securities},
+  language  = {eng},
+  publisher = {Pearson Education Limited}
+}
+
+@misc{banerjee2024pinnsmedicalimageanalysis,
+  title         = {PINNs for Medical Image Analysis: A Survey},
+  author        = {Chayan Banerjee and Kien Nguyen and Olivier Salvado and Truyen Tran and Clinton Fookes},
+  year          = {2024},
+  eprint        = {2408.01026},
+  archiveprefix = {arXiv},
+  primaryclass  = {eess.IV},
+  url           = {https://arxiv.org/abs/2408.01026}
+}
+
+@misc{bekele2024physicsinformedneuralnetworkscurriculum,
+  title         = {Physics-informed neural networks with curriculum training for poroelastic flow and deformation processes},
+  author        = {Yared W. Bekele},
+  year          = {2024},
+  eprint        = {2404.13909},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CE},
+  url           = {https://arxiv.org/abs/2404.13909}
+}
+
+@article{bellman1966dynamic,
+  title     = {Dynamic programming},
+  author    = {Bellman, Richard},
+  journal   = {Science},
+  volume    = {153},
+  number    = {3731},
+  pages     = {34--37},
+  year      = {1966},
+  publisher = {American Association for the Advancement of Science}
+}
+
+@article{Bhatnagar_2019,
+  title     = {Prediction of aerodynamic flow fields using convolutional neural networks},
+  volume    = {64},
+  issn      = {1432-0924},
+  url       = {http://dx.doi.org/10.1007/s00466-019-01740-0},
+  doi       = {10.1007/s00466-019-01740-0},
+  number    = {2},
+  journal   = {Computational Mechanics},
+  publisher = {Springer Science and Business Media LLC},
+  author    = {Bhatnagar, Saakaar and Afshar, Yaser and Pan, Shaowu and Duraisamy, Karthik and Kaushik, Shailendra},
+  year      = {2019},
+  month     = jun,
+  pages     = {525–545}
+}
+
+@article{BISCHOF2025117914,
+  title    = {Multi-Objective Loss Balancing for Physics-Informed Deep Learning},
+  journal  = {Computer Methods in Applied Mechanics and Engineering},
+  volume   = {439},
+  pages    = {117914},
+  year     = {2025},
+  issn     = {0045-7825},
+  doi      = {https://doi.org/10.1016/j.cma.2025.117914},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0045782525001860},
+  author   = {Rafael Bischof and Michael A. Kraus},
+  keywords = {Partial differential equations, Scientific machine learning, Helmholtz equation, Burgers equation, PINNacle, Loss balancing, Multi-objective optimisation},
+  abstract = {Physics-Informed Neural Networks (PINN) are deep learning algorithms that leverage physical laws by including partial differential equations together with a respective set of boundary and initial conditions as penalty terms in their loss function. In this work, we observe the significant role of correctly weighting the combination of multiple competitive loss functions for training PINNs effectively. To this end, we implement and evaluate different methods aiming at balancing the contributions of multiple terms of the PINN’s loss function and their gradients. After reviewing three existing loss scaling approaches (Learning Rate Annealing, GradNorm and SoftAdapt), we propose a novel self-adaptive loss balancing scheme for PINNs named ReLoBRaLo (Relative Loss Balancing with Random Lookback). We extensively evaluate the performance of the aforementioned balancing schemes by solving both forward as well as inverse problems on three benchmark PDEs for PINNs: Burgers’ equation, Kirchhoff’s plate bending equation, Helmholtz’s equation and over 20 PDEs from the ”PINNacle” collection. The results show that ReLoBRaLo is able to consistently outperform the baseline of existing scaling methods in terms of accuracy while also inducing significantly less computational overhead for a variety of PDE classes.}
+}
+
+@book{björk2004arbitrage,
+  title     = {Arbitrage Theory in Continuous Time},
+  author    = {Bj{\"o}rk, T.},
+  isbn      = {9780191533846},
+  series    = {Oxford Finance Series},
+  url       = {https://books.google.es/books?id=TJgjgJATeVIC},
+  year      = {2004},
+  publisher = {Oxford University Press, Incorporated}
+}
+
 @article{black1973,
   issn      = {00223808, 1537534X},
   url       = {http://www.jstor.org/stable/1831029},
@@ -17,65 +100,90 @@
   year      = {1973}
 }
 
-@article{merton1973,
-  issn      = {00058556, 23255323},
-  url       = {http://www.jstor.org/stable/3003143},
-  abstract  = {The long history of the theory of option pricing began in 1900 when the French mathematician Louis Bachelier deduced an option pricing formula based on the assumption that stock prices follow a Brownian motion with zero drift. Since that time, numerous researchers have contributed to the theory. The present paper begins by deducing a set of restrictions on option pricing formulas from the assumption that investors prefer more to less. These restrictions are necessary conditions for a formula to be consistent with a rational pricing theory. Attention is given to the problems created when dividends are paid on the underlying common stock and when the terms of the option contract can be changed explicitly by a change in exercise price or implicitly by a shift in the investment or capital structure policy of the firm. Since the deduced restrictions are not sufficient to uniquely determine an option pricing formula, additional assumptions are introduced to examine and extend the seminal Black-Scholes theory of option pricing. Explicit formulas for pricing both call and put options as well as for warrants and the new "down-and-out" option are derived. The effects of dividends and call provisions on the warrant price are examined. The possibilities for further extension of the theory to the pricing of corporate liabilities are discussed.},
-  author    = {Robert C. Merton},
-  journal   = {The Bell Journal of Economics and Management Science},
-  number    = {1},
-  pages     = {141--183},
-  publisher = {[Wiley, RAND Corporation]},
-  title     = {Theory of Rational Option Pricing},
-  urldate   = {2025-04-23},
-  volume    = {4},
+@article{blackscholes,
+  issn      = {00223808, 1537534X},
+  url       = {http://www.jstor.org/stable/1831029},
+  abstract  = {If options are correctly priced in the market, it should not be possible to make sure profits by creating portfolios of long and short positions in options and their underlying stocks. Using this principle, a theoretical valuation formula for options is derived. Since almost all corporate liabilities can be viewed as combinations of options, the formula and the analysis that led to it are also applicable to corporate liabilities such as common stock, corporate bonds, and warrants. In particular, the formula can be used to derive the discount that should be applied to a corporate bond because of the possibility of default.},
+  author    = {Fischer Black and Myron Scholes},
+  journal   = {Journal of Political Economy},
+  number    = {3},
+  pages     = {637--654},
+  publisher = {The University of Chicago Press},
+  title     = {The Pricing of Options and Corporate Liabilities},
+  urldate   = {2025-04-25},
+  volume    = {81},
   year      = {1973}
 }
 
-@inproceedings{Wilmott2010PaulWO,
-  title  = {Paul Wilmott on Quantitative Finance},
-  author = {Paul Wilmott},
-  year   = {2010},
-  url    = {https://api.semanticscholar.org/CorpusID:153668090}
+@book{brigo2013interest,
+  title     = {Interest Rate Models Theory and Practice},
+  author    = {Brigo, D. and Mercurio, F.},
+  isbn      = {9783662045534},
+  series    = {Springer Finance},
+  url       = {https://books.google.es/books?id=USvrCAAAQBAJ},
+  year      = {2013},
+  publisher = {Springer Berlin Heidelberg}
 }
 
-@misc{wang2023expertsguidetrainingphysicsinformed,
-  title         = {An Expert's Guide to Training Physics-informed Neural Networks},
-  author        = {Sifan Wang and Shyam Sankaran and Hanwen Wang and Paris Perdikaris},
+@misc{chen2018gradnormgradientnormalizationadaptive,
+  title         = {GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks},
+  author        = {Zhao Chen and Vijay Badrinarayanan and Chen-Yu Lee and Andrew Rabinovich},
+  year          = {2018},
+  eprint        = {1711.02257},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CV},
+  url           = {https://arxiv.org/abs/1711.02257}
+}
+
+@misc{cho2023separablephysicsinformedneuralnetworks,
+  title         = {Separable Physics-Informed Neural Networks},
+  author        = {Junwoo Cho and Seungtae Nam and Hyunmo Yang and Seok-Bae Yun and Youngjoon Hong and Eunbyung Park},
   year          = {2023},
-  eprint        = {2308.08468},
+  eprint        = {2306.15969},
   archiveprefix = {arXiv},
   primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/2308.08468}
+  url           = {https://arxiv.org/abs/2306.15969}
 }
 
-@article{HORNIK1989359,
-  title    = {Multilayer feedforward networks are universal approximators},
-  journal  = {Neural Networks},
-  volume   = {2},
+@article{CiCP-28-5,
+  author   = {Jagtap, D., Ameya and Karniadakis, George, Em},
+  title    = {Extended Physics-Informed Neural Networks (XPINNs): A Generalized Space-Time Domain Decomposition Based Deep Learning Framework for Nonlinear Partial Differential Equations},
+  journal  = {Communications in Computational Physics},
+  year     = {2020},
+  volume   = {28},
   number   = {5},
-  pages    = {359-366},
-  year     = {1989},
-  issn     = {0893-6080},
-  doi      = {https://doi.org/10.1016/0893-6080(89)90020-8},
-  url      = {https://www.sciencedirect.com/science/article/pii/0893608089900208},
-  author   = {Kurt Hornik and Maxwell Stinchcombe and Halbert White},
-  keywords = {Feedforward networks, Universal approximation, Mapping networks, Network representation capability, Stone-Weierstrass Theorem, Squashing functions, Sigma-Pi networks, Back-propagation networks},
-  abstract = {This paper rigorously establishes that standard multilayer feedforward networks with as few as one hidden layer using arbitrary squashing functions are capable of approximating any Borel measurable function from one finite dimensional space to another to any desired degree of accuracy, provided sufficiently many hidden units are available. In this sense, multilayer feedforward networks are a class of universal approximators.}
+  pages    = {2002--2041},
+  abstract = {<p style="text-align: justify;">We propose a generalized space-time domain decomposition approach for
+              the physics-informed neural networks (PINNs) to solve nonlinear partial differential
+              equations (PDEs) on arbitrary complex-geometry domains. The proposed framework,
+              named eXtended PINNs ($XPINNs$), further pushes the boundaries of both PINNs as
+              well as conservative PINNs (cPINNs), which is a recently proposed domain decomposition approach in the PINN framework tailored to conservation laws. Compared to
+              PINN, the XPINN method has large representation and parallelization capacity due to
+              the inherent property of deployment of multiple neural networks in the smaller subdomains. Unlike cPINN, XPINN can be extended to any type of PDEs. Moreover, the
+              domain can be decomposed in any arbitrary way (in space and time), which is not
+              possible in cPINN. Thus, XPINN offers both space and time parallelization, thereby
+              reducing the training cost more effectively. In each subdomain, a separate neural network is employed with optimally selected hyperparameters, e.g., depth/width of the
+              network, number and location of residual points, activation function, optimization
+              method, etc. A deep network can be employed in a subdomain with complex solution,
+              whereas a shallow neural network can be used in a subdomain with relatively simple
+              and smooth solutions. We demonstrate the versatility of XPINN by solving both forward and inverse PDE problems, ranging from one-dimensional to three-dimensional
+              problems, from time-dependent to time-independent problems, and from continuous
+              to discontinuous problems, which clearly shows that the XPINN method is promising in many practical problems. The proposed XPINN method is the generalization of
+              PINN and cPINN methods, both in terms of applicability as well as domain decomposition approach, which efficiently lends itself to parallelized computation. The XPINN
+              code is available on $https://github.com/AmeyaJagtap/XPINNs$.</p>},
+  issn     = {1991-7120},
+  doi      = {https://doi.org/10.4208/cicp.OA-2020-0164},
+  url      = {https://global-sci.com/article/79747/extended-physics-informed-neural-networks-xpinns-a-generalized-space-time-domain-decomposition-based-deep-learning-framework-for-nonlinear-partial-differential-equations}
 }
 
-@article{RAISSI2019686,
-  title    = {Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations},
-  journal  = {Journal of Computational Physics},
-  volume   = {378},
-  pages    = {686-707},
-  year     = {2019},
-  issn     = {0021-9991},
-  doi      = {https://doi.org/10.1016/j.jcp.2018.10.045},
-  url      = {https://www.sciencedirect.com/science/article/pii/S0021999118307125},
-  author   = {M. Raissi and P. Perdikaris and G.E. Karniadakis},
-  keywords = {Data-driven scientific computing, Machine learning, Predictive modeling, Runge–Kutta methods, Nonlinear dynamics},
-  abstract = {We introduce physics-informed neural networks – neural networks that are trained to solve supervised learning tasks while respecting any given laws of physics described by general nonlinear partial differential equations. In this work, we present our developments in the context of solving two main classes of problems: data-driven solution and data-driven discovery of partial differential equations. Depending on the nature and arrangement of the available data, we devise two distinct types of algorithms, namely continuous time and discrete time models. The first type of models forms a new family of data-efficient spatio-temporal function approximators, while the latter type allows the use of arbitrarily accurate implicit Runge–Kutta time stepping schemes with unlimited number of stages. The effectiveness of the proposed framework is demonstrated through a collection of classical problems in fluids, quantum mechanics, reaction–diffusion systems, and the propagation of nonlinear shallow-water waves.}
+@misc{crépey2024cvasensitivitieshedgingrisk,
+  title         = {CVA Sensitivities, Hedging and Risk},
+  author        = {Stéphane Crépey and Botao Li and Hoang Nguyen and Bouazza Saadeddine},
+  year          = {2024},
+  eprint        = {2407.18583},
+  archiveprefix = {arXiv},
+  primaryclass  = {q-fin.CP},
+  url           = {https://arxiv.org/abs/2407.18583}
 }
 
 @article{cybenko:hal-03753170,
@@ -96,64 +204,60 @@
   hal_version = {v1}
 }
 
-@article{WU2023115671,
-  title    = {A comprehensive study of non-adaptive and residual-based adaptive sampling for physics-informed neural networks},
-  journal  = {Computer Methods in Applied Mechanics and Engineering},
-  volume   = {403},
-  pages    = {115671},
+@article{deeponets,
+  abstract      = {It is widely known that neural networks (NNs) are universal approximators of continuous functions. However, a less known but powerful result is that a NN with a single hidden layer can accurately approximate any nonlinear continuous operator. This universal approximation theorem of operators is suggestive of the structure and potential of deep neural networks (DNNs) in learning continuous operators or complex systems from streams of scattered data. Here, we thus extend this theorem to DNNs. We design a new network with small generalization error, the deep operator network (DeepONet), which consists of a DNN for encoding the discrete input function space (branch net) and another DNN for encoding the domain of the output functions (trunk net). We demonstrate that DeepONet can learn various explicit operators, such as integrals and fractional Laplacians, as well as implicit operators that represent deterministic and stochastic differential equations. We study different formulations of the input function space and its effect on the generalization error for 16 different diverse applications.},
+  author        = {Lu, Lu and Jin, Pengzhan and Pang, Guofei and Zhang, Zhongqiang and Karniadakis, George Em},
+  date          = {2021/03/01},
+  date-added    = {2025-07-24 08:38:41 +0200},
+  date-modified = {2025-07-24 08:38:41 +0200},
+  doi           = {10.1038/s42256-021-00302-5},
+  id            = {Lu2021},
+  isbn          = {2522-5839},
+  journal       = {Nature Machine Intelligence},
+  number        = {3},
+  pages         = {218--229},
+  title         = {Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators},
+  url           = {https://doi.org/10.1038/s42256-021-00302-5},
+  volume        = {3},
+  year          = {2021},
+  bdsk-url-1    = {https://doi.org/10.1038/s42256-021-00302-5}
+}
+
+@book{duffy2022numerical,
+  title     = {Numerical Methods in Computational Finance: A Partial Differential Equation (PDE/FDM) Approach},
+  author    = {Duffy, D.J.},
+  isbn      = {9781119719670},
+  lccn      = {2021042738},
+  series    = {Wiley Finance},
+  url       = {https://books.google.es/books?id=6cZ6EAAAQBAJ},
+  year      = {2022},
+  publisher = {Wiley}
+}
+
+@inproceedings{Gao_2022,
+  title     = {SVD-PINNs: Transfer Learning of Physics-Informed Neural Networks via Singular Value Decomposition},
+  url       = {http://dx.doi.org/10.1109/SSCI51031.2022.10022281},
+  doi       = {10.1109/ssci51031.2022.10022281},
+  booktitle = {2022 IEEE Symposium Series on Computational Intelligence (SSCI)},
+  publisher = {IEEE},
+  author    = {Gao, Yihang and Cheung, Ka Chun and Ng, Michael K.},
+  year      = {2022},
+  month     = dec,
+  pages     = {1443–1450}
+}
+
+@article{GATTA202368,
+  title    = {Meshless methods for American option pricing through Physics-Informed Neural Networks},
+  journal  = {Engineering Analysis with Boundary Elements},
+  volume   = {151},
+  pages    = {68-82},
   year     = {2023},
-  issn     = {0045-7825},
-  doi      = {https://doi.org/10.1016/j.cma.2022.115671},
-  url      = {https://www.sciencedirect.com/science/article/pii/S0045782522006260},
-  author   = {Chenxi Wu and Min Zhu and Qinyang Tan and Yadhu Kartha and Lu Lu},
-  keywords = {Partial differential equations, Physics-informed neural networks, Residual point distribution, Non-adaptive uniform sampling, Uniform sampling with resampling, Residual-based adaptive sampling},
-  abstract = {Physics-informed neural networks (PINNs) have shown to be effective tools for solving both forward and inverse problems of partial differential equations (PDEs). PINNs embed the PDEs into the loss of the neural network using automatic differentiation, and this PDE loss is evaluated at a set of scattered spatio-temporal points (called residual points). The location and distribution of these residual points are highly important to the performance of PINNs. However, in the existing studies on PINNs, only a few simple residual point sampling methods have mainly been used. Here, we present a comprehensive study of two categories of sampling for PINNs: non-adaptive uniform sampling and adaptive nonuniform sampling. We consider six uniform sampling methods, including (1) equispaced uniform grid, (2) uniformly random sampling, (3) Latin hypercube sampling, (4) Halton sequence, (5) Hammersley sequence, and (6) Sobol sequence. We also consider a resampling strategy for uniform sampling. To improve the sampling efficiency and the accuracy of PINNs, we propose two new residual-based adaptive sampling methods: residual-based adaptive distribution (RAD) and residual-based adaptive refinement with distribution (RAR-D), which dynamically improve the distribution of residual points based on the PDE residuals during training. Hence, we have considered a total of 10 different sampling methods, including six non-adaptive uniform sampling, uniform sampling with resampling, two proposed adaptive sampling, and an existing adaptive sampling. We extensively tested the performance of these sampling methods for four forward problems and two inverse problems in many setups. Our numerical results presented in this study are summarized from more than 6000 simulations of PINNs. We show that the proposed adaptive sampling methods of RAD and RAR-D significantly improve the accuracy of PINNs with fewer residual points for both forward and inverse problems. The results obtained in this study can also be used as a practical guideline in choosing sampling methods.}
-}
-
-@misc{chen2018gradnormgradientnormalizationadaptive,
-  title         = {GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks},
-  author        = {Zhao Chen and Vijay Badrinarayanan and Chen-Yu Lee and Andrew Rabinovich},
-  year          = {2018},
-  eprint        = {1711.02257},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.CV},
-  url           = {https://arxiv.org/abs/1711.02257}
-}
-
-@misc{wang2020understandingmitigatinggradientpathologies,
-  title         = {Understanding and mitigating gradient pathologies in physics-informed neural networks},
-  author        = {Sifan Wang and Yujun Teng and Paris Perdikaris},
-  year          = {2020},
-  eprint        = {2001.04536},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/2001.04536}
-}
-
-@inbook{ref1,
-  title     = {Deep Learning: History and State-of-the-Arts},
-  booktitle = {The Development of Deep Learning Technologies: Research on the Development of Electronic Information Engineering Technology in China},
-  year      = {2020},
-  publisher = {Springer Singapore},
-  address   = {Singapore},
-  pages     = {1--11},
-  abstract  = {This chapter introduces the history and state-of-the-arts of deep learning technologies. In recent years, deep learning has made an immense impact on both academia and industry. Many academic fields have witnessed deep learning-triggered breakthroughs and a rise in deep learning-related papers. Deep learning has become a buzzword at major academic conferences. Deep learning-related patents account for a sizable share of the AI patent applications. Meanwhile, industrial advancements and new products due to deep learning have greatly changed our manner of working, studying, and living. Widely used in a variety of important fields, deep learning has empowered increasing numbers of applications in information retrieval, information exchange, shopping, healthcare, finance, and industrial manufacturing, which undoubtedly will become increasingly important in our daily lives in the future.},
-  isbn      = {978-981-15-4584-9},
-  doi       = {10.1007/978-981-15-4584-9_1},
-  url       = {https://doi.org/10.1007/978-981-15-4584-9_1}
-}
-
-@book{alma99148840908702021,
-  author    = {Hull, John},
-  title     = {Options, futures, and other derivatives },
-  year      = {2018 - 2018},
-  address   = {Boston},
-  booktitle = {Options, futures, and other derivatives},
-  edition   = {Ninth edition, Global edition},
-  isbn      = {1292212896},
-  keywords  = {Futures ; Stock options ; Derivative securities},
-  language  = {eng},
-  publisher = {Pearson Education Limited}
+  issn     = {0955-7997},
+  doi      = {https://doi.org/10.1016/j.enganabound.2023.02.040},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0955799723000978},
+  author   = {Federico Gatta and Vincenzo Schiano {Di Cola} and Fabio Giampaolo and Francesco Piccialli and Salvatore Cuomo},
+  keywords = {Finance, Black-Scholes, PINN, Free boundary problem, Deep learning, Parametric model},
+  abstract = {Nowadays, Deep Learning is drastically revolutionizing financial research as well as industry. Many methods have been discussed in the last few years, mainly related to option pricing. In fact, traditional approaches such as Monte Carlo simulation or finite difference methods are seriously harmed by multi-dimensional underlying and path dependency. Thus, dealing with particular contracts such as American multi-asset options is still rough. This paper addresses such a problem by pricing said put options with a novel meshless methodology, named Physics-Informed Neural Networks (PINNs), based on Artificial Intelligence. PINN paradigm has been recently introduced in Deep Learning literature. It exploits the theoretical background of the universal approximation theorem for neural networks to solve Partial Differential Equations numerically. This Deep Learning meshless method incorporates the equation and its initial and boundary conditions thanks to a specially designed loss function. We develop a suitable PINN for the proposed problem by introducing an algorithmic trick for improving the convergence of the free boundary problem. Furthermore, the worthiness of the proposal is assessed by several experiments concerned with single and multi-asset options. Finally, a parametric model is built to benefit further studies of option value behaviour related to particular market conditions.}
 }
 
 @book{glasserman2004monte,
@@ -175,83 +279,6 @@
   year        = 2004
 }
 
-@article{blackscholes,
-  issn      = {00223808, 1537534X},
-  url       = {http://www.jstor.org/stable/1831029},
-  abstract  = {If options are correctly priced in the market, it should not be possible to make sure profits by creating portfolios of long and short positions in options and their underlying stocks. Using this principle, a theoretical valuation formula for options is derived. Since almost all corporate liabilities can be viewed as combinations of options, the formula and the analysis that led to it are also applicable to corporate liabilities such as common stock, corporate bonds, and warrants. In particular, the formula can be used to derive the discount that should be applied to a corporate bond because of the possibility of default.},
-  author    = {Fischer Black and Myron Scholes},
-  journal   = {Journal of Political Economy},
-  number    = {3},
-  pages     = {637--654},
-  publisher = {The University of Chicago Press},
-  title     = {The Pricing of Options and Corporate Liabilities},
-  urldate   = {2025-04-25},
-  volume    = {81},
-  year      = {1973}
-}
-
-@article{lecun,
-  author  = {LeCun, Yann and Bengio, Y. and Hinton, Geoffrey},
-  year    = {2015},
-  month   = {05},
-  pages   = {436-44},
-  title   = {Deep Learning},
-  volume  = {521},
-  journal = {Nature},
-  doi     = {10.1038/nature14539}
-}
-
-@article{bellman1966dynamic,
-  title     = {Dynamic programming},
-  author    = {Bellman, Richard},
-  journal   = {Science},
-  volume    = {153},
-  number    = {3731},
-  pages     = {34--37},
-  year      = {1966},
-  publisher = {American Association for the Advancement of Science}
-}
-
-@misc{heaton2018deeplearningfinance,
-  title         = {Deep Learning in Finance},
-  author        = {J. B. Heaton and N. G. Polson and J. H. Witte},
-  year          = {2018},
-  eprint        = {1602.06561},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/1602.06561}
-}
-
-@misc{crépey2024cvasensitivitieshedgingrisk,
-  title         = {CVA Sensitivities, Hedging and Risk},
-  author        = {Stéphane Crépey and Botao Li and Hoang Nguyen and Bouazza Saadeddine},
-  year          = {2024},
-  eprint        = {2407.18583},
-  archiveprefix = {arXiv},
-  primaryclass  = {q-fin.CP},
-  url           = {https://arxiv.org/abs/2407.18583}
-}
-
-@misc{huge2020differentialmachinelearning,
-  title         = {Differential Machine Learning},
-  author        = {Brian Huge and Antoine Savine},
-  year          = {2020},
-  eprint        = {2005.02347},
-  archiveprefix = {arXiv},
-  primaryclass  = {q-fin.CP},
-  url           = {https://arxiv.org/abs/2005.02347}
-}
-
-@article{longstaffshawrtz,
-  author  = {Longstaff, Sam},
-  year    = {2001},
-  month   = {01},
-  pages   = {113-147},
-  title   = {Valuing american options by simulation: a simple least squares approach},
-  volume  = {14},
-  journal = {Review of Finance Studies}
-}
-
 @article{Han_2018,
   title     = {Solving high-dimensional partial differential equations using deep learning},
   volume    = {115},
@@ -267,30 +294,6 @@
   pages     = {8505–8510}
 }
 
-@article{BISCHOF2025117914,
-  title    = {Multi-Objective Loss Balancing for Physics-Informed Deep Learning},
-  journal  = {Computer Methods in Applied Mechanics and Engineering},
-  volume   = {439},
-  pages    = {117914},
-  year     = {2025},
-  issn     = {0045-7825},
-  doi      = {https://doi.org/10.1016/j.cma.2025.117914},
-  url      = {https://www.sciencedirect.com/science/article/pii/S0045782525001860},
-  author   = {Rafael Bischof and Michael A. Kraus},
-  keywords = {Partial differential equations, Scientific machine learning, Helmholtz equation, Burgers equation, PINNacle, Loss balancing, Multi-objective optimisation},
-  abstract = {Physics-Informed Neural Networks (PINN) are deep learning algorithms that leverage physical laws by including partial differential equations together with a respective set of boundary and initial conditions as penalty terms in their loss function. In this work, we observe the significant role of correctly weighting the combination of multiple competitive loss functions for training PINNs effectively. To this end, we implement and evaluate different methods aiming at balancing the contributions of multiple terms of the PINN’s loss function and their gradients. After reviewing three existing loss scaling approaches (Learning Rate Annealing, GradNorm and SoftAdapt), we propose a novel self-adaptive loss balancing scheme for PINNs named ReLoBRaLo (Relative Loss Balancing with Random Lookback). We extensively evaluate the performance of the aforementioned balancing schemes by solving both forward as well as inverse problems on three benchmark PDEs for PINNs: Burgers’ equation, Kirchhoff’s plate bending equation, Helmholtz’s equation and over 20 PDEs from the ”PINNacle” collection. The results show that ReLoBRaLo is able to consistently outperform the baseline of existing scaling methods in terms of accuracy while also inducing significantly less computational overhead for a variety of PDE classes.}
-}
-
-@misc{cho2023separablephysicsinformedneuralnetworks,
-  title         = {Separable Physics-Informed Neural Networks},
-  author        = {Junwoo Cho and Seungtae Nam and Hyunmo Yang and Seok-Bae Yun and Youngjoon Hong and Eunbyung Park},
-  year          = {2023},
-  eprint        = {2306.15969},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/2306.15969}
-}
-
 @misc{hao2023physicsinformedmachinelearningsurvey,
   title         = {Physics-Informed Machine Learning: A Survey on Problems, Methods and Applications},
   author        = {Zhongkai Hao and Songming Liu and Yichi Zhang and Chengyang Ying and Yao Feng and Hang Su and Jun Zhu},
@@ -301,126 +304,14 @@
   url           = {https://arxiv.org/abs/2211.08064}
 }
 
-@article{karniadakis2021physics,
-  title   = {Physics-informed machine learning},
-  author  = {Karniadakis, George Em et al.},
-  journal = {Nature Reviews Physics},
-  volume  = {3},
-  pages   = {422--440},
-  year    = {2021}
-}
-
-@misc{wang2022respectingcausalityneedtraining,
-  title         = {Respecting causality is all you need for training physics-informed neural networks},
-  author        = {Sifan Wang and Shyam Sankaran and Paris Perdikaris},
-  year          = {2022},
-  eprint        = {2203.07404},
+@misc{heaton2018deeplearningfinance,
+  title         = {Deep Learning in Finance},
+  author        = {J. B. Heaton and N. G. Polson and J. H. Witte},
+  year          = {2018},
+  eprint        = {1602.06561},
   archiveprefix = {arXiv},
   primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/2203.07404}
-}
-
-@misc{banerjee2024pinnsmedicalimageanalysis,
-  title         = {PINNs for Medical Image Analysis: A Survey},
-  author        = {Chayan Banerjee and Kien Nguyen and Olivier Salvado and Truyen Tran and Clinton Fookes},
-  year          = {2024},
-  eprint        = {2408.01026},
-  archiveprefix = {arXiv},
-  primaryclass  = {eess.IV},
-  url           = {https://arxiv.org/abs/2408.01026}
-}
-
-@misc{kharazmi2019variationalphysicsinformedneuralnetworks,
-  title         = {Variational Physics-Informed Neural Networks For Solving Partial Differential Equations},
-  author        = {E. Kharazmi and Z. Zhang and G. E. Karniadakis},
-  year          = {2019},
-  eprint        = {1912.00873},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.NE},
-  url           = {https://arxiv.org/abs/1912.00873}
-}
-
-@article{Hu_2023,
-  title     = {Augmented Physics-Informed Neural Networks (APINNs): A gating network-based soft domain decomposition methodology},
-  volume    = {126},
-  issn      = {0952-1976},
-  url       = {http://dx.doi.org/10.1016/j.engappai.2023.107183},
-  doi       = {10.1016/j.engappai.2023.107183},
-  journal   = {Engineering Applications of Artificial Intelligence},
-  publisher = {Elsevier BV},
-  author    = {Hu, Zheyuan and Jagtap, Ameya D. and Karniadakis, George Em and Kawaguchi, Kenji},
-  year      = {2023},
-  month     = nov,
-  pages     = {107183}
-}
-
-@article{Hu_2022,
-  title     = {When Do Extended Physics-Informed Neural Networks (XPINNs) Improve Generalization?},
-  volume    = {44},
-  issn      = {1095-7197},
-  url       = {http://dx.doi.org/10.1137/21M1447039},
-  doi       = {10.1137/21m1447039},
-  number    = {5},
-  journal   = {SIAM Journal on Scientific Computing},
-  publisher = {Society for Industrial & Applied Mathematics (SIAM)},
-  author    = {Hu, Zheyuan and Jagtap, Ameya D. and Karniadakis, George Em and Kawaguchi, Kenji},
-  year      = {2022},
-  month     = sep,
-  pages     = {A3158–A3182}
-}
-
-@misc{li2021fourierneuraloperatorparametric,
-  title         = {Fourier Neural Operator for Parametric Partial Differential Equations},
-  author        = {Zongyi Li and Nikola Kovachki and Kamyar Azizzadenesheli and Burigede Liu and Kaushik Bhattacharya and Andrew Stuart and Anima Anandkumar},
-  year          = {2021},
-  eprint        = {2010.08895},
-  archiveprefix = {arXiv},
-  primaryclass  = {cs.LG},
-  url           = {https://arxiv.org/abs/2010.08895}
-}
-
-@article{Lu_2021,
-  title     = {Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators},
-  volume    = {3},
-  issn      = {2522-5839},
-  url       = {http://dx.doi.org/10.1038/s42256-021-00302-5},
-  doi       = {10.1038/s42256-021-00302-5},
-  number    = {3},
-  journal   = {Nature Machine Intelligence},
-  publisher = {Springer Science and Business Media LLC},
-  author    = {Lu, Lu and Jin, Pengzhan and Pang, Guofei and Zhang, Zhongqiang and Karniadakis, George Em},
-  year      = {2021},
-  month     = mar,
-  pages     = {218–229}
-}
-
-@article{Bhatnagar_2019,
-  title     = {Prediction of aerodynamic flow fields using convolutional neural networks},
-  volume    = {64},
-  issn      = {1432-0924},
-  url       = {http://dx.doi.org/10.1007/s00466-019-01740-0},
-  doi       = {10.1007/s00466-019-01740-0},
-  number    = {2},
-  journal   = {Computational Mechanics},
-  publisher = {Springer Science and Business Media LLC},
-  author    = {Bhatnagar, Saakaar and Afshar, Yaser and Pan, Shaowu and Duraisamy, Karthik and Kaushik, Shailendra},
-  year      = {2019},
-  month     = jun,
-  pages     = {525–545}
-}
-
-@article{SUKUMAR2022114333,
-  title    = {Exact imposition of boundary conditions with distance functions in physics-informed deep neural networks},
-  journal  = {Computer Methods in Applied Mechanics and Engineering},
-  volume   = {389},
-  pages    = {114333},
-  year     = {2022},
-  issn     = {0045-7825},
-  doi      = {https://doi.org/10.1016/j.cma.2021.114333},
-  url      = {https://www.sciencedirect.com/science/article/pii/S0045782521006186},
-  author   = {N. Sukumar and Ankit Srivastava},
-  keywords = {Deep learning, Meshfree method, Distance function, R-function, Transfinite interpolation, Exact geometry},
-  abstract = {In this paper, we introduce a new approach based on distance fields to exactly impose boundary conditions in physics-informed deep neural networks. The challenges in satisfying Dirichlet boundary conditions in meshfree and particle methods are well-known. This issue is also pertinent in the development of physics informed neural networks (PINN) for the solution of partial differential equations. We introduce geometry-aware trial functions in artificial neural networks to improve the training in deep learning for partial differential equations. To this end, we use concepts from constructive solid geometry (R-functions) and generalized barycentric coordinates (mean value potential fields) to construct ϕ(x), an approximate distance function to the boundary of a domain in Rd. To exactly impose homogeneous Dirichlet boundary conditions, the trial function is taken as ϕ(x) multiplied by the PINN approximation, and its generalization via transfinite interpolation is used to a priori satisfy inhomogeneous Dirichlet (essential), Neumann (natural), and Robin boundary conditions on complex geometries. In doing so, we eliminate modeling error associated with the satisfaction of boundary conditions in a collocation method and ensure that kinematic admissibility is met pointwise in a Ritz method. With this new ansatz, the training for the neural network is simplified: sole contribution to the loss function is from the residual error at interior collocation points where the governing equation is required to be satisfied. Numerical solutions are computed using strong form collocation and Ritz minimization. To convey the main ideas and to assess the accuracy of the approach, we present numerical solutions for linear and nonlinear boundary-value problems over convex and nonconvex polygonal domains as well as over domains with curved boundaries. Benchmark problems in one dimension for linear elasticity, advection-diffusion, and beam bending; and in two dimensions for the steady-state heat equation, Laplace equation, biharmonic equation (Kirchhoff plate bending), and the nonlinear Eikonal equation are considered. The construction of approximate distance functions using R-functions extends to higher dimensions, and we showcase its use by solving a Poisson problem with homogeneous Dirichlet boundary conditions over the four-dimensional hypercube. The proposed approach consistently outperforms a standard PINN-based collocation method, which underscores the importance of exactly (a priori) satisfying the boundary condition when constructing a loss function in PINN. This study provides a pathway for meshfree analysis to be conducted on the exact geometry without domain discretization.}
+  url           = {https://arxiv.org/abs/1602.06561}
 }
 
 @article{hestonmodel,
@@ -438,14 +329,58 @@
   year      = {1993}
 }
 
-@book{brigo2013interest,
-  title     = {Interest Rate Models Theory and Practice},
-  author    = {Brigo, D. and Mercurio, F.},
-  isbn      = {9783662045534},
-  series    = {Springer Finance},
-  url       = {https://books.google.es/books?id=USvrCAAAQBAJ},
-  year      = {2013},
-  publisher = {Springer Berlin Heidelberg}
+@article{HORNIK1989359,
+  title    = {Multilayer feedforward networks are universal approximators},
+  journal  = {Neural Networks},
+  volume   = {2},
+  number   = {5},
+  pages    = {359-366},
+  year     = {1989},
+  issn     = {0893-6080},
+  doi      = {https://doi.org/10.1016/0893-6080(89)90020-8},
+  url      = {https://www.sciencedirect.com/science/article/pii/0893608089900208},
+  author   = {Kurt Hornik and Maxwell Stinchcombe and Halbert White},
+  keywords = {Feedforward networks, Universal approximation, Mapping networks, Network representation capability, Stone-Weierstrass Theorem, Squashing functions, Sigma-Pi networks, Back-propagation networks},
+  abstract = {This paper rigorously establishes that standard multilayer feedforward networks with as few as one hidden layer using arbitrary squashing functions are capable of approximating any Borel measurable function from one finite dimensional space to another to any desired degree of accuracy, provided sufficiently many hidden units are available. In this sense, multilayer feedforward networks are a class of universal approximators.}
+}
+
+@article{Hu_2022,
+  title     = {When Do Extended Physics-Informed Neural Networks (XPINNs) Improve Generalization?},
+  volume    = {44},
+  issn      = {1095-7197},
+  url       = {http://dx.doi.org/10.1137/21M1447039},
+  doi       = {10.1137/21m1447039},
+  number    = {5},
+  journal   = {SIAM Journal on Scientific Computing},
+  publisher = {Society for Industrial and Applied Mathematics (SIAM)},
+  author    = {Hu, Zheyuan and Jagtap, Ameya D. and Karniadakis, George Em and Kawaguchi, Kenji},
+  year      = {2022},
+  month     = sep,
+  pages     = {A3158–A3182}
+}
+
+@article{Hu_2023,
+  title     = {Augmented Physics-Informed Neural Networks (APINNs): A gating network-based soft domain decomposition methodology},
+  volume    = {126},
+  issn      = {0952-1976},
+  url       = {http://dx.doi.org/10.1016/j.engappai.2023.107183},
+  doi       = {10.1016/j.engappai.2023.107183},
+  journal   = {Engineering Applications of Artificial Intelligence},
+  publisher = {Elsevier BV},
+  author    = {Hu, Zheyuan and Jagtap, Ameya D. and Karniadakis, George Em and Kawaguchi, Kenji},
+  year      = {2023},
+  month     = nov,
+  pages     = {107183}
+}
+
+@misc{huge2020differentialmachinelearning,
+  title         = {Differential Machine Learning},
+  author        = {Brian Huge and Antoine Savine},
+  year          = {2020},
+  eprint        = {2005.02347},
+  archiveprefix = {arXiv},
+  primaryclass  = {q-fin.CP},
+  url           = {https://arxiv.org/abs/2005.02347}
 }
 
 @article{hullwhitemodel,
@@ -464,47 +399,269 @@
   eprint   = {https://academic.oup.com/rfs/article-pdf/3/4/573/24416170/030573.pdf}
 }
 
-@book{björk2004arbitrage,
-  title     = {Arbitrage Theory in Continuous Time},
-  author    = {Bj{\"o}rk, T.},
-  isbn      = {9780191533846},
-  series    = {Oxford Finance Series},
-  url       = {https://books.google.es/books?id=TJgjgJATeVIC},
-  year      = {2004},
-  publisher = {Oxford University Press, Incorporated}
+@article{IKONEN2004809,
+  title    = {Operator splitting methods for American option pricing},
+  journal  = {Applied Mathematics Letters},
+  volume   = {17},
+  number   = {7},
+  pages    = {809-814},
+  year     = {2004},
+  issn     = {0893-9659},
+  doi      = {https://doi.org/10.1016/j.aml.2004.06.010},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0893965904804968},
+  author   = {S. Ikonen and J. Toivanen},
+  keywords = {American option, Operator splitting method, Time discretization, Linear complementarity problem},
+  abstract = {We propose operator splitting methods for solving the linear complementarity problems arising from the pricing of American options. The space discretization of the underlying Black-Scholes Scholes equation is done using a central finite-difference scheme. The time discretization as well as the operator splittings are based on the Crank-Nicolson method and the two-step backward differentiation formula. Numerical experiments show that the operator splitting methodology is much more efficient than the projected SOR, while the accuracy of both methods are similar.}
 }
 
-@article{VASICEK1977177,
-  title    = {An equilibrium characterization of the term structure},
-  journal  = {Journal of Financial Economics},
-  volume   = {5},
-  number   = {2},
-  pages    = {177-188},
-  year     = {1977},
-  issn     = {0304-405X},
-  doi      = {https://doi.org/10.1016/0304-405X(77)90016-2},
-  url      = {https://www.sciencedirect.com/science/article/pii/0304405X77900162},
-  author   = {Oldrich Vasicek},
-  abstract = {The paper derives a general form of the term structure of interest rates. The following assumptions are made: (A.1) The instantaneous (spot) interest rate follows a diffusion process; (A.2) the price of a discount bond depends only on the spot rate over its term; and (A.3) the market is efficient. Under these assumptions, it is shown by means of an arbitrage argument that the expected rate of return on any bond in excess of the spot rate is proportional to its standard deviation. This property is then used to derive a partial differential equation for bond prices. The solution to that equation is given in the form of a stochastic integral representation. An interpretation of the bond pricing formula is provided. The model is illustrated on a specific case.}
+@article{karniadakis2021physics,
+  title   = {Physics-informed machine learning},
+  author  = {Karniadakis, George Em et al.},
+  journal = {Nature Reviews Physics},
+  volume  = {3},
+  pages   = {422--440},
+  year    = {2021}
 }
 
-@book{duffy2022numerical,
-  title     = {Numerical Methods in Computational Finance: A Partial Differential Equation (PDE/FDM) Approach},
-  author    = {Duffy, D.J.},
-  isbn      = {9781119719670},
-  lccn      = {2021042738},
-  series    = {Wiley Finance},
-  url       = {https://books.google.es/books?id=6cZ6EAAAQBAJ},
+@misc{kharazmi2019variationalphysicsinformedneuralnetworks,
+  title         = {Variational Physics-Informed Neural Networks For Solving Partial Differential Equations},
+  author        = {E. Kharazmi and Z. Zhang and G. E. Karniadakis},
+  year          = {2019},
+  eprint        = {1912.00873},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.NE},
+  url           = {https://arxiv.org/abs/1912.00873}
+}
+
+@misc{kingma2017adammethodstochasticoptimization,
+  title         = {Adam: A Method for Stochastic Optimization},
+  author        = {Diederik P. Kingma and Jimmy Ba},
+  year          = {2017},
+  eprint        = {1412.6980},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/1412.6980}
+}
+
+@article{lecun,
+  author  = {LeCun, Yann and Bengio, Y. and Hinton, Geoffrey},
+  year    = {2015},
+  month   = {05},
+  pages   = {436-44},
+  title   = {Deep Learning},
+  volume  = {521},
+  journal = {Nature},
+  doi     = {10.1038/nature14539}
+}
+
+@misc{li2021fourierneuraloperatorparametric,
+  title         = {Fourier Neural Operator for Parametric Partial Differential Equations},
+  author        = {Zongyi Li and Nikola Kovachki and Kamyar Azizzadenesheli and Burigede Liu and Kaushik Bhattacharya and Andrew Stuart and Anima Anandkumar},
+  year          = {2021},
+  eprint        = {2010.08895},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2010.08895}
+}
+
+@misc{li2021fourierneuraloperatorparametric,
+  title         = {Fourier Neural Operator for Parametric Partial Differential Equations},
+  author        = {Zongyi Li and Nikola Kovachki and Kamyar Azizzadenesheli and Burigede Liu and Kaushik Bhattacharya and Andrew Stuart and Anima Anandkumar},
+  year          = {2021},
+  eprint        = {2010.08895},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2010.08895}
+}
+
+@article{LI202460,
+  title    = {Physical informed neural networks with soft and hard boundary constraints for solving advection-diffusion equations using Fourier expansions},
+  journal  = {Computers and Mathematics with Applications},
+  volume   = {159},
+  pages    = {60-75},
+  year     = {2024},
+  issn     = {0898-1221},
+  doi      = {https://doi.org/10.1016/j.camwa.2024.01.021},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0898122124000348},
+  author   = {Xi'an Li and Jiaxin Deng and Jinran Wu and Shaotong Zhang and Weide Li and You-Gan Wang},
+  keywords = {Advection-diffusion equation, PINN, Hard constraint, Subnetworks, Fourier feature mapping},
+  abstract = {Deep learning methods have gained considerable interest in the numerical solution of various partial differential equations (PDEs). One particular focus is physics-informed neural networks (PINN), which integrate physical principles into neural networks. This transforms the process of solving PDEs into optimization problems for neural networks. To address a collection of advection-diffusion equations (ADE) in a range of difficult circumstances, this paper proposes a novel network structure. This architecture integrates the solver, a multi-scale deep neural networks (MscaleDNN) utilized in the PINN method, with a hard constraint technique known as HCPINN. This method introduces a revised formulation of the desired solution for ADE by utilizing a loss function that incorporates the residuals of the governing equation and penalizes any deviations from the specified boundary and initial constraints. By surpassing the boundary constraints automatically, this method improves the accuracy and efficiency of the PINN technique. To address the “spectral bias” phenomenon in neural networks, a subnetwork structure of MscaleDNN and a Fourier-induced activation function are incorporated into the HCPINN, resulting in a hybrid approach called SFHCPINN. The effectiveness of SFHCPINN is demonstrated through various numerical experiments involving ADE in different dimensions. The numerical results indicate that SFHCPINN outperforms both standard PINN and its subnetwork version with Fourier feature embedding. It achieves remarkable accuracy and efficiency while effectively handling complex boundary conditions and high-frequency scenarios in ADE.}
+}
+
+@article{LI2025128675,
+  title    = {An architectural analysis of DeepOnet and a general extension of the physics-informed DeepOnet model on solving nonlinear parametric partial differential equations},
+  journal  = {Neurocomputing},
+  volume   = {611},
+  pages    = {128675},
+  year     = {2025},
+  issn     = {0925-2312},
+  doi      = {https://doi.org/10.1016/j.neucom.2024.128675},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0925231224014462},
+  author   = {Haolin Li and Yuyang Miao and Zahra Sharif Khodaei and M.H. Aliabadi},
+  keywords = {DeepOnet, Nonlinear parametric PDEs, Neural operators, Physic-informed neural networks},
+  abstract = {The Deep Neural Operator, as proposed by Lu et al. (2021), marks a considerable advancement in solving parametric partial differential equations. This paper examines the DeepOnet model’s neural network design, focusing on the effectiveness of its trunk-branch structure in operator learning tasks. Three key advantages of the trunk-branch structure are identified: the global learning strategy, the independent operation of the trunk and branch networks, and the consistent representation of solutions. These features are especially beneficial for operator learning. Building upon these findings, we have evolved the traditional DeepOnet into a more general form from a network perspective, allowing a nonlinear interfere of the branch net on the trunk net than the linear combination limited by the conventional DeepOnet. The operator model also incorporates physical information for enhanced integration. In a series of experiments tackling partial differential equations, the extended DeepOnet consistently outperforms than the traditional DeepOnet, particularly in complex problems. Notably, the extended DeepOnet model shows substantial advancements in operator learning with nonlinear parametric partial differential equations and exhibits a remarkable capacity for reducing physics loss.}
+}
+
+@article{longstaffshawrtz,
+  author  = {Longstaff, Sam},
+  year    = {2001},
+  month   = {01},
+  pages   = {113-147},
+  title   = {Valuing american options by simulation: a simple least squares approach},
+  volume  = {14},
+  journal = {Review of Finance Studies}
+}
+
+@article{Lu_2021,
+  title     = {Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators},
+  volume    = {3},
+  issn      = {2522-5839},
+  url       = {http://dx.doi.org/10.1038/s42256-021-00302-5},
+  doi       = {10.1038/s42256-021-00302-5},
+  number    = {3},
+  journal   = {Nature Machine Intelligence},
+  publisher = {Springer Science and Business Media LLC},
+  author    = {Lu, Lu and Jin, Pengzhan and Pang, Guofei and Zhang, Zhongqiang and Karniadakis, George Em},
+  year      = {2021},
+  month     = mar,
+  pages     = {218–229}
+}
+
+@article{math9010046,
+  author         = {Salvador, Beatriz and Oosterlee, Cornelis W. and van der Meer, Remco},
+  title          = {Financial Option Valuation by Unsupervised Learning with Artificial Neural Networks},
+  journal        = {Mathematics},
+  volume         = {9},
+  year           = {2021},
+  number         = {1},
+  article-number = {46},
+  url            = {https://www.mdpi.com/2227-7390/9/1/46},
+  issn           = {2227-7390},
+  abstract       = {Artificial neural networks (ANNs) have recently also been applied to solve partial differential equations (PDEs). The classical problem of pricing European and American financial options, based on the corresponding PDE formulations, is studied here. Instead of using numerical techniques based on finite element or difference methods, we address the problem using ANNs in the context of unsupervised learning. As a result, the ANN learns the option values for all possible underlying stock values at future time points, based on the minimization of a suitable loss function. For the European option, we solve the linear Black–Scholes equation, whereas for the American option we solve the linear complementarity problem formulation. Two-asset exotic option values are also computed, since ANNs enable the accurate valuation of high-dimensional options. The resulting errors of the ANN approach are assessed by comparing to the analytic option values or to numerical reference solutions (for American options, computed by finite elements). In the short note, previously published, a brief introduction to this work was given, where some ideas to price vanilla options by ANNs were presented, and only European options were addressed. In the current work, the methodology is introduced in much more detail.},
+  doi            = {10.3390/math9010046}
+}
+
+@article{Mattey_2022,
+  title     = {A novel sequential method to train physics informed neural networks for Allen Cahn and Cahn Hilliard equations},
+  volume    = {390},
+  issn      = {0045-7825},
+  url       = {http://dx.doi.org/10.1016/j.cma.2021.114474},
+  doi       = {10.1016/j.cma.2021.114474},
+  journal   = {Computer Methods in Applied Mechanics and Engineering},
+  publisher = {Elsevier BV},
+  author    = {Mattey, Revanth and Ghosh, Susanta},
   year      = {2022},
-  publisher = {Wiley}
+  month     = feb,
+  pages     = {114474}
 }
 
 @misc{Melo2025pricingpinns,
-  author       = {Melo, José},
+  author       = {Melo, J.},
   title        = {Leveraging Physics-Informed Neural Networks for Option Pricing Problems},
   year         = {2025},
   howpublished = {\url{https://github.com/jmelo11/pricing_pinns}},
   note         = {GitHub repository, accessed July 2025}
+}
+
+@misc{melo_options_pinns_2025,
+  author       = {Melo, J.},
+  title        = {Options-PINNs: A Physics-Informed Neural Network approach to option pricing},
+  howpublished = {\url{https://jmelo11.github.io/notebook/options-pinns/}},
+  year         = {2025},
+  note         = {Accessed: 2025-07-24}
+}
+
+
+@article{merton1973,
+  issn      = {00058556, 23255323},
+  url       = {http://www.jstor.org/stable/3003143},
+  abstract  = {The long history of the theory of option pricing began in 1900 when the French mathematician Louis Bachelier deduced an option pricing formula based on the assumption that stock prices follow a Brownian motion with zero drift. Since that time, numerous researchers have contributed to the theory. The present paper begins by deducing a set of restrictions on option pricing formulas from the assumption that investors prefer more to less. These restrictions are necessary conditions for a formula to be consistent with a rational pricing theory. Attention is given to the problems created when dividends are paid on the underlying common stock and when the terms of the option contract can be changed explicitly by a change in exercise price or implicitly by a shift in the investment or capital structure policy of the firm. Since the deduced restrictions are not sufficient to uniquely determine an option pricing formula, additional assumptions are introduced to examine and extend the seminal Black-Scholes theory of option pricing. Explicit formulas for pricing both call and put options as well as for warrants and the new "down-and-out" option are derived. The effects of dividends and call provisions on the warrant price are examined. The possibilities for further extension of the theory to the pricing of corporate liabilities are discussed.},
+  author    = {Robert C. Merton},
+  journal   = {The Bell Journal of Economics and Management Science},
+  number    = {1},
+  pages     = {141--183},
+  publisher = {[Wiley, RAND Corporation]},
+  title     = {Theory of Rational Option Pricing},
+  urldate   = {2025-04-23},
+  volume    = {4},
+  year      = {1973}
+}
+
+@article{nondimensionalinputs2025,
+  author  = {Malekjani, Narjes and Kharaghani, Reza and Tsotsas, Evangelos},
+  year    = {2025},
+  month   = {01},
+  pages   = {121214},
+  title   = {A comparative study of dimensional and non-dimensional inputs in physics-informed and data-driven neural networks for single-droplet evaporation},
+  volume  = {306},
+  journal = {Chemical Engineering Science},
+  doi     = {10.1016/j.ces.2025.121214}
+}
+
+@misc{pellegrin2022transferlearningphysicsinformedneural,
+  title         = {Transfer Learning with Physics-Informed Neural Networks for Efficient Simulation of Branched Flows},
+  author        = {Raphaël Pellegrin and Blake Bullwinkel and Marios Mattheakis and Pavlos Protopapas},
+  year          = {2022},
+  eprint        = {2211.00214},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2211.00214}
+}
+
+   @article{RAISSI2019686,
+  title    = {Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations},
+  journal  = {Journal of Computational Physics},
+  volume   = {378},
+  pages    = {686-707},
+  year     = {2019},
+  issn     = {0021-9991},
+  doi      = {https://doi.org/10.1016/j.jcp.2018.10.045},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0021999118307125},
+  author   = {M. Raissi and P. Perdikaris and G.E. Karniadakis},
+  keywords = {Data-driven scientific computing, Machine learning, Predictive modeling, Runge–Kutta methods, Nonlinear dynamics},
+  abstract = {We introduce physics-informed neural networks – neural networks that are trained to solve supervised learning tasks while respecting any given laws of physics described by general nonlinear partial differential equations. In this work, we present our developments in the context of solving two main classes of problems: data-driven solution and data-driven discovery of partial differential equations. Depending on the nature and arrangement of the available data, we devise two distinct types of algorithms, namely continuous time and discrete time models. The first type of models forms a new family of data-efficient spatio-temporal function approximators, while the latter type allows the use of arbitrarily accurate implicit Runge–Kutta time stepping schemes with unlimited number of stages. The effectiveness of the proposed framework is demonstrated through a collection of classical problems in fluids, quantum mechanics, reaction–diffusion systems, and the propagation of nonlinear shallow-water waves.}
+}
+
+@inbook{ref1,
+  title     = {Deep Learning: History and State-of-the-Arts},
+  booktitle = {The Development of Deep Learning Technologies: Research on the Development of Electronic Information Engineering Technology in China},
+  year      = {2020},
+  publisher = {Springer Singapore},
+  address   = {Singapore},
+  pages     = {1--11},
+  abstract  = {This chapter introduces the history and state-of-the-arts of deep learning technologies. In recent years, deep learning has made an immense impact on both academia and industry. Many academic fields have witnessed deep learning-triggered breakthroughs and a rise in deep learning-related papers. Deep learning has become a buzzword at major academic conferences. Deep learning-related patents account for a sizable share of the AI patent applications. Meanwhile, industrial advancements and new products due to deep learning have greatly changed our manner of working, studying, and living. Widely used in a variety of important fields, deep learning has empowered increasing numbers of applications in information retrieval, information exchange, shopping, healthcare, finance, and industrial manufacturing, which undoubtedly will become increasingly important in our daily lives in the future.},
+  isbn      = {978-981-15-4584-9},
+  doi       = {10.1007/978-981-15-4584-9_1},
+  url       = {https://doi.org/10.1007/978-981-15-4584-9_1}
+}
+
+
+@article{STIASNY2023109748,
+  title    = {Physics-informed neural networks for time-domain simulations: Accuracy, computational cost, and flexibility},
+  journal  = {Electric Power Systems Research},
+  volume   = {224},
+  pages    = {109748},
+  year     = {2023},
+  issn     = {0378-7796},
+  doi      = {https://doi.org/10.1016/j.epsr.2023.109748},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0378779623006375},
+  author   = {Jochen Stiasny and Spyros Chatzivasileiadis},
+  keywords = {Dynamical systems, Neural networks, Scientific machine learning, Time-domain simulation},
+  abstract = {The simulation of power system dynamics poses a computationally expensive task. Considering the growing uncertainty of generation and demand patterns, thousands of scenarios need to be continuously assessed to ensure the safety of power systems. Physics-Informed Neural Networks (PINNs) have recently emerged as a promising solution for drastically accelerating computations of non-linear dynamical systems. This work investigates the applicability of these methods for power system dynamics, focusing on the dynamic response to load disturbances. Comparing the prediction of PINNs to the solution of conventional solvers, we find that PINNs can be 10 to 1’000 times faster than conventional solvers. At the same time, we find them to be sufficiently accurate and numerically stable even for large time steps. To facilitate a deeper understanding, this paper also present a new regularisation of Neural Network (NN) training by introducing a gradient-based term in the loss function. The resulting NNs, which we call dtNNs, help us deliver a comprehensive analysis about the strengths and weaknesses of the NN based approaches, how incorporating knowledge of the underlying physics affects NN performance, and how this compares with conventional solvers for power system dynamics.}
+}
+
+@article{SUKUMAR2022114333,
+  title    = {Exact imposition of boundary conditions with distance functions in physics-informed deep neural networks},
+  journal  = {Computer Methods in Applied Mechanics and Engineering},
+  volume   = {389},
+  pages    = {114333},
+  year     = {2022},
+  issn     = {0045-7825},
+  doi      = {https://doi.org/10.1016/j.cma.2021.114333},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0045782521006186},
+  author   = {N. Sukumar and Ankit Srivastava},
+  keywords = {Deep learning, Meshfree method, Distance function, R-function, Transfinite interpolation, Exact geometry},
+  abstract = {In this paper, we introduce a new approach based on distance fields to exactly impose boundary conditions in physics-informed deep neural networks. The challenges in satisfying Dirichlet boundary conditions in meshfree and particle methods are well-known. This issue is also pertinent in the development of physics informed neural networks (PINN) for the solution of partial differential equations. We introduce geometry-aware trial functions in artificial neural networks to improve the training in deep learning for partial differential equations. To this end, we use concepts from constructive solid geometry (R-functions) and generalized barycentric coordinates (mean value potential fields) to construct ϕ(x), an approximate distance function to the boundary of a domain in Rd. To exactly impose homogeneous Dirichlet boundary conditions, the trial function is taken as ϕ(x) multiplied by the PINN approximation, and its generalization via transfinite interpolation is used to a priori satisfy inhomogeneous Dirichlet (essential), Neumann (natural), and Robin boundary conditions on complex geometries. In doing so, we eliminate modeling error associated with the satisfaction of boundary conditions in a collocation method and ensure that kinematic admissibility is met pointwise in a Ritz method. With this new ansatz, the training for the neural network is simplified: sole contribution to the loss function is from the residual error at interior collocation points where the governing equation is required to be satisfied. Numerical solutions are computed using strong form collocation and Ritz minimization. To convey the main ideas and to assess the accuracy of the approach, we present numerical solutions for linear and nonlinear boundary-value problems over convex and nonconvex polygonal domains as well as over domains with curved boundaries. Benchmark problems in one dimension for linear elasticity, advection-diffusion, and beam bending; and in two dimensions for the steady-state heat equation, Laplace equation, biharmonic equation (Kirchhoff plate bending), and the nonlinear Eikonal equation are considered. The construction of approximate distance functions using R-functions extends to higher dimensions, and we showcase its use by solving a Poisson problem with homogeneous Dirichlet boundary conditions over the four-dimensional hypercube. The proposed approach consistently outperforms a standard PINN-based collocation method, which underscores the importance of exactly (a priori) satisfying the boundary condition when constructing a loss function in PINN. This study provides a pathway for meshfree analysis to be conducted on the exact geometry without domain discretization.}
 }
 
 @article{Urb_n_2025,
@@ -521,39 +678,106 @@
   pages     = {113656}
 }
 
-@article{nondimensionalinputs2025,
-  author  = {Malekjani, Narjes and Kharaghani, Reza and Tsotsas, Evangelos},
-  year    = {2025},
-  month   = {01},
-  pages   = {121214},
-  title   = {A comparative study of dimensional and non-dimensional inputs in physics-informed and data-driven neural networks for single-droplet evaporation},
-  volume  = {306},
-  journal = {Chemical Engineering Science},
-  doi     = {10.1016/j.ces.2025.121214}
+@article{VASICEK1977177,
+  title    = {An equilibrium characterization of the term structure},
+  journal  = {Journal of Financial Economics},
+  volume   = {5},
+  number   = {2},
+  pages    = {177-188},
+  year     = {1977},
+  issn     = {0304-405X},
+  doi      = {https://doi.org/10.1016/0304-405X(77)90016-2},
+  url      = {https://www.sciencedirect.com/science/article/pii/0304405X77900162},
+  author   = {Oldrich Vasicek},
+  abstract = {The paper derives a general form of the term structure of interest rates. The following assumptions are made: (A.1) The instantaneous (spot) interest rate follows a diffusion process; (A.2) the price of a discount bond depends only on the spot rate over its term; and (A.3) the market is efficient. Under these assumptions, it is shown by means of an arbitrage argument that the expected rate of return on any bond in excess of the spot rate is proportional to its standard deviation. This property is then used to derive a partial differential equation for bond prices. The solution to that equation is given in the form of a stochastic integral representation. An interpretation of the bond pricing formula is provided. The model is illustrated on a specific case.}
+}
+
+@misc{wang2020understandingmitigatinggradientpathologies,
+  title         = {Understanding and mitigating gradient pathologies in physics-informed neural networks},
+  author        = {Sifan Wang and Yujun Teng and Paris Perdikaris},
+  year          = {2020},
+  eprint        = {2001.04536},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2001.04536}
+}
+
+@misc{wang2022respectingcausalityneedtraining,
+  title         = {Respecting causality is all you need for training physics-informed neural networks},
+  author        = {Sifan Wang and Shyam Sankaran and Paris Perdikaris},
+  year          = {2022},
+  eprint        = {2203.07404},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2203.07404}
+}
+
+@misc{wang2023expertsguidetrainingphysicsinformed,
+  title         = {An Expert's Guide to Training Physics-informed Neural Networks},
+  author        = {Sifan Wang and Shyam Sankaran and Hanwen Wang and Paris Perdikaris},
+  year          = {2023},
+  eprint        = {2308.08468},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2308.08468}
 }
 
 @book{wilmott1995mathematics,
-  title={The Mathematics of Financial Derivatives: A Student Introduction},
-  author={Wilmott, P. and Howison, S. and Dewynne, J.},
-  isbn={9780521497893},
-  lccn={95016466},
-  series={The Mathematics of Financial Derivatives: A Student Introduction},
-  url={https://books.google.es/books?id=VYVhnC3fIVEC},
-  year={1995},
-  publisher={Cambridge University Press}
+  title     = {The Mathematics of Financial Derivatives: A Student Introduction},
+  author    = {Wilmott, P. and Howison, S. and Dewynne, J.},
+  isbn      = {9780521497893},
+  lccn      = {95016466},
+  series    = {The Mathematics of Financial Derivatives: A Student Introduction},
+  url       = {https://books.google.es/books?id=VYVhnC3fIVEC},
+  year      = {1995},
+  publisher = {Cambridge University Press}
 }
 
-@article{IKONEN2004809,
-title = {Operator splitting methods for American option pricing},
-journal = {Applied Mathematics Letters},
-volume = {17},
-number = {7},
-pages = {809-814},
-year = {2004},
-issn = {0893-9659},
-doi = {https://doi.org/10.1016/j.aml.2004.06.010},
-url = {https://www.sciencedirect.com/science/article/pii/S0893965904804968},
-author = {S. Ikonen and J. Toivanen},
-keywords = {American option, Operator splitting method, Time discretization, Linear complementarity problem},
-abstract = {We propose operator splitting methods for solving the linear complementarity problems arising from the pricing of American options. The space discretization of the underlying Black-Scholes Scholes equation is done using a central finite-difference scheme. The time discretization as well as the operator splittings are based on the Crank-Nicolson method and the two-step backward differentiation formula. Numerical experiments show that the operator splitting methodology is much more efficient than the projected SOR, while the accuracy of both methods are similar.}
+@inproceedings{Wilmott2010PaulWO,
+  title  = {Paul Wilmott on Quantitative Finance},
+  author = {Paul Wilmott},
+  year   = {2010},
+  url    = {https://api.semanticscholar.org/CorpusID:153668090}
+}
+
+@article{WU2023115671,
+  title    = {A comprehensive study of non-adaptive and residual-based adaptive sampling for physics-informed neural networks},
+  journal  = {Computer Methods in Applied Mechanics and Engineering},
+  volume   = {403},
+  pages    = {115671},
+  year     = {2023},
+  issn     = {0045-7825},
+  doi      = {https://doi.org/10.1016/j.cma.2022.115671},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0045782522006260},
+  author   = {Chenxi Wu and Min Zhu and Qinyang Tan and Yadhu Kartha and Lu Lu},
+  keywords = {Partial differential equations, Physics-informed neural networks, Residual point distribution, Non-adaptive uniform sampling, Uniform sampling with resampling, Residual-based adaptive sampling},
+  abstract = {Physics-informed neural networks (PINNs) have shown to be effective tools for solving both forward and inverse problems of partial differential equations (PDEs). PINNs embed the PDEs into the loss of the neural network using automatic differentiation, and this PDE loss is evaluated at a set of scattered spatio-temporal points (called residual points). The location and distribution of these residual points are highly important to the performance of PINNs. However, in the existing studies on PINNs, only a few simple residual point sampling methods have mainly been used. Here, we present a comprehensive study of two categories of sampling for PINNs: non-adaptive uniform sampling and adaptive nonuniform sampling. We consider six uniform sampling methods, including (1) equispaced uniform grid, (2) uniformly random sampling, (3) Latin hypercube sampling, (4) Halton sequence, (5) Hammersley sequence, and (6) Sobol sequence. We also consider a resampling strategy for uniform sampling. To improve the sampling efficiency and the accuracy of PINNs, we propose two new residual-based adaptive sampling methods: residual-based adaptive distribution (RAD) and residual-based adaptive refinement with distribution (RAR-D), which dynamically improve the distribution of residual points based on the PDE residuals during training. Hence, we have considered a total of 10 different sampling methods, including six non-adaptive uniform sampling, uniform sampling with resampling, two proposed adaptive sampling, and an existing adaptive sampling. We extensively tested the performance of these sampling methods for four forward problems and two inverse problems in many setups. Our numerical results presented in this study are summarized from more than 6000 simulations of PINNs. We show that the proposed adaptive sampling methods of RAD and RAR-D significantly improve the accuracy of PINNs with fewer residual points for both forward and inverse problems. The results obtained in this study can also be used as a practical guideline in choosing sampling methods.}
+}
+
+@article{WU2023115671,
+  title    = {A comprehensive study of non-adaptive and residual-based adaptive sampling for physics-informed neural networks},
+  journal  = {Computer Methods in Applied Mechanics and Engineering},
+  volume   = {403},
+  pages    = {115671},
+  year     = {2023},
+  issn     = {0045-7825},
+  doi      = {https://doi.org/10.1016/j.cma.2022.115671},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0045782522006260},
+  author   = {Chenxi Wu and Min Zhu and Qinyang Tan and Yadhu Kartha and Lu Lu},
+  keywords = {Partial differential equations, Physics-informed neural networks, Residual point distribution, Non-adaptive uniform sampling, Uniform sampling with resampling, Residual-based adaptive sampling},
+  abstract = {Physics-informed neural networks (PINNs) have shown to be effective tools for solving both forward and inverse problems of partial differential equations (PDEs). PINNs embed the PDEs into the loss of the neural network using automatic differentiation, and this PDE loss is evaluated at a set of scattered spatio-temporal points (called residual points). The location and distribution of these residual points are highly important to the performance of PINNs. However, in the existing studies on PINNs, only a few simple residual point sampling methods have mainly been used. Here, we present a comprehensive study of two categories of sampling for PINNs: non-adaptive uniform sampling and adaptive nonuniform sampling. We consider six uniform sampling methods, including (1) equispaced uniform grid, (2) uniformly random sampling, (3) Latin hypercube sampling, (4) Halton sequence, (5) Hammersley sequence, and (6) Sobol sequence. We also consider a resampling strategy for uniform sampling. To improve the sampling efficiency and the accuracy of PINNs, we propose two new residual-based adaptive sampling methods: residual-based adaptive distribution (RAD) and residual-based adaptive refinement with distribution (RAR-D), which dynamically improve the distribution of residual points based on the PDE residuals during training. Hence, we have considered a total of 10 different sampling methods, including six non-adaptive uniform sampling, uniform sampling with resampling, two proposed adaptive sampling, and an existing adaptive sampling. We extensively tested the performance of these sampling methods for four forward problems and two inverse problems in many setups. Our numerical results presented in this study are summarized from more than 6000 simulations of PINNs. We show that the proposed adaptive sampling methods of RAD and RAR-D significantly improve the accuracy of PINNs with fewer residual points for both forward and inverse problems. The results obtained in this study can also be used as a practical guideline in choosing sampling methods.}
+}
+
+@article{XIANG202211,
+  title    = {Self-adaptive loss balanced Physics-informed neural networks},
+  journal  = {Neurocomputing},
+  volume   = {496},
+  pages    = {11-34},
+  year     = {2022},
+  issn     = {0925-2312},
+  doi      = {https://doi.org/10.1016/j.neucom.2022.05.015},
+  url      = {https://www.sciencedirect.com/science/article/pii/S092523122200546X},
+  author   = {Zixue Xiang and Wei Peng and Xu Liu and Wen Yao},
+  keywords = {Physics-informed neural networks, Partial differential equations, Loss balancing},
+  abstract = {Physics-informed neural networks (PINNs) have received significant attention as a representative deep learning-based technique for solving partial differential equations (PDEs). The loss function of PINNs is a weighted sum of multiple terms, including the mismatch of observed data, boundary and initial constraints, as well as PDE residuals. In this paper, we observe that the performance of PINNs is susceptible to the weighted combination of competitive multiple loss functions. Therefore, we establish Gaussian probabilistic models to define the self-adaptive loss function through the adaptive weights for each loss term. In particular, we propose a self-adaptive loss balanced method that automatically assigns the weights of losses by updating adaptive weights in each epoch based on the maximum likelihood estimation. Finally, we perform a series of numerical experiments with self-adaptive loss balanced physics-informed neural networks (lbPINNs), including solving Poisson, Burgers, Helmholtz, Navier–Stokes, and Allen–Cahn equations in regular and irregular areas. We also test the robustness of lbPINNs by varying the initial adaptive weights, numbers of observations, hidden layers, and neurons per layer. These experimental results demonstrate that lbPINNs consistently achieve better performance than PINNs, and reduce the relative L2 error by about two orders of magnitude.}
 }
