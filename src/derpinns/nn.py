@@ -3,14 +3,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class FourierEmbedding(nn.Module):
     """
     A feature embedding that applies a random Fourier transform to inputs.
     Often used to help the network learn high-frequency functions.
     """
 
-    def __init__(self, input_dim, num_fourier_features, scale=1.0, dtype=torch.float32):
+    def __init__(self, input_dim, num_fourier_features, scale=1.0, dtype=torch.float64):
         super().__init__()
         self.input_dim = input_dim
         self.num_fourier_features = num_fourier_features
@@ -52,7 +51,7 @@ class NNWithFourier(nn.Module):
         output_dim: int,
         num_fourier_features: int = 16,
         fourier_scale: float = 1.0,
-        dtype: torch.dtype = torch.float32,
+        dtype: torch.dtype = torch.float64,
         activation: nn.Module = nn.Tanh()
     ):
         super().__init__()
@@ -98,7 +97,7 @@ class NN(nn.Module):
         Vanilla NN.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Softplus()):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float64, activation=nn.Softplus()):
         super(NN, self).__init__()
         layers = []
         # First layer: Linear followed by activation
@@ -117,7 +116,7 @@ class NN(nn.Module):
     def forward(self, inputs):
         x = self.hidden_layers(inputs)
         x = self.output_layer(x)
-        return x
+        return x.squeeze()
 
 
 class NNWithAnsatz(nn.Module):
@@ -125,7 +124,7 @@ class NNWithAnsatz(nn.Module):
         NN with a differentiable approximation of the payoff function.
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32, activation=nn.Softplus()):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float64, activation=nn.Softplus()):
         super(NNWithAnsatz, self).__init__()
         layers = []
         self.input_dim = input_dim
@@ -144,26 +143,15 @@ class NNWithAnsatz(nn.Module):
         self.output_layer = nn.Linear(hidden_dim, output_dim, dtype=dtype)
 
     def payoff(self, x):
-        x = self.smooth_max_exp(x, alpha=self.alpha)
-        ones = torch.ones_like(x)
-        payoff_values = F.gelu(x - ones)
-        return payoff_values.reshape([-1, 1])
-
-    def smooth_max_exp(self, x: torch.Tensor, alpha: torch.Tensor) -> torch.Tensor:
-        """
-        Differentiable approximation of max(exp(x_j)) across the last dimension of x
-          smooth_max_exp(x, alpha) = ( sum_j exp(alpha * (x_j - x_max)) )^(1/alpha) * exp(x_max)
-        where x_max is the max across each row to improve numerical stability.
-        """
-        x_max = x.max(dim=1, keepdim=True).values
-        lse = torch.logsumexp(alpha * (x - x_max), dim=1, keepdim=True)
-        return torch.exp((lse + alpha * x_max) / alpha).squeeze(1)
+        x = torch.exp(x) - 1
+        x = x.max(dim=1, keepdim=True).values
+        return F.relu(x).reshape([-1, 1])
 
     def forward(self, inputs):
         x = self.hidden_layers(inputs)
         x = self.output_layer(x)
         p = self.payoff(inputs[:, :self.input_dim-1])
-        return p + x
+        return p + x * inputs[:, -1].unsqueeze(1)
 
 
 class SPINN(nn.Module):
@@ -176,7 +164,7 @@ class SPINN(nn.Module):
         https://arxiv.org/abs/2306.15969
     """
 
-    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float32):
+    def __init__(self, n_layers, input_dim, hidden_dim, output_dim, dtype=torch.float64):
         super(SPINN, self).__init__()
         self.n_dim = input_dim
         # Create one NN per input dimension. Each NN accepts a single feature.
@@ -213,7 +201,7 @@ def weights_init(m):
         nn.init.constant_(m.bias, 0.0)
 
 
-def build_nn(nn_shape: str, input_dim: int, dtype=torch.float32, activation=nn.Tanh()):
+def build_nn(nn_shape: str, input_dim: int, dtype=torch.float64, activation=nn.Tanh()):
     """
     Build a neural network based on the provided shape string.
     """
@@ -240,7 +228,7 @@ class FirstOrderNN(nn.Module):
                  input_dim: int,
                  hidden_dim: int,
                  activation: Optional[nn.Module] = nn.Tanh(),
-                 dtype=torch.float32):
+                 dtype=torch.float64):
 
         super().__init__()
         layers = []

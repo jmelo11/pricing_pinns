@@ -3,6 +3,8 @@ import torch
 from torch.utils.data import Dataset
 from derpinns.collocations import *
 
+device = torch.device("cuda")   
+torch.set_default_device(device)
 
 class SampledDataset(Dataset):
     """
@@ -64,9 +66,7 @@ class SampledDatasetWithPINNBoundary(Dataset):
             # set the lower boundary value for the i-th asset
             y[lb_mask] = lb_y
 
-        self.x = torch.tensor(
-            x, dtype=dtype, device=device, requires_grad=True)
-
+        self.x = torch.tensor(x, dtype=dtype, device=device, requires_grad=True)
         self.y = torch.tensor(y, dtype=dtype, device=device)
         self.mask = torch.tensor(mask, dtype=torch.bool, device=device)
 

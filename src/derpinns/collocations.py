@@ -1,7 +1,6 @@
 import numpy as np
 from derpinns.sampling import random_samples, scale_samples
 
-
 class OptionParameters:
     '''
         Wrapper class with all required parameters. Given a set of parameters, it also computes the domain of each space variable.

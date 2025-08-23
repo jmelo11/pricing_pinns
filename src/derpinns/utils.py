@@ -1,3 +1,4 @@
+from scipy.stats import norm
 import re
 import pandas as pd
 import numpy as np
@@ -519,6 +520,7 @@ def plot_solution_surface(
     params,
     assets: int,
     device,
+    dtype,
     save_path: str = None,
     backend: str = "plotly",
     fig_size=(800, 600),
@@ -537,7 +539,7 @@ def plot_solution_surface(
             p[0], p[1] = x0[i], x1[j]
             p.append(params.tau)
             pts.append(p)
-    X = torch.tensor(pts, dtype=torch.float32, device=device)
+    X = torch.tensor(pts, dtype=dtype, device=device)
     with torch.no_grad():
         Y = model(X).cpu().numpy().reshape(num_points, num_points)
 
@@ -597,7 +599,7 @@ def _parse_bench(bench, scale_nn):
         shape, n = m.groups()
         n = int(n)
 
-        total_time = v["adam_time"] + v["ssbroyden_time"]
+        total_time = v["adam_time"] + v["qn_time"]
         if shape.lower() == "nn":  # if you need to scale one shape
             total_time *= scale_nn
 
@@ -762,3 +764,472 @@ def plot_l2_error(
         else:
             plt.show()
         return fig
+
+
+def compare_solution_surfaces(
+    models,
+    params,
+    assets: int,
+    device,
+    labels=None,
+    save_path: str = None,
+    backend: str = "plotly",
+    fig_size=(800, 600),
+    num_points: int = 100,
+    real_solution: bool = False,
+    view: tuple = (30, -60),
+):
+    """
+    Compare PINN / FOPINN solution surfaces.
+
+    If assets==1 and real_solution==True, then
+      • x-axis is S = K * exp(x)
+      • z-axis is V = K * u(x,τ)
+    Otherwise we stay purely in dimensionless (x,τ,u).
+    """
+    n = len(models)
+    assert n > 0
+    if labels is None:
+        labels = [f"Model {i+1}" for i in range(n)]
+    assert len(labels) == n
+
+    # --- build the *dimensionless* grid (x in [x_min,x_max], τ in [0,tau]) ---
+    x_vals = np.linspace(params.x_min, params.x_max-1, num_points)
+    t_vals = np.linspace(0.0,            params.tau,    num_points)
+    XX, TT = np.meshgrid(x_vals, t_vals)
+    pts = np.stack([XX, TT], axis=2).reshape(-1, 2)
+    X_t = torch.tensor(pts, dtype=torch.float32, device=device)
+
+    # --- evaluate each model and reshape back to (num_points, num_points) ---
+    Ys = []
+    with torch.no_grad():
+        for m in models:
+            out = m(X_t)
+            u = out[:, 0] if (out.ndim == 2 and out.shape[1]
+                              > 1) else out.view(-1)
+            Ys.append(u.cpu().numpy().reshape(num_points, num_points))
+
+    # --- if requested, convert to *real* S–V surface ---
+    if assets == 1 and real_solution:
+        # horizontal axis S = K * e^x
+        X0_plot = params.strike * np.exp(XX)
+        # vertical axis V = K * u
+        Ys = [Y * params.strike for Y in Ys]
+        x_label, y_label, z_label = "S", r"$\tau$", r"$V(S,\tau)$"
+    else:
+        # stay in dimensionless x,τ,u
+        X0_plot, TT_plot = XX, TT
+        x_label, y_label, z_label = r"$x$", r"$\tau$", r"$u(x,\tau)$"
+        # note: if assets>1 you’d handle that case here...
+
+    # prepare colormaps exactly as before
+    import matplotlib.cm as cm
+    try:
+        mpl_cmap = cm.get_cmap("mako", 256)
+    except ValueError:
+        try:
+            import seaborn as sns
+            mpl_cmap = sns.color_palette("mako", 256, as_cmap=True)
+        except ImportError:
+            mpl_cmap = cm.get_cmap("magma", 256)
+
+    vals = mpl_cmap(np.linspace(0, 1, 256))
+    plotly_scale = [
+        [i/255.0, f"rgb({int(r*255)},{int(g*255)},{int(b*255)})"]
+        for i, (r, g, b, a) in enumerate(vals)
+    ]
+
+    # ---- Matplotlib ----
+    if backend in ("matplotlib", "both"):
+        import matplotlib.pyplot as plt
+        from mpl_toolkits.mplot3d import Axes3D  # noqa
+
+        fig = plt.figure(
+            figsize=((fig_size[0]/100)*n, fig_size[1]/100)
+        )
+        axs = []
+        for idx, (Y, lbl) in enumerate(zip(Ys, labels), start=1):
+            ax = fig.add_subplot(1, n, idx, projection="3d")
+            surf = ax.plot_surface(
+                X0_plot, TT, Y,
+                cmap=mpl_cmap, edgecolor="none"
+            )
+            ax.set_title(lbl)
+            ax.set_xlabel(x_label)
+            ax.set_ylabel(y_label)
+            ax.set_zlabel(z_label)
+            ax.view_init(elev=view[0], azim=view[1])
+            axs.append(ax)
+
+        # single colorbar, outside the last panel
+        fig.subplots_adjust(right=0.8)
+        cax = fig.add_axes([0.85, 0.15, 0.03, 0.7])
+        fig.colorbar(surf, cax=cax, label=z_label)
+
+        plt.tight_layout(rect=(0, 0, 0.8, 1.0))
+        if save_path and backend == "matplotlib":
+            plt.savefig(save_path, dpi=300)
+            plt.close()
+        else:
+            plt.show()
+
+    # ---- Plotly ----
+    if backend in ("plotly", "both"):
+        import plotly.graph_objs as go
+        from plotly.subplots import make_subplots
+
+        fig2 = make_subplots(
+            rows=1, cols=n,
+            specs=[[{"type": "surface"}]*n],
+            subplot_titles=labels
+        )
+        for i, Y in enumerate(Ys, start=1):
+            fig2.add_trace(
+                go.Surface(
+                    z=Y,
+                    x=X0_plot[0],
+                    y=TT[:, 0],
+                    colorscale=plotly_scale,
+                    showscale=(i == n)
+                ), row=1, col=i
+            )
+
+        # unify axes + camera
+        elev, azim = view
+        r = 2.5
+        eye = dict(
+            x=r*np.cos(np.radians(azim))*np.cos(np.radians(elev)),
+            y=r*np.sin(np.radians(azim))*np.cos(np.radians(elev)),
+            z=r*np.sin(np.radians(elev)),
+        )
+        for i in range(1, n+1):
+            scene = fig2.layout[f"scene{i}"]
+            scene.update(
+                xaxis_title=x_label,
+                yaxis_title=y_label,
+                zaxis_title=z_label,
+                camera=dict(eye=eye)
+            )
+
+        fig2.update_layout(
+            width=fig_size[0]*n,
+            height=fig_size[1],
+            title_text="Solution surface comparison",
+            template="plotly_white"
+        )
+        if save_path and backend == "plotly":
+            fig2.write_image(save_path)
+        else:
+            fig2.show()
+
+
+# ─────────────────────────────  Black–Scholes helper
+def black_scholes_option_price(S, K, T, r, sigma, option_type="call"):
+    S = np.maximum(S.astype(np.float32), 1e-12)
+    K = np.float32(K)
+    T = np.maximum(T.astype(np.float32), 1e-12)
+    r = np.float32(r)
+    sigma = np.float32(sigma)
+
+    d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+
+    if option_type == "call":
+        return S * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
+    else:
+        return K * np.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+
+
+# ─────────────────────────────  error-heat-map routine
+def compare_error_heatmaps(
+    models,
+    params,
+    device,
+    labels=None,
+    save_path: str | None = None,
+    backend: str = "matplotlib",  # "matplotlib" | "plotly" | "both"
+    fig_size=(6, 3),  # inches per panel  (width , height)
+    num_S: int = 100,  # resolution in x-direction
+    num_t: int = 100,  # resolution in t-direction
+    cmap: str = "mako",
+):
+    """
+    Heat-map of | V_true − V_pred | for several networks.
+
+    Network   input : (x , t) with  x = log(S / K)
+    Network  output : log(u)       with  u = V / K
+
+    *Absolute* error is plotted (dollar units).
+    """
+    # ─────────  labels
+    if labels is None:
+        labels = [f"Model {i+1}" for i in range(len(models))]
+    if len(labels) != len(models):
+        raise ValueError("`labels` length must match `models` length")
+
+    # ─────────  shorthand
+    r, K, sigma = params.r, params.strike, params.sigma
+    option_type = getattr(params, "option_type", "call")
+
+    # ─────────  grid   (shape:  x → rows ,  t → columns  ⇒  (num_S , num_t))
+    x_vals = np.linspace(params.x_min, params.x_max, num_S, dtype=np.float32)
+    S_vals = np.exp(x_vals) * K
+    t_vals = np.linspace(0.0, params.tau, num_t, dtype=np.float32)
+
+    # (num_S, num_t)
+    XX, TT = np.meshgrid(x_vals, t_vals, indexing="ij")
+
+    # ─────────  flatten grid for one forward pass per model
+    pts = torch.from_numpy(
+        np.stack([XX.ravel(order="C"), TT.ravel(order="C")], axis=1)
+    ).to(device)                                                # (N, 2)  N = num_S*num_t
+
+    # ─────────  network predictions  →  dimensional price
+    V_preds = []
+    with torch.no_grad():
+        for net in models:
+            out = net(pts)                               # (N,) or (N, m)
+            if out.ndim == 2:
+                out = out[:, 0]                          # take only log(u)
+            out = out.view(-1)                           # ensure flat
+            V_pred = out * K                  # V = K · exp(log u)
+            V_pred = V_pred.cpu().numpy().reshape(
+                num_S, num_t, order="C"
+            ).astype(np.float32)
+            V_preds.append(V_pred)
+
+    # ─────────  analytic Black–Scholes surface
+    Tau = TT     # remaining time grid
+    V_true = black_scholes_option_price(
+        S_vals[:, None], K, Tau, r, sigma, option_type
+    ).astype(np.float32)                                 # (num_S, num_t)
+
+    # ─────────  error maps & global relative L₂ norms
+    Err_maps = [np.abs(Vp - V_true) for Vp in V_preds]
+    rel_L2 = [np.linalg.norm(Vp - V_true) /
+              np.linalg.norm(V_true) for Vp in V_preds]
+
+    # ─────────  colour-map
+    import matplotlib.cm as cm
+    try:
+        mpl_cmap = cm.get_cmap(cmap, 256)
+    except ValueError:                                   # seaborn fallback
+        import seaborn as sns
+        mpl_cmap = sns.color_palette(cmap, 256, as_cmap=True)
+
+    # ──────────────────────────────────────────────────────────────────
+    #  MATPLOTLIB
+    # ──────────────────────────────────────────────────────────────────
+    backend = backend.lower()
+    if backend in ("matplotlib", "both"):
+        import matplotlib.pyplot as plt
+        from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+        fig, axes = plt.subplots(
+            1, len(models),
+            figsize=(fig_size[0] * len(models), fig_size[1]),
+            squeeze=False
+        )
+        axes = axes[0]
+
+        for ax, err, lbl, r2 in zip(axes, Err_maps, labels, rel_L2):
+            im = ax.imshow(
+                err.T,                                       # transpose -> x horizontal
+                extent=[params.x_min, params.x_max, 0, params.tau],
+                origin="lower", aspect="auto", cmap=mpl_cmap
+            )
+            ax.set_title(f"{lbl}\nRelative $L_2$ Error = {r2:.2e}")
+            ax.set_xlabel(r"$x=\log(S/K)$")
+            ax.set_ylabel(r"$\tau$")
+
+        # single colour-bar in its own axis right of last subplot
+        divider = make_axes_locatable(axes[-1])
+        cax = divider.append_axes("right", size="2.5%", pad=0.05)
+        cb = fig.colorbar(im, cax=cax)
+        cb.set_label(r"$|{\rm Error}|$")
+
+        fig.tight_layout()
+        if save_path and backend == "matplotlib":
+            fig.savefig(save_path, dpi=120)
+            plt.close(fig)
+        else:
+            plt.show()
+
+    # ──────────────────────────────────────────────────────────────────
+    #  PLOTLY
+    # ──────────────────────────────────────────────────────────────────
+    if backend in ("plotly", "both"):
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+
+        # convert matplotlib cmap to plotly scale
+        vals = mpl_cmap(np.linspace(0, 1, 256))
+        plotly_scale = [[i / 255, f"rgb({int(r*255)},{int(g*255)},{int(b*255)})"]
+                        for i, (r, g, b, _) in enumerate(vals)]
+
+        fig_p = make_subplots(
+            rows=1, cols=len(models),
+            subplot_titles=[f"{lb}<br>rel L₂ err = {er:.2e}"
+                            for lb, er in zip(labels, rel_L2)]
+        )
+
+        for i, (err, show_scale) in enumerate(
+            zip(Err_maps, [False]*(len(models)-1) + [True]), start=1
+        ):
+            fig_p.add_trace(
+                go.Heatmap(
+                    z=err.T,                   # Plotly uses z[y,x]
+                    x=x_vals, y=t_vals,
+                    colorscale=plotly_scale,
+                    showscale=show_scale,
+                    colorbar=dict(title="|error|")
+                ),
+                row=1, col=i
+            )
+
+        fig_p.update_xaxes(title_text="x = log(S/K)")
+        fig_p.update_yaxes(title_text="t")
+        fig_p.update_layout(
+            width=fig_size[0] * 100 * len(models),
+            height=fig_size[1] * 100,
+            template="plotly_white",
+            title="Absolute-error heat maps"
+        )
+
+        if save_path and backend == "plotly":
+            fig_p.write_image(save_path)
+        else:
+            fig_p.show()
+
+
+def compare_error_histories(
+    runs,
+    labels=None,
+    save_path: str = None,
+    backend: str = "plotly",
+    fig_size=(900, 600),
+    smooth: bool = True,
+    smooth_window: int = 50,
+    yscale: str = "power10",
+):
+    """
+    Plot L₂ relative-error over training for multiple runs,
+    allowing runs of different lengths.
+
+    Parameters
+    ----------
+    runs : list of dicts with key 'l2_rel_err'
+    labels : list of str, one per run
+    save_path : if given, write figure to this path
+    backend : 'plotly' or 'matplotlib'
+    fig_size : (width, height) pixels for Plotly, inches (dpi=100) for Matplotlib
+    smooth : apply moving‐average smoothing?
+    smooth_window : window size for smoothing
+    yscale : 'linear', 'log', or 'power10'
+    """
+    n = len(runs)
+    assert n > 0, "Need at least one run to compare"
+    if labels is None:
+        labels = [f"Run {i+1}" for i in range(n)]
+    assert len(labels) == n
+
+    # prepare data (only L2)
+    histories = []
+    for d in runs:
+        l2 = np.asarray(d["l2_rel_err"], dtype=float)
+        if smooth:
+            l2 = _moving_average(l2, smooth_window)
+        histories.append(l2)
+
+    # color cycle
+    colors = [
+        "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+        "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+    ]
+
+    backend = backend.lower()
+
+    if backend == "plotly":
+        import plotly.graph_objs as go
+
+        fig = go.Figure()
+        for idx, l2 in enumerate(histories):
+            fig.add_trace(
+                go.Scatter(
+                    x=np.arange(len(l2)),
+                    y=l2,
+                    mode="lines",
+                    name=labels[idx],
+                    line=dict(color=colors[idx % len(colors)])
+                )
+            )
+
+        # y-scale
+        if yscale == "linear":
+            fig.update_yaxes(type="linear")
+        else:
+            fig.update_yaxes(type="log")
+            if yscale == "power10":
+                fig.update_yaxes(
+                    exponentformat="power",
+                    showexponent="all"
+                )
+
+        fig.update_layout(
+            title="$L_2$ Relative Error over Training",
+            xaxis_title="Iteration",
+            yaxis_title="rel $L_2$ error",
+            width=fig_size[0], height=fig_size[1],
+            legend_title="Run",
+            template="plotly_white"
+        )
+
+        if save_path:
+            fig.write_image(save_path)
+        else:
+            fig.show()
+
+    elif backend == "matplotlib":
+        import matplotlib.pyplot as plt
+        from matplotlib.ticker import LogFormatterMathtext
+
+        # convert px → inches for Matplotlib at dpi=100
+        fig, ax = plt.subplots(
+            1, 1,
+            figsize=(fig_size[0]/100, fig_size[1]/100),
+            squeeze=True
+        )
+
+        for idx, l2 in enumerate(histories):
+            ax.plot(
+                np.arange(len(l2)),
+                l2,
+                label=labels[idx],
+                color=colors[idx % len(colors)]
+            )
+
+        # y-scale
+        if yscale == "linear":
+            ax.set_yscale("linear")
+        elif yscale == "log":
+            ax.set_yscale("log")
+        elif yscale == "power10":
+            ax.set_yscale("log")
+            ax.yaxis.set_major_formatter(LogFormatterMathtext())
+        else:
+            raise ValueError(f"Unknown yscale {yscale!r}")
+
+        ax.set_title("$L_2$ Relative Error over Training")
+        ax.set_xlabel("Iteration")
+        ax.set_ylabel("Relative $L_2$ Error")
+        ax.legend(loc="upper right")
+        plt.tight_layout()
+
+        if save_path:
+            plt.savefig(save_path, dpi=300)
+            plt.close(fig)
+        else:
+            plt.show()
+
+    else:
+        raise ValueError(f"Unsupported backend: {backend!r}")
