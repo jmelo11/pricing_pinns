@@ -1,8 +1,8 @@
-# Levelaging PINNs For Multi-Dimensional Pricing Problems
+# Levelaging PINNs For Option Pricing Problems
 
 ## Author: Jose Melo
 
-This repository has all codes used for the master's thesis ***"Leveraging PINNs For Multi-Dimensional Pricing Problems"***.
+This repository has all codes used for the master's thesis ***"Leveraging PINNs For Option Pricing Problems"***.
 
 The content of each file is shown below:
 
@@ -19,5 +19,3 @@ In order to run the code in experiments, ```requirements.txt``` file is provided
 ```bash
 pip install -e .
 ```
-
-🚧 Work in progress...
