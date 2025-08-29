@@ -150,8 +150,6 @@ hmargin=3cm
 \usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{amsmath,amssymb} % for math symbols & environments
-\usepackage{amsthm} % for theorem environments
 
 % Theorem-style definitions:
 \theoremstyle{plain} % default: italic body
@@ -1412,14 +1410,21 @@ Regarding activation functions, we primarily employed the hyperbolic tangent (\e
 Although we also experimented with the Softplus activation—which closely resembles typical payoff functions—we observed only marginal 
 improvements in convergence speed, insufficient to justify its use over \emph{tanh}.
 
-In terms of optimization methods, quasi-Newton algorithms, particularly the L-BFGS solver implemented in PyTorch, consistently 
-delivered the best outcomes. Other solvers such as BFGS and SSBroyden were also implemented and tested, and in some cases yielded better results. 
-Gradient-based optimizers, notably Adam, were evaluated but generally failed to match the 
+In terms of optimization methods, quasi-Newton algorithms, particularly the BFGS solver which 
+we implemented in PyTorch, consistently delivered the best outcomes. Gradient-based 
+optimizers, notably Adam, were evaluated but generally failed to match the 
 accuracy or convergence speed achieved by quasi-Newton approaches.
 
 Sampling collocation points was predominantly carried out using a uniform distribution over the domain of interest to evaluate 
 PDE residuals and boundary conditions. Alternative sampling strategies, including Sobol and Halton sequences, were tested but 
 did not lead to significant improvements in accuracy or computational efficiency.
+
+In all experiments we report both the rel-\(\ell_2\) error, defined as
+\[ \text{rel-}\ell_2\text{ error} = \frac{\|V_{\text{PINN}}- V_{\text{ref}}\|_{\text{Fro}}}{\|V_{\text{exact}}\|_{\text{Fro}}}, \]
+and the mean-square error (MSE) over a test set of \(N\) points:
+\[ \text{MSE} = \frac{1}{N}\sum_{i=1}^{N} \left(V_{\text{PINN}} - V_{\text{ref}}\right), \]
+where \(V_{\text{PINN}}\) is the neural network's predicted value, \(V_{\text{ref}}\) is a reference solution (either analytical or high-fidelity numerical),
+and \(\|\cdot\|_{\text{Fro}}\) denotes the Frobenius norm. These two metric allows us to have both a scale-dependent and a scale-independent measure of accuracy.
 
 All models were implemented in Python using the PyTorch framework. The complete implementation is publicly available on 
 GitHub \cite{Melo2025pricingpinns} and a brief article on the topic can be found in \cite{melo_options_pinns_2025}. Computations were performed on a personal computer equipped with an Intel i7-12700K CPU and 
@@ -1430,30 +1435,23 @@ an NVIDIA RTX 2070 GPU, facilitating efficient training of neural network models
 As an initial test case for the methodology, we priced a standard European call option under the classical 
 Black-Scholes model, whose PDE in Eq.~\eqref{eq:BS_complete} admits a closed-form solution that serves as a 
 convenient benchmark. The numerical experiment used the parameters in Table~\ref{tab:params}.
-
 \begin{table}[H]
  \caption{Call Option Parameters}
  \label{tab:params}
  \centering
- \begin{tabular}{|c|c|}
+ \begin{tabular}{|c|c|c|c|}
  \hline
- \textit{Parameter} & \textit{Value} \\
+ \textit{Strike price, $K$} & \textit{Maturity, $T$} & \textit{Risk-free rate, $r$} & \textit{Volatility, $\sigma$} \\
  \hline
- Strike price, $K$ & \$100 \\
- \hline
- Maturity, $T$ & 1 year \\
- \hline
- Risk-free rate, $r$ & 5.0\% p.a. \\
- \hline
- Volatility, $\sigma$ & 20\% p.a.\\
+ \$1 & 1 year & 5.0\% p.a. & 20\% p.a. \\
  \hline
  \end{tabular}
 \end{table}
 
 The PINN consisted of two hidden layers with 20 neurons each and was trained 
-with the BFGS optimizer on \(75000\) collocation points distributed across the interior domain \(\Omega\), 
+with the BFGS optimizer on \(80000\) collocation points distributed across the interior domain \(\Omega\), 
 the boundary \(\partial\Omega\), and the initial hypersurface \(\Omega_0\). Despite its simple architecture, 
-the network reproduced the analytical solution accurately, achieving an \(\ell_2\) error of \(1.5054\times10^{-5}\).
+the network reproduced the analytical solution accurately, achieving an rel-\(\ell_2\) error of \(4.19\times10^{-5}\) and a MSE of \(4.05\times10^{-9}\).
 
 \begin{figure}[H]
  \centering
@@ -1477,8 +1475,8 @@ near maturity and the strike.
 The pronounced spike in error at-the-money on the expiry surface
 stems from the kink in the option payoff.
 When a function has a discontinuous first derivative, any
-approximation built from smooth basis functions—including neural
-networks—develops oscillatory overshoots, an instance of the
+approximation built from smooth basis functions--including neural
+networks--develops oscillatory overshoots, an instance of the
 \emph{Gibbs phenomenon}.
 
 \begin{figure}[H]
@@ -1490,70 +1488,66 @@ networks—develops oscillatory overshoots, an instance of the
   \label{fig:call_option_expiry}
 \end{figure}
 
-As already stated, a key advantage of training neural networks with automatic
+A key advantage of training neural networks with automatic
 differentiation is that it furnishes \emph{exact} derivatives of the network
-output with respect to its inputs.  
-In quantitative finance these derivatives are the familiar
+output with respect to its inputs. In quantitative finance these derivatives are the familiar
 \emph{Greeks}, which risk desks use to monitor and hedge positions. Because the network's 
 forward and backward passes are computed
 simultaneously, we obtain the entire vector of Greeks at virtually no extra cost,
 so their fidelity becomes a critical test of the PINN.
-The same effect propagates—more visibly—into the Greeks:
-Delta ($\Delta$) (Figure~\ref{fig:delta}) is recovered almost perfectly,
+
+The same oscillation effect propagates into the Greeks:
+delta, denoted by $\Delta$, (Figure~\ref{fig:delta}) is recovered almost perfectly,
 except during the final moments before maturity, when the true delta collapses
 into a step function that is hard to emulate with smooth activations.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{imagenes/delta.png}
-  \caption{$\Delta$ comparison.  Small oscillations emerge only very close
+  \caption{$\Delta$ at different times. Small oscillations emerge only very close
            to $t=T$.}
   \label{fig:delta}
 \end{figure}
 
-Gamma ($\Gamma$) presents the greatest challenge (Figure~\ref{fig:gamma}). 
-As a second spatial derivative it amplifies any ripple in the
-reconstructed price surface, producing the largest $L_{2}$ error in
-Table~\ref{tab:greek_errors}. Additional collocation points around the
-strike or an explicit curvature-penalty term in the loss could
-alleviate this issue.
+Gamma, denoted by $\Gamma$, poses the greatest challenge (Figure~\ref{fig:gamma}). 
+As a second-order derivative of the option price, it is highly sensitive to even small oscillations 
+in the reconstructed price surface, which leads to the largest rel-$\ell_{2}$ error observed in 
+Table~\ref{tab:greek_errors}. This difficulty can be mitigated by introducing additional collocation 
+points near the strike or by incorporating an explicit curvature-penalty term in the loss function.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{imagenes/gamma.png}
-  \caption{$\Gamma$ comparison. Oscillations near the strike dominate the
+  \caption{$\Gamma$ at different times. Oscillations near the strike dominate the
            error; a secondary mismatch appears for very small $S$.}
   \label{fig:gamma}
 \end{figure}
 
-Theta ($\Theta$) sits between the two extremes: its error ($12\%$) is larger than
+Theta, denoted by $\Theta$, sits between the two extremes: its error ($12\%$) is larger than
 delta's but well below gamma's $26\%$ (see
-Table~\ref{tab:greek_errors}). In this case, the error can be explain by 
+Table~\ref{tab:greek_errors}). In this case, the error could be explain by 
 violations of the temporal dependence structure of the PDE, as reported in \cite{Mattey_2022, STIASNY2023109748}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{imagenes/theta.png}
-  \caption{$\Theta$ comparison. The main discrepancies occur near
-           maturity, consistent with the temporal derivative being the
-           hardest term to satisfy in the PDE residual.}
+  \caption{$\Theta$ at different times. The main discrepancies occur both near inception and as $t \to T$.}
   \label{fig:theta}
 \end{figure}
 
 \begin{table}[htbp]
-  \caption{Relative $L_{2}$-errors of the Greeks.}
+  \caption{Relative $\ell_{2}$ relative errors of the Greeks.}
   \centering
   \label{tab:greek_errors}
-  \begin{tabular}{c c c}
+  \begin{tabular}{c c c c}
     \toprule
-    $\| \Delta_{\mathrm{PINN}} - \Delta_{\mathrm{BS}} \|_{2}  /  \| \Delta_{\mathrm{BS}} \|_{2}$ &
-    $\| \Theta_{\mathrm{PINN}} - \Theta_{\mathrm{BS}} \|_{2}  /  \| \Theta_{\mathrm{BS}} \|_{2}$ &
-    $\| \Gamma_{\mathrm{PINN}} - \Gamma_{\mathrm{BS}} \|_{2}  /  \| \Gamma_{\mathrm{BS}} \|_{2}$ \\
+     & $\Delta$ & $\Theta$ & $\Gamma$ \\
     \midrule
-    0.0066 & 0.1201 & 0.2553 \\
+    rel-$\ell_{2}$ error & 0.0045 & 0.1165 & 0.2394 \\
     \bottomrule
   \end{tabular}
 \end{table}
+
 
 Finally, Figure~\ref{fig:call_option_error_rel} underscores a generic
 limitation of data-driven solvers: accuracy deteriorates outside the
@@ -1568,8 +1562,8 @@ however, the errors remain well below thresholds used in practice.
 \end{figure}
 
 For this straightforward example, training required about two minutes, underscoring the computational 
-burden that PINNs impose. Once trained, evaluation is fast—in our test, roughly \(1.45\times\) faster than 
-the closed-form Black-Scholes formula—but the initial training cost remains a practical consideration.
+burden that PINNs impose. Once trained, evaluation is fast—-in our test, roughly \(1.45\times\) faster than 
+the closed-form Black-Scholes formula—-but the initial training cost remains a practical consideration.
 
 \section{Multi-Asset Option}
 
@@ -1578,32 +1572,22 @@ experiment to multiple underlying assets. A compact network with three hidden la
 neurons each is first trained on the dimensionless form of the multi-asset Black-Scholes PDE 
 in Eq.~\eqref{eq:scaled_PDE_exact}. 
 
-Because training costs increase significantly with 
-dimensionality—due both to the complexity of the boundary conditions and the exponential 
-growth in the volume of the domain—we employ a deliberately small set of collocation points: 
+Because training costs increase significantly with dimensionality—due both to the complexity of 
+the boundary conditions and the exponential growth in the volume of the domain—we deliberately employ a small set of collocation points: 
 500 in the interior domain \(\Omega\), 500 on the boundary \(\partial\Omega\), and 500 on the 
 initial hypersurface \(\Omega_0\). It is important to note that the number of required points 
 on the boundary increases linearly with the number of assets, which further contributes to 
 the computational burden as dimensionality grows. The specific parameters used in this test 
 case are summarized in Table~\ref{tab:multiasset_params}.
-
 \begin{table}[H]
- \caption{Best-Of Call Option Parameters}
+ \caption{European Best-Of Option Parameters}
  \label{tab:multiasset_params}
  \centering
- \begin{tabular}{|c|c|}
+ \begin{tabular}{|c|c|c|c|c|}
  \hline
- \textit{Parameter} & \textit{Value} \\
+ \textit{Strike price, $K$} & \textit{Maturity, $T$} & \textit{Risk-free rate, $r$} & \textit{Volatilities, $\sigma_i$} & \textit{Correlation, $\rho_{ij}$} \\
  \hline
- Strike price, $K$ & \$100 \\
- \hline
- Maturity, $T$ & 1.0 year \\
- \hline
- Risk-free rate, $r$ & 0.05 \\
- \hline
- Volatilities, $\sigma_i$ & 0.20 \\
- \hline
- Correlation, $\rho_{ij}$ & 0.25 \\
+ \$100 & 1 year & 5.0\% p.a. & 20\% p.a. & 0.25 \\
  \hline
  \end{tabular}
 \end{table}
@@ -1613,7 +1597,7 @@ and \ref{fig:multiasset_surface}, correspond to the first two asset dimensions i
 and original coordinate spaces, respectively. 
 
 As in the single-asset case, the solution displays 
-the expected features: values near zero when asset prices are far below the strike, approximately 
+some of the expected features: values near zero when asset prices are far below the strike, approximately 
 linear growth as asset prices increase well above the strike, and a ridge or kink near the strike 
 region. These qualitative features are preserved as dimensionality increases, but the quality 
 of the approximation deteriorates. The surfaces reveal increased irregularity and loss of precision, 
@@ -1622,14 +1606,14 @@ particularly in regions near the domain boundaries.
 \begin{figure}[H]
  \centering
  \includegraphics[width=1\textwidth]{imagenes/multiasset_dimless_surface.png}
- \caption{Dimensionless multi-asset call option price (first two asset axes).}
+ \caption{Dimensionless multi-asset best-of option price (first two asset axes).}
  \label{fig:multiasset_dimless}
 \end{figure}
 
 \begin{figure}[H]
  \centering
  \includegraphics[width=1\textwidth]{imagenes/multiasset_surface.png}
- \caption{Multi-asset call option price in original coordinates (first two asset axes).}
+ \caption{Multi-asset best-of option price in original coordinates (first two asset axes).}
  \label{fig:multiasset_surface}
 \end{figure}
 
@@ -1637,7 +1621,7 @@ At the boundaries of the domain, especially in cases with more than three assets
 begins to exhibit an undesired curvature because the small network struggles to capture accurately the solution. 
 In our experiments, increasing the number of boundary collocation points did not lead to 
 significant improvements. Instead, better accuracy was achieved by increasing the expressiveness (width and depth)
-of the network. 
+of the neural network. 
 
 By retaining the same number of layers but increasing the width to 60 neurons per 
 layer, the network was able to represent the solution more faithfully, as demonstrated in 
@@ -1646,13 +1630,13 @@ Figure~\ref{fig:7dim_surfaces}, which compares both architectures in a seven-ass
 \begin{figure}[H]
  \centering
  \includegraphics[width=1\textwidth]{imagenes/7dim_surfaces.png}
- \caption{Seven-asset call option surfaces for two architectures. The network with 60 neurons 
+ \caption{Seven-asset best-of option surfaces for two architectures. The network with 60 neurons 
 	per layer captures the solution more faithfully than the smaller 10-neuron model.}
  \label{fig:7dim_surfaces}
 \end{figure}
 
 With the larger network and careful tuning of hyperparameters, it was possible to achieve a 
-relative \(\ell_2\) error below \(10^{-3}\) (or better, depending on the case), which is generally considered 
+relative rel-\(\ell_2\) error arround \(10^{-3}\) which is generally considered 
 acceptable for most practical applications. However, it is worth noting that such accuracy was not guaranteed 
 across all dimensions and required repeated experimentation to achieve. Moreover, although 
 the final error levels are satisfactory, there remains a lack of a comprehensive theoretical 
@@ -1673,7 +1657,7 @@ short training times but significantly worse solutions.
 
 Once trained, PINNs offer excellent performance in terms of computational speed. 
 As shown in Figure~\ref{fig:speedup}, the inference time of a trained PINN is significantly 
-faster than traditional Monte Carlo simulation methods, achieving substantial speedups even 
+faster than traditional MC simulation methods, achieving substantial speedups even 
 on a standard CPU. This computational advantage makes PINNs particularly attractive for real-time 
 evaluations and repeated queries.
 
@@ -1698,47 +1682,48 @@ parameter configurations, or be integrated selectively into systems that can tol
 
 \section{Call Option with Stochastic Volatility and Interest Rates}
 
-We now extend our previous examples by introducing stochastic volatility 
-and stochastic interest rates using the Heston-Hull-White model. This 
-combined framework allows us to capture realistic market features, including 
-volatility smiles and interest rate fluctuations. 
-Figure~\ref{fig:call_option_heston_hullwhite_surface} illustrates the price surfaces 
-produced by the PINN under various volatility ($v$) levels. The complete set 
-of parameters used for this scenario is provided in Table~\ref{tab:params_heston_hullwhite}.
+We now extend the previous analysis by introducing both stochastic volatility 
+and stochastic interest rates through the Heston-Hull-White model. 
+This combined framework captures more realistic market features, such as 
+volatility smiles and interest-rate fluctuations. 
+Figure~\ref{fig:call_option_heston_hullwhite_surface} illustrates the 
+option price surfaces produced by the PINN under different volatility levels. 
+The complete set of parameters used in this scenario is given in 
+Table~\ref{tab:params_heston_hullwhite}.
 
 \begin{table}[H]
-	\caption{Parameters for the Call Option under the Heston-Hull-White Model}
+	\caption{Parameters for the call option under the Heston-Hull-White model.}
 	\label{tab:params_heston_hullwhite}
 	\centering
 	\begin{tabular}{|c|c|}
 		\hline
 		\textit{Parameter} & \textit{Value} \\
 		\hline
-		Strike price, $K$ & \$0.5 \\
+		Strike price, $K$ & \$1.0 \\
 		\hline
-		Maturity, $T$ & 5.0 years \\
+		Maturity, $T$ & 2.0 years \\
 		\hline
-		Initial risk-free short rate, $r_0$ & 0.05 \\
+		Initial short rate, $r_0$ & 5.0\% p.a. \\
 		\hline
-		Hull-White mean reversion speed, $a_r$ & 0.1 \\
+		Hull-White mean reversion speed, $\kappa_r$ & 0.2 \\
 		\hline
-		Hull-White mean reversion level, $\theta_r$ & 0.05 \\
+		Hull-White long-term mean, $\theta_r$ & 3.0\% \\
 		\hline
-		Hull-White interest rate volatility, $\sigma_r$ & 0.02 \\
+		Hull-White rate volatility, $\sigma_r$ & 1.0\% p.a. \\
 		\hline
-		Heston initial volatility, $v_0$ & 0.04 \\
+		Heston initial variance, $v_0$ & 0.5 \\
 		\hline
-		Heston mean reversion speed, $\kappa_v$ & 1.5 \\
+		Heston mean reversion speed, $\kappa_v$ & 2.0 \\
 		\hline
-		Heston long-term volatility, $\theta_v$ & 0.04 \\
+		Heston long-term variance, $\theta_v$ & 14\% p.a. \\
 		\hline
-		Heston volatility of volatility, $\sigma_v$ & 0.2 \\
+		Heston volatility of volatility, $\sigma_v$ & 50\% p.a. \\
 		\hline
-		Correlation between asset and volatility, $\rho_{Sv}$ & -0.7 \\
+		Correlation $\rho_{Sv}$ (asset-volatility) & $-0.6$ \\
 		\hline
-		Correlation between asset and interest rate, $\rho_{Sr}$ & 0.0 \\
+		Correlation $\rho_{Sr}$ (asset-rate) & $0.1$ \\
 		\hline
-		Correlation between volatility and interest rate, $\rho_{vr}$ & 0.0 \\
+		Correlation $\rho_{Vr}$ (volatility-rate) & $0.0$ \\
 		\hline
 	\end{tabular}
 \end{table}
@@ -1746,65 +1731,54 @@ of parameters used for this scenario is provided in Table~\ref{tab:params_heston
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{imagenes/heston_hullwhite_surfaces.png}
-	\caption{Call option pricing surfaces using the Heston-Hull-White model for different volatility levels.}
+	\caption{Call option price surfaces obtained with the Heston-Hull-White model for different volatility levels.}
 	\label{fig:call_option_heston_hullwhite_surface}
 \end{figure}
 
-Using the experience from the case of Section \ref{sec:multiasset}, we used a neural network with three hidden layers, each containing 60 neurons,
-and trained it with the BFGS optimizer on 13 320 collocation points distributed equitatively 
-across the different domains. Training took approximately 12 minutes, which contrast with the multi-dimensional case for the same number of dimensions.
+Following the approach of Section~\ref{sec:multiasset}, we used a neural network with three hidden layers of 60 neurons each, 
+trained with the BFGS optimizer on 26,660 collocation points distributed uniformly across the domain. 
+Training required approximately 2 hours, which resembles the time needed for the multi-asset case.
 
-Since no analytical solution exists for the combined Heston-Hull-White model, 
-we qualitatively compare the PINN results to those obtained using the simpler 
-Black-Scholes model (see Figure~\ref{fig:heston_hullwhite_vols}). It is possible to observe that
-for high underlying asset values, option prices behave nearly 
-linearly with the underlying; at lower values, the price closely resembles the discounted 
-payoff.
+To provide a qualitative benchmark, we compare the PINN results with the simpler 
+Black-Scholes model. We first analyze the effect of volatility on option pricing.
+Figure~\ref{fig:hhw_bs_diff_sigma} shows the difference between Heston-Hull-White 
+and Black-Scholes prices for various initial variance $v_0$ (or $\sigma$ in the Black-Scholes setting). For simplicity,
+both parameters are denoted by $\sigma$ in the figures.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{imagenes/heston_hullwhite_vols.png}
-	\caption{Price sensitivity to changes in volatility ($v$). Higher 
-	values decrease curvature in the price surface.}
-	\label{fig:heston_hullwhite_vols}
-\end{figure}
-
-The effect of interest-rate dynamics on option pricing is shown in 
-Figure~\ref{fig:heston_hullwhite_rates}. As short-term interest 
-rates increase, option prices generally rise, reflecting the increased cost 
-associated with hedging positions and financing derivatives contracts over 
-longer horizons. This aligns with standard market expectations.
+The bell-shaped profiles arise because volatility in the Heston model follows a mean-reverting process. 
+Very high or very low initial volatilities tend to revert towards the long-term mean during the option's life. 
+The peak in the difference occurs near the strike, where vega--the option's price derivative w.r.t volatility-- is maximal and the option is most sensitive to assumptions about the volatility process.
+By contrast, deep in-the-money or out-of-the-money options are much less sensitive, which explains the flattening of the curves. 
+Positive differences occur when the stochastic variance tends to revert to a level above the constant volatility assumed by Black-Scholes, and vice versa.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{imagenes/heston_hullwhite_rates.png}
-	\caption{Price sensitivity to short rates in the Heston-Hull-White model. Higher interest rates raise the option's hedging cost, increasing the option price.}
-	\label{fig:heston_hullwhite_rates}
+	\includegraphics[width=0.8\textwidth]{imagenes/hhw_bs_diff_sigma.png}
+	\caption{Difference between Heston-Hull-White and Black-Scholes call prices 
+	as a function of volatility. Mean reversion in the Heston model produces 
+	the characteristic bell shape.}
+	\label{fig:hhw_bs_diff_sigma}
 \end{figure}
 
-As the model incorporates stochastic volatility and interest rate models, the resulting price surfaces differ from the Black-Scholes solution,
-both because additional stochastic factors are present and because the combined model incorporates correlations between the underlying asset, volatility, and interest rates.
-This can be seen in Figure~\ref{fig:hullwhiteheston_surface_vol} and Figure~\ref{fig:hullwhiteheston_surface_rates}, where the price
-surfaces are shown at $t=0$ for the stock and volatility dimensions, and the stock and interest rate dimensions, respectively.
+The impact of stochastic interest rates is presented in 
+Figure~\ref{fig:hhw_bs_diff_rates}. As before, the difference is explained by mean reversion. 
+When the initial rate is low, stochastic rates imply less discounting on average than the deterministic discounting in Black-Scholes, 
+which increases the option price. Conversely, when rates are high, mean reversion mitigates discounting relative to Black-Scholes, 
+reducing the difference. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{imagenes/hullwhiteheston_vol.png}
-	\caption{Price surface at $t=0$ for the stock and volatility dimension.}
-	\label{fig:hullwhiteheston_surface_vol}
+	\includegraphics[width=0.8\textwidth]{imagenes/hhw_bs_diff_rates.png}
+	\caption{Difference between Heston-Hull-White and Black-Scholes call prices 
+	as a function of the short rate. Stochastic mean reversion of rates leads to 
+	systematically higher prices than under constant-rate discounting, 
+	particularly when initial rates are low.}
+	\label{fig:hhw_bs_diff_rates}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{imagenes/hullwhiteheston_rates.png}
-	\caption{Price surface at $t=0$ for the stock and volatility dimension.}
-	\label{fig:hullwhiteheston_surface_rates}
-\end{figure}
-
-This experiment demonstrates that PINNs can accommodate richer dynamics than the Black-Scholes 
-setting while retaining rapid inference once training is complete—a property valuable in 
-latency-sensitive contexts such as high-frequency trading, where models must reconcile speed 
-with the need to reflect joint dynamics.
+Finally, we note that the relative $\ell_2$ error of the PINN solution is $4.61\times 10^{-3}$ 
+and the MSE is $4.98\times 10^{-5}$. These errors are acceptable for practical applications, 
+although they are higher than in the simpler Black-Scholes case. 
 
 \section{Put Option Pricing}
 
@@ -1815,29 +1789,24 @@ $$\Phi(S) = \max(K - S, 0).$$
 For this section, the parameters used are summarized in
 Table~\ref{tab:params_put}.
 
-\begin{table}
-	\caption{Parameters for the European Put Option}
-	\label{tab:params_put}
-	\centering
-	\begin{tabular}{|c|c|}
-		\hline
-		\textit{Parameter} & \textit{Value} \\
-		\hline
-		Strike price, $K$ & \$100 \\
-		\hline
-		Maturity, $T$ & 1.0 year \\
-		\hline
-		Risk-free rate, $r$ & 0.05 \\
-		\hline
-		Volatility, $\sigma$ & 0.20 \\
-		\hline
-	\end{tabular}
+\begin{table}[H]
+ \caption{Parameters for the European Put Option}
+ \label{tab:params_put}
+ \centering
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ \textit{Strike price, $K$} & \textit{Maturity, $T$} & \textit{Risk-free rate, $r$} & \textit{Volatility, $\sigma$} \\
+ \hline
+ \$100 & 1 year & 5.0\% p.a. & 20\% p.a. \\
+ \hline
+ \end{tabular}
 \end{table}
+
 
 The pricing surface obtained from the PINN compared to the exact Black-Scholes analytical solution is 
 displayed in Figure~\ref{fig:put_option}. Unlike call options, put option prices increase as 
 the underlying asset value decreases, reflecting their payoff structure. Therefore, we need to exchange the boundary
-conditions when training the neural network and comparing to the call option-when $S\to\infty$, the prices behaves linearly and when $S\to0$.
+conditions when training the neural network and comparing to the call option--when $S\to\infty$, the prices behaves linearly and when $S\to0$.
 
 \begin{figure}[H]
 	\centering
@@ -1872,9 +1841,9 @@ tells us that the difference between the call and put prices should equal the di
 expected value of the underlying asset at maturity minus the strike price where no stochasticity is present, producing a linear relationship 
 between the underlying asset price and the difference between the call and put prices. Evaluating the left-hand side 
 with the two PINN surfaces confirms the identity
-to high accuracy: the relative \(\ell_2\) error of the parity is \(5.63\times10^{-5}\).
+to high accuracy: the relative rel-\(\ell_2\) error of the parity is \(1.40\times10^{-4}\) and a MSE of \(6.75\times10^{-9}\).
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{imagenes/parity.png}
 	\caption{Put-call parity verification: the difference between the PINN solutions for call and put options matches the expected relationship.}
@@ -1884,7 +1853,7 @@ to high accuracy: the relative \(\ell_2\) error of the parity is \(5.63\times10^
 In future applications, this parity can be of use for adding additional constraints to the PINN,
 ensuring that the solutions for call and put options are consistent with the theoretical relationship.
 
-In this particular case, we limit our selves to state the $\ell_2$ error obtained by the PINN, \(5.85\times10^{-5}\), as 
+In this particular case, we limit our selves to state the $\ell_2$ error obtained by the PINN, \(8.75\times10^{-5}\), and the MSE, \(1.25\times10^{-9}\) as 
 the case is very similar to the call option.
 
 \section{American Put Option Pricing}
@@ -1894,17 +1863,22 @@ allowing the holder to exercise anytime before maturity. Consequently, pricing r
 solving a free-boundary problem. 
 
 There are various ways to incorporate into the modeling framework free-boundary restrictions. In this experiment
-we achieve this by instead of directly minimizing the PDE interior residual (\(\mathcal{L}_{\text{PDE}}\)), we minimize the
-following loss function:
+we achieve this by replacing the PDE interior residual (\(\mathcal{L}_{\text{PDE}}\)), for a new loss function where we minimize:
 
 \begin{equation}
 \label{eq:american_put_loss}
 \mathcal{L}_{\text{PDE}}(\theta) = \int_{0}^{T}\int_{\Omega}\left|\max\{\Phi(S)- u_\theta(t,x), \mathcal{N}_I[u_\theta(t,x)]\}\right|^2\mathrm{d}x\mathrm{d}t.
 \end{equation}
 
-More on this can be found in \cite{wilmott1995mathematics, IKONEN2004809}. The resulting PINN solution, compared against a benchmark 
-numerical solution (FDM), is shown in Figure~\ref{fig:american_put_option}. In this case, we used
-the same neural network architecture and parameters as the European put option.
+This modified loss directly encodes the early-exercise constraint by enforcing the 
+option value to remain above its intrinsic value $\Phi(S)$ while still satisfying the 
+PDE in the continuation region. In other words, the network is trained to respect the 
+minimum of the two competing conditions: no-arbitrage through the payoff constraint 
+and consistency with the governing PDE. More on this can be found in \cite{wilmott1995mathematics, IKONEN2004809}. 
+
+The resulting PINN solution, compared against a benchmark numerical solution--FDM-- 
+is shown in Figure~\ref{fig:american_put_option}. In this case, we used the same neural network 
+architecture and parameters as the European put option.
 
 \begin{figure}[H]
 	\centering
@@ -1921,18 +1895,18 @@ now extend across a wider region due to the early-exercise boundary's dynamic na
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{imagenes/american_put_error.png}
-	\caption{Errors for American put option pricing. Is possible to see that the PINN is able to infer correctly most of the free boundary.}
+	\caption{Absolute error for American put option pricing. Its possible to observe that the PINN is able to reproduce closely most of the free boundary.}
 	\label{fig:american_put_option_error}
 \end{figure}
 
-From Figure~\ref{fig:american_put_option_error}, we can see that the PINN is able to achieve good prediction of the free boundary, highlited by the blue and yellow lines,,
+From Figure~\ref{fig:american_put_option_error}, we can see that the PINN is able to achieve good 
+prediction of the free boundary, highlited by the blue and yellow lines,
 which is the main challenge in American option pricing. Still, some artifacts are visible, especially near the strike price.
 
-In terms of the accuracy of the obtained solution, the PINN achieved an \(\ell_2\) error of 
-\(1.30\times10^{-3}\), which is acceptable for practical applications, but worse than the European cases. This can be 
+In terms of the accuracy of the obtained solution, the PINN achieved an rel-\(\ell_2\) error of 
+\(9.21\times10^{-4}\) and a MSE of \(1.44\times10^{-7}\), which is very competitive with traditional methods, i.e FDM, but slightly worse than the European cases. This can be 
 attributed to the new loss function, which introduces a maximum operator inside the integrand of the loss, making the PDE residual less 
-smooth and harder to approximate with a neural 
-network.
+smooth and harder to approximate with a neural network.
 
 \section{Swaption Pricing}
 
@@ -1958,7 +1932,7 @@ and set \(X_i^{\star}=A(T,T_i)e^{-B(T,T_i)r^{\star}}\). Then, the pricing formul
 \]
 where the Hull-White price of a put option with underlying a zero-coupon bond is
 \[
-\operatorname{ZBP}(t,T,S,K)=P(t,S)^M\Phi(h)-X P(t,T)^M\Phi(h-\sigma_p),
+\operatorname{ZBP}(t,T,S,K)=P(t,S)^M N(h)-X P(t,T)^M N(h-\sigma_p),
 \]
 \[
 \sigma_p = \sigma\sqrt{\frac{1-e^{-2\kappa(T-t)}}{2\kappa}}B(T,S),
@@ -1966,7 +1940,7 @@ where the Hull-White price of a put option with underlying a zero-coupon bond is
 \[
 h = \frac{1}{\sigma_p}\operatorname{ln}\Big(\frac{P(t,S)^M}{P(t,T)^M X}\Big)+\frac{\sigma_p}{2}.
 \]
-Here, $\Phi(\cdot)$ denotes a standar normal CDF and the parameters are the sames as in Section \ref{sec:sr_extension}.
+Here, $N(\cdot)$ denotes a standar normal CDF and the parameters are the sames as in Section \ref{sec:sr_extension}.
 
 In this framework, the short rate \( r_t \) evolves according to the stochastic differential equation defined in 
 \ref{eq:vasicek_pde}. The swaption price depends on the future evolution of the short rate and on 
@@ -1997,7 +1971,7 @@ exhibit low smoothness or where the valuation is highly sensitive to changes in 
 	\label{fig:swaption_error}
 \end{figure}
 
-For this particular case, the PINN achieved an \(\ell_2\) error of \(5.7\times10^{-3}\). In general, 
+For this particular case, the PINN achieved an rel-\(\ell_2\) error of \(5.7\times10^{-3}\) and a MSE of \(1.15\times10^{-5}\). In general, 
 the PINN demonstrates strong agreement with analytical benchmarks. This confirms its ability to handle the 
 pricing of interest-rate derivatives with path-dependent structures and stochastic dynamics.
 
@@ -2017,33 +1991,34 @@ contracts while delivering near-instantaneous inference once training is complet
 \centering
 \caption{PINN training results across models and dimensions.}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{cccccccccc}
+\begin{tabular}{cccccccccccc}
 \toprule
-\(d\) & Net Size & Instrument & Model & Training Time (hr) & \(\Omega\) & \(\partial \Omega\) & \(\Omega_0\) & \(\ell_2\) error (\%) \\
+\(d\) & Layers & Width & Instrument & Model & Training Time (hr) & \(\Omega\) & \(\partial \Omega\) & \(\Omega_0\) & rel-\(\ell_2\) error & MSE \\
 \midrule
-2 & 2x20x20 & Call & BS & 0.12 & 25{,}000 & 25{,}000 & 25{,}000 & 0.023 \\
-2 & 2x20x20 & Put & BS & 0.07 & 25{,}000 & 25{,}000 & 25{,}000 & 0.006 \\
-2 & 2x20x20 & American Put & BS & 0.09 & 25{,}000 & 25{,}000 & 25{,}000 & 0.132 \\
-4 & 4x60x60 & Call & Heston-HW & 0.20 & 10{,}000 & 1{,}660 & 1{,}660 & N/A \\
-2 & 2x60x60 & Swaption & HW & 0.07 & 25{,}000 & 25{,}000 & 25{,}000 & 0.58 \\
-3 & 3x10x10 & Best-Of & BS & 0.47 & 500 & 2{,}000 & 500 & 0.474 \\
-4 & 4x10x10 & Best-Of & BS & 1.56 & 500 & 3{,}000 & 500 & 0.580 \\
-5 & 5x10x10 & Best-Of & BS & 2.36 & 500 & 4{,}000 & 500 & 0.971 \\
-6 & 6x10x10 & Best-Of & BS & 0.85 & 500 & 5{,}000 & 500 & 2.779 \\
-7 & 7x10x10 & Best-Of & BS & 4.75 & 500 & 6{,}000 & 500 & 3.088 \\
-8 & 8x10x10 & Best-Of & BS & 7.03 & 500 & 7{,}000 & 500 & 3.027 \\
-6 & 6x60x60 & Best-Of & BS & 3.71 & 500 & 5{,}000 & 500 & 0.576 \\
-7 & 7x60x60 & Best-Of & BS & 6.29 & 500 & 6{,}000 & 500 & 0.558 \\
-8 & 8x60x60 & Best-Of & BS & 10.34 & 500 & 7{,}000 & 500 & 0.716 \\
+2 & 2 & 20 & European Call & BS & 0.03 & 20{,}000 & 40{,}000 & 20{,}000 & $4.19\times10^{-5}$ & $4.05\times10^{-9}$ \\
+2 & 2 & 20 & European Put & BS & 0.03 & 20{,}000 & 40{,}000 & 20{,}000 & $8.75\times10^{-5}$ & $1.25\times10^{-9}$ \\
+2 & 3 & 60 & American Put & BS & 0.16 & 20{,}000 & 40{,}000 & 20{,}000 & $9.21\times10^{-5}$ & $1.44\times10^{-7}$ \\
+4 & 3 & 60 & European Call & Heston-HW & 1.70 & 20{,}000 & 19{,}998 & 3{,}333 & $4.61\times10^{-3}$ & $4.98\times10^{-5}$ \\
+2 & 3 & 60 & European Swaption & HW & 0.33 & 20{,}000 & 40{,}000 & 20{,}000 & $7.76\times10^{-3}$ & $1.15\times10^{-5}$ \\
+3 & 3 & 10 & Best-Of Call & DimlessBS & 0.47 & 500 & 2{,}000 & 500 & $5.19\times10^{-3}$ & $2.02\times10^{-1}$ \\
+4 & 3 & 10 & Best-Of Call & DimlessBS & 1.56 & 500 & 3{,}000 & 500 & $5.66\times10^{-3}$ & $3.57\times10^{-1}$ \\
+6 & 3 & 60 & Best-Of Call & DimlessBS & 3.71 & 500 & 5{,}000 & 500 & $3.87\times10^{-3}$ & $2.87\times10^{-1}$ \\
+7 & 3 & 60 & Best-Of Call & DimlessBS & 6.29 & 500 & 6{,}000 & 500 & $6.17\times10^{-3}$ & $8.52\times10^{-1}$ \\
+8 & 3 & 60 & Best-Of Call & DimlessBS & 10.34 & 500 & 7{,}000 & 500 & $7.60\times10^{-3}$ & $1.56\times10^{0}$ \\
+5 & 3 & 10 & Best-Of Call & DimlessBS & 2.36 & 500 & 4{,}000 & 500 & $1.03\times10^{-2}$ & $1.56\times10^{0}$ \\
+6 & 3 & 10 & Best-Of Call & DimlessBS & 0.85 & 500 & 5{,}000 & 500 & $2.49\times10^{-2}$ & $1.19\times10^{1}$ \\
+7 & 3 & 10 & Best-Of Call & DimlessBS & 4.75 & 500 & 6{,}000 & 500 & $3.08\times10^{-2}$ & $2.12\times10^{1}$ \\
+8 & 3 & 10 & Best-Of Call & DimlessBS & 7.03 & 500 & 7{,}000 & 500 & $2.92\times10^{-2}$ & $2.31\times10^{1}$ \\
 \bottomrule
 \end{tabular}
 } % end resizebox
 \label{tab:pinn_results}
 \end{table}
 
+
 For low-dimensional problems—the European call and put under Black-Scholes, the one-factor Hull-White 
 swaption, and the three-state Heston-Hull-White call—the trained networks attained relative \(\ell_2\) 
-errors below \(10^{-3}\) and reproduced the qualitative features of the true pricing surfaces, 
+errors below \(10^{-5}\) and reproduced the qualitative features of the true pricing surfaces, 
 including the expected linear growth deep-in-the-money and the curvature induced by stochastic 
 volatility and rates. In all those cases a single forward pass through the network was between 
 one and two orders of magnitude faster than a finite-difference or Monte-Carlo solver executed 
@@ -2069,11 +2044,8 @@ state dimension, the presence of kinks or free boundaries, or the need to retrai
 parameters. The multi-asset experiment illustrates the first effect and the swaption case the second. 
 After widening the hidden layers to sixty neurons the network required almost the same number of iterations to converge, 
 but the complexity of the problem made each iteration more expensive, leading to a significant increase in wall-clock time.
-In all the cases, the residual error concentrated near the payoff ridge, a manifestation of 
-the Gibbs phenomenon that smooth activations cannot suppress. 
 
-The third limitation—lack of 
-transferability—emerges whenever the strike, maturity or other model parameters changed. Because a 
+The third limitation—lack of transferability—emerges whenever the strike, maturity or other model parameters changed. Because a 
 classical PINN encodes one particular solution rather than the pricing operator itself, every 
 change forced a full optimisation run whose wall-clock cost erodes the apparent speed-up achieved 
 at inference.
@@ -2117,7 +2089,6 @@ or environments requiring frequent recalibration will demand architectural innov
 provide \emph{a posteriori} error estimates, and ensure robust optimization dynamics. If these challenges are met, physics-informed 
 learning could become a foundational tool in next-generation quantitative finance infrastructure, offering a compelling blend of 
 theoretical rigor and data-driven adaptability.
-
 
 \clearpage
 \addcontentsline{toc}{chapter}{Bibliography}
