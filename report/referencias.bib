@@ -771,3 +771,30 @@
   keywords = {Physics-informed neural networks, Partial differential equations, Loss balancing},
   abstract = {Physics-informed neural networks (PINNs) have received significant attention as a representative deep learning-based technique for solving partial differential equations (PDEs). The loss function of PINNs is a weighted sum of multiple terms, including the mismatch of observed data, boundary and initial constraints, as well as PDE residuals. In this paper, we observe that the performance of PINNs is susceptible to the weighted combination of competitive multiple loss functions. Therefore, we establish Gaussian probabilistic models to define the self-adaptive loss function through the adaptive weights for each loss term. In particular, we propose a self-adaptive loss balanced method that automatically assigns the weights of losses by updating adaptive weights in each epoch based on the maximum likelihood estimation. Finally, we perform a series of numerical experiments with self-adaptive loss balanced physics-informed neural networks (lbPINNs), including solving Poisson, Burgers, Helmholtz, Navier-Stokes, and Allen-Cahn equations in regular and irregular areas. We also test the robustness of lbPINNs by varying the initial adaptive weights, numbers of observations, hidden layers, and neurons per layer. These experimental results demonstrate that lbPINNs consistently achieve better performance than PINNs, and reduce the relative L2 error by about two orders of magnitude.}
 }
+
+@article{jamshidian1989exact,
+  title     = {An Exact Bond Option Pricing Formula},
+  author    = {Jamshidian, Farshid},
+  journal   = {The Journal of Finance},
+  volume    = {44},
+  number    = {1},
+  pages     = {205--209},
+  year      = {1989},
+  publisher = {Wiley},
+  doi       = {10.1111/j.1540-6261.1989.tb02413.x}
+}
+
+@Article{repec:kap:annfin:v:20:y:2024:i:3:d:10.1007_s10436-024-00452-7,
+journal={Annals of Finance},
+author={Donatien Hainaut and Alex Casas},
+title={Option pricing in the Heston model with physics inspired neural networks},
+year={2024},
+month={September},
+pages={353-376},
+volume={20},
+number={3},
+abstract={ In absence of a closed form expression such as in the Heston model, the option pricing is computationally intensive when calibrating a model to market quotes. this article proposes an alternative to standard pricing methods based on physics-inspired neural networks (PINNs). A PINN integrates principles from physics into its learning process to enhance its efficiency in solving complex problems. In this article, the driving principle is the Feynman-Kac (FK) equation, which is a partial differential equation (PDE) governing the derivative price in the Heston model. We focus on the valuation of European options and show that PINNs constitute an efficient alternative for pricing options with various specifications and parameters without the need for retraining.},
+keywords={Neural networks; Options; Heston model; Feynman-Kac equation},
+doi={10.1007/s10436-024-00452-7},
+url={https://ideas.repec.org/a/kap/annfin/v20y2024i3d10.1007_s10436-024-00452-7.html},
+}
