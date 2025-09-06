@@ -19,30 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{Melo2025pricingpinns}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=cf29ca70de7e24ca1467f4603e8b6cb9}{%
-           family={Melo},
-           familyi={M\bibinitperiod},
-           given={J.},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \strng{fullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \strng{bibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \strng{authorbibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \strng{authornamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \strng{authorfullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
-      \field{extraname}{1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://github.com/jmelo11/pricing_pinns}}
-      \field{note}{GitHub repository, accessed July 2025}
-      \field{title}{Leveraging Physics-Informed Neural Networks for Option Pricing Problems}
-      \field{year}{2025}
-    \endentry
     \entry{lecun}{article}{}
       \name{author}{3}{}{%
         {{hash=6a1aa6b7eab12b931ca7c7e3f927231d}{%
@@ -67,8 +43,8 @@
       \strng{authorbibnamehash}{4cdbdf6bda52e35be20da5dd176c4431}
       \strng{authornamehash}{4cdbdf6bda52e35be20da5dd176c4431}
       \strng{authorfullhash}{4cdbdf6bda52e35be20da5dd176c4431}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature}
@@ -105,8 +81,8 @@
       \strng{authorbibnamehash}{8eb46e2417b472d17c974e4c3bc21987}
       \strng{authornamehash}{8eb46e2417b472d17c974e4c3bc21987}
       \strng{authorfullhash}{8eb46e2417b472d17c974e4c3bc21987}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Options, futures, and other derivatives}
@@ -130,8 +106,8 @@
       \strng{authorbibnamehash}{b4eae05c5ac84581289f65180c29143e}
       \strng{authornamehash}{b4eae05c5ac84581289f65180c29143e}
       \strng{authorfullhash}{b4eae05c5ac84581289f65180c29143e}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Paul Wilmott on Quantitative Finance}
@@ -163,8 +139,8 @@
       \strng{authorbibnamehash}{ad8512135fae00796ff8f92716d977c9}
       \strng{authornamehash}{ad8512135fae00796ff8f92716d977c9}
       \strng{authorfullhash}{ad8512135fae00796ff8f92716d977c9}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{"This book develops the use of Monte Carlo methods in finance, and it also uses simulation as a vehicle for presenting models and ideas from financial engineering. It divides roughly into three parts. The first part develops the fundamentals of Monte Carlo methods, the foundations of derivatives pricing, and the implementation of several of the most important models used in financial engineering. The next part describes techniques for improving simulation accuracy and efficiency. The final third of the book addresses special topics: estimating price sensitivities, valuing American options, and measuring market risk and credit risk in financial portfolios." "The most important prerequisite is familiarity with the mathematical tools used to specify and analyze continuous time models in finance, in particular the key ideas of stochastic calculus. Prior exposure to the basic principles of option pricing is useful but not essential." "The book is aimed at graduate students in financial engineering, researchers in Monte Carlo simulation, and practitioners implementing models in industry."--Jacket.}
@@ -202,8 +178,8 @@
       \strng{authornamehash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
       \strng{authorfullhash}{0bcdbf94b820ddcda24f3e8d73d9a4ec}
       \field{extraname}{1}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{If options are correctly priced in the market, it should not be possible to make sure profits by creating portfolios of long and short positions in options and their underlying stocks. Using this principle, a theoretical valuation formula for options is derived. Since almost all corporate liabilities can be viewed as combinations of options, the formula and the analysis that led to it are also applicable to corporate liabilities such as common stock, corporate bonds, and warrants. In particular, the formula can be used to derive the discount that should be applied to a corporate bond because of the possibility of default.}
@@ -243,8 +219,8 @@
       \strng{authorbibnamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
       \strng{authornamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
       \strng{authorfullhash}{7bb51e859e70aaedef4ed1f3bb67779b}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -279,8 +255,8 @@
       \strng{authorbibnamehash}{a17a0649dc8bad70026488d4ea37c508}
       \strng{authornamehash}{a17a0649dc8bad70026488d4ea37c508}
       \strng{authorfullhash}{a17a0649dc8bad70026488d4ea37c508}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We introduce physics-informed neural networks - neural networks that are trained to solve supervised learning tasks while respecting any given laws of physics described by general nonlinear partial differential equations. In this work, we present our developments in the context of solving two main classes of problems: data-driven solution and data-driven discovery of partial differential equations. Depending on the nature and arrangement of the available data, we devise two distinct types of algorithms, namely continuous time and discrete time models. The first type of models forms a new family of data-efficient spatio-temporal function approximators, while the latter type allows the use of arbitrarily accurate implicit Runge-Kutta time stepping schemes with unlimited number of stages. The effectiveness of the proposed framework is demonstrated through a collection of classical problems in fluids, quantum mechanics, reaction-diffusion systems, and the propagation of nonlinear shallow-water waves.}
@@ -336,8 +312,8 @@
       \strng{authorbibnamehash}{d4f693b79fc6d54ce21a46633b3b214e}
       \strng{authornamehash}{21ea092f7eb68f8b1cd6fd2ead40fad1}
       \strng{authorfullhash}{d4f693b79fc6d54ce21a46633b3b214e}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Nowadays, Deep Learning is drastically revolutionizing financial research as well as industry. Many methods have been discussed in the last few years, mainly related to option pricing. In fact, traditional approaches such as Monte Carlo simulation or finite difference methods are seriously harmed by multi-dimensional underlying and path dependency. Thus, dealing with particular contracts such as American multi-asset options is still rough. This paper addresses such a problem by pricing said put options with a novel meshless methodology, named Physics-Informed Neural Networks (PINNs), based on Artificial Intelligence. PINN paradigm has been recently introduced in Deep Learning literature. It exploits the theoretical background of the universal approximation theorem for neural networks to solve Partial Differential Equations numerically. This Deep Learning meshless method incorporates the equation and its initial and boundary conditions thanks to a specially designed loss function. We develop a suitable PINN for the proposed problem by introducing an algorithmic trick for improving the convergence of the free boundary problem. Furthermore, the worthiness of the proposal is assessed by several experiments concerned with single and multi-asset options. Finally, a parametric model is built to benefit further studies of option value behaviour related to particular market conditions.}
@@ -385,8 +361,8 @@
       \strng{authorbibnamehash}{d233b5957b26b0fa2c35a3142ee87e35}
       \strng{authornamehash}{d233b5957b26b0fa2c35a3142ee87e35}
       \strng{authorfullhash}{d233b5957b26b0fa2c35a3142ee87e35}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Artificial neural networks (ANNs) have recently also been applied to solve partial differential equations (PDEs). The classical problem of pricing European and American financial options, based on the corresponding PDE formulations, is studied here. Instead of using numerical techniques based on finite element or difference methods, we address the problem using ANNs in the context of unsupervised learning. As a result, the ANN learns the option values for all possible underlying stock values at future time points, based on the minimization of a suitable loss function. For the European option, we solve the linear Black-Scholes equation, whereas for the American option we solve the linear complementarity problem formulation. Two-asset exotic option values are also computed, since ANNs enable the accurate valuation of high-dimensional options. The resulting errors of the ANN approach are assessed by comparing to the analytic option values or to numerical reference solutions (for American options, computed by finite elements). In the short note, previously published, a brief introduction to this work was given, where some ideas to price vanilla options by ANNs were presented, and only European options were addressed. In the current work, the methodology is introduced in much more detail.}
@@ -693,8 +669,8 @@
       \strng{authorbibnamehash}{6cf2f2c1f3183acd87195d7dc5af9158}
       \strng{authornamehash}{6cf2f2c1f3183acd87195d7dc5af9158}
       \strng{authorfullhash}{6cf2f2c1f3183acd87195d7dc5af9158}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This article shows that the one-state-variable interest-rate models of Vasicek (1977) and Cox, Ingersoll, and Ross (1985b) can be extended so that they are consistent with both the current term structure of interest rates and either the current volatilities of all spot interest rates or the current volatilities of all forward interest rates. The extended Vasicek model is shown to be very tractable analytically. The article compares option prices obtained using the extended Vasicek model with those obtained using a number of other models.}
@@ -908,8 +884,8 @@
       \strng{authorbibnamehash}{f82dc1f3c0d6c8c9dce9a0c8557c4147}
       \strng{authornamehash}{f82dc1f3c0d6c8c9dce9a0c8557c4147}
       \strng{authorfullhash}{f82dc1f3c0d6c8c9dce9a0c8557c4147}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Chemical Engineering Science}
@@ -979,6 +955,30 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0045782522006260
       \endverb
       \keyw{Partial differential equations,Physics-informed neural networks,Residual point distribution,Non-adaptive uniform sampling,Uniform sampling with resampling,Residual-based adaptive sampling}
+    \endentry
+    \entry{Melo2025pricingpinns}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=cf29ca70de7e24ca1467f4603e8b6cb9}{%
+           family={Melo},
+           familyi={M\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{fullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{bibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorbibnamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authornamehash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \strng{authorfullhash}{cf29ca70de7e24ca1467f4603e8b6cb9}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/jmelo11/pricing_pinns}}
+      \field{note}{GitHub repository, accessed July 2025}
+      \field{title}{Leveraging Physics-Informed Neural Networks for Option Pricing Problems}
+      \field{year}{2025}
     \endentry
     \entry{melo_options_pinns_2025}{misc}{}
       \name{author}{1}{}{%
@@ -1090,49 +1090,6 @@
       \endverb
       \keyw{Dynamical systems,Neural networks,Scientific machine learning,Time-domain simulation}
     \endentry
-    \entry{repec:kap:annfin:v:20:y:2024:i:3:d:10.1007_s10436-024-00452-7}{article}{}
-      \name{author}{2}{}{%
-        {{hash=51d0db8357fb370e2199aa6f1253c85f}{%
-           family={Hainaut},
-           familyi={H\bibinitperiod},
-           given={Donatien},
-           giveni={D\bibinitperiod}}}%
-        {{hash=dfff110dcb10de2b5fa9eb76a127e480}{%
-           family={Casas},
-           familyi={C\bibinitperiod},
-           given={Alex},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{0c677235fb26528094802f3bea3dbe97}
-      \strng{fullhash}{0c677235fb26528094802f3bea3dbe97}
-      \strng{bibnamehash}{0c677235fb26528094802f3bea3dbe97}
-      \strng{authorbibnamehash}{0c677235fb26528094802f3bea3dbe97}
-      \strng{authornamehash}{0c677235fb26528094802f3bea3dbe97}
-      \strng{authorfullhash}{0c677235fb26528094802f3bea3dbe97}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{In absence of a closed form expression such as in the Heston model, the option pricing is computationally intensive when calibrating a model to market quotes. this article proposes an alternative to standard pricing methods based on physics-inspired neural networks (PINNs). A PINN integrates principles from physics into its learning process to enhance its efficiency in solving complex problems. In this article, the driving principle is the Feynman-Kac (FK) equation, which is a partial differential equation (PDE) governing the derivative price in the Heston model. We focus on the valuation of European options and show that PINNs constitute an efficient alternative for pricing options with various specifications and parameters without the need for retraining.}
-      \field{journaltitle}{Annals of Finance}
-      \field{month}{9}
-      \field{number}{3}
-      \field{title}{Option pricing in the Heston model with physics inspired neural networks}
-      \field{volume}{20}
-      \field{year}{2024}
-      \field{pages}{353\bibrangedash 376}
-      \range{pages}{24}
-      \verb{doi}
-      \verb 10.1007/s10436-024-00452-7
-      \endverb
-      \verb{urlraw}
-      \verb https://ideas.repec.org/a/kap/annfin/v20y2024i3d10.1007_s10436-024-00452-7.html
-      \endverb
-      \verb{url}
-      \verb https://ideas.repec.org/a/kap/annfin/v20y2024i3d10.1007_s10436-024-00452-7.html
-      \endverb
-      \keyw{Neural networks; Options; Heston model; Feynman-Kac equation}
-    \endentry
     \entry{jamshidian1989exact}{article}{}
       \name{author}{1}{}{%
         {{hash=990d74e89e238a4b693fd97ac6580de1}{%
@@ -1209,8 +1166,8 @@
       \strng{authorbibnamehash}{b16598cfd68a21333b13de477a9f94a7}
       \strng{authornamehash}{b16598cfd68a21333b13de477a9f94a7}
       \strng{authorfullhash}{3e58006f2c869702116637d04136c3b9}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.LG}
@@ -1261,8 +1218,8 @@
       \strng{authorbibnamehash}{ff79a03c159d9858e9715a9ba15ffe27}
       \strng{authornamehash}{a4021fa953a5bdfcfa24d6e4f0debd5c}
       \strng{authorfullhash}{ff79a03c159d9858e9715a9ba15ffe27}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{It is widely known that neural networks (NNs) are universal approximators of continuous functions. However, a less known but powerful result is that a NN with a single hidden layer can accurately approximate any nonlinear continuous operator. This universal approximation theorem of operators is suggestive of the structure and potential of deep neural networks (DNNs) in learning continuous operators or complex systems from streams of scattered data. Here, we thus extend this theorem to DNNs. We design a new network with small generalization error, the deep operator network (DeepONet), which consists of a DNN for encoding the discrete input function space (branch net) and another DNN for encoding the domain of the output functions (trunk net). We demonstrate that DeepONet can learn various explicit operators, such as integrals and fractional Laplacians, as well as implicit operators that represent deterministic and stochastic differential equations. We study different formulations of the input function space and its effect on the generalization error for 16 different diverse applications.}
@@ -1314,8 +1271,8 @@
       \strng{authorbibnamehash}{638f8181c33d2ff0de7e3f2fd3691e66}
       \strng{authornamehash}{f7b81cf84ff761b781b73fcd72340ce9}
       \strng{authorfullhash}{638f8181c33d2ff0de7e3f2fd3691e66}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The Deep Neural Operator, as proposed by Lu et al. (2021), marks a considerable advancement in solving parametric partial differential equations. This paper examines the DeepOnet model’s neural network design, focusing on the effectiveness of its trunk-branch structure in operator learning tasks. Three key advantages of the trunk-branch structure are identified: the global learning strategy, the independent operation of the trunk and branch networks, and the consistent representation of solutions. These features are especially beneficial for operator learning. Building upon these findings, we have evolved the traditional DeepOnet into a more general form from a network perspective, allowing a nonlinear interfere of the branch net on the trunk net than the linear combination limited by the conventional DeepOnet. The operator model also incorporates physical information for enhanced integration. In a series of experiments tackling partial differential equations, the extended DeepOnet consistently outperforms than the traditional DeepOnet, particularly in complex problems. Notably, the extended DeepOnet model shows substantial advancements in operator learning with nonlinear parametric partial differential equations and exhibits a remarkable capacity for reducing physics loss.}
@@ -1360,8 +1317,8 @@
       \strng{authorbibnamehash}{8542ddfae81fb63f28a6d6dde95dba1a}
       \strng{authornamehash}{8542ddfae81fb63f28a6d6dde95dba1a}
       \strng{authorfullhash}{8542ddfae81fb63f28a6d6dde95dba1a}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{<p style="text-align: justify;">We propose a generalized space-time domain decomposition approach for the physics-informed neural networks (PINNs) to solve nonlinear partial differential equations (PDEs) on arbitrary complex-geometry domains. The proposed framework, named eXtended PINNs ($XPINNs$), further pushes the boundaries of both PINNs as well as conservative PINNs (cPINNs), which is a recently proposed domain decomposition approach in the PINN framework tailored to conservation laws. Compared to PINN, the XPINN method has large representation and parallelization capacity due to the inherent property of deployment of multiple neural networks in the smaller subdomains. Unlike cPINN, XPINN can be extended to any type of PDEs. Moreover, the domain can be decomposed in any arbitrary way (in space and time), which is not possible in cPINN. Thus, XPINN offers both space and time parallelization, thereby reducing the training cost more effectively. In each subdomain, a separate neural network is employed with optimally selected hyperparameters, e.g., depth/width of the network, number and location of residual points, activation function, optimization method, etc. A deep network can be employed in a subdomain with complex solution, whereas a shallow neural network can be used in a subdomain with relatively simple and smooth solutions. We demonstrate the versatility of XPINN by solving both forward and inverse PDE problems, ranging from one-dimensional to three-dimensional problems, from time-dependent to time-independent problems, and from continuous to discontinuous problems, which clearly shows that the XPINN method is promising in many practical problems. The proposed XPINN method is the generalization of PINN and cPINN methods, both in terms of applicability as well as domain decomposition approach, which efficiently lends itself to parallelized computation. The XPINN code is available on $https://github.com/AmeyaJagtap/XPINNs$.</p>}

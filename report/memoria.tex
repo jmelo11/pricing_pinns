@@ -877,7 +877,7 @@ The only difference between $\mathcal L^{\mathbb P}$ and $\tilde{\mathcal L}$ is
 $\mu$ has been replaced by the risk-free rate~$r$.
 
 Relation~\eqref{eq:market_price_vol} must hold for \emph{every} sufficiently smooth pair of
-payoffs $(V,\widehat V)$, so the common value of the two quotients can depend \emph{only} on the
+payoffs $(V_T,\widehat V_T)$, so the common value of the two quotients can depend \emph{only} on the
 state variables $(t,S,v)$. We therefore introduce the \emph{instantaneous market price of
 volatility risk}
 \[
@@ -1362,8 +1362,8 @@ The choice of activation is thus closely tied to the regularity of the target so
 
 \subsection{Weight Initialization}
 
-Before optimization begins, the parameters~$\theta$ are typically initialised randomly, commonly using Xavier or 
-He initialisation, or drawn from a pre-trained model. Good initialisation accelerates convergence and improves final accuracy. 
+Before optimization begins, the parameters~$\theta$ are typically initialised randomly, commonly using Xavier \cite{pmlr-v9-glorot10a} or 
+He initialisation \cite{he2015delvingdeeprectifierssurpassing}, or drawn from a pre-trained model. Good initialisation accelerates convergence and improves final accuracy. 
 The dimensionless reformulation of the PDEs discussed earlier helps by keeping input scales comparable, which also stabilizes training \cite{nondimensionalinputs2025}.
 
 \subsection{Collocation Point Sampling}
@@ -1428,7 +1428,7 @@ where \(V_{\text{PINN}}\) is the neural network's predicted value, \(V_{\text{re
 and \(\|\cdot\|_{\text{Fro}}\) denotes the Frobenius norm. These two metric allows us to have both a scale-dependent and a scale-independent measure of accuracy.
 
 All models were implemented in Python using the PyTorch framework. The complete implementation is publicly available on 
-GitHub \cite{Melo2025pricingpinns} and a brief article on the topic can be found in \cite{melo_options_pinns_2025}. Computations were performed on a personal computer equipped with an Intel i7-12700K CPU and 
+GitHub \cite{Melo2025pricingpinns} and a brief article on the topic can be found in \cite{melo_options_pinns_2025}. Computations were performed on a personal computer equipped with an Intel i7-10700K CPU and 
 an NVIDIA RTX 2070 GPU, facilitating efficient training of neural network models.
 
 \section{European Call Option Pricing}
@@ -1463,7 +1463,7 @@ results are on par with those reported in \cite{math9010046}, which confirms the
  \label{fig:call_option}
 \end{figure}
 
-Figure~\ref{fig:call_option} shows that the learned pricing surface is visually indistinguishable from the 
+Figure~\ref{fig:call_option} shows that the learned price surface is visually indistinguishable from the 
 Black-Scholes benchmark, while Figure~\ref{fig:call_option_error} depicts the absolute error, which is largest 
 near maturity and the strike.
 
@@ -1491,7 +1491,7 @@ networks--develops oscillatory overshoots, an instance of the
 \end{figure}
 
 A key advantage of training neural networks with automatic
-differentiation is that it furnishes \emph{exact} derivatives of the network
+differentiation is that it uses \emph{exact} derivatives of the network
 output with respect to its inputs. In quantitative finance these derivatives are the familiar
 \emph{Greeks}, which risk desks use to monitor and hedge positions. Because the network's 
 forward and backward passes are computed
@@ -1499,7 +1499,7 @@ simultaneously, we obtain the entire vector of Greeks at virtually no extra cost
 so their fidelity becomes a critical test of the PINN.
 
 The same oscillation effect propagates into the Greeks:
-delta, denoted by $\Delta$ ($\partial V / \partial S$), is recovered almost perfectly,
+delta ($\partial V / \partial S$), denoted by $\Delta$, is recovered almost perfectly,
 except during the final moments before maturity, when the true delta collapses
 into a step function that is hard to emulate with smooth activations, as seen in Figure~\ref{fig:delta}.
 
@@ -1558,7 +1558,8 @@ capability when $S\to\infty$, as the boundary condition makes the solution linea
 \begin{figure}[H]
  \centering
  \includegraphics[width=1\textwidth]{imagenes/extrapolation_error.png}
- \caption{Absolute error of the PINN solution. The error is concentrated around the strike price and maturity.}
+ \caption{Absolute error of the PINN solution. The error remains small even
+	when extrapolating beyond the training domain.}
  \label{fig:call_option_error_rel}
 \end{figure}
 
@@ -1674,8 +1675,8 @@ evaluations and repeated queries.
 \end{figure}
 
 Despite the remarkable inference speed, the long training times required for PINNs present a 
-major limitation in professional financial settings. In practice, model parameters such 
-as volatilities, correlations, and interest rates are frequently recalibrated to reflect changing market conditions. 
+major limitation in professional financial settings. In practice, \emph{model parameters such 
+as volatilities, correlations, and interest rates are frequently recalibrated to reflect changing market conditions.} 
 
 Additionally, option-specific inputs such as strike prices and maturities may vary across instruments 
 or need to be adjusted in scenario analyses. In such environments, it is common to perform rapid 
@@ -1776,7 +1777,7 @@ reducing the difference.
 	\caption{Difference between Heston-Hull-White and Black-Scholes call prices 
 	as a function of the short rate. Stochastic mean reversion of rates leads to 
 	systematically higher prices than under constant-rate discounting, 
-	particularly when initial rates are low.}viridis
+	particularly when initial rates are low.}
 	\label{fig:hhw_bs_diff_rates}
 \end{figure}
 
@@ -1884,13 +1885,13 @@ we achieve this by replacing the PDE interior residual (\(\mathcal{L}_{\text{PDE
 \mathcal{L}_{\text{PDE}}(\theta) = \int_{0}^{T}\int_{\Omega}\left|\max\{\Phi(S)- u_\theta(t,x), \mathcal{N}_I[u_\theta(t,x)]\}\right|^2\mathrm{d}x\mathrm{d}t,
 \end{equation}
 
-where $\Phi(S)$ is the payoff function of the American put option, and $\mathcal{N}_I[\cdot]$ is the differential operator defined in \eqref{eq:BS_complete}.
+where $\Phi(S)$ is the payoff function of the American put option, and $\mathcal{N}_I[\cdot]$ is the differential operator defined in \eqref{eq:PDE_conditions}.
 This modified loss directly encodes the early-exercise constraint by enforcing 
 the option value to remain above its intrinsic value $\Phi(S)$ while still 
 satisfying the PDE in the continuation region, i.e., the set of states 
 where exercising right away is not optimal and it is better to wait for potential future gains in option value.
 
-The resulting PINN solution, compared against a benchmark numerical solution--FDM-- 
+The resulting PINN solution, \emph{compared against a benchmark numerical solution--FDM--}
 is shown in Figure~\ref{fig:american_put_option}. In this case, we used the same neural network 
 architecture and parameters as the European put option.
 
@@ -1914,8 +1915,8 @@ now extend across a wider region due to the early-exercise boundary's dynamic na
 \end{figure}
 
 From Figure~\ref{fig:american_put_option_error}, we can see that the PINN is able to achieve good 
-prediction of the free boundary, highlighted by the blue and yellow lines,
-which is the main challenge in American option pricing. Still, some artifacts are visible, especially near the strike price.
+prediction of the free boundary, highlighted by the blue and purple lines,
+which is the main challenge in American option pricing. Still, some artifacts are visible, especially near maturity.
 
 In terms of the accuracy of the obtained solution, the PINN achieved an relative \(\ell_2\) error of 
 \(9.21\times10^{-4}\) and a MSE of \(1.44\times10^{-7}\), which is very competitive with traditional methods, i.e. FDM, but slightly worse than the European cases. This can be 
@@ -1942,9 +1943,9 @@ Jamshidian's decomposition \cite{jamshidian1989exact} expresses the swaption pay
 \[
 \sum_{i=1}^{n} c_i A(T,T_i) e^{-B(T,T_i)r^{\star}} = 1,
 \]
-and set \(X_i^{\star}=A(T,T_i)e^{-B(T,T_i)r^{\star}}\). Then, the pricing formula is given by
+and set \(X_i^{\star}=A(T,T_i)e^{-B(T,T_i)r^{\star}}\). Then, the pricing formula of a \emph{payer swaption} is given by
 \[
-\operatorname{PS}_{\mathrm{pay}}(t,T,\mathcal{T},X)
+\operatorname{PS}(t,T,\mathcal{T},X)
         = \sum_{i=1}^{n} c_i 
           \operatorname{ZBP} \bigl(t,T,T_i,X_i^{\star}\bigr),
 \]
